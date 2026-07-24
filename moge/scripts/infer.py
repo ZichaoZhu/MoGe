@@ -17,7 +17,8 @@ import click
 @click.option('--fov_x', 'fov_x_', type=float, default=None, help='If camera parameters are known, set the horizontal field of view in degrees. Otherwise, MoGe will estimate it.')
 @click.option('--output', '-o', 'output_path', default='./output', type=click.Path(), help='Output folder path')
 @click.option('--pretrained', 'pretrained_model_name_or_path', type=str, default=None, help='Pretrained model name or path. If not provided, the corresponding default model will be chosen.')
-@click.option('--version', 'model_version', type=click.Choice(['v1', 'v2']), default='v2', help='Model version. Defaults to "v2"')
+@click.option('--version', 'model_version', type=click.Choice(['v1', 'v2', 'v3']), default='v2', help='Model version. Defaults to "v2"')
+@click.option('--refinement-steps', type=click.IntRange(0, 7), default=3, help='MoGe-3 SSR iterations. Ignored by v1/v2.')
 @click.option('--device', 'device_name', type=str, default='cuda', help='Device name (e.g. "cuda", "cuda:0", "cpu"). Defaults to "cuda"')
 @click.option('--fp16', 'use_fp16', is_flag=True, help='Use fp16 precision for much faster inference.')
 @click.option('--resize', 'resize_to', type=int, default=None, help='Resize the image(s) & output maps to a specific size. Defaults to None (no resizing).')
@@ -38,6 +39,7 @@ def main(
     output_path: str,
     pretrained_model_name_or_path: str,
     model_version: str,
+    refinement_steps: int,
     device_name: str,
     use_fp16: bool,
     resize_to: int,
@@ -77,10 +79,13 @@ def main(
         DEFAULT_PRETRAINED_MODEL_FOR_EACH_VERSION = {
             "v1": "Ruicheng/moge-vitl",
             "v2": "Ruicheng/moge-2-vitl-normal",
+            # Until official v3 weights are released, initialize the v3 base from
+            # MoGe-2. Its zero-initialized SSR is initially an identity mapping.
+            "v3": "Ruicheng/moge-2-vitl-normal",
         }
         pretrained_model_name_or_path = DEFAULT_PRETRAINED_MODEL_FOR_EACH_VERSION[model_version]
     model = import_model_class_by_version(model_version).from_pretrained(pretrained_model_name_or_path).to(device).eval()
-    if use_fp16:
+    if use_fp16 and model_version != 'v3':
         model.half()
     
     if not any([save_maps_, save_glb_, save_ply_]):
@@ -98,7 +103,15 @@ def main(
         image_tensor = torch.tensor(image / 255, dtype=torch.float32, device=device).permute(2, 0, 1)
 
         # Inference
-        output = model.infer(image_tensor, fov_x=fov_x_, resolution_level=resolution_level, num_tokens=num_tokens, use_fp16=use_fp16)
+        infer_kwargs = {
+            'fov_x': fov_x_,
+            'resolution_level': resolution_level,
+            'num_tokens': num_tokens,
+            'use_fp16': use_fp16,
+        }
+        if model_version == 'v3':
+            infer_kwargs['num_refinement_steps'] = refinement_steps
+        output = model.infer(image_tensor, **infer_kwargs)
         points, depth, mask, intrinsics = output['points'].cpu().numpy(), output['depth'].cpu().numpy(), output['mask'].cpu().numpy(), output['intrinsics'].cpu().numpy()
         normal = output['normal'].cpu().numpy() if 'normal' in output else None
 

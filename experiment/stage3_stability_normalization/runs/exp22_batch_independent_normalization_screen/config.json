@@ -1,0 +1,41 @@
+{
+  "experiment_id": "exp22_batch_independent_normalization_screen",
+  "objective": "在相同短程detached训练中筛选不依赖BatchNorm运行统计的SSR归一化。",
+  "variants": [
+    "layer_norm",
+    "group_norm"
+  ],
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16,
+    "augmentation": false,
+    "fine_structure_rois": "experiment/stage2_training_strategy/runs/exp13_fixed_base_ssr_diagnostic/fine_structure_rois.json"
+  },
+  "training": {
+    "resolution": [384, 512],
+    "num_tokens": 2500,
+    "steps": 200,
+    "refinement_steps": 3,
+    "global_batch_size": 8,
+    "microbatch_size": 1,
+    "dino_frozen": true,
+    "head_learning_rate": 1e-6,
+    "ssr_learning_rate": 2e-5,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "refiner_detach_steps": 200,
+    "seed": 221
+  },
+  "evaluation": {
+    "steps": [0, 1, 3, 5],
+    "residual_threshold": 0.5,
+    "splits": ["train", "val", "test"]
+  },
+  "monitoring": {
+    "interval_seconds": 600,
+    "minimum_free_memory_mib": 30000,
+    "do_not_terminate_other_jobs": true
+  }
+}

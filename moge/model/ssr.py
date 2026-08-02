@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import Dict, List, Sequence, Tuple
 
@@ -156,17 +157,59 @@ def sample_visual_features_for_voxels(
     return visual[batch, :, row, col]
 
 
+SSR_NORMALIZATIONS = ("batch_norm", "group_norm", "layer_norm")
+
+
+def sparse_feature_normalization(
+    channels: int,
+    normalization: str,
+) -> nn.Module:
+    """Build a normalization that operates on sparse features shaped [N, C]."""
+    if normalization == "batch_norm":
+        return nn.BatchNorm1d(channels)
+    if normalization == "layer_norm":
+        return nn.LayerNorm(channels)
+    if normalization == "group_norm":
+        groups = min(8, channels)
+        while channels % groups:
+            groups -= 1
+        return nn.GroupNorm(groups, channels)
+    raise ValueError(
+        f"Unsupported SSR normalization {normalization!r}; "
+        f"expected one of {SSR_NORMALIZATIONS}"
+    )
+
+
 class _SparseResidualBlock(nn.Module):
-    def __init__(self, spconv, channels: int, indice_key: str):
+    def __init__(
+        self,
+        spconv,
+        channels: int,
+        indice_key: str,
+        conv_algo,
+        normalization: str,
+    ):
         super().__init__()
         self.conv1 = spconv.SubMConv3d(
-            channels, channels, 3, padding=1, bias=False, indice_key=f"{indice_key}_1"
+            channels,
+            channels,
+            3,
+            padding=1,
+            bias=False,
+            indice_key=f"{indice_key}_1",
+            algo=conv_algo,
         )
         self.conv2 = spconv.SubMConv3d(
-            channels, channels, 3, padding=1, bias=False, indice_key=f"{indice_key}_2"
+            channels,
+            channels,
+            3,
+            padding=1,
+            bias=False,
+            indice_key=f"{indice_key}_2",
+            algo=conv_algo,
         )
-        self.norm1 = nn.BatchNorm1d(channels)
-        self.norm2 = nn.BatchNorm1d(channels)
+        self.norm1 = sparse_feature_normalization(channels, normalization)
+        self.norm2 = sparse_feature_normalization(channels, normalization)
 
     def forward(self, sparse):
         identity = sparse.features
@@ -186,10 +229,12 @@ class SpconvSparseUNet(nn.Module):
         channels: Sequence[int] = (32, 64, 128, 256, 512),
         visual_channels: int = 256,
         blocks_per_level: int = 2,
+        normalization: str = "batch_norm",
     ):
         super().__init__()
         try:
             import spconv.pytorch as spconv
+            from spconv.core import ConvAlgo
         except ImportError as exc:
             raise ImportError(
                 "The spconv backend requires spconv 2.x. Install a CUDA wheel "
@@ -199,17 +244,38 @@ class SpconvSparseUNet(nn.Module):
         if len(channels) < 2:
             raise ValueError("Sparse U-Net needs at least two resolution levels")
         self.spconv = spconv
+        # Keep the algorithm explicit so runtime changes cannot silently alter
+        # training numerics. The validated CUDA 12.8 / RTX 4090 environment
+        # uses SpConv's performant masked implicit GEMM implementation.
+        self.conv_algo = ConvAlgo.MaskImplicitGemm
         self.channels = tuple(int(v) for v in channels)
         self.num_downsamples = len(self.channels) - 1
+        self.normalization = str(normalization)
+        if self.normalization not in SSR_NORMALIZATIONS:
+            raise ValueError(
+                f"Unsupported SSR normalization {self.normalization!r}; "
+                f"expected one of {SSR_NORMALIZATIONS}"
+            )
 
         self.input_projection = spconv.SubMConv3d(
-            3, self.channels[0], 1, bias=False, indice_key="ssr_input"
+            3,
+            self.channels[0],
+            1,
+            bias=False,
+            indice_key="ssr_input",
+            algo=self.conv_algo,
         )
         self.encoder_blocks = nn.ModuleList(
             [
                 nn.ModuleList(
                     [
-                        _SparseResidualBlock(spconv, width, f"enc_{level}_{block}")
+                        _SparseResidualBlock(
+                            spconv,
+                            width,
+                            f"enc_{level}_{block}",
+                            self.conv_algo,
+                            self.normalization,
+                        )
                         for block in range(blocks_per_level)
                     ]
                 )
@@ -225,6 +291,7 @@ class SpconvSparseUNet(nn.Module):
                     stride=2,
                     bias=False,
                     indice_key=f"ssr_down_{level}",
+                    algo=self.conv_algo,
                 )
                 for level in range(self.num_downsamples)
             ]
@@ -237,6 +304,7 @@ class SpconvSparseUNet(nn.Module):
             kernel_size=1,
             bias=False,
             indice_key="ssr_visual_fusion",
+            algo=self.conv_algo,
         )
 
         self.upsample = nn.ModuleList(
@@ -247,6 +315,7 @@ class SpconvSparseUNet(nn.Module):
                     kernel_size=2,
                     bias=False,
                     indice_key=f"ssr_down_{level}",
+                    algo=self.conv_algo,
                 )
                 for level in range(self.num_downsamples)
             ]
@@ -259,6 +328,7 @@ class SpconvSparseUNet(nn.Module):
                     kernel_size=1,
                     bias=False,
                     indice_key=f"ssr_dec_fuse_{level}",
+                    algo=self.conv_algo,
                 )
                 for level in range(self.num_downsamples)
             ]
@@ -267,7 +337,13 @@ class SpconvSparseUNet(nn.Module):
             [
                 nn.ModuleList(
                     [
-                        _SparseResidualBlock(spconv, self.channels[level], f"dec_{level}_{block}")
+                        _SparseResidualBlock(
+                            spconv,
+                            self.channels[level],
+                            f"dec_{level}_{block}",
+                            self.conv_algo,
+                            self.normalization,
+                        )
                         for block in range(blocks_per_level)
                     ]
                 )
@@ -275,7 +351,12 @@ class SpconvSparseUNet(nn.Module):
             ]
         )
         self.output_layer = spconv.SubMConv3d(
-            self.channels[0], 1, kernel_size=1, bias=True, indice_key="ssr_output"
+            self.channels[0],
+            1,
+            kernel_size=1,
+            bias=True,
+            indice_key="ssr_output",
+            algo=self.conv_algo,
         )
         nn.init.zeros_(self.output_layer.weight)
         nn.init.zeros_(self.output_layer.bias)
@@ -486,6 +567,7 @@ class SelfGuidedSparseRefiner(nn.Module):
         blocks_per_level: int = 2,
         backend: str = "spconv",
         reference_max_dense_voxels: int = 2_000_000,
+        normalization: str = "batch_norm",
     ):
         super().__init__()
         self.voxel_resolution = float(voxel_resolution)
@@ -496,6 +578,7 @@ class SelfGuidedSparseRefiner(nn.Module):
                 channels=channels,
                 visual_channels=visual_channels,
                 blocks_per_level=blocks_per_level,
+                normalization=normalization,
             )
         elif backend == "reference":
             self.unet = ReferenceSparseUNet(
@@ -529,3 +612,114 @@ class SelfGuidedSparseRefiner(nn.Module):
         stats["active_voxels_per_level"] = active_counts
         stats["spatial_shape"] = shell.spatial_shape
         return residual, stats
+
+
+@contextmanager
+def stateless_batch_statistics(module: nn.Module):
+    """Use current sparse-feature statistics in eval mode without updating buffers."""
+    batch_norms = [
+        child
+        for child in module.modules()
+        if isinstance(child, nn.BatchNorm1d)
+    ]
+    if not batch_norms:
+        raise RuntimeError("The selected module contains no BatchNorm1d layers")
+    snapshots = [
+        (
+            child,
+            child.running_mean,
+            child.running_var,
+            child.num_batches_tracked,
+            child.track_running_stats,
+        )
+        for child in batch_norms
+    ]
+    try:
+        for child in batch_norms:
+            child.running_mean = None
+            child.running_var = None
+            child.num_batches_tracked = None
+            child.track_running_stats = False
+        yield
+    finally:
+        for (
+            child,
+            running_mean,
+            running_var,
+            num_batches_tracked,
+            track_running_stats,
+        ) in snapshots:
+            child.running_mean = running_mean
+            child.running_var = running_var
+            child.num_batches_tracked = num_batches_tracked
+            child.track_running_stats = track_running_stats
+
+
+def capture_batch_norm_running_state(
+    module: nn.Module,
+) -> Dict[str, Dict[str, torch.Tensor]]:
+    state: Dict[str, Dict[str, torch.Tensor]] = {}
+    for name, child in module.named_modules():
+        if not isinstance(child, nn.BatchNorm1d):
+            continue
+        if (
+            child.running_mean is None
+            or child.running_var is None
+            or child.num_batches_tracked is None
+        ):
+            raise RuntimeError(
+                f"BatchNorm running buffers are unavailable for {name}"
+            )
+        state[name] = {
+            "running_mean": child.running_mean.detach().cpu().clone(),
+            "running_var": child.running_var.detach().cpu().clone(),
+            "num_batches_tracked": (
+                child.num_batches_tracked.detach().cpu().clone()
+            ),
+        }
+    if not state:
+        raise RuntimeError("The selected module contains no BatchNorm1d layers")
+    return state
+
+
+def load_batch_norm_running_state(
+    module: nn.Module,
+    state: Dict[str, Dict[str, torch.Tensor]],
+) -> None:
+    modules = {
+        name: child
+        for name, child in module.named_modules()
+        if isinstance(child, nn.BatchNorm1d)
+    }
+    if set(modules) != set(state):
+        raise RuntimeError(
+            "BatchNorm state names do not match the selected module"
+        )
+    for name, child in modules.items():
+        source = state[name]
+        if (
+            child.running_mean is None
+            or child.running_var is None
+            or child.num_batches_tracked is None
+        ):
+            raise RuntimeError(
+                f"BatchNorm running buffers are unavailable for {name}"
+            )
+        child.running_mean.copy_(
+            source["running_mean"].to(
+                device=child.running_mean.device,
+                dtype=child.running_mean.dtype,
+            )
+        )
+        child.running_var.copy_(
+            source["running_var"].to(
+                device=child.running_var.device,
+                dtype=child.running_var.dtype,
+            )
+        )
+        child.num_batches_tracked.copy_(
+            source["num_batches_tracked"].to(
+                device=child.num_batches_tracked.device,
+                dtype=child.num_batches_tracked.dtype,
+            )
+        )

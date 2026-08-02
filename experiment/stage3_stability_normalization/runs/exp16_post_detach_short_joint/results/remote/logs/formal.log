@@ -1,0 +1,9 @@
+{"step": 810, "stage": "joint", "loss": 0.18520274478942156, "grad_norm": 1.467236876487732, "learning_rates": {"ssr": 2e-06, "heads": 5e-07, "backbone": 0.0}, "best_step": 800, "selection_split": "train", "best_k3_point_rel": 0.051242086579496006, "optimizer_step_skipped": false, "skipped_preclip_total": 0, "elapsed_seconds": 74.20735078211874}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_joint_v3.py", line 1667, in <module>
+    main()
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_joint_v3.py", line 1283, in main
+    raise RuntimeError(
+RuntimeError: SSR log-depth residual exceeded the configured safety limit

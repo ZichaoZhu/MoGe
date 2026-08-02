@@ -1,0 +1,31 @@
+{
+  "experiment_id": "exp19_ssr_batchnorm_recalibration",
+  "objective": "保持权重不变，验证SSR BatchNorm运行统计重校准能否修复推理态残差离群。",
+  "source_checkpoint": {
+    "experiment": "exp15_detached_head_ssr_coadaptation",
+    "step": 800,
+    "sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa"
+  },
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "calibration_split": "train",
+    "train": 100,
+    "validation": 16,
+    "test": 16
+  },
+  "calibration": {
+    "shape": [384, 512],
+    "num_tokens": 2500,
+    "refinement_steps": 3,
+    "batch_sizes": [1, 8],
+    "reset_running_statistics": true,
+    "cumulative_momentum": null,
+    "seed": 191
+  },
+  "evaluation": {
+    "refinement_steps": [0, 1, 3, 5],
+    "residual_threshold": 0.5,
+    "mode": "eval",
+    "boundary_threshold": 0.03
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "status": "complete",
+  "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp23_true_microbatch2_batchnorm/artifacts/formal/training/checkpoint.pt",
+  "checkpoint_sha256": "6ea582d5e40ab0179ef4e44154269424a6d55d91ebb8f10d650e9adbb91966c3",
+  "checkpoint_step": 200,
+  "ssr_normalization": "batch_norm",
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "refinement_steps": 3,
+  "modes": [
+    "eval"
+  ],
+  "ssr_normalization_policy": "stored_running_statistics",
+  "ssr_iteration_statistics_sha256": null,
+  "train_mode_repeats": 3,
+  "splits": [
+    "train",
+    "val",
+    "test"
+  ],
+  "max_samples_per_split": null,
+  "sample_count": 132,
+  "highlight_ids": [],
+  "summary": {
+    "threshold": 0.5,
+    "row_count": 396,
+    "unique_sample_count": 132,
+    "unique_samples_exceeding_threshold": [],
+    "unique_sample_count_exceeding_threshold": 0,
+    "global_maximum": {
+      "mode": "eval",
+      "repeat": 0,
+      "id": "ai_052_005_cam_01_frame.0099",
+      "split": "train",
+      "iteration": 2,
+      "max_abs_residual": 0.007243000902235508,
+      "max_signed_residual": -0.007243000902235508,
+      "max_row": 66,
+      "max_col": 115,
+      "depth_span": 781.0
+    },
+    "highlighted_maximum": null,
+    "aggregates": [
+      {
+        "mode": "eval",
+        "split": "test",
+        "iteration": 1,
+        "row_count": 16,
+        "sample_count": 16,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.005873386282473803,
+        "maximum_sample_id": "ai_046_001_cam_00_frame.0042",
+        "maximum_repeat": 0,
+        "maximum_row": 253,
+        "maximum_col": 408
+      },
+      {
+        "mode": "eval",
+        "split": "test",
+        "iteration": 2,
+        "row_count": 16,
+        "sample_count": 16,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.005940410308539867,
+        "maximum_sample_id": "ai_046_001_cam_00_frame.0042",
+        "maximum_repeat": 0,
+        "maximum_row": 285,
+        "maximum_col": 394
+      },
+      {
+        "mode": "eval",
+        "split": "test",
+        "iteration": 3,
+        "row_count": 16,
+        "sample_count": 16,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.005846289452165365,
+        "maximum_sample_id": "ai_050_001_cam_00_frame.0014",
+        "maximum_repeat": 0,
+        "maximum_row": 253,
+        "maximum_col": 344
+      },
+      {
+        "mode": "eval",
+        "split": "train",
+        "iteration": 1,
+        "row_count": 100,
+        "sample_count": 100,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.006972493603825569,
+        "maximum_sample_id": "ai_052_005_cam_01_frame.0099",
+        "maximum_repeat": 0,
+        "maximum_row": 19,
+        "maximum_col": 218
+      },
+      {
+        "mode": "eval",
+        "split": "train",
+        "iteration": 2,
+        "row_count": 100,
+        "sample_count": 100,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.007243000902235508,
+        "maximum_sample_id": "ai_052_005_cam_01_frame.0099",
+        "maximum_repeat": 0,
+        "maximum_row": 66,
+        "maximum_col": 115
+      },
+      {
+        "mode": "eval",
+        "split": "train",
+        "iteration": 3,
+        "row_count": 100,
+        "sample_count": 100,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.00715250987559557,
+        "maximum_sample_id": "ai_052_005_cam_01_frame.0099",
+        "maximum_repeat": 0,
+        "maximum_row": 22,
+        "maximum_col": 109
+      },
+      {
+        "mode": "eval",
+        "split": "val",
+        "iteration": 1,
+        "row_count": 16,
+        "sample_count": 16,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.0062440866604447365,
+        "maximum_sample_id": "ai_047_001_cam_00_frame.0000",
+        "maximum_repeat": 0,
+        "maximum_row": 237,
+        "maximum_col": 506
+      },
+      {
+        "mode": "eval",
+        "split": "val",
+        "iteration": 2,
+        "row_count": 16,
+        "sample_count": 16,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.006083539687097073,
+        "maximum_sample_id": "ai_047_001_cam_00_frame.0000",
+        "maximum_repeat": 0,
+        "maximum_row": 248,
+        "maximum_col": 508
+      },
+      {
+        "mode": "eval",
+        "split": "val",
+        "iteration": 3,
+        "row_count": 16,
+        "sample_count": 16,
+        "samples_exceeding_threshold": 0,
+        "maximum": 0.006098718382418156,
+        "maximum_sample_id": "ai_047_001_cam_00_frame.0042",
+        "maximum_repeat": 0,
+        "maximum_row": 302,
+        "maximum_col": 330
+      }
+    ]
+  },
+  "elapsed_seconds": 33.57987743895501
+}

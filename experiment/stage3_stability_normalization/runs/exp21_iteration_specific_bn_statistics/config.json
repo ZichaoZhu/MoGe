@@ -1,0 +1,29 @@
+{
+  "experiment_id": "exp21_iteration_specific_bn_statistics",
+  "objective": "验证逐轮独立的batch-8人口统计能否同时消除递归残差离群并保持留出集几何指标。",
+  "source_checkpoint": {
+    "experiment": "exp15_detached_head_ssr_coadaptation",
+    "step": 800,
+    "sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa"
+  },
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16
+  },
+  "calibration": {
+    "shape": [384, 512],
+    "num_tokens": 2500,
+    "batch_size": 8,
+    "iteration_count": 5,
+    "reset_each_iteration": true,
+    "cumulative_momentum": null,
+    "seed": 211
+  },
+  "evaluation": {
+    "batch_size": 1,
+    "steps": [0, 1, 3, 5],
+    "residual_threshold": 0.5
+  }
+}

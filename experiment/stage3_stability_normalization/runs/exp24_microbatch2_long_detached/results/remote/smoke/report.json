@@ -1,0 +1,15 @@
+{
+  "status": "complete",
+  "mode": "smoke",
+  "resume_audit": {
+    "status": "complete",
+    "step": 200,
+    "best_step": 200,
+    "batch_size": 8,
+    "microbatch_size": 2,
+    "ssr_normalization": "batch_norm",
+    "has_optimizer": true,
+    "has_cpu_rng": true,
+    "has_loss_rng": true
+  }
+}

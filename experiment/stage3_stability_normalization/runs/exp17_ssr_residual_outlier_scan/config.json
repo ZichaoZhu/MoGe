@@ -1,0 +1,38 @@
+{
+  "experiment_id": "exp17_ssr_residual_outlier_scan",
+  "objective": "扫描Exp15未修改检查点的全部逐帧逐迭代残差，区分起点离群与Exp16联合更新漂移。",
+  "checkpoint": {
+    "experiment": "exp15_detached_head_ssr_coadaptation",
+    "step": 800,
+    "sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa"
+  },
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16
+  },
+  "scan": {
+    "shape": [384, 512],
+    "num_tokens": 2500,
+    "refinement_steps": 3,
+    "threshold": 0.5,
+    "eval_repeats": 1,
+    "train_mode_repeats": 3,
+    "seed": 171
+  },
+  "exp16_step820_batch": [
+    "ai_045_004_cam_01_frame.0099",
+    "ai_001_001_cam_00_frame.0099",
+    "ai_026_019_cam_00_frame.0000",
+    "ai_052_008_cam_01_frame.0099",
+    "ai_044_008_cam_01_frame.0099",
+    "ai_027_009_cam_02_frame.0099",
+    "ai_008_010_cam_00_frame.0000",
+    "ai_002_008_cam_00_frame.0099"
+  ],
+  "decision_rule": {
+    "baseline_train_mode_exceeds_0_5": "优先诊断训练态BatchNorm与离群样本，不把Exp16归因于联合梯度。",
+    "baseline_never_exceeds_0_5": "Exp16前19次联合更新导致残差放大，下一步降低或约束联合梯度。"
+  }
+}

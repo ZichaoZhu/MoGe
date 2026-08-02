@@ -1,0 +1,20 @@
+{
+  "storage": "server_only",
+  "safe_root": "/mnt/data/home/zhuzichao",
+  "checkpoints": [
+    {
+      "variant": "layer_norm",
+      "step": 200,
+      "bytes": 1508049327,
+      "sha256": "97a3c8af9f601cd10159bc61a5d7a7b21deba4730af75f9638e044dea727acbd",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp22_batch_independent_normalization_screen/artifacts/formal/layer_norm/training/checkpoint.pt"
+    },
+    {
+      "variant": "group_norm",
+      "step": 200,
+      "bytes": 1508049327,
+      "sha256": "7162d0848958da63eb02bb3263b81a13487a4d1200ce3f780a553897e6eab3cf",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp22_batch_independent_normalization_screen/artifacts/formal/group_norm/training/checkpoint.pt"
+    }
+  ]
+}

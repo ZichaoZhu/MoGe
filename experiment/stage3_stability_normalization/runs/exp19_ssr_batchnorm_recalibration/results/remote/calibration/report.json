@@ -1,0 +1,921 @@
+{
+  "status": "complete",
+  "source_checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp15_detached_head_ssr_coadaptation/artifacts/formal/checkpoint.pt",
+  "source_checkpoint_sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+  "checkpoint_step": 800,
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "refinement_steps": 3,
+  "calibration_sample_ids": [
+    "ai_001_001_cam_00_frame.0000",
+    "ai_001_001_cam_00_frame.0014",
+    "ai_001_001_cam_00_frame.0028",
+    "ai_001_001_cam_00_frame.0043",
+    "ai_001_001_cam_00_frame.0056",
+    "ai_001_001_cam_00_frame.0071",
+    "ai_001_001_cam_00_frame.0085",
+    "ai_001_001_cam_00_frame.0099",
+    "ai_018_003_cam_00_frame.0000",
+    "ai_018_003_cam_00_frame.0014",
+    "ai_018_003_cam_00_frame.0028",
+    "ai_018_003_cam_00_frame.0042",
+    "ai_018_003_cam_00_frame.0057",
+    "ai_018_003_cam_00_frame.0071",
+    "ai_018_003_cam_00_frame.0085",
+    "ai_018_003_cam_00_frame.0099",
+    "ai_036_002_cam_00_frame.0000",
+    "ai_036_002_cam_00_frame.0014",
+    "ai_036_002_cam_00_frame.0028",
+    "ai_036_002_cam_00_frame.0042",
+    "ai_036_002_cam_00_frame.0057",
+    "ai_036_002_cam_00_frame.0071",
+    "ai_036_002_cam_00_frame.0085",
+    "ai_036_002_cam_00_frame.0099",
+    "ai_019_007_cam_00_frame.0000",
+    "ai_024_008_cam_00_frame.0099",
+    "ai_019_004_cam_00_frame.0000",
+    "ai_019_004_cam_00_frame.0099",
+    "ai_052_008_cam_01_frame.0099",
+    "ai_026_013_cam_00_frame.0000",
+    "ai_055_006_cam_00_frame.0000",
+    "ai_054_008_cam_00_frame.0000",
+    "ai_044_009_cam_00_frame.0000",
+    "ai_052_010_cam_00_frame.0000",
+    "ai_052_004_cam_00_frame.0000",
+    "ai_053_018_cam_00_frame.0000",
+    "ai_054_006_cam_00_frame.0000",
+    "ai_008_004_cam_00_frame.0000",
+    "ai_027_009_cam_02_frame.0099",
+    "ai_048_007_cam_00_frame.0001",
+    "ai_002_003_cam_00_frame.0000",
+    "ai_044_006_cam_01_frame.0099",
+    "ai_027_005_cam_00_frame.0000",
+    "ai_034_003_cam_00_frame.0000",
+    "ai_045_005_cam_03_frame.0099",
+    "ai_009_001_cam_00_frame.0099",
+    "ai_055_002_cam_01_frame.0099",
+    "ai_044_002_cam_01_frame.0099",
+    "ai_052_005_cam_01_frame.0099",
+    "ai_028_001_cam_00_frame.0099",
+    "ai_036_006_cam_00_frame.0000",
+    "ai_011_009_cam_01_frame.0099",
+    "ai_024_018_cam_00_frame.0099",
+    "ai_017_009_cam_03_frame.0099",
+    "ai_031_009_cam_00_frame.0000",
+    "ai_002_002_cam_00_frame.0099",
+    "ai_027_003_cam_00_frame.0000",
+    "ai_055_004_cam_00_frame.0099",
+    "ai_039_006_cam_00_frame.0000",
+    "ai_005_006_cam_00_frame.0099",
+    "ai_041_001_cam_00_frame.0000",
+    "ai_015_005_cam_00_frame.0000",
+    "ai_009_003_cam_00_frame.0000",
+    "ai_003_005_cam_00_frame.0000",
+    "ai_044_007_cam_01_frame.0099",
+    "ai_053_020_cam_00_frame.0000",
+    "ai_033_010_cam_00_frame.0000",
+    "ai_013_004_cam_00_frame.0000",
+    "ai_030_009_cam_00_frame.0000",
+    "ai_036_008_cam_00_frame.0000",
+    "ai_008_010_cam_00_frame.0000",
+    "ai_026_019_cam_00_frame.0000",
+    "ai_038_002_cam_00_frame.0099",
+    "ai_012_010_cam_00_frame.0099",
+    "ai_029_005_cam_00_frame.0000",
+    "ai_051_002_cam_00_frame.0000",
+    "ai_048_004_cam_00_frame.0000",
+    "ai_013_001_cam_00_frame.0000",
+    "ai_018_007_cam_00_frame.0000",
+    "ai_016_006_cam_00_frame.0099",
+    "ai_032_002_cam_00_frame.0099",
+    "ai_042_002_cam_00_frame.0000",
+    "ai_034_001_cam_00_frame.0000",
+    "ai_045_004_cam_01_frame.0099",
+    "ai_035_009_cam_00_frame.0000",
+    "ai_019_001_cam_00_frame.0000",
+    "ai_004_008_cam_00_frame.0000",
+    "ai_039_007_cam_00_frame.0099",
+    "ai_006_003_cam_00_frame.0000",
+    "ai_010_009_cam_00_frame.0000",
+    "ai_001_002_cam_00_frame.0000",
+    "ai_038_006_cam_00_frame.0000",
+    "ai_032_005_cam_00_frame.0000",
+    "ai_022_002_cam_00_frame.0000",
+    "ai_023_008_cam_00_frame.0000",
+    "ai_002_008_cam_00_frame.0099",
+    "ai_055_005_cam_01_frame.0099",
+    "ai_028_002_cam_00_frame.0000",
+    "ai_044_008_cam_01_frame.0099",
+    "ai_033_008_cam_00_frame.0000"
+  ],
+  "calibration_sample_count": 100,
+  "batch_sizes": [
+    1,
+    8
+  ],
+  "original_batch_norm": {
+    "unet.encoder_blocks.0.0.norm1": {
+      "running_mean_l2": 0.5726631283760071,
+      "running_variance_mean": 0.049957625567913055,
+      "running_variance_minimum": 0.0005671089165844023,
+      "running_variance_maximum": 0.10649687051773071,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.0.0.norm2": {
+      "running_mean_l2": 0.5580757260322571,
+      "running_variance_mean": 0.050408460199832916,
+      "running_variance_minimum": 0.02380707673728466,
+      "running_variance_maximum": 0.08975649625062943,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.0.1.norm1": {
+      "running_mean_l2": 0.8035772442817688,
+      "running_variance_mean": 0.08251453191041946,
+      "running_variance_minimum": 0.03677698224782944,
+      "running_variance_maximum": 0.200434148311615,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.0.1.norm2": {
+      "running_mean_l2": 0.5676187872886658,
+      "running_variance_mean": 0.05003582686185837,
+      "running_variance_minimum": 0.03067695163190365,
+      "running_variance_maximum": 0.070209801197052,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.1.0.norm1": {
+      "running_mean_l2": 0.24183900654315948,
+      "running_variance_mean": 0.016293959692120552,
+      "running_variance_minimum": 0.01027957908809185,
+      "running_variance_maximum": 0.02892022579908371,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.1.0.norm2": {
+      "running_mean_l2": 1.0196523666381836,
+      "running_variance_mean": 0.07114940881729126,
+      "running_variance_minimum": 0.046095944941043854,
+      "running_variance_maximum": 0.13808616995811462,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.1.1.norm1": {
+      "running_mean_l2": 1.1478030681610107,
+      "running_variance_mean": 0.0850653126835823,
+      "running_variance_minimum": 0.058179937303066254,
+      "running_variance_maximum": 0.1941012293100357,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.1.1.norm2": {
+      "running_mean_l2": 0.885212779045105,
+      "running_variance_mean": 0.07083944976329803,
+      "running_variance_minimum": 0.0452888198196888,
+      "running_variance_maximum": 0.12417641282081604,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.2.0.norm1": {
+      "running_mean_l2": 0.5454098582267761,
+      "running_variance_mean": 0.023350166156888008,
+      "running_variance_minimum": 0.013682084158062935,
+      "running_variance_maximum": 0.03546571731567383,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.2.0.norm2": {
+      "running_mean_l2": 2.5316457748413086,
+      "running_variance_mean": 0.11279044300317764,
+      "running_variance_minimum": 0.06183038651943207,
+      "running_variance_maximum": 0.24876011908054352,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.2.1.norm1": {
+      "running_mean_l2": 1.732254147529602,
+      "running_variance_mean": 0.09603901207447052,
+      "running_variance_minimum": 0.06361682713031769,
+      "running_variance_maximum": 0.18050624430179596,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.2.1.norm2": {
+      "running_mean_l2": 2.1589653491973877,
+      "running_variance_mean": 0.10253872722387314,
+      "running_variance_minimum": 0.061916787177324295,
+      "running_variance_maximum": 0.2460624724626541,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.3.0.norm1": {
+      "running_mean_l2": 1.0738202333450317,
+      "running_variance_mean": 0.032604485750198364,
+      "running_variance_minimum": 0.021078282967209816,
+      "running_variance_maximum": 0.05601558834314346,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.3.0.norm2": {
+      "running_mean_l2": 5.701744079589844,
+      "running_variance_mean": 0.17790192365646362,
+      "running_variance_minimum": 0.09852989763021469,
+      "running_variance_maximum": 0.41565248370170593,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.3.1.norm1": {
+      "running_mean_l2": 2.4552645683288574,
+      "running_variance_mean": 0.11460607498884201,
+      "running_variance_minimum": 0.08054444938898087,
+      "running_variance_maximum": 0.18129050731658936,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.3.1.norm2": {
+      "running_mean_l2": 4.862996578216553,
+      "running_variance_mean": 0.11732438206672668,
+      "running_variance_minimum": 0.07976855337619781,
+      "running_variance_maximum": 0.19196590781211853,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.4.0.norm1": {
+      "running_mean_l2": 1.6528517007827759,
+      "running_variance_mean": 0.040166161954402924,
+      "running_variance_minimum": 0.029341507703065872,
+      "running_variance_maximum": 0.06000272557139397,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.4.0.norm2": {
+      "running_mean_l2": 6.246711254119873,
+      "running_variance_mean": 0.11433441936969757,
+      "running_variance_minimum": 0.08583565801382065,
+      "running_variance_maximum": 0.20224010944366455,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.4.1.norm1": {
+      "running_mean_l2": 6.214782238006592,
+      "running_variance_mean": 0.15569178760051727,
+      "running_variance_minimum": 0.11844664067029953,
+      "running_variance_maximum": 0.22280849516391754,
+      "num_batches_tracked": 19200
+    },
+    "unet.encoder_blocks.4.1.norm2": {
+      "running_mean_l2": 4.456410884857178,
+      "running_variance_mean": 0.09323526918888092,
+      "running_variance_minimum": 0.07002806663513184,
+      "running_variance_maximum": 0.16997703909873962,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.0.0.norm1": {
+      "running_mean_l2": 0.3527137339115143,
+      "running_variance_mean": 0.19690078496932983,
+      "running_variance_minimum": 0.020750895142555237,
+      "running_variance_maximum": 0.6653410196304321,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.0.0.norm2": {
+      "running_mean_l2": 0.6597022414207458,
+      "running_variance_mean": 0.06976084411144257,
+      "running_variance_minimum": 0.03958264738321304,
+      "running_variance_maximum": 0.15687353909015656,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.0.1.norm1": {
+      "running_mean_l2": 0.8705010414123535,
+      "running_variance_mean": 0.24896202981472015,
+      "running_variance_minimum": 0.0656539648771286,
+      "running_variance_maximum": 0.7696191668510437,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.0.1.norm2": {
+      "running_mean_l2": 0.6940788626670837,
+      "running_variance_mean": 0.06660914421081543,
+      "running_variance_minimum": 0.033708881586790085,
+      "running_variance_maximum": 0.13359057903289795,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.1.0.norm1": {
+      "running_mean_l2": 0.8261763453483582,
+      "running_variance_mean": 0.1830211877822876,
+      "running_variance_minimum": 0.026024196296930313,
+      "running_variance_maximum": 0.8800264000892639,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.1.0.norm2": {
+      "running_mean_l2": 0.80866539478302,
+      "running_variance_mean": 0.10423076152801514,
+      "running_variance_minimum": 0.05067577213048935,
+      "running_variance_maximum": 0.2267627716064453,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.1.1.norm1": {
+      "running_mean_l2": 1.513535976409912,
+      "running_variance_mean": 0.5392159223556519,
+      "running_variance_minimum": 0.08361291140317917,
+      "running_variance_maximum": 2.444552421569824,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.1.1.norm2": {
+      "running_mean_l2": 0.5295733213424683,
+      "running_variance_mean": 0.07407122850418091,
+      "running_variance_minimum": 0.0335150845348835,
+      "running_variance_maximum": 0.14181748032569885,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.2.0.norm1": {
+      "running_mean_l2": 1.1376899480819702,
+      "running_variance_mean": 0.05436323955655098,
+      "running_variance_minimum": 0.02805180661380291,
+      "running_variance_maximum": 0.1526358276605606,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.2.0.norm2": {
+      "running_mean_l2": 1.3345253467559814,
+      "running_variance_mean": 0.08404474705457687,
+      "running_variance_minimum": 0.04967667534947395,
+      "running_variance_maximum": 0.14092156291007996,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.2.1.norm1": {
+      "running_mean_l2": 2.0560412406921387,
+      "running_variance_mean": 0.21610255539417267,
+      "running_variance_minimum": 0.10400816798210144,
+      "running_variance_maximum": 0.46694278717041016,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.2.1.norm2": {
+      "running_mean_l2": 0.915375828742981,
+      "running_variance_mean": 0.09099258482456207,
+      "running_variance_minimum": 0.0592387318611145,
+      "running_variance_maximum": 0.21743497252464294,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.3.0.norm1": {
+      "running_mean_l2": 1.4659528732299805,
+      "running_variance_mean": 0.0477609783411026,
+      "running_variance_minimum": 0.031148793175816536,
+      "running_variance_maximum": 0.07546190172433853,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.3.0.norm2": {
+      "running_mean_l2": 2.4830386638641357,
+      "running_variance_mean": 0.09465745091438293,
+      "running_variance_minimum": 0.06216548755764961,
+      "running_variance_maximum": 0.20701968669891357,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.3.1.norm1": {
+      "running_mean_l2": 2.688758611679077,
+      "running_variance_mean": 0.16578933596611023,
+      "running_variance_minimum": 0.10316289961338043,
+      "running_variance_maximum": 0.3911202847957611,
+      "num_batches_tracked": 19200
+    },
+    "unet.decoder_blocks.3.1.norm2": {
+      "running_mean_l2": 2.118790626525879,
+      "running_variance_mean": 0.10688406229019165,
+      "running_variance_minimum": 0.06385932862758636,
+      "running_variance_maximum": 0.19634443521499634,
+      "num_batches_tracked": 19200
+    }
+  },
+  "arms": {
+    "batch_1": {
+      "batch_size": 1,
+      "sample_count": 100,
+      "forward_batch_count": 100,
+      "ssr_call_count": 300,
+      "maximum_train_mode_residual": 0.464359849691391,
+      "elapsed_seconds": 18.74691052106209,
+      "batch_norm": {
+        "unet.encoder_blocks.0.0.norm1": {
+          "running_mean_l2": 0.6464723348617554,
+          "running_variance_mean": 0.0561513751745224,
+          "running_variance_minimum": 0.0005753631703555584,
+          "running_variance_maximum": 0.13505910336971283,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.0.0.norm2": {
+          "running_mean_l2": 0.5634010434150696,
+          "running_variance_mean": 0.050294429063797,
+          "running_variance_minimum": 0.024464817717671394,
+          "running_variance_maximum": 0.0888964831829071,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.0.1.norm1": {
+          "running_mean_l2": 0.8579287528991699,
+          "running_variance_mean": 0.08728926628828049,
+          "running_variance_minimum": 0.0368841178715229,
+          "running_variance_maximum": 0.1746848076581955,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.0.1.norm2": {
+          "running_mean_l2": 0.559127151966095,
+          "running_variance_mean": 0.051129624247550964,
+          "running_variance_minimum": 0.0301399827003479,
+          "running_variance_maximum": 0.07648555189371109,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.1.0.norm1": {
+          "running_mean_l2": 0.255217045545578,
+          "running_variance_mean": 0.016633857041597366,
+          "running_variance_minimum": 0.00936646107584238,
+          "running_variance_maximum": 0.031089965254068375,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.1.0.norm2": {
+          "running_mean_l2": 0.9854927659034729,
+          "running_variance_mean": 0.07097133994102478,
+          "running_variance_minimum": 0.046273089945316315,
+          "running_variance_maximum": 0.1470576822757721,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.1.1.norm1": {
+          "running_mean_l2": 1.1292483806610107,
+          "running_variance_mean": 0.08585578948259354,
+          "running_variance_minimum": 0.05865691229701042,
+          "running_variance_maximum": 0.1967449188232422,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.1.1.norm2": {
+          "running_mean_l2": 0.8544911742210388,
+          "running_variance_mean": 0.07015138119459152,
+          "running_variance_minimum": 0.043758708983659744,
+          "running_variance_maximum": 0.11775726079940796,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.2.0.norm1": {
+          "running_mean_l2": 0.5208929181098938,
+          "running_variance_mean": 0.023025287315249443,
+          "running_variance_minimum": 0.013514065183699131,
+          "running_variance_maximum": 0.035330630838871,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.2.0.norm2": {
+          "running_mean_l2": 2.4912335872650146,
+          "running_variance_mean": 0.11618320643901825,
+          "running_variance_minimum": 0.0633007287979126,
+          "running_variance_maximum": 0.2521567940711975,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.2.1.norm1": {
+          "running_mean_l2": 1.678344488143921,
+          "running_variance_mean": 0.09376676380634308,
+          "running_variance_minimum": 0.06202053651213646,
+          "running_variance_maximum": 0.1788048893213272,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.2.1.norm2": {
+          "running_mean_l2": 2.135319232940674,
+          "running_variance_mean": 0.10240712761878967,
+          "running_variance_minimum": 0.06041534245014191,
+          "running_variance_maximum": 0.23342186212539673,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.3.0.norm1": {
+          "running_mean_l2": 1.0330535173416138,
+          "running_variance_mean": 0.03119688853621483,
+          "running_variance_minimum": 0.02064569480717182,
+          "running_variance_maximum": 0.05589814856648445,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.3.0.norm2": {
+          "running_mean_l2": 5.574520587921143,
+          "running_variance_mean": 0.1792868673801422,
+          "running_variance_minimum": 0.09856310486793518,
+          "running_variance_maximum": 0.4142240285873413,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.3.1.norm1": {
+          "running_mean_l2": 2.3827250003814697,
+          "running_variance_mean": 0.10975821316242218,
+          "running_variance_minimum": 0.07963857799768448,
+          "running_variance_maximum": 0.16940142214298248,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.3.1.norm2": {
+          "running_mean_l2": 4.735391139984131,
+          "running_variance_mean": 0.11781255155801773,
+          "running_variance_minimum": 0.07886731624603271,
+          "running_variance_maximum": 0.19873188436031342,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.4.0.norm1": {
+          "running_mean_l2": 1.5273646116256714,
+          "running_variance_mean": 0.03731326758861542,
+          "running_variance_minimum": 0.02763614058494568,
+          "running_variance_maximum": 0.05602465197443962,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.4.0.norm2": {
+          "running_mean_l2": 6.084499359130859,
+          "running_variance_mean": 0.11403755098581314,
+          "running_variance_minimum": 0.08345380425453186,
+          "running_variance_maximum": 0.21190385520458221,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.4.1.norm1": {
+          "running_mean_l2": 5.9777750968933105,
+          "running_variance_mean": 0.15203893184661865,
+          "running_variance_minimum": 0.1146634891629219,
+          "running_variance_maximum": 0.22358715534210205,
+          "num_batches_tracked": 300
+        },
+        "unet.encoder_blocks.4.1.norm2": {
+          "running_mean_l2": 4.3489179611206055,
+          "running_variance_mean": 0.09086354076862335,
+          "running_variance_minimum": 0.06902928650379181,
+          "running_variance_maximum": 0.17004576325416565,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.0.0.norm1": {
+          "running_mean_l2": 0.3603101372718811,
+          "running_variance_mean": 0.23878902196884155,
+          "running_variance_minimum": 0.021458564326167107,
+          "running_variance_maximum": 0.8013617396354675,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.0.0.norm2": {
+          "running_mean_l2": 0.5927679538726807,
+          "running_variance_mean": 0.07327805459499359,
+          "running_variance_minimum": 0.03781510889530182,
+          "running_variance_maximum": 0.15175774693489075,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.0.1.norm1": {
+          "running_mean_l2": 0.8057259321212769,
+          "running_variance_mean": 0.28016868233680725,
+          "running_variance_minimum": 0.07010063529014587,
+          "running_variance_maximum": 0.8958298563957214,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.0.1.norm2": {
+          "running_mean_l2": 0.6268179416656494,
+          "running_variance_mean": 0.06905963271856308,
+          "running_variance_minimum": 0.03433983027935028,
+          "running_variance_maximum": 0.12042540311813354,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.1.0.norm1": {
+          "running_mean_l2": 0.8122568726539612,
+          "running_variance_mean": 0.22571603953838348,
+          "running_variance_minimum": 0.026487844064831734,
+          "running_variance_maximum": 1.1134850978851318,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.1.0.norm2": {
+          "running_mean_l2": 0.7659076452255249,
+          "running_variance_mean": 0.1217079758644104,
+          "running_variance_minimum": 0.056306689977645874,
+          "running_variance_maximum": 0.32085391879081726,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.1.1.norm1": {
+          "running_mean_l2": 1.4141337871551514,
+          "running_variance_mean": 0.633366048336029,
+          "running_variance_minimum": 0.08774038404226303,
+          "running_variance_maximum": 3.12213397026062,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.1.1.norm2": {
+          "running_mean_l2": 0.49883827567100525,
+          "running_variance_mean": 0.08380195498466492,
+          "running_variance_minimum": 0.033290423452854156,
+          "running_variance_maximum": 0.19306756556034088,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.2.0.norm1": {
+          "running_mean_l2": 1.1075665950775146,
+          "running_variance_mean": 0.051614560186862946,
+          "running_variance_minimum": 0.025986438617110252,
+          "running_variance_maximum": 0.1379913091659546,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.2.0.norm2": {
+          "running_mean_l2": 1.3127691745758057,
+          "running_variance_mean": 0.0866202563047409,
+          "running_variance_minimum": 0.05035999417304993,
+          "running_variance_maximum": 0.14997240900993347,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.2.1.norm1": {
+          "running_mean_l2": 2.0141842365264893,
+          "running_variance_mean": 0.22698421776294708,
+          "running_variance_minimum": 0.11130634695291519,
+          "running_variance_maximum": 0.531251072883606,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.2.1.norm2": {
+          "running_mean_l2": 0.8836271166801453,
+          "running_variance_mean": 0.09440332651138306,
+          "running_variance_minimum": 0.05973538011312485,
+          "running_variance_maximum": 0.2324157953262329,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.3.0.norm1": {
+          "running_mean_l2": 1.4081313610076904,
+          "running_variance_mean": 0.046269506216049194,
+          "running_variance_minimum": 0.03013392724096775,
+          "running_variance_maximum": 0.07643067091703415,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.3.0.norm2": {
+          "running_mean_l2": 2.4117274284362793,
+          "running_variance_mean": 0.09186404943466187,
+          "running_variance_minimum": 0.0611192062497139,
+          "running_variance_maximum": 0.19450117647647858,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.3.1.norm1": {
+          "running_mean_l2": 2.628272533416748,
+          "running_variance_mean": 0.15929687023162842,
+          "running_variance_minimum": 0.10243740677833557,
+          "running_variance_maximum": 0.38245078921318054,
+          "num_batches_tracked": 300
+        },
+        "unet.decoder_blocks.3.1.norm2": {
+          "running_mean_l2": 2.021770715713501,
+          "running_variance_mean": 0.0961524099111557,
+          "running_variance_minimum": 0.06232801824808121,
+          "running_variance_maximum": 0.17159198224544525,
+          "num_batches_tracked": 300
+        }
+      },
+      "state_audit": {
+        "allowed_buffer_count": 108,
+        "changed_allowed_buffer_count": 108,
+        "bitwise_unchanged_state_count": 609
+      },
+      "peak_memory_mib": 2284.09228515625,
+      "source_checkpoint_sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp19_ssr_batchnorm_recalibration/artifacts/calibration/bn_recal_b1.pt",
+      "checkpoint_sha256": "9837729d8008eeffc5d197be14ea797ff23396001fd0cd8a5a2ed040a59ee414",
+      "checkpoint_bytes": 1508086964
+    },
+    "batch_8": {
+      "batch_size": 8,
+      "sample_count": 100,
+      "forward_batch_count": 13,
+      "ssr_call_count": 39,
+      "maximum_train_mode_residual": 0.523374617099762,
+      "elapsed_seconds": 12.287253896938637,
+      "batch_norm": {
+        "unet.encoder_blocks.0.0.norm1": {
+          "running_mean_l2": 0.6509523987770081,
+          "running_variance_mean": 0.05762171000242233,
+          "running_variance_minimum": 0.0005756230093538761,
+          "running_variance_maximum": 0.13898365199565887,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.0.0.norm2": {
+          "running_mean_l2": 0.5526434183120728,
+          "running_variance_mean": 0.0517326295375824,
+          "running_variance_minimum": 0.024799909442663193,
+          "running_variance_maximum": 0.09305983036756516,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.0.1.norm1": {
+          "running_mean_l2": 0.8589127063751221,
+          "running_variance_mean": 0.08830074965953827,
+          "running_variance_minimum": 0.03673413395881653,
+          "running_variance_maximum": 0.17535541951656342,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.0.1.norm2": {
+          "running_mean_l2": 0.5522552728652954,
+          "running_variance_mean": 0.05266502499580383,
+          "running_variance_minimum": 0.030307922512292862,
+          "running_variance_maximum": 0.08239036053419113,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.1.0.norm1": {
+          "running_mean_l2": 0.2550387382507324,
+          "running_variance_mean": 0.016693105921149254,
+          "running_variance_minimum": 0.008973564952611923,
+          "running_variance_maximum": 0.031607963144779205,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.1.0.norm2": {
+          "running_mean_l2": 0.9693610072135925,
+          "running_variance_mean": 0.07208753377199173,
+          "running_variance_minimum": 0.04642978310585022,
+          "running_variance_maximum": 0.15485115349292755,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.1.1.norm1": {
+          "running_mean_l2": 1.1158643960952759,
+          "running_variance_mean": 0.08792325854301453,
+          "running_variance_minimum": 0.05893735960125923,
+          "running_variance_maximum": 0.20467717945575714,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.1.1.norm2": {
+          "running_mean_l2": 0.8372631669044495,
+          "running_variance_mean": 0.07240188121795654,
+          "running_variance_minimum": 0.04269622266292572,
+          "running_variance_maximum": 0.13231804966926575,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.2.0.norm1": {
+          "running_mean_l2": 0.5090125203132629,
+          "running_variance_mean": 0.023221435025334358,
+          "running_variance_minimum": 0.013202189467847347,
+          "running_variance_maximum": 0.03655301406979561,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.2.0.norm2": {
+          "running_mean_l2": 2.4388177394866943,
+          "running_variance_mean": 0.1223510354757309,
+          "running_variance_minimum": 0.06519924104213715,
+          "running_variance_maximum": 0.27688759565353394,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.2.1.norm1": {
+          "running_mean_l2": 1.6238558292388916,
+          "running_variance_mean": 0.09342877566814423,
+          "running_variance_minimum": 0.05928739905357361,
+          "running_variance_maximum": 0.2013484090566635,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.2.1.norm2": {
+          "running_mean_l2": 2.0878825187683105,
+          "running_variance_mean": 0.10745827853679657,
+          "running_variance_minimum": 0.0591144822537899,
+          "running_variance_maximum": 0.2732529044151306,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.3.0.norm1": {
+          "running_mean_l2": 0.9787327647209167,
+          "running_variance_mean": 0.030067451298236847,
+          "running_variance_minimum": 0.01950511336326599,
+          "running_variance_maximum": 0.059650078415870667,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.3.0.norm2": {
+          "running_mean_l2": 5.430464744567871,
+          "running_variance_mean": 0.1880374550819397,
+          "running_variance_minimum": 0.10040012747049332,
+          "running_variance_maximum": 0.4618208110332489,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.3.1.norm1": {
+          "running_mean_l2": 2.2919514179229736,
+          "running_variance_mean": 0.10404131561517715,
+          "running_variance_minimum": 0.07615119963884354,
+          "running_variance_maximum": 0.1698950231075287,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.3.1.norm2": {
+          "running_mean_l2": 4.671675682067871,
+          "running_variance_mean": 0.11993713676929474,
+          "running_variance_minimum": 0.07863946259021759,
+          "running_variance_maximum": 0.2077970802783966,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.4.0.norm1": {
+          "running_mean_l2": 1.4580613374710083,
+          "running_variance_mean": 0.035172197967767715,
+          "running_variance_minimum": 0.026039307937026024,
+          "running_variance_maximum": 0.05491197481751442,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.4.0.norm2": {
+          "running_mean_l2": 6.04356050491333,
+          "running_variance_mean": 0.11518066376447678,
+          "running_variance_minimum": 0.08350429683923721,
+          "running_variance_maximum": 0.21648810803890228,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.4.1.norm1": {
+          "running_mean_l2": 5.913815498352051,
+          "running_variance_mean": 0.15116502344608307,
+          "running_variance_minimum": 0.11260979622602463,
+          "running_variance_maximum": 0.22238104045391083,
+          "num_batches_tracked": 39
+        },
+        "unet.encoder_blocks.4.1.norm2": {
+          "running_mean_l2": 4.336300373077393,
+          "running_variance_mean": 0.09111300110816956,
+          "running_variance_minimum": 0.06832528859376907,
+          "running_variance_maximum": 0.17452332377433777,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.0.0.norm1": {
+          "running_mean_l2": 0.3600912094116211,
+          "running_variance_mean": 0.20700469613075256,
+          "running_variance_minimum": 0.0199604369699955,
+          "running_variance_maximum": 0.6831755638122559,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.0.0.norm2": {
+          "running_mean_l2": 0.543505072593689,
+          "running_variance_mean": 0.07183675467967987,
+          "running_variance_minimum": 0.03642107546329498,
+          "running_variance_maximum": 0.13789156079292297,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.0.1.norm1": {
+          "running_mean_l2": 0.7552594542503357,
+          "running_variance_mean": 0.23980391025543213,
+          "running_variance_minimum": 0.06874065101146698,
+          "running_variance_maximum": 0.7584348917007446,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.0.1.norm2": {
+          "running_mean_l2": 0.5882759094238281,
+          "running_variance_mean": 0.06989403069019318,
+          "running_variance_minimum": 0.03312494605779648,
+          "running_variance_maximum": 0.11425317078828812,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.1.0.norm1": {
+          "running_mean_l2": 0.8009858131408691,
+          "running_variance_mean": 0.23369233310222626,
+          "running_variance_minimum": 0.027289222925901413,
+          "running_variance_maximum": 1.1544243097305298,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.1.0.norm2": {
+          "running_mean_l2": 0.7092183232307434,
+          "running_variance_mean": 0.12784144282341003,
+          "running_variance_minimum": 0.058637168258428574,
+          "running_variance_maximum": 0.36905989050865173,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.1.1.norm1": {
+          "running_mean_l2": 1.3066831827163696,
+          "running_variance_mean": 0.6348872780799866,
+          "running_variance_minimum": 0.0893125981092453,
+          "running_variance_maximum": 3.3195464611053467,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.1.1.norm2": {
+          "running_mean_l2": 0.4564608931541443,
+          "running_variance_mean": 0.08735333383083344,
+          "running_variance_minimum": 0.03241356462240219,
+          "running_variance_maximum": 0.21905829012393951,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.2.0.norm1": {
+          "running_mean_l2": 1.072983741760254,
+          "running_variance_mean": 0.05062149092555046,
+          "running_variance_minimum": 0.024679074063897133,
+          "running_variance_maximum": 0.13062705099582672,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.2.0.norm2": {
+          "running_mean_l2": 1.2769919633865356,
+          "running_variance_mean": 0.0847838893532753,
+          "running_variance_minimum": 0.04912962764501572,
+          "running_variance_maximum": 0.1412794142961502,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.2.1.norm1": {
+          "running_mean_l2": 1.9697794914245605,
+          "running_variance_mean": 0.23040014505386353,
+          "running_variance_minimum": 0.11185821890830994,
+          "running_variance_maximum": 0.541646420955658,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.2.1.norm2": {
+          "running_mean_l2": 0.8397470712661743,
+          "running_variance_mean": 0.09613873064517975,
+          "running_variance_minimum": 0.05884207412600517,
+          "running_variance_maximum": 0.236659973859787,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.3.0.norm1": {
+          "running_mean_l2": 1.369433045387268,
+          "running_variance_mean": 0.045057620853185654,
+          "running_variance_minimum": 0.02892959676682949,
+          "running_variance_maximum": 0.07853417098522186,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.3.0.norm2": {
+          "running_mean_l2": 2.3806545734405518,
+          "running_variance_mean": 0.09136327356100082,
+          "running_variance_minimum": 0.06044483929872513,
+          "running_variance_maximum": 0.19869966804981232,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.3.1.norm1": {
+          "running_mean_l2": 2.600022315979004,
+          "running_variance_mean": 0.1567392349243164,
+          "running_variance_minimum": 0.09821049869060516,
+          "running_variance_maximum": 0.38721439242362976,
+          "num_batches_tracked": 39
+        },
+        "unet.decoder_blocks.3.1.norm2": {
+          "running_mean_l2": 2.003192186355591,
+          "running_variance_mean": 0.09449063241481781,
+          "running_variance_minimum": 0.061840470880270004,
+          "running_variance_maximum": 0.17045564949512482,
+          "num_batches_tracked": 39
+        }
+      },
+      "state_audit": {
+        "allowed_buffer_count": 108,
+        "changed_allowed_buffer_count": 108,
+        "bitwise_unchanged_state_count": 609
+      },
+      "peak_memory_mib": 7533.6201171875,
+      "source_checkpoint_sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp19_ssr_batchnorm_recalibration/artifacts/calibration/bn_recal_b8.pt",
+      "checkpoint_sha256": "2e6cd78e2e3a4a26a6da73ca6bb25a399bfad786d5133c9e4d9277a44896d506",
+      "checkpoint_bytes": 1508086900
+    }
+  },
+  "elapsed_seconds": 41.01425373414531
+}

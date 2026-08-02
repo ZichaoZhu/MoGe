@@ -1,0 +1,949 @@
+{
+  "status": "complete",
+  "hypothesis": "SSR BatchNorm运行统计失配导致推理态递归残差离群。",
+  "baseline": {
+    "residual": {
+      "maximum": 1.045814037322998,
+      "maximum_id": "ai_018_003_cam_00_frame.0099",
+      "maximum_iteration": 3,
+      "outlier_count": 6,
+      "outlier_ids": [
+        "ai_018_003_cam_00_frame.0042",
+        "ai_018_003_cam_00_frame.0099",
+        "ai_026_019_cam_00_frame.0000",
+        "ai_027_005_cam_00_frame.0000",
+        "ai_036_002_cam_00_frame.0057",
+        "ai_045_004_cam_01_frame.0099"
+      ]
+    },
+    "metrics": {
+      "0": {
+        "train": {
+          "point_rel": 0.052725183544680476,
+          "depth_rel": 0.04442902552429587,
+          "boundary_f1": 0.8005988436937332,
+          "structure_point_rel": 0.062340739411565496,
+          "structure_depth_rel": 0.051756549951673114,
+          "structure_boundary_f1": 0.6073361179738674
+        },
+        "val": {
+          "point_rel": 0.08653977431822568,
+          "depth_rel": 0.06673888675868511,
+          "boundary_f1": 0.8550957553088665,
+          "structure_point_rel": 0.08108149468898773,
+          "structure_depth_rel": 0.07978402823209763,
+          "structure_boundary_f1": 0.7584583163261414
+        },
+        "test": {
+          "point_rel": 0.06858487625140697,
+          "depth_rel": 0.06311582308262587,
+          "boundary_f1": 0.8232436254620552,
+          "structure_point_rel": 0.09067538380622864,
+          "structure_depth_rel": 0.0874801054596901,
+          "structure_boundary_f1": 0.8518447875976562
+        }
+      },
+      "1": {
+        "train": {
+          "point_rel": 0.047672180272638795,
+          "depth_rel": 0.03970886131748557,
+          "boundary_f1": 0.8032469233870506,
+          "structure_point_rel": 0.05445395464534467,
+          "structure_depth_rel": 0.04431188817329283,
+          "structure_boundary_f1": 0.608991987440946
+        },
+        "val": {
+          "point_rel": 0.0862872411380522,
+          "depth_rel": 0.06690450123278424,
+          "boundary_f1": 0.8524944446980953,
+          "structure_point_rel": 0.0821564719080925,
+          "structure_depth_rel": 0.08075816929340363,
+          "structure_boundary_f1": 0.7713162302970886
+        },
+        "test": {
+          "point_rel": 0.06822379701770842,
+          "depth_rel": 0.06287280633114278,
+          "boundary_f1": 0.8198419362306595,
+          "structure_point_rel": 0.09063271433115005,
+          "structure_depth_rel": 0.08744016289710999,
+          "structure_boundary_f1": 0.8530897498130798
+        }
+      },
+      "3": {
+        "train": {
+          "point_rel": 0.04520800509955734,
+          "depth_rel": 0.037431043917313216,
+          "boundary_f1": 0.7948782768845558,
+          "structure_point_rel": 0.05124292803822823,
+          "structure_depth_rel": 0.0415772246899751,
+          "structure_boundary_f1": 0.6096965507516321
+        },
+        "val": {
+          "point_rel": 0.08904973394237459,
+          "depth_rel": 0.06960652983980253,
+          "boundary_f1": 0.8400810807943344,
+          "structure_point_rel": 0.08746694028377533,
+          "structure_depth_rel": 0.08600497245788574,
+          "structure_boundary_f1": 0.7944186329841614
+        },
+        "test": {
+          "point_rel": 0.06893044814933091,
+          "depth_rel": 0.06335141125600785,
+          "boundary_f1": 0.8104375004768372,
+          "structure_point_rel": 0.0933237373828888,
+          "structure_depth_rel": 0.09002532064914703,
+          "structure_boundary_f1": 0.856654703617096
+        }
+      },
+      "5": {
+        "train": {
+          "point_rel": 0.04805712084285915,
+          "depth_rel": 0.040077965948730705,
+          "boundary_f1": 0.7841246697306633,
+          "structure_point_rel": 0.05528017736198205,
+          "structure_depth_rel": 0.04512418500797929,
+          "structure_boundary_f1": 0.6004908829927444
+        },
+        "val": {
+          "point_rel": 0.09378162259235978,
+          "depth_rel": 0.07368200086057186,
+          "boundary_f1": 0.8189494870603085,
+          "structure_point_rel": 0.09102743864059448,
+          "structure_depth_rel": 0.08939234167337418,
+          "structure_boundary_f1": 0.7905930280685425
+        },
+        "test": {
+          "point_rel": 0.07085986412130296,
+          "depth_rel": 0.06478625489398837,
+          "boundary_f1": 0.7934826351702213,
+          "structure_point_rel": 0.09919365495443344,
+          "structure_depth_rel": 0.0957360789179802,
+          "structure_boundary_f1": 0.8481099605560303
+        }
+      }
+    }
+  },
+  "arms": {
+    "b1": {
+      "calibration": {
+        "batch_size": 1,
+        "sample_count": 100,
+        "forward_batch_count": 100,
+        "ssr_call_count": 300,
+        "maximum_train_mode_residual": 0.464359849691391,
+        "elapsed_seconds": 18.74691052106209,
+        "batch_norm": {
+          "unet.encoder_blocks.0.0.norm1": {
+            "running_mean_l2": 0.6464723348617554,
+            "running_variance_mean": 0.0561513751745224,
+            "running_variance_minimum": 0.0005753631703555584,
+            "running_variance_maximum": 0.13505910336971283,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.0.0.norm2": {
+            "running_mean_l2": 0.5634010434150696,
+            "running_variance_mean": 0.050294429063797,
+            "running_variance_minimum": 0.024464817717671394,
+            "running_variance_maximum": 0.0888964831829071,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.0.1.norm1": {
+            "running_mean_l2": 0.8579287528991699,
+            "running_variance_mean": 0.08728926628828049,
+            "running_variance_minimum": 0.0368841178715229,
+            "running_variance_maximum": 0.1746848076581955,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.0.1.norm2": {
+            "running_mean_l2": 0.559127151966095,
+            "running_variance_mean": 0.051129624247550964,
+            "running_variance_minimum": 0.0301399827003479,
+            "running_variance_maximum": 0.07648555189371109,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.1.0.norm1": {
+            "running_mean_l2": 0.255217045545578,
+            "running_variance_mean": 0.016633857041597366,
+            "running_variance_minimum": 0.00936646107584238,
+            "running_variance_maximum": 0.031089965254068375,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.1.0.norm2": {
+            "running_mean_l2": 0.9854927659034729,
+            "running_variance_mean": 0.07097133994102478,
+            "running_variance_minimum": 0.046273089945316315,
+            "running_variance_maximum": 0.1470576822757721,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.1.1.norm1": {
+            "running_mean_l2": 1.1292483806610107,
+            "running_variance_mean": 0.08585578948259354,
+            "running_variance_minimum": 0.05865691229701042,
+            "running_variance_maximum": 0.1967449188232422,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.1.1.norm2": {
+            "running_mean_l2": 0.8544911742210388,
+            "running_variance_mean": 0.07015138119459152,
+            "running_variance_minimum": 0.043758708983659744,
+            "running_variance_maximum": 0.11775726079940796,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.2.0.norm1": {
+            "running_mean_l2": 0.5208929181098938,
+            "running_variance_mean": 0.023025287315249443,
+            "running_variance_minimum": 0.013514065183699131,
+            "running_variance_maximum": 0.035330630838871,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.2.0.norm2": {
+            "running_mean_l2": 2.4912335872650146,
+            "running_variance_mean": 0.11618320643901825,
+            "running_variance_minimum": 0.0633007287979126,
+            "running_variance_maximum": 0.2521567940711975,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.2.1.norm1": {
+            "running_mean_l2": 1.678344488143921,
+            "running_variance_mean": 0.09376676380634308,
+            "running_variance_minimum": 0.06202053651213646,
+            "running_variance_maximum": 0.1788048893213272,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.2.1.norm2": {
+            "running_mean_l2": 2.135319232940674,
+            "running_variance_mean": 0.10240712761878967,
+            "running_variance_minimum": 0.06041534245014191,
+            "running_variance_maximum": 0.23342186212539673,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.3.0.norm1": {
+            "running_mean_l2": 1.0330535173416138,
+            "running_variance_mean": 0.03119688853621483,
+            "running_variance_minimum": 0.02064569480717182,
+            "running_variance_maximum": 0.05589814856648445,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.3.0.norm2": {
+            "running_mean_l2": 5.574520587921143,
+            "running_variance_mean": 0.1792868673801422,
+            "running_variance_minimum": 0.09856310486793518,
+            "running_variance_maximum": 0.4142240285873413,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.3.1.norm1": {
+            "running_mean_l2": 2.3827250003814697,
+            "running_variance_mean": 0.10975821316242218,
+            "running_variance_minimum": 0.07963857799768448,
+            "running_variance_maximum": 0.16940142214298248,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.3.1.norm2": {
+            "running_mean_l2": 4.735391139984131,
+            "running_variance_mean": 0.11781255155801773,
+            "running_variance_minimum": 0.07886731624603271,
+            "running_variance_maximum": 0.19873188436031342,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.4.0.norm1": {
+            "running_mean_l2": 1.5273646116256714,
+            "running_variance_mean": 0.03731326758861542,
+            "running_variance_minimum": 0.02763614058494568,
+            "running_variance_maximum": 0.05602465197443962,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.4.0.norm2": {
+            "running_mean_l2": 6.084499359130859,
+            "running_variance_mean": 0.11403755098581314,
+            "running_variance_minimum": 0.08345380425453186,
+            "running_variance_maximum": 0.21190385520458221,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.4.1.norm1": {
+            "running_mean_l2": 5.9777750968933105,
+            "running_variance_mean": 0.15203893184661865,
+            "running_variance_minimum": 0.1146634891629219,
+            "running_variance_maximum": 0.22358715534210205,
+            "num_batches_tracked": 300
+          },
+          "unet.encoder_blocks.4.1.norm2": {
+            "running_mean_l2": 4.3489179611206055,
+            "running_variance_mean": 0.09086354076862335,
+            "running_variance_minimum": 0.06902928650379181,
+            "running_variance_maximum": 0.17004576325416565,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.0.0.norm1": {
+            "running_mean_l2": 0.3603101372718811,
+            "running_variance_mean": 0.23878902196884155,
+            "running_variance_minimum": 0.021458564326167107,
+            "running_variance_maximum": 0.8013617396354675,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.0.0.norm2": {
+            "running_mean_l2": 0.5927679538726807,
+            "running_variance_mean": 0.07327805459499359,
+            "running_variance_minimum": 0.03781510889530182,
+            "running_variance_maximum": 0.15175774693489075,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.0.1.norm1": {
+            "running_mean_l2": 0.8057259321212769,
+            "running_variance_mean": 0.28016868233680725,
+            "running_variance_minimum": 0.07010063529014587,
+            "running_variance_maximum": 0.8958298563957214,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.0.1.norm2": {
+            "running_mean_l2": 0.6268179416656494,
+            "running_variance_mean": 0.06905963271856308,
+            "running_variance_minimum": 0.03433983027935028,
+            "running_variance_maximum": 0.12042540311813354,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.1.0.norm1": {
+            "running_mean_l2": 0.8122568726539612,
+            "running_variance_mean": 0.22571603953838348,
+            "running_variance_minimum": 0.026487844064831734,
+            "running_variance_maximum": 1.1134850978851318,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.1.0.norm2": {
+            "running_mean_l2": 0.7659076452255249,
+            "running_variance_mean": 0.1217079758644104,
+            "running_variance_minimum": 0.056306689977645874,
+            "running_variance_maximum": 0.32085391879081726,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.1.1.norm1": {
+            "running_mean_l2": 1.4141337871551514,
+            "running_variance_mean": 0.633366048336029,
+            "running_variance_minimum": 0.08774038404226303,
+            "running_variance_maximum": 3.12213397026062,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.1.1.norm2": {
+            "running_mean_l2": 0.49883827567100525,
+            "running_variance_mean": 0.08380195498466492,
+            "running_variance_minimum": 0.033290423452854156,
+            "running_variance_maximum": 0.19306756556034088,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.2.0.norm1": {
+            "running_mean_l2": 1.1075665950775146,
+            "running_variance_mean": 0.051614560186862946,
+            "running_variance_minimum": 0.025986438617110252,
+            "running_variance_maximum": 0.1379913091659546,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.2.0.norm2": {
+            "running_mean_l2": 1.3127691745758057,
+            "running_variance_mean": 0.0866202563047409,
+            "running_variance_minimum": 0.05035999417304993,
+            "running_variance_maximum": 0.14997240900993347,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.2.1.norm1": {
+            "running_mean_l2": 2.0141842365264893,
+            "running_variance_mean": 0.22698421776294708,
+            "running_variance_minimum": 0.11130634695291519,
+            "running_variance_maximum": 0.531251072883606,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.2.1.norm2": {
+            "running_mean_l2": 0.8836271166801453,
+            "running_variance_mean": 0.09440332651138306,
+            "running_variance_minimum": 0.05973538011312485,
+            "running_variance_maximum": 0.2324157953262329,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.3.0.norm1": {
+            "running_mean_l2": 1.4081313610076904,
+            "running_variance_mean": 0.046269506216049194,
+            "running_variance_minimum": 0.03013392724096775,
+            "running_variance_maximum": 0.07643067091703415,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.3.0.norm2": {
+            "running_mean_l2": 2.4117274284362793,
+            "running_variance_mean": 0.09186404943466187,
+            "running_variance_minimum": 0.0611192062497139,
+            "running_variance_maximum": 0.19450117647647858,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.3.1.norm1": {
+            "running_mean_l2": 2.628272533416748,
+            "running_variance_mean": 0.15929687023162842,
+            "running_variance_minimum": 0.10243740677833557,
+            "running_variance_maximum": 0.38245078921318054,
+            "num_batches_tracked": 300
+          },
+          "unet.decoder_blocks.3.1.norm2": {
+            "running_mean_l2": 2.021770715713501,
+            "running_variance_mean": 0.0961524099111557,
+            "running_variance_minimum": 0.06232801824808121,
+            "running_variance_maximum": 0.17159198224544525,
+            "num_batches_tracked": 300
+          }
+        },
+        "state_audit": {
+          "allowed_buffer_count": 108,
+          "changed_allowed_buffer_count": 108,
+          "bitwise_unchanged_state_count": 609
+        },
+        "peak_memory_mib": 2284.09228515625,
+        "source_checkpoint_sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+        "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp19_ssr_batchnorm_recalibration/artifacts/calibration/bn_recal_b1.pt",
+        "checkpoint_sha256": "9837729d8008eeffc5d197be14ea797ff23396001fd0cd8a5a2ed040a59ee414",
+        "checkpoint_bytes": 1508086964
+      },
+      "residual": {
+        "maximum": 0.9445877075195312,
+        "maximum_id": "ai_045_004_cam_01_frame.0099",
+        "maximum_iteration": 3,
+        "outlier_count": 3,
+        "outlier_ids": [
+          "ai_018_003_cam_00_frame.0014",
+          "ai_018_003_cam_00_frame.0099",
+          "ai_045_004_cam_01_frame.0099"
+        ]
+      },
+      "metrics": {
+        "0": {
+          "train": {
+            "point_rel": 0.052725183544680476,
+            "depth_rel": 0.04442902552429587,
+            "boundary_f1": 0.8005988436937332,
+            "structure_point_rel": 0.062340739411565496,
+            "structure_depth_rel": 0.051756549951673114,
+            "structure_boundary_f1": 0.6073361179738674
+          },
+          "val": {
+            "point_rel": 0.08653977431822568,
+            "depth_rel": 0.06673888675868511,
+            "boundary_f1": 0.8550957553088665,
+            "structure_point_rel": 0.08108149468898773,
+            "structure_depth_rel": 0.07978402823209763,
+            "structure_boundary_f1": 0.7584583163261414
+          },
+          "test": {
+            "point_rel": 0.06858487625140697,
+            "depth_rel": 0.06311582308262587,
+            "boundary_f1": 0.8232436254620552,
+            "structure_point_rel": 0.09067538380622864,
+            "structure_depth_rel": 0.0874801054596901,
+            "structure_boundary_f1": 0.8518447875976562
+          }
+        },
+        "1": {
+          "train": {
+            "point_rel": 0.04779420590028167,
+            "depth_rel": 0.039807629841379824,
+            "boundary_f1": 0.8026531887054443,
+            "structure_point_rel": 0.05496637570619021,
+            "structure_depth_rel": 0.04474615694884703,
+            "structure_boundary_f1": 0.607830673877923
+          },
+          "val": {
+            "point_rel": 0.08640293101780117,
+            "depth_rel": 0.06693964451551437,
+            "boundary_f1": 0.8527289554476738,
+            "structure_point_rel": 0.08182617276906967,
+            "structure_depth_rel": 0.08039572834968567,
+            "structure_boundary_f1": 0.7705150842666626
+          },
+          "test": {
+            "point_rel": 0.06825134111568332,
+            "depth_rel": 0.06288384099025279,
+            "boundary_f1": 0.8198010809719563,
+            "structure_point_rel": 0.09133300930261612,
+            "structure_depth_rel": 0.08811334520578384,
+            "structure_boundary_f1": 0.850565493106842
+          }
+        },
+        "3": {
+          "train": {
+            "point_rel": 0.04454074295703322,
+            "depth_rel": 0.03681422252673656,
+            "boundary_f1": 0.7961996093392372,
+            "structure_point_rel": 0.05079958747791232,
+            "structure_depth_rel": 0.041133925230857335,
+            "structure_boundary_f1": 0.6074446383512245
+          },
+          "val": {
+            "point_rel": 0.08920710266102105,
+            "depth_rel": 0.06979696510825306,
+            "boundary_f1": 0.8417133539915085,
+            "structure_point_rel": 0.08665156364440918,
+            "structure_depth_rel": 0.08511056005954742,
+            "structure_boundary_f1": 0.7885245084762573
+          },
+          "test": {
+            "point_rel": 0.06859761872328818,
+            "depth_rel": 0.06314657093025744,
+            "boundary_f1": 0.8106558695435524,
+            "structure_point_rel": 0.0935840755701065,
+            "structure_depth_rel": 0.09026864916086197,
+            "structure_boundary_f1": 0.8580553531646729
+          }
+        },
+        "5": {
+          "train": {
+            "point_rel": 0.04668842371553183,
+            "depth_rel": 0.03889126539230347,
+            "boundary_f1": 0.787216494679451,
+            "structure_point_rel": 0.05397575823062996,
+            "structure_depth_rel": 0.044084361596208696,
+            "structure_boundary_f1": 0.602937675731362
+          },
+          "val": {
+            "point_rel": 0.0936518550151959,
+            "depth_rel": 0.07381533738225698,
+            "boundary_f1": 0.8233855813741684,
+            "structure_point_rel": 0.09115658700466156,
+            "structure_depth_rel": 0.08935116976499557,
+            "structure_boundary_f1": 0.7929849624633789
+          },
+          "test": {
+            "point_rel": 0.06983001378830522,
+            "depth_rel": 0.06402897846419364,
+            "boundary_f1": 0.8001003041863441,
+            "structure_point_rel": 0.101079560816288,
+            "structure_depth_rel": 0.0975358858704567,
+            "structure_boundary_f1": 0.843086838722229
+          }
+        }
+      },
+      "k3_changes_from_original": {
+        "train": {
+          "k3_point_rel_relative_reduction": 0.01475982275826307,
+          "k3_structure_point_rel_relative_reduction": 0.008651741367807306
+        },
+        "val": {
+          "k3_point_rel_relative_reduction": -0.0017672003236787028,
+          "k3_structure_point_rel_relative_reduction": 0.009322112294322454
+        },
+        "test": {
+          "k3_point_rel_relative_reduction": 0.004828481969560011,
+          "k3_structure_point_rel_relative_reduction": -0.0027896245319622855
+        }
+      },
+      "k0_point_rel_maximum_absolute_difference": 0.0,
+      "outliers_removed": 3,
+      "maximum_residual_relative_reduction": 0.09679190199299573
+    },
+    "b8": {
+      "calibration": {
+        "batch_size": 8,
+        "sample_count": 100,
+        "forward_batch_count": 13,
+        "ssr_call_count": 39,
+        "maximum_train_mode_residual": 0.523374617099762,
+        "elapsed_seconds": 12.287253896938637,
+        "batch_norm": {
+          "unet.encoder_blocks.0.0.norm1": {
+            "running_mean_l2": 0.6509523987770081,
+            "running_variance_mean": 0.05762171000242233,
+            "running_variance_minimum": 0.0005756230093538761,
+            "running_variance_maximum": 0.13898365199565887,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.0.0.norm2": {
+            "running_mean_l2": 0.5526434183120728,
+            "running_variance_mean": 0.0517326295375824,
+            "running_variance_minimum": 0.024799909442663193,
+            "running_variance_maximum": 0.09305983036756516,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.0.1.norm1": {
+            "running_mean_l2": 0.8589127063751221,
+            "running_variance_mean": 0.08830074965953827,
+            "running_variance_minimum": 0.03673413395881653,
+            "running_variance_maximum": 0.17535541951656342,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.0.1.norm2": {
+            "running_mean_l2": 0.5522552728652954,
+            "running_variance_mean": 0.05266502499580383,
+            "running_variance_minimum": 0.030307922512292862,
+            "running_variance_maximum": 0.08239036053419113,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.1.0.norm1": {
+            "running_mean_l2": 0.2550387382507324,
+            "running_variance_mean": 0.016693105921149254,
+            "running_variance_minimum": 0.008973564952611923,
+            "running_variance_maximum": 0.031607963144779205,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.1.0.norm2": {
+            "running_mean_l2": 0.9693610072135925,
+            "running_variance_mean": 0.07208753377199173,
+            "running_variance_minimum": 0.04642978310585022,
+            "running_variance_maximum": 0.15485115349292755,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.1.1.norm1": {
+            "running_mean_l2": 1.1158643960952759,
+            "running_variance_mean": 0.08792325854301453,
+            "running_variance_minimum": 0.05893735960125923,
+            "running_variance_maximum": 0.20467717945575714,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.1.1.norm2": {
+            "running_mean_l2": 0.8372631669044495,
+            "running_variance_mean": 0.07240188121795654,
+            "running_variance_minimum": 0.04269622266292572,
+            "running_variance_maximum": 0.13231804966926575,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.2.0.norm1": {
+            "running_mean_l2": 0.5090125203132629,
+            "running_variance_mean": 0.023221435025334358,
+            "running_variance_minimum": 0.013202189467847347,
+            "running_variance_maximum": 0.03655301406979561,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.2.0.norm2": {
+            "running_mean_l2": 2.4388177394866943,
+            "running_variance_mean": 0.1223510354757309,
+            "running_variance_minimum": 0.06519924104213715,
+            "running_variance_maximum": 0.27688759565353394,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.2.1.norm1": {
+            "running_mean_l2": 1.6238558292388916,
+            "running_variance_mean": 0.09342877566814423,
+            "running_variance_minimum": 0.05928739905357361,
+            "running_variance_maximum": 0.2013484090566635,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.2.1.norm2": {
+            "running_mean_l2": 2.0878825187683105,
+            "running_variance_mean": 0.10745827853679657,
+            "running_variance_minimum": 0.0591144822537899,
+            "running_variance_maximum": 0.2732529044151306,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.3.0.norm1": {
+            "running_mean_l2": 0.9787327647209167,
+            "running_variance_mean": 0.030067451298236847,
+            "running_variance_minimum": 0.01950511336326599,
+            "running_variance_maximum": 0.059650078415870667,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.3.0.norm2": {
+            "running_mean_l2": 5.430464744567871,
+            "running_variance_mean": 0.1880374550819397,
+            "running_variance_minimum": 0.10040012747049332,
+            "running_variance_maximum": 0.4618208110332489,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.3.1.norm1": {
+            "running_mean_l2": 2.2919514179229736,
+            "running_variance_mean": 0.10404131561517715,
+            "running_variance_minimum": 0.07615119963884354,
+            "running_variance_maximum": 0.1698950231075287,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.3.1.norm2": {
+            "running_mean_l2": 4.671675682067871,
+            "running_variance_mean": 0.11993713676929474,
+            "running_variance_minimum": 0.07863946259021759,
+            "running_variance_maximum": 0.2077970802783966,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.4.0.norm1": {
+            "running_mean_l2": 1.4580613374710083,
+            "running_variance_mean": 0.035172197967767715,
+            "running_variance_minimum": 0.026039307937026024,
+            "running_variance_maximum": 0.05491197481751442,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.4.0.norm2": {
+            "running_mean_l2": 6.04356050491333,
+            "running_variance_mean": 0.11518066376447678,
+            "running_variance_minimum": 0.08350429683923721,
+            "running_variance_maximum": 0.21648810803890228,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.4.1.norm1": {
+            "running_mean_l2": 5.913815498352051,
+            "running_variance_mean": 0.15116502344608307,
+            "running_variance_minimum": 0.11260979622602463,
+            "running_variance_maximum": 0.22238104045391083,
+            "num_batches_tracked": 39
+          },
+          "unet.encoder_blocks.4.1.norm2": {
+            "running_mean_l2": 4.336300373077393,
+            "running_variance_mean": 0.09111300110816956,
+            "running_variance_minimum": 0.06832528859376907,
+            "running_variance_maximum": 0.17452332377433777,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.0.0.norm1": {
+            "running_mean_l2": 0.3600912094116211,
+            "running_variance_mean": 0.20700469613075256,
+            "running_variance_minimum": 0.0199604369699955,
+            "running_variance_maximum": 0.6831755638122559,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.0.0.norm2": {
+            "running_mean_l2": 0.543505072593689,
+            "running_variance_mean": 0.07183675467967987,
+            "running_variance_minimum": 0.03642107546329498,
+            "running_variance_maximum": 0.13789156079292297,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.0.1.norm1": {
+            "running_mean_l2": 0.7552594542503357,
+            "running_variance_mean": 0.23980391025543213,
+            "running_variance_minimum": 0.06874065101146698,
+            "running_variance_maximum": 0.7584348917007446,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.0.1.norm2": {
+            "running_mean_l2": 0.5882759094238281,
+            "running_variance_mean": 0.06989403069019318,
+            "running_variance_minimum": 0.03312494605779648,
+            "running_variance_maximum": 0.11425317078828812,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.1.0.norm1": {
+            "running_mean_l2": 0.8009858131408691,
+            "running_variance_mean": 0.23369233310222626,
+            "running_variance_minimum": 0.027289222925901413,
+            "running_variance_maximum": 1.1544243097305298,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.1.0.norm2": {
+            "running_mean_l2": 0.7092183232307434,
+            "running_variance_mean": 0.12784144282341003,
+            "running_variance_minimum": 0.058637168258428574,
+            "running_variance_maximum": 0.36905989050865173,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.1.1.norm1": {
+            "running_mean_l2": 1.3066831827163696,
+            "running_variance_mean": 0.6348872780799866,
+            "running_variance_minimum": 0.0893125981092453,
+            "running_variance_maximum": 3.3195464611053467,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.1.1.norm2": {
+            "running_mean_l2": 0.4564608931541443,
+            "running_variance_mean": 0.08735333383083344,
+            "running_variance_minimum": 0.03241356462240219,
+            "running_variance_maximum": 0.21905829012393951,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.2.0.norm1": {
+            "running_mean_l2": 1.072983741760254,
+            "running_variance_mean": 0.05062149092555046,
+            "running_variance_minimum": 0.024679074063897133,
+            "running_variance_maximum": 0.13062705099582672,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.2.0.norm2": {
+            "running_mean_l2": 1.2769919633865356,
+            "running_variance_mean": 0.0847838893532753,
+            "running_variance_minimum": 0.04912962764501572,
+            "running_variance_maximum": 0.1412794142961502,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.2.1.norm1": {
+            "running_mean_l2": 1.9697794914245605,
+            "running_variance_mean": 0.23040014505386353,
+            "running_variance_minimum": 0.11185821890830994,
+            "running_variance_maximum": 0.541646420955658,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.2.1.norm2": {
+            "running_mean_l2": 0.8397470712661743,
+            "running_variance_mean": 0.09613873064517975,
+            "running_variance_minimum": 0.05884207412600517,
+            "running_variance_maximum": 0.236659973859787,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.3.0.norm1": {
+            "running_mean_l2": 1.369433045387268,
+            "running_variance_mean": 0.045057620853185654,
+            "running_variance_minimum": 0.02892959676682949,
+            "running_variance_maximum": 0.07853417098522186,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.3.0.norm2": {
+            "running_mean_l2": 2.3806545734405518,
+            "running_variance_mean": 0.09136327356100082,
+            "running_variance_minimum": 0.06044483929872513,
+            "running_variance_maximum": 0.19869966804981232,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.3.1.norm1": {
+            "running_mean_l2": 2.600022315979004,
+            "running_variance_mean": 0.1567392349243164,
+            "running_variance_minimum": 0.09821049869060516,
+            "running_variance_maximum": 0.38721439242362976,
+            "num_batches_tracked": 39
+          },
+          "unet.decoder_blocks.3.1.norm2": {
+            "running_mean_l2": 2.003192186355591,
+            "running_variance_mean": 0.09449063241481781,
+            "running_variance_minimum": 0.061840470880270004,
+            "running_variance_maximum": 0.17045564949512482,
+            "num_batches_tracked": 39
+          }
+        },
+        "state_audit": {
+          "allowed_buffer_count": 108,
+          "changed_allowed_buffer_count": 108,
+          "bitwise_unchanged_state_count": 609
+        },
+        "peak_memory_mib": 7533.6201171875,
+        "source_checkpoint_sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+        "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp19_ssr_batchnorm_recalibration/artifacts/calibration/bn_recal_b8.pt",
+        "checkpoint_sha256": "2e6cd78e2e3a4a26a6da73ca6bb25a399bfad786d5133c9e4d9277a44896d506",
+        "checkpoint_bytes": 1508086900
+      },
+      "residual": {
+        "maximum": 0.8123764395713806,
+        "maximum_id": "ai_045_004_cam_01_frame.0099",
+        "maximum_iteration": 3,
+        "outlier_count": 2,
+        "outlier_ids": [
+          "ai_027_005_cam_00_frame.0000",
+          "ai_045_004_cam_01_frame.0099"
+        ]
+      },
+      "metrics": {
+        "0": {
+          "train": {
+            "point_rel": 0.052725183544680476,
+            "depth_rel": 0.04442902552429587,
+            "boundary_f1": 0.8005988436937332,
+            "structure_point_rel": 0.062340739411565496,
+            "structure_depth_rel": 0.051756549951673114,
+            "structure_boundary_f1": 0.6073361179738674
+          },
+          "val": {
+            "point_rel": 0.08653977431822568,
+            "depth_rel": 0.06673888675868511,
+            "boundary_f1": 0.8550957553088665,
+            "structure_point_rel": 0.08108149468898773,
+            "structure_depth_rel": 0.07978402823209763,
+            "structure_boundary_f1": 0.7584583163261414
+          },
+          "test": {
+            "point_rel": 0.06858487625140697,
+            "depth_rel": 0.06311582308262587,
+            "boundary_f1": 0.8232436254620552,
+            "structure_point_rel": 0.09067538380622864,
+            "structure_depth_rel": 0.0874801054596901,
+            "structure_boundary_f1": 0.8518447875976562
+          }
+        },
+        "1": {
+          "train": {
+            "point_rel": 0.04807135282084346,
+            "depth_rel": 0.040057529690675435,
+            "boundary_f1": 0.8025943166017533,
+            "structure_point_rel": 0.05551113762875211,
+            "structure_depth_rel": 0.04525504378988495,
+            "structure_boundary_f1": 0.6081512436833022
+          },
+          "val": {
+            "point_rel": 0.08642340154619887,
+            "depth_rel": 0.06689641281263903,
+            "boundary_f1": 0.8526942133903503,
+            "structure_point_rel": 0.0816599503159523,
+            "structure_depth_rel": 0.08023598790168762,
+            "structure_boundary_f1": 0.7695187330245972
+          },
+          "test": {
+            "point_rel": 0.06834403611719608,
+            "depth_rel": 0.06297450035344809,
+            "boundary_f1": 0.8198799602687359,
+            "structure_point_rel": 0.0910075306892395,
+            "structure_depth_rel": 0.08776531368494034,
+            "structure_boundary_f1": 0.8525764346122742
+          }
+        },
+        "3": {
+          "train": {
+            "point_rel": 0.044430268029682335,
+            "depth_rel": 0.0367003931151703,
+            "boundary_f1": 0.79715840280056,
+            "structure_point_rel": 0.05073205357030878,
+            "structure_depth_rel": 0.04104508849669178,
+            "structure_boundary_f1": 0.6071733352991769
+          },
+          "val": {
+            "point_rel": 0.08881660178303719,
+            "depth_rel": 0.06929484568536282,
+            "boundary_f1": 0.8421265371143818,
+            "structure_point_rel": 0.08555825054645538,
+            "structure_depth_rel": 0.08401983231306076,
+            "structure_boundary_f1": 0.7844822406768799
+          },
+          "test": {
+            "point_rel": 0.06869268289301544,
+            "depth_rel": 0.06329140183515847,
+            "boundary_f1": 0.8125180900096893,
+            "structure_point_rel": 0.0927589163184166,
+            "structure_depth_rel": 0.08944655954837799,
+            "structure_boundary_f1": 0.8559836149215698
+          }
+        },
+        "5": {
+          "train": {
+            "point_rel": 0.04578369452618063,
+            "depth_rel": 0.03803943338338286,
+            "boundary_f1": 0.7890282967686653,
+            "structure_point_rel": 0.05268072792030168,
+            "structure_depth_rel": 0.0430038165090219,
+            "structure_boundary_f1": 0.6055085119211449
+          },
+          "val": {
+            "point_rel": 0.09273213590495288,
+            "depth_rel": 0.07317857502494007,
+            "boundary_f1": 0.8261262699961662,
+            "structure_point_rel": 0.08829249441623688,
+            "structure_depth_rel": 0.08655954897403717,
+            "structure_boundary_f1": 0.7915137410163879
+          },
+          "test": {
+            "point_rel": 0.06982447241898626,
+            "depth_rel": 0.06419164896942675,
+            "boundary_f1": 0.7992859780788422,
+            "structure_point_rel": 0.09755972772836685,
+            "structure_depth_rel": 0.09409502893686295,
+            "structure_boundary_f1": 0.8556051850318909
+          }
+        }
+      },
+      "k3_changes_from_original": {
+        "train": {
+          "k3_point_rel_relative_reduction": 0.01720352552965487,
+          "k3_structure_point_rel_relative_reduction": 0.009969658008971155
+        },
+        "val": {
+          "k3_point_rel_relative_reduction": 0.0026179995045045807,
+          "k3_structure_point_rel_relative_reduction": 0.021821841842500102
+        },
+        "test": {
+          "k3_point_rel_relative_reduction": 0.003449350217488433,
+          "k3_structure_point_rel_relative_reduction": 0.006052276519475958
+        }
+      },
+      "k0_point_rel_maximum_absolute_difference": 0.0,
+      "outliers_removed": 4,
+      "maximum_residual_relative_reduction": 0.2232113831146833
+    }
+  },
+  "selected_arm": "b8",
+  "decision": {
+    "any_arm_removes_all_outliers": false,
+    "batch_size_changes_result": true,
+    "learned_parameters_unchanged": true
+  }
+}

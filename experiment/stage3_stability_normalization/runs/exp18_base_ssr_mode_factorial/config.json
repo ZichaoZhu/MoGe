@@ -1,0 +1,34 @@
+{
+  "experiment_id": "exp18_base_ssr_mode_factorial",
+  "objective": "通过Base和SSR的train/eval四组合扫描，隔离Exp17残差失配发生在哪个模块。",
+  "checkpoint": {
+    "experiment": "exp15_detached_head_ssr_coadaptation",
+    "step": 800,
+    "sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa"
+  },
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16
+  },
+  "scan": {
+    "shape": [384, 512],
+    "num_tokens": 2500,
+    "refinement_steps": 3,
+    "threshold": 0.5,
+    "stochastic_repeats": 3,
+    "seed": 181,
+    "modes": [
+      "base_eval_ssr_eval",
+      "base_eval_ssr_train",
+      "base_train_ssr_eval",
+      "base_train_ssr_train"
+    ]
+  },
+  "decision_rule": {
+    "ssr_eval_only_outliers": "主要失配定位到SSR归一化/运行统计。",
+    "base_mode_changes_outliers": "继续隔离Base中的训练态模块，不能只修改SSR。",
+    "all_modes_outlier": "模型权重本身递归不稳定，不是单纯模式统计问题。"
+  }
+}

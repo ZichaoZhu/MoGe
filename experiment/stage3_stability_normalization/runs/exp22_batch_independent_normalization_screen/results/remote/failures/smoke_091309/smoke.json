@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "exit_code": 1,
+  "physical_gpu": 1,
+  "mode": "smoke",
+  "started_at": "2026-08-02T09:13:09+08:00",
+  "finished_at": "2026-08-02T09:13:35.868849+08:00"
+}

@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-08-02T10:33:09.748505+08:00",
+  "overall_state": "complete",
+  "action": {
+    "type": "monitoring"
+  },
+  "gpus": [
+    {
+      "index": 0,
+      "memory_used_mib": 24713,
+      "memory_free_mib": 23796,
+      "utilization_percent": 0
+    },
+    {
+      "index": 1,
+      "memory_used_mib": 32677,
+      "memory_free_mib": 15832,
+      "utilization_percent": 30
+    },
+    {
+      "index": 2,
+      "memory_used_mib": 29684,
+      "memory_free_mib": 18825,
+      "utilization_percent": 0
+    },
+    {
+      "index": 3,
+      "memory_used_mib": 46052,
+      "memory_free_mib": 2457,
+      "utilization_percent": 100
+    }
+  ],
+  "smoke": {
+    "mode": "smoke",
+    "state": "complete",
+    "pid": 3698422,
+    "physical_gpu": 1,
+    "last_training": null,
+    "last_evaluation": null,
+    "report_exists": true
+  },
+  "formal": {
+    "mode": "formal",
+    "state": "complete",
+    "pid": 3748102,
+    "physical_gpu": 1,
+    "last_training": null,
+    "last_evaluation": null,
+    "report_exists": true
+  }
+}

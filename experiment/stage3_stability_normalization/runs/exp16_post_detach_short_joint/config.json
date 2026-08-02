@@ -1,0 +1,56 @@
+{
+  "experiment_id": "exp16_post_detach_short_joint",
+  "objective": "从Exp15正确完成detached共适应的最佳点进入短程联合反向，验证论文第二阶段能否继续改善训练拟合且保留SSR收益。",
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16,
+    "fine_structure_rois": "experiment/stage2_training_strategy/runs/exp13_fixed_base_ssr_diagnostic/fine_structure_rois.json"
+  },
+  "warm_start": {
+    "source_experiment": "exp15_detached_head_ssr_coadaptation",
+    "step": 800,
+    "checkpoint": "experiment/stage2_training_strategy/runs/exp15_detached_head_ssr_coadaptation/artifacts/formal/checkpoint.pt",
+    "sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+    "fresh_optimizer": true
+  },
+  "trainable_modules": {
+    "dino_backbone": false,
+    "neck_and_points_head": true,
+    "ssr": true
+  },
+  "gradient_routing": {
+    "refiner_detach_steps": 800,
+    "first_joint_step": 801,
+    "refined_loss_updates_head": true
+  },
+  "optimization": {
+    "maximum_step": 1000,
+    "new_steps": 200,
+    "global_batch_size": 8,
+    "microbatch_size": 1,
+    "ssr_learning_rate": 2e-6,
+    "head_learning_rate": 5e-7,
+    "backbone_learning_rate": 0,
+    "evaluation_every_steps": 50,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "seed": 161
+  },
+  "checkpoint_selection": {
+    "split": "train",
+    "scope": "structure",
+    "metric": "K=3 Point Rel"
+  },
+  "decision_questions": [
+    "正确detached预热后联合阶段能否超过Exp15起点",
+    "K0与K3是否能够同时改善而不发生Exp14式错配",
+    "联合训练是否放大已经接近上限的SSR残差",
+    "K5与留出结构稳定性是否改善"
+  ],
+  "monitoring": {
+    "interval_seconds": 600,
+    "minimum_free_memory_mib": 30000
+  }
+}

@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_joint_v3.py", line 1685, in <module>
+    main()
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_joint_v3.py", line 1162, in main
+    best_score = initial_periodic[str(args.refinement_steps)][
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'structure_point_rel'

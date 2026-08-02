@@ -1,0 +1,24 @@
+{
+  "experiment": "exp24_microbatch2_long_detached",
+  "server_root": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp24_microbatch2_long_detached/artifacts/formal/training",
+  "checkpoints": [
+    {
+      "name": "checkpoint.pt",
+      "role": "step 800训练结构最优权重",
+      "bytes": 1508132959,
+      "sha256": "176a18cef425be9b733aa96f52fa1d6193a541af265e455926d3bfc272ed83b2"
+    },
+    {
+      "name": "latest_checkpoint.pt",
+      "role": "step 800最终模型权重与配置",
+      "bytes": 2034635913,
+      "sha256": "04d64d0bafa18bc42f48dae495aafc9b1559d399aeb2f24de5ccfd749d0ff341"
+    },
+    {
+      "name": "resume_checkpoint.pt",
+      "role": "step 800完整优化器与随机数恢复点",
+      "bytes": 2034635913,
+      "sha256": "2873583f7e4f420cddab4e81425f2942213f12021e6a85a5d4c667b77472579a"
+    }
+  ]
+}

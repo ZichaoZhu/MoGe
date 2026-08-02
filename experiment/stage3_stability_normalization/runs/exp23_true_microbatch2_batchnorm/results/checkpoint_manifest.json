@@ -1,0 +1,13 @@
+{
+  "storage": "server_only",
+  "safe_root": "/mnt/data/home/zhuzichao",
+  "checkpoints": [
+    {
+      "variant": "batch_norm_microbatch_2",
+      "step": 200,
+      "bytes": 1508132767,
+      "sha256": "6ea582d5e40ab0179ef4e44154269424a6d55d91ebb8f10d650e9adbb91966c3",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp23_true_microbatch2_batchnorm/artifacts/formal/training/checkpoint.pt"
+    }
+  ]
+}

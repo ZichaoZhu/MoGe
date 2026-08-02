@@ -1,0 +1,43 @@
+{
+  "status": "failed_by_safety_guard",
+  "experiment": "exp16_post_detach_short_joint",
+  "warm_start": {
+    "experiment": "exp15_detached_head_ssr_coadaptation",
+    "step": 800,
+    "sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa"
+  },
+  "formal_run": {
+    "started_at": "2026-08-02T07:41:12+08:00",
+    "finished_at": "2026-08-02T07:44:38.759065+08:00",
+    "last_logged_step": 810,
+    "last_logged_loss": 0.18520274478942156,
+    "last_logged_preclip_grad_norm": 1.467236876487732,
+    "skipped_optimizer_steps": 0
+  },
+  "failure": {
+    "event": "log_depth_residual_limit",
+    "step": 820,
+    "stage": "joint",
+    "threshold": 0.5,
+    "ssr_max_abs_log_depth_residual": 0.5331000089645386,
+    "ssr_max_depth_span": 388.0,
+    "action": "aborted before backward and optimizer step",
+    "oom": false,
+    "nan": false
+  },
+  "formal_checkpoint": {
+    "step": 800,
+    "sha256": "f919acbae0516a4ce6a384acb52ca31a950480f76122faec899054119c571f47",
+    "bytes": 1508132895
+  },
+  "formal_resume_checkpoint": {
+    "step": 800,
+    "sha256": "b3e34008b4071e03240ff4ea8943e0249227a713d1f53736460675217f06df43",
+    "bytes": 1508140210
+  },
+  "interpretation": {
+    "new_periodic_evaluation_exists": false,
+    "joint_training_effect_is_measurable": false,
+    "next_diagnostic": "Scan the unmodified Exp15 checkpoint across every split and every SSR iteration before changing the safety threshold."
+  }
+}

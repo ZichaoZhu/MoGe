@@ -1,7 +1,9 @@
+import pytest
 import torch
 
 from moge.model.ssr import (
     SelfGuidedSparseRefiner,
+    SpconvSparseUNet,
     factorize_points,
     gather_features_at_coordinates,
     sample_visual_features_for_voxels,
@@ -92,3 +94,19 @@ def test_visual_sampling_ignores_voxel_depth():
         visual, coordinates, image_size=(4, 4), level_scale=1
     )
     torch.testing.assert_close(sampled[0], sampled[1])
+
+
+def test_production_spconv_uses_mask_implicit_gemm_algorithm():
+    pytest.importorskip("spconv.pytorch")
+    from spconv.core import ConvAlgo
+
+    model = SpconvSparseUNet(
+        visual_dim=8,
+        channels=(4, 8),
+        visual_channels=4,
+        blocks_per_level=1,
+    )
+    algorithms = {
+        module.algo for module in model.modules() if hasattr(module, "algo")
+    }
+    assert algorithms == {ConvAlgo.MaskImplicitGemm}

@@ -1,0 +1,145 @@
+{
+  "status": "complete",
+  "experiment": "Hypersim two-stage joint MoGe-3 fine-tuning",
+  "paper_alignment": {
+    "base_and_ssr_jointly_optimized": true,
+    "refiner_detached_during_warmup": true,
+    "fixed_base_diagnostic_ablation": false,
+    "dino_bfloat16_geometry_float32": true,
+    "normal_prediction": false,
+    "synthetic_only_controlled_screen": true,
+    "real_data_routing_exercised": false
+  },
+  "distributed": {
+    "backend": "nccl",
+    "world_size": 1,
+    "global_batch_size": 2,
+    "local_batch_size": 2
+  },
+  "counts": {
+    "train": 4,
+    "val": 4,
+    "test": 4
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "ssr_normalization": "layer_norm",
+  "optimization_steps": 4,
+  "refiner_detach_steps": 4,
+  "backbone_frozen": true,
+  "complete_base_and_2d_heads_frozen": false,
+  "backbone_freeze_steps": 0,
+  "backbone_warmup_end": 1,
+  "learning_rates": {
+    "ssr": 2e-05,
+    "heads": 1e-06,
+    "backbone": 0.0,
+    "schedule": "constant",
+    "decay_start_step": 0,
+    "decay_end_step": 0,
+    "final_scale": 1.0
+  },
+  "batch_size": 2,
+  "microbatch_size": 1,
+  "best_step": 4,
+  "selection_split": "train",
+  "best_k3_point_rel": 0.01179474825039506,
+  "initial_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.012859626673161983,
+        "depth_rel": 0.01163498917594552,
+        "depth_delta_1.01": 0.6119067072868347,
+        "depth_delta_1.25": 0.9996109157800674,
+        "boundary_f1": 0.8857196420431137
+      },
+      "val": {
+        "point_rel": 0.022347492864355445,
+        "depth_rel": 0.02038333984091878,
+        "depth_delta_1.01": 0.4258996658027172,
+        "depth_delta_1.25": 0.9927900433540344,
+        "boundary_f1": 0.8452016860246658
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.012859626673161983,
+        "depth_rel": 0.01163498917594552,
+        "depth_delta_1.01": 0.6119067072868347,
+        "depth_delta_1.25": 0.9996109157800674,
+        "boundary_f1": 0.8857196420431137
+      },
+      "val": {
+        "point_rel": 0.022347492864355445,
+        "depth_rel": 0.02038333984091878,
+        "depth_delta_1.01": 0.4258996658027172,
+        "depth_delta_1.25": 0.9927900433540344,
+        "boundary_f1": 0.8452016860246658
+      }
+    }
+  },
+  "latest_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.011839788872748613,
+        "depth_rel": 0.010528712067753077,
+        "depth_delta_1.01": 0.6608149409294128,
+        "depth_delta_1.25": 0.999623641371727,
+        "boundary_f1": 0.8831679821014404
+      },
+      "val": {
+        "point_rel": 0.02201453852467239,
+        "depth_rel": 0.02008054545149207,
+        "depth_delta_1.01": 0.43927716463804245,
+        "depth_delta_1.25": 0.9928116500377655,
+        "boundary_f1": 0.8447865843772888
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.01179474825039506,
+        "depth_rel": 0.010468482039868832,
+        "depth_delta_1.01": 0.6627362668514252,
+        "depth_delta_1.25": 0.999623641371727,
+        "boundary_f1": 0.8831929415464401
+      },
+      "val": {
+        "point_rel": 0.022070592269301414,
+        "depth_rel": 0.020133114652708173,
+        "depth_delta_1.01": 0.4358120933175087,
+        "depth_delta_1.25": 0.992812916636467,
+        "boundary_f1": 0.8445609509944916
+      }
+    }
+  },
+  "initial_loss": 0.037905409932136536,
+  "final_loss": 0.049943869933485985,
+  "training_seconds_including_periodic_eval": 38.16865353193134,
+  "total_seconds": 59.72305769100785,
+  "peak_memory_bytes": 8795448320,
+  "peak_memory_bytes_by_process": [
+    8795448320
+  ],
+  "stability": {
+    "max_preclip_grad_norm": 100.0,
+    "skipped_preclip_steps": 0,
+    "max_skipped_preclip_steps": 5,
+    "max_consecutive_skipped_preclip_steps": 2
+  },
+  "resumed_from": null,
+  "warm_started_from": null,
+  "cuda_visible_devices": "1",
+  "requested_device": "cuda:0",
+  "artifacts": {
+    "best_checkpoint": "checkpoint.pt",
+    "latest_checkpoint": "latest_checkpoint.pt",
+    "resume_checkpoint": "resume_checkpoint.pt",
+    "training_history": "training_history.csv",
+    "evaluation_history": "evaluation_history.csv",
+    "training_curves": "training_curves.png",
+    "stability_events": "stability_events.jsonl"
+  }
+}

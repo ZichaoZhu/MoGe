@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "experiment": "exp20_stateless_ssr_batch_statistics",
+  "metric": "full_point_rel_relative_reduction_k0_to_k3",
+  "policy": {
+    "train": "K=0 到 K=3 Point Rel 相对改善最大的五张",
+    "val": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+    "test": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名"
+  },
+  "splits": {
+    "train": [
+      {
+        "id": "ai_013_001_cam_00_frame.0000",
+        "picture": 1,
+        "rank": 1,
+        "total": 100,
+        "relativeImprovement": 0.72717
+      },
+      {
+        "id": "ai_005_006_cam_00_frame.0099",
+        "picture": 2,
+        "rank": 2,
+        "total": 100,
+        "relativeImprovement": 0.55077
+      },
+      {
+        "id": "ai_019_001_cam_00_frame.0000",
+        "picture": 3,
+        "rank": 3,
+        "total": 100,
+        "relativeImprovement": 0.53411
+      },
+      {
+        "id": "ai_036_002_cam_00_frame.0085",
+        "picture": 4,
+        "rank": 4,
+        "total": 100,
+        "relativeImprovement": 0.52728
+      },
+      {
+        "id": "ai_018_007_cam_00_frame.0000",
+        "picture": 5,
+        "rank": 5,
+        "total": 100,
+        "relativeImprovement": 0.52549
+      }
+    ],
+    "val": [
+      {
+        "id": "ai_047_001_cam_00_frame.0099",
+        "picture": 1,
+        "rank": 1,
+        "total": 16,
+        "relativeImprovement": 0.06113
+      },
+      {
+        "id": "ai_047_001_cam_00_frame.0042",
+        "picture": 2,
+        "rank": 5,
+        "total": 16,
+        "relativeImprovement": -0.00433
+      },
+      {
+        "id": "ai_047_001_cam_00_frame.0085",
+        "picture": 3,
+        "rank": 9,
+        "total": 16,
+        "relativeImprovement": -0.05413
+      },
+      {
+        "id": "ai_043_002_cam_00_frame.0099",
+        "picture": 4,
+        "rank": 12,
+        "total": 16,
+        "relativeImprovement": -0.15011
+      },
+      {
+        "id": "ai_043_002_cam_00_frame.0042",
+        "picture": 5,
+        "rank": 16,
+        "total": 16,
+        "relativeImprovement": -0.37089
+      }
+    ],
+    "test": [
+      {
+        "id": "ai_046_001_cam_00_frame.0071",
+        "picture": 1,
+        "rank": 1,
+        "total": 16,
+        "relativeImprovement": 0.11106
+      },
+      {
+        "id": "ai_050_001_cam_00_frame.0014",
+        "picture": 2,
+        "rank": 5,
+        "total": 16,
+        "relativeImprovement": -0.00802
+      },
+      {
+        "id": "ai_046_001_cam_00_frame.0000",
+        "picture": 3,
+        "rank": 9,
+        "total": 16,
+        "relativeImprovement": -0.08331
+      },
+      {
+        "id": "ai_050_001_cam_00_frame.0057",
+        "picture": 4,
+        "rank": 12,
+        "total": 16,
+        "relativeImprovement": -0.11551
+      },
+      {
+        "id": "ai_046_001_cam_00_frame.0099",
+        "picture": 5,
+        "rank": 16,
+        "total": 16,
+        "relativeImprovement": -0.56099
+      }
+    ]
+  }
+}

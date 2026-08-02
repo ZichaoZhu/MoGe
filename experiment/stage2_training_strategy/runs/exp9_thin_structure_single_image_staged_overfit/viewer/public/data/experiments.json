@@ -1,7 +1,22 @@
 {
   "version": 1,
-  "defaultExperiment": "exp12_hypersim_100_immediate_joint_finetuning",
+  "defaultExperiment": "exp20_stateless_ssr_batch_statistics",
   "experiments": [
+    {
+      "id": "exp20_stateless_ssr_batch_statistics",
+      "label": "Exp20 · 训练域最佳推理配置",
+      "shortLabel": "Exp20 训练域最佳",
+      "summary": "使用 Exp15 step 800 权重与单图即时 BatchNorm 统计；训练集 K=3 Point Rel 为 3.919%，但验证与测试整体未同步改善。",
+      "manifestUrl": "/data/exp20/manifest.json",
+      "stageLabels": {
+        "initial": "未使用",
+        "final": "Exp20 推理"
+      },
+      "stageDetails": {
+        "initial": "该实验没有独立训练前快照",
+        "final": "Exp15 step 800 权重 · SSR 单图即时 BatchNorm 统计"
+      }
+    },
     {
       "id": "exp9_thin_structure_single_image_staged_overfit",
       "label": "Exp9 · 单图极限过拟合",

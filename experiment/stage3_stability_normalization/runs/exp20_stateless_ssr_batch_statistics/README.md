@@ -118,3 +118,27 @@ Hypersim，且真实前向 batch 为 1。更重要的是，论文没有公开稀
 - [全量残差扫描](results/remote/residual/report.json)；
 - [运行状态](results/remote/status/scan.json)；
 - [固定十分钟监督记录](results/remote/logs/monitor_checks.jsonl)。
+
+## 交互式点云归档
+
+Exp20 已加入多实验点云网站。该入口明确标为“训练域最佳推理配置”，不能表述为
+独立训练的新模型：
+
+- 权重仍是 Exp15 step 800，SHA-256 为
+  `f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa`；
+- train 选择 K=0→K=3 Point Rel 改善最大的五张；
+- val/test 各选择改善排序第 1、5、9、12、16 名，展示从改善到明显退化的分布；
+- 每张保存 K=0/1/3/5 原始 XYZ，共 60 份 PLY、176,966,700 字节；
+- 导出前后 SSR BatchNorm running-state SHA 均为
+  `ec2b3499b559511901ec3f32376c59b7245485e92e63cc667f07b82776c6fc1c`，
+  证明即时统计导出没有修改缓冲或检查点。
+
+机器可读选图规则位于 [viewer_selection.json](viewer_selection.json)，导出报告
+和各样本指标位于 [results/viewer_export](results/viewer_export)，三个划分的
+双窗口验收截图位于
+[results/viewer_acceptance](results/viewer_acceptance)。
+
+全图指标沿用 Exp20 正式评测 CSV。由于 SpConv CUDA 前向并非逐位确定，本次重跑
+的连续指标最大绝对偏差为：Point Rel `2.6812e-4`、Depth Rel
+`2.4299e-4`；阈值指标对临界像素更敏感，最大差异已原样记录在导出报告。新生成
+的裁剪和结构指标来自本次点云，不冒充原正式 ROI 指标。

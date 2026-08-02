@@ -10,12 +10,17 @@ import {
 import type { RasterScope } from "@/lib/geometry";
 import {
   REFINEMENT_STEPS,
+  defaultManifestSplit,
+  defaultStage,
+  manifestSplits,
   resolveAsset,
+  sampleStages,
   stageUsesAlias,
   validateExperimentCatalog,
   validateManifest,
   websiteSamples,
   type CoordinateMode,
+  type DatasetSplit,
   type ExperimentCatalog,
   type ExperimentCatalogEntry,
   type PointCloudManifest,
@@ -25,6 +30,7 @@ import {
   type ScopeName,
   type StageName,
 } from "@/lib/manifest";
+import { parseViewerUrl, serializeViewerUrl } from "@/lib/urlState";
 
 type PaneState = {
   stage: StageName;
@@ -35,6 +41,14 @@ type PaneState = {
 
 function percent(value: number, digits = 2): string {
   return `${(100 * value).toFixed(digits)}%`;
+}
+
+function splitLabel(split: DatasetSplit): string {
+  return {
+    train: "Train · 训练集",
+    val: "Validation · 验证集",
+    test: "Test · 测试集",
+  }[split];
 }
 
 function Segment<T extends string | number>({
@@ -139,6 +153,7 @@ function ViewerPane({
   const asset = resolveAsset(sample, pane.stage, pane.step);
   const metricScope: ScopeName = rasterScope === "full" ? "full" : "crop";
   const isInitialAlias = stageUsesAlias(sample, pane.stage, pane.step);
+  const stages = sampleStages(sample);
   const stageLabel = experiment.stageLabels[pane.stage];
   return (
     <section className="viewer-pane" data-testid={`viewer-${panelId}`}>
@@ -162,14 +177,16 @@ function ViewerPane({
       </header>
 
       <div className="pane-controls">
-        <Segment
-          label="阶段"
-          value={pane.stage}
-          values={["initial", "final"] as const}
-          format={(value) => experiment.stageLabels[value]}
-          onChange={(stage) => setPane({ ...pane, stage })}
-          testId={`${panelId}-stage`}
-        />
+        {stages.length > 1 && (
+          <Segment
+            label="阶段"
+            value={pane.stage}
+            values={stages}
+            format={(value) => experiment.stageLabels[value]}
+            onChange={(stage) => setPane({ ...pane, stage })}
+            testId={`${panelId}-stage`}
+          />
+        )}
         <Segment
           label="精修"
           value={pane.step}
@@ -226,6 +243,19 @@ function ViewerPane({
       />
       <footer className="asset-meta">
         <span>{asset.pointCount.toLocaleString("zh-CN")} 点</span>
+        {asset.pointRelReductionFromK0 !== undefined && (
+          <span
+            className={
+              asset.pointRelReductionFromK0 >= 0
+                ? "metric-improved"
+                : "metric-degraded"
+            }
+          >
+            较 K=0{" "}
+            {asset.pointRelReductionFromK0 >= 0 ? "改善" : "退化"}{" "}
+            {percent(Math.abs(asset.pointRelReductionFromK0))}
+          </span>
+        )}
         <span>s={asset.alignment.scale.toPrecision(5)}</span>
         <span>t={asset.alignment.zShift.toPrecision(5)}</span>
         <span title={asset.checkpointSha256}>
@@ -246,10 +276,18 @@ function LoadingPage() {
 }
 
 export function PointCloudComparison() {
+  const initialUrlState = useMemo(
+    () =>
+      typeof window === "undefined"
+        ? {}
+        : parseViewerUrl(window.location.search),
+    [],
+  );
   const [catalog, setCatalog] = useState<ExperimentCatalog | null>(null);
   const [experimentId, setExperimentId] = useState("");
   const [manifest, setManifest] = useState<PointCloudManifest | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [split, setSplit] = useState<DatasetSplit | null>(null);
   const [sampleId, setSampleId] = useState("");
   const [coordinateMode, setCoordinateMode] =
     useState<CoordinateMode>("aligned");
@@ -283,14 +321,20 @@ export function PointCloudComparison() {
       .then((loaded) => {
         validateExperimentCatalog(loaded);
         setCatalog(loaded);
-        setExperimentId(loaded.defaultExperiment);
+        const requested = initialUrlState.experiment;
+        setExperimentId(
+          requested &&
+            loaded.experiments.some((entry) => entry.id === requested)
+            ? requested
+            : loaded.defaultExperiment,
+        );
       })
       .catch((error: unknown) => {
         if (error instanceof DOMException && error.name === "AbortError") return;
         setLoadError(error instanceof Error ? error.message : String(error));
       });
     return () => controller.abort();
-  }, []);
+  }, [initialUrlState.experiment]);
 
   const experiment = catalog?.experiments.find(
     (entry) => entry.id === experimentId,
@@ -316,20 +360,36 @@ export function PointCloudComparison() {
           );
         }
         validateManifest(loaded);
-        const loadedSamples = websiteSamples(loaded);
+        const availableSplits = manifestSplits(loaded);
+        const requestedSplit =
+          initialUrlState.split &&
+          availableSplits.includes(initialUrlState.split)
+            ? initialUrlState.split
+            : defaultManifestSplit(loaded);
+        const loadedSamples = websiteSamples(loaded, requestedSplit);
+        const requestedSample = initialUrlState.sample
+          ? loadedSamples.find(
+              (candidate) => candidate.order === initialUrlState.sample,
+            )
+          : undefined;
+        const selectedSample = requestedSample ?? loadedSamples[0];
+        if (!selectedSample) {
+          throw new Error(`${experiment.shortLabel} 没有可显示的样本`);
+        }
         setManifest(loaded);
-        setSampleId(loadedSamples[0].id);
+        setSplit(requestedSplit);
+        setSampleId(selectedSample.id);
         setCameraSnapshot(null);
         setLeft((value) => ({
           ...value,
-          stage: "initial",
-          step: 0,
+          stage: defaultStage(loaded, selectedSample, "left"),
+          step: initialUrlState.leftK ?? 0,
           fitNonce: value.fitNonce + 1,
         }));
         setRight((value) => ({
           ...value,
-          stage: "final",
-          step: 3,
+          stage: defaultStage(loaded, selectedSample, "right"),
+          step: initialUrlState.rightK ?? 3,
           fitNonce: value.fitNonce + 1,
         }));
       })
@@ -338,17 +398,54 @@ export function PointCloudComparison() {
         setLoadError(error instanceof Error ? error.message : String(error));
       });
     return () => controller.abort();
-  }, [experiment]);
+  }, [
+    experiment,
+    initialUrlState.leftK,
+    initialUrlState.rightK,
+    initialUrlState.sample,
+    initialUrlState.split,
+  ]);
 
   useEffect(() => {
     setSyncEnabled(coordinateMode === "aligned");
   }, [coordinateMode]);
 
   const samples = useMemo(
-    () => (manifest ? websiteSamples(manifest) : []),
-    [manifest],
+    () => (manifest ? websiteSamples(manifest, split) : []),
+    [manifest, split],
   );
   const sample = samples.find((value) => value.id === sampleId) ?? samples[0];
+
+  useEffect(() => {
+    if (
+      typeof window === "undefined" ||
+      !catalog ||
+      !manifest ||
+      !sample
+    ) {
+      return;
+    }
+    const query = serializeViewerUrl({
+      experiment: experimentId,
+      split: split ?? undefined,
+      sample: sample.order,
+      leftK: left.step,
+      rightK: right.step,
+    });
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${query}${window.location.hash}`,
+    );
+  }, [
+    catalog,
+    experimentId,
+    left.step,
+    manifest,
+    right.step,
+    sample,
+    split,
+  ]);
 
   if (loadError) {
     return (
@@ -367,6 +464,7 @@ export function PointCloudComparison() {
     setLeft((value) => ({ ...value, fitNonce: value.fitNonce + 1 }));
     setRight((value) => ({ ...value, fitNonce: value.fitNonce + 1 }));
   };
+  const availableSplits = manifestSplits(manifest);
 
   return (
     <main className="app-shell">
@@ -416,6 +514,52 @@ export function PointCloudComparison() {
         <span>{experiment.summary}</span>
       </div>
 
+      {manifest.provenance && (
+        <section className="provenance-warning" role="status">
+          <strong>结果口径</strong>
+          <span>
+            当前入口使用 {manifest.provenance.sourceExperiment} 的 step{" "}
+            {manifest.provenance.checkpointStep} 权重；SSR 采用单图即时
+            BatchNorm 统计。这是训练域数值最佳的推理诊断，不是新的训练权重，
+            也不代表验证集或测试集泛化成功。
+          </span>
+        </section>
+      )}
+
+      {availableSplits.length > 0 && (
+        <nav className="split-switcher" aria-label="数据划分切换">
+          <span className="split-heading">数据划分</span>
+          {availableSplits.map((item) => (
+            <button
+              type="button"
+              key={item}
+              className={item === split ? "active" : ""}
+              aria-pressed={item === split}
+              data-testid={`split-${item}`}
+              onClick={() => {
+                if (item === split) return;
+                const nextSamples = websiteSamples(manifest, item);
+                const nextSample = nextSamples[0];
+                updateGlobalView(() => {
+                  setSplit(item);
+                  setSampleId(nextSample.id);
+                  setLeft((value) => ({
+                    ...value,
+                    stage: defaultStage(manifest, nextSample, "left"),
+                  }));
+                  setRight((value) => ({
+                    ...value,
+                    stage: defaultStage(manifest, nextSample, "right"),
+                  }));
+                });
+              }}
+            >
+              {splitLabel(item)}
+            </button>
+          ))}
+        </nav>
+      )}
+
       <nav className="sample-switcher" aria-label="样本切换">
         {samples.map((item) => (
           <button
@@ -427,13 +571,40 @@ export function PointCloudComparison() {
             onClick={() =>
               updateGlobalView(() => {
                 setSampleId(item.id);
+                setLeft((value) => ({
+                  ...value,
+                  stage: defaultStage(manifest, item, "left"),
+                }));
+                setRight((value) => ({
+                  ...value,
+                  stage: defaultStage(manifest, item, "right"),
+                }));
               })
             }
           >
             <img src={item.rgbUrl} alt="" />
             <span>
               <strong>{item.label}</strong>
-              <small>{item.description}</small>
+              <small className="sample-id">{item.id}</small>
+              {item.selection ? (
+                <small
+                  className={
+                    item.selection.relativeImprovement >= 0
+                      ? "sample-gain improved"
+                      : "sample-gain degraded"
+                  }
+                >
+                  排名 {item.selection.rank}/{item.selection.total} · K=3{" "}
+                  {item.selection.relativeImprovement >= 0
+                    ? "改善"
+                    : "退化"}{" "}
+                  {percent(
+                    Math.abs(item.selection.relativeImprovement),
+                  )}
+                </small>
+              ) : (
+                <small>{item.description}</small>
+              )}
             </span>
           </button>
         ))}
@@ -545,8 +716,11 @@ export function PointCloudComparison() {
         <div>
           <strong>归档范围</strong>
           <span>
-            当前实验已保存 {manifest.archivedInitialSampleIds.length} 张初始点云；
-            网页开放 {samples.length} 张双阶段对比。
+            当前实验共开放{" "}
+            {manifest.version === 2
+              ? manifest.samples.filter((item) => item.websiteEnabled).length
+              : samples.length}{" "}
+            张样本；当前划分显示 {samples.length} 张。
           </span>
         </div>
       </footer>

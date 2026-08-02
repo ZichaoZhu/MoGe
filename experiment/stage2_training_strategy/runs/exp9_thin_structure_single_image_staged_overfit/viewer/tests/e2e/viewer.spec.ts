@@ -189,10 +189,18 @@ test("shows a clear startup error when the manifest cannot be loaded", async ({
 
 test("loads Exp12 train, validation, and test samples", async ({ page }) => {
   await page.goto("/");
+  await page
+    .getByTestId(
+      "experiment-exp12_hypersim_100_immediate_joint_finetuning",
+    )
+    .click();
   await expect(page.getByText("Exp12 · 100 张联合微调").first()).toBeVisible();
   await expect(page.getByTestId("sample-1")).toContainText("训练样本");
+  await page.getByTestId("split-val").click();
   await expect(page.getByTestId("sample-2")).toContainText("验证样本");
+  await page.getByTestId("split-test").click();
   await expect(page.getByTestId("sample-3")).toContainText("测试样本");
+  await page.getByTestId("split-train").click();
   await expect(page.getByTestId("viewer-left")).toContainText(
     "联合前 · K=0",
   );
@@ -216,7 +224,12 @@ test("loads Exp12 train, validation, and test samples", async ({ page }) => {
       "../../exp12_hypersim_100_immediate_joint_finetuning/results/viewer_acceptance",
     );
     await mkdir(screenshotDirectory, { recursive: true });
-    for (const order of [1, 2, 3]) {
+    for (const [split, order] of [
+      ["train", 1],
+      ["val", 2],
+      ["test", 3],
+    ] as const) {
+      await page.getByTestId(`split-${split}`).click();
       await page.getByTestId(`sample-${order}`).click();
       await expect(page.locator("canvas")).toHaveCount(2);
       await expect(page.locator(".canvas-error")).toHaveCount(0);
@@ -226,6 +239,75 @@ test("loads Exp12 train, validation, and test samples", async ({ page }) => {
           screenshotDirectory,
           `exp12_sample_${order}_dual_view.png`,
         ),
+        fullPage: true,
+      });
+    }
+  }
+});
+
+test("browses Exp20 by split, picture and K without resetting the camera", async ({
+  page,
+}) => {
+  await page.goto(
+    "/?experiment=exp20_stateless_ssr_batch_statistics&split=train&sample=1&leftK=0&rightK=3",
+  );
+  await expect(page.getByText("Exp20 · 训练域最佳推理配置").first()).toBeVisible();
+  await expect(page.getByTestId("sample-1")).toContainText(
+    "ai_013_001_cam_00_frame.0000",
+  );
+  await expect(page.locator(".sample-switcher button")).toHaveCount(5);
+  await expect(page.getByTestId("left-stage")).toHaveCount(0);
+  await expect(page.getByTestId("viewer-left")).toContainText(
+    "Exp20 推理 · K=0",
+  );
+  await expect(page.getByTestId("viewer-right")).toContainText(
+    "Exp20 推理 · K=3",
+  );
+
+  const leftCanvas = page.locator("canvas").first();
+  await expect(leftCanvas).toHaveAttribute("data-camera-snapshot", /position/);
+  const cameraBefore = await leftCanvas.getAttribute("data-camera-snapshot");
+  await page
+    .getByTestId("left-k")
+    .getByRole("button", { name: "K=1" })
+    .click();
+  await expect(page.getByTestId("viewer-left")).toContainText(
+    "Exp20 推理 · K=1",
+  );
+  await expect(leftCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    cameraBefore!,
+  );
+  await expect(page).toHaveURL(/leftK=1/);
+
+  for (const split of ["val", "test", "train"] as const) {
+    await page.getByTestId(`split-${split}`).click();
+    await expect(page.locator(".sample-switcher button")).toHaveCount(5);
+    await page.getByTestId("sample-5").click();
+    await expect(page).toHaveURL(new RegExp(`split=${split}.*sample=5`));
+    await expect(page.locator(".canvas-error")).toHaveCount(0);
+  }
+
+  if (process.env.UPDATE_ACCEPTANCE_SCREENSHOTS === "1") {
+    const screenshotDirectory = path.resolve(
+      process.cwd(),
+      "../../../../stage3_stability_normalization/runs/exp20_stateless_ssr_batch_statistics/results/viewer_acceptance",
+    );
+    await mkdir(screenshotDirectory, { recursive: true });
+    await page
+      .getByTestId("left-k")
+      .getByRole("button", { name: "K=0" })
+      .click();
+    await page
+      .getByTestId("right-k")
+      .getByRole("button", { name: "K=3" })
+      .click();
+    for (const split of ["train", "val", "test"] as const) {
+      await page.getByTestId(`split-${split}`).click();
+      await page.getByTestId("sample-1").click();
+      await page.waitForTimeout(800);
+      await page.screenshot({
+        path: path.join(screenshotDirectory, `${split}_dual_view.png`),
         fullPage: true,
       });
     }

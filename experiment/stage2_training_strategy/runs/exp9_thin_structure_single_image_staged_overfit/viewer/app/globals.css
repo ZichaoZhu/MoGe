@@ -140,7 +140,7 @@ button {
 
 .experiment-switcher {
   display: grid;
-  grid-template-columns: minmax(13rem, 0.62fr) repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(13rem, 0.62fr) repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
   margin-bottom: 0.75rem;
   padding: 0.75rem;
@@ -226,9 +226,69 @@ button {
   color: var(--amber);
 }
 
+.provenance-warning {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+  margin-bottom: 0.75rem;
+  padding: 0.78rem 0.9rem;
+  border: 1px solid rgba(255, 196, 107, 0.34);
+  border-radius: 0.8rem;
+  color: #ffd99f;
+  background: rgba(128, 83, 18, 0.18);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.provenance-warning strong {
+  color: var(--amber);
+  white-space: nowrap;
+}
+
+.split-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.6rem 0.72rem;
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: rgba(7, 18, 26, 0.68);
+}
+
+.split-heading {
+  margin-right: 0.35rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.split-switcher button {
+  padding: 0.5rem 0.72rem;
+  border: 1px solid var(--line);
+  border-radius: 0.58rem;
+  color: var(--muted);
+  background: rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+}
+
+.split-switcher button:hover {
+  color: var(--ink);
+  border-color: rgba(120, 227, 220, 0.42);
+}
+
+.split-switcher button.active {
+  color: #041314;
+  border-color: var(--cyan);
+  background: var(--cyan);
+  font-weight: 750;
+}
+
 .sample-switcher {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0.75rem;
   margin-bottom: 0.85rem;
 }
@@ -285,6 +345,21 @@ button {
 
 .sample-switcher small {
   color: var(--muted);
+}
+
+.sample-switcher .sample-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.63rem;
+}
+
+.sample-switcher .sample-gain.improved,
+.metric-improved {
+  color: var(--cyan);
+}
+
+.sample-switcher .sample-gain.degraded,
+.metric-degraded {
+  color: var(--danger);
 }
 
 .global-toolbar {
@@ -586,6 +661,10 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .sample-switcher {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .switcher-heading {
     grid-column: 1 / -1;
   }
@@ -614,6 +693,10 @@ button {
 
   .experiment-summary {
     display: grid;
+  }
+
+  .provenance-warning {
+    grid-template-columns: 1fr;
   }
 
   .sample-switcher button {

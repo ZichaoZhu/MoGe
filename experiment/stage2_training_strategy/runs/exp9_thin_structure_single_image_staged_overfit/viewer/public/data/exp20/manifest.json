@@ -1,0 +1,3479 @@
+{
+  "version": 2,
+  "experiment": "exp20_stateless_ssr_batch_statistics",
+  "coordinateSpace": {
+    "stored": "raw_moge_camera_xyz",
+    "aligned": "P_aligned = scale * P_raw + (0, 0, zShift)",
+    "threeDisplay": "[x, -y, -z]"
+  },
+  "voxelization": {
+    "depthScale": 200,
+    "spconvOrder": [
+      "batch",
+      "depth",
+      "row",
+      "column"
+    ],
+    "depthCoordinate": "round(depthScale * log(Z_raw))"
+  },
+  "resolution": {
+    "width": 512,
+    "height": 384
+  },
+  "steps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "availableSplits": [
+    "train",
+    "val",
+    "test"
+  ],
+  "defaultSplit": "train",
+  "websiteSampleOrderBySplit": {
+    "train": [
+      "ai_013_001_cam_00_frame.0000",
+      "ai_005_006_cam_00_frame.0099",
+      "ai_019_001_cam_00_frame.0000",
+      "ai_036_002_cam_00_frame.0085",
+      "ai_018_007_cam_00_frame.0000"
+    ],
+    "val": [
+      "ai_047_001_cam_00_frame.0099",
+      "ai_047_001_cam_00_frame.0042",
+      "ai_047_001_cam_00_frame.0085",
+      "ai_043_002_cam_00_frame.0099",
+      "ai_043_002_cam_00_frame.0042"
+    ],
+    "test": [
+      "ai_046_001_cam_00_frame.0071",
+      "ai_050_001_cam_00_frame.0014",
+      "ai_046_001_cam_00_frame.0000",
+      "ai_050_001_cam_00_frame.0057",
+      "ai_046_001_cam_00_frame.0099"
+    ]
+  },
+  "availableStages": [
+    "final"
+  ],
+  "defaultStages": {
+    "left": "final",
+    "right": "final"
+  },
+  "samples": [
+    {
+      "id": "ai_013_001_cam_00_frame.0000",
+      "split": "train",
+      "label": "图片 1",
+      "order": 1,
+      "description": "train 第 1/100 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        160,
+        112,
+        352,
+        304
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_013_001_cam_00_frame.0000/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0 到 K=3 Point Rel 相对改善最大的五张",
+        "rank": 1,
+        "total": 100,
+        "relativeImprovement": 0.7271678627518933
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_013_001_cam_00_frame.0000/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "605b0d2f6f246e161a1b5470f1c3cd0885ee40ce2ada013f2b7b024e5f2f17a0",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 370.97003173828125,
+              "zShift": -7.134033203125
+            },
+            "bounds": {
+              "min": [
+                -1.4633326530456543,
+                -2.040137529373169,
+                0.5260903835296631
+              ],
+              "max": [
+                0.7443763017654419,
+                1.0203438997268677,
+                5.295391082763672
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.054876115173101425,
+                "depth_rel": 0.05018051713705063,
+                "depth_delta_1.01": 0.2717437744140625,
+                "depth_delta_1.25": 0.9909414052963257,
+                "boundary_f1": 0.9248903393745422
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.026783857494592667,
+                "depth_rel": 0.025317039340734482,
+                "depth_delta_1.01": 0.3980848491191864,
+                "depth_delta_1.25": 0.9810112714767456,
+                "boundary_f1": 0.9027612805366516
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.021492335945367813,
+                "depth_rel": 0.02022928185760975,
+                "depth_delta_1.01": 0.4495985209941864,
+                "depth_delta_1.25": 0.9892035722732544,
+                "boundary_f1": 0.19588269293308258
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_013_001_cam_00_frame.0000/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "05abad29f1e7eb32ed908ec88a2e658a569d24fffc68b5a4595ab4660aa4f6e2",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 382.65869140625,
+              "zShift": -8.11700439453125
+            },
+            "bounds": {
+              "min": [
+                -1.4178296327590942,
+                -1.988883376121521,
+                0.5310798287391663
+              ],
+              "max": [
+                0.7243067622184753,
+                0.9988120198249817,
+                5.130728721618652
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.03875308111310005,
+                "depth_rel": 0.035521671175956726,
+                "depth_delta_1.01": 0.3756307065486908,
+                "depth_delta_1.25": 0.9919484853744507,
+                "boundary_f1": 0.920647919178009
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.022134164348244667,
+                "depth_rel": 0.02070728689432144,
+                "depth_delta_1.01": 0.5792643427848816,
+                "depth_delta_1.25": 0.9812554121017456,
+                "boundary_f1": 0.9012479186058044
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.01883550174534321,
+                "depth_rel": 0.01764974743127823,
+                "depth_delta_1.01": 0.5623915195465088,
+                "depth_delta_1.25": 0.9889323115348816,
+                "boundary_f1": 0.19338203966617584
+              }
+            },
+            "pointRelReductionFromK0": 0.2938078617471884
+          },
+          "3": {
+            "url": "/data/exp20/ai_013_001_cam_00_frame.0000/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "08db5f80c07a8c49cd817d4dc1095e83e6424f191479406f11641ad70805f15d",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 403.11492919921875,
+              "zShift": -7.987884521484375
+            },
+            "bounds": {
+              "min": [
+                -1.3294607400894165,
+                -1.8974034786224365,
+                0.5423101782798767
+              ],
+              "max": [
+                0.6872708797454834,
+                0.9570696949958801,
+                4.810945987701416
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.014971967786550522,
+                "depth_rel": 0.011396018788218498,
+                "depth_delta_1.01": 0.7728424072265625,
+                "depth_delta_1.25": 0.9922637939453125,
+                "boundary_f1": 0.9085555672645569
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.019312139600515366,
+                "depth_rel": 0.01758144609630108,
+                "depth_delta_1.01": 0.7494032382965088,
+                "depth_delta_1.25": 0.9811469316482544,
+                "boundary_f1": 0.8985410332679749
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.014406717382371426,
+                "depth_rel": 0.012367363087832928,
+                "depth_delta_1.01": 0.8508571982383728,
+                "depth_delta_1.25": 0.9886610507965088,
+                "boundary_f1": 0.1835339367389679
+              }
+            },
+            "pointRelReductionFromK0": 0.7271678627518933
+          },
+          "5": {
+            "url": "/data/exp20/ai_013_001_cam_00_frame.0000/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "ad1e1afb43bf4aca3ab6879ba9f6acae584629b36f345a387b56024ef3f5e0af",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 426.6186828613281,
+              "zShift": -10.9632568359375
+            },
+            "bounds": {
+              "min": [
+                -1.242030382156372,
+                -1.8096555471420288,
+                0.5378631949424744
+              ],
+              "max": [
+                0.6620489954948425,
+                0.917170524597168,
+                4.553984642028809
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.0381523035466671,
+                "depth_rel": 0.0322800949215889,
+                "depth_delta_1.01": 0.363067626953125,
+                "depth_delta_1.25": 0.992279052734375,
+                "boundary_f1": 0.8936536908149719
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.025857925415039062,
+                "depth_rel": 0.024643510580062866,
+                "depth_delta_1.01": 0.4737684428691864,
+                "depth_delta_1.25": 0.9810383915901184,
+                "boundary_f1": 0.8822684288024902
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.016641000285744667,
+                "depth_rel": 0.01492614857852459,
+                "depth_delta_1.01": 0.7201606035232544,
+                "depth_delta_1.25": 0.9886067509651184,
+                "boundary_f1": 0.1737470030784607
+              }
+            },
+            "pointRelReductionFromK0": 0.30475574981356957
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_005_006_cam_00_frame.0099",
+      "split": "train",
+      "label": "图片 2",
+      "order": 2,
+      "description": "train 第 2/100 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        304,
+        96,
+        496,
+        288
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_005_006_cam_00_frame.0099/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0 到 K=3 Point Rel 相对改善最大的五张",
+        "rank": 2,
+        "total": 100,
+        "relativeImprovement": 0.5507656025508925
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_005_006_cam_00_frame.0099/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "3b14ffb67bc8e95d73d371a583db7ac2c748f546f2edfc974e822ad94c7086cb",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.21398663520813,
+              "zShift": -0.05263805389404297
+            },
+            "bounds": {
+              "min": [
+                -1.149716854095459,
+                -0.8938696384429932,
+                0.515749990940094
+              ],
+              "max": [
+                1.0051897764205933,
+                0.6439651846885681,
+                2.9475138187408447
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.03883344307541847,
+                "depth_rel": 0.034289564937353134,
+                "depth_delta_1.01": 0.2550150752067566,
+                "depth_delta_1.25": 0.9815775752067566,
+                "boundary_f1": 0.902599573135376
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.0671958178281784,
+                "depth_rel": 0.061004891991615295,
+                "depth_delta_1.01": 0.1600748747587204,
+                "depth_delta_1.25": 0.945176899433136,
+                "boundary_f1": 0.9276597499847412
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.0937490463256836,
+                "depth_rel": 0.0833338052034378,
+                "depth_delta_1.01": 0.146267369389534,
+                "depth_delta_1.25": 0.9285481572151184,
+                "boundary_f1": 0.7207727432250977
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_005_006_cam_00_frame.0099/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "58a4743c421f6ab1d02c53f1e6fc24bfb56c6b728e44c05bc76d848718f6075b",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.250631332397461,
+              "zShift": -0.024216890335083008
+            },
+            "bounds": {
+              "min": [
+                -1.1469935178756714,
+                -0.8880439400672913,
+                0.48837658762931824
+              ],
+              "max": [
+                0.976291835308075,
+                0.6438478827476501,
+                2.878079652786255
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.02820741757750511,
+                "depth_rel": 0.025246091187000275,
+                "depth_delta_1.01": 0.4705251157283783,
+                "depth_delta_1.25": 0.9881235957145691,
+                "boundary_f1": 0.9110438823699951
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.052094995975494385,
+                "depth_rel": 0.04750373587012291,
+                "depth_delta_1.01": 0.3432888388633728,
+                "depth_delta_1.25": 0.9611274003982544,
+                "boundary_f1": 0.9292999505996704
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.07057992368936539,
+                "depth_rel": 0.06324255466461182,
+                "depth_delta_1.01": 0.2689887285232544,
+                "depth_delta_1.25": 0.9625651240348816,
+                "boundary_f1": 0.7372092008590698
+              }
+            },
+            "pointRelReductionFromK0": 0.27363078461203
+          },
+          "3": {
+            "url": "/data/exp20/ai_005_006_cam_00_frame.0099/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "ef46b8399e9d6f8125a93fddfd7526a35116deb2a201c5253c4f86fa3988ed44",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.341663122177124,
+              "zShift": 0.007833719253540039
+            },
+            "bounds": {
+              "min": [
+                -1.1322764158248901,
+                -0.8724538087844849,
+                0.4359980821609497
+              ],
+              "max": [
+                0.957036018371582,
+                0.6442326307296753,
+                2.782935380935669
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.017445318400859833,
+                "depth_rel": 0.01487542875111103,
+                "depth_delta_1.01": 0.7381591796875,
+                "depth_delta_1.25": 0.989593505859375,
+                "boundary_f1": 0.9050520658493042
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.03433709591627121,
+                "depth_rel": 0.031162917613983154,
+                "depth_delta_1.01": 0.5451117753982544,
+                "depth_delta_1.25": 0.965928852558136,
+                "boundary_f1": 0.9162437319755554
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.0410759374499321,
+                "depth_rel": 0.03733653202652931,
+                "depth_delta_1.01": 0.3655599057674408,
+                "depth_delta_1.25": 0.9747721552848816,
+                "boundary_f1": 0.7319316267967224
+              }
+            },
+            "pointRelReductionFromK0": 0.5507656025508925
+          },
+          "5": {
+            "url": "/data/exp20/ai_005_006_cam_00_frame.0099/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "29e4ad60d3d58aeab9603d1bdaa0246098bdc98b792151aa7122385c3d136073",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.4018630981445312,
+              "zShift": 0.08132266998291016
+            },
+            "bounds": {
+              "min": [
+                -1.114930272102356,
+                -0.8571605086326599,
+                0.3813904821872711
+              ],
+              "max": [
+                0.9588068723678589,
+                0.6320095062255859,
+                2.729708433151245
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.02646886371076107,
+                "depth_rel": 0.02122684381902218,
+                "depth_delta_1.01": 0.5201162099838257,
+                "depth_delta_1.25": 0.9894663691520691,
+                "boundary_f1": 0.8892549872398376
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.04113083705306053,
+                "depth_rel": 0.03739955648779869,
+                "depth_delta_1.01": 0.3720431923866272,
+                "depth_delta_1.25": 0.9647352695465088,
+                "boundary_f1": 0.8939779996871948
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.047849882394075394,
+                "depth_rel": 0.042657893151044846,
+                "depth_delta_1.01": 0.2198893278837204,
+                "depth_delta_1.25": 0.97509765625,
+                "boundary_f1": 0.7222796082496643
+              }
+            },
+            "pointRelReductionFromK0": 0.3184002855642787
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_019_001_cam_00_frame.0000",
+      "split": "train",
+      "label": "图片 3",
+      "order": 3,
+      "description": "train 第 3/100 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        160,
+        0,
+        352,
+        192
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_019_001_cam_00_frame.0000/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0 到 K=3 Point Rel 相对改善最大的五张",
+        "rank": 3,
+        "total": 100,
+        "relativeImprovement": 0.5341062871116368
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_019_001_cam_00_frame.0000/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "637947dc776a6bdbeb65c58176ebe1ce7e285977aa778d0c8a886e4a755dd141",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 5.610344886779785,
+              "zShift": 0.3649106025695801
+            },
+            "bounds": {
+              "min": [
+                -1.5293737649917603,
+                -0.71755450963974,
+                0.7193465232849121
+              ],
+              "max": [
+                0.7310948967933655,
+                0.5333097577095032,
+                2.561986207962036
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.048383474349975586,
+                "depth_rel": 0.04582713544368744,
+                "depth_delta_1.01": 0.2034352719783783,
+                "depth_delta_1.25": 0.9933522939682007,
+                "boundary_f1": 0.8881287574768066
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.04352014511823654,
+                "depth_rel": 0.0416703037917614,
+                "depth_delta_1.01": 0.230712890625,
+                "depth_delta_1.25": 0.9760199785232544,
+                "boundary_f1": 0.9696823954582214
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.03272316977381706,
+                "depth_rel": 0.029721731320023537,
+                "depth_delta_1.01": 0.4495442807674408,
+                "depth_delta_1.25": 0.9847005009651184,
+                "boundary_f1": 0.6569234132766724
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_019_001_cam_00_frame.0000/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "f3b2737a1467148fe2ac25b26ce54937267e59bb19f49070bb59973dd85af982",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 5.691625118255615,
+              "zShift": 0.3918027877807617
+            },
+            "bounds": {
+              "min": [
+                -1.4733723402023315,
+                -0.7169426083564758,
+                0.6676926016807556
+              ],
+              "max": [
+                0.7363487482070923,
+                0.5177229642868042,
+                2.4203896522521973
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.03574280068278313,
+                "depth_rel": 0.03384479880332947,
+                "depth_delta_1.01": 0.2683156430721283,
+                "depth_delta_1.25": 0.9937490224838257,
+                "boundary_f1": 0.8997915983200073
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.03388230875134468,
+                "depth_rel": 0.031881093978881836,
+                "depth_delta_1.01": 0.30908203125,
+                "depth_delta_1.25": 0.9760470986366272,
+                "boundary_f1": 0.9709308743476868
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.02582273632287979,
+                "depth_rel": 0.022980470210313797,
+                "depth_delta_1.01": 0.5697699785232544,
+                "depth_delta_1.25": 0.9847548007965088,
+                "boundary_f1": 0.6766816973686218
+              }
+            },
+            "pointRelReductionFromK0": 0.2612601479537783
+          },
+          "3": {
+            "url": "/data/exp20/ai_019_001_cam_00_frame.0000/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "2c98c1f1c5ac380ecbc2d6d1814c91dfe0888e2eeefafd6ef62d149fa2d96c75",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 5.922831058502197,
+              "zShift": 0.3283655643463135
+            },
+            "bounds": {
+              "min": [
+                -1.3923542499542236,
+                -0.7155010104179382,
+                0.588344156742096
+              ],
+              "max": [
+                0.7523649334907532,
+                0.5031664371490479,
+                2.459962844848633
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.022541556507349014,
+                "depth_rel": 0.016668669879436493,
+                "depth_delta_1.01": 0.4905853271484375,
+                "depth_delta_1.25": 0.9946238398551941,
+                "boundary_f1": 0.8955107927322388
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.027465475723147392,
+                "depth_rel": 0.022913530468940735,
+                "depth_delta_1.01": 0.551025390625,
+                "depth_delta_1.25": 0.980089008808136,
+                "boundary_f1": 0.9713491201400757
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.02606595866382122,
+                "depth_rel": 0.022710243239998817,
+                "depth_delta_1.01": 0.4688585102558136,
+                "depth_delta_1.25": 0.98486328125,
+                "boundary_f1": 0.6911488175392151
+              }
+            },
+            "pointRelReductionFromK0": 0.5341062871116368
+          },
+          "5": {
+            "url": "/data/exp20/ai_019_001_cam_00_frame.0000/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "1ecf3bd6c340cd1e4e10fbbcbc4d8f6464393e8f826b2f28e1c055989cfc142c",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 5.99471378326416,
+              "zShift": 0.5011043548583984
+            },
+            "bounds": {
+              "min": [
+                -1.3350050449371338,
+                -0.7137372493743896,
+                0.5366531610488892
+              ],
+              "max": [
+                0.78484708070755,
+                0.5037418603897095,
+                2.56563138961792
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.032349973917007446,
+                "depth_rel": 0.021590275689959526,
+                "depth_delta_1.01": 0.3674723505973816,
+                "depth_delta_1.25": 0.9943288564682007,
+                "boundary_f1": 0.8875725269317627
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.03661342337727547,
+                "depth_rel": 0.03302990645170212,
+                "depth_delta_1.01": 0.213161900639534,
+                "depth_delta_1.25": 0.979112446308136,
+                "boundary_f1": 0.965789794921875
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.03639361634850502,
+                "depth_rel": 0.03321627154946327,
+                "depth_delta_1.01": 0.2897135317325592,
+                "depth_delta_1.25": 0.9844292402267456,
+                "boundary_f1": 0.6996235847473145
+              }
+            },
+            "pointRelReductionFromK0": 0.331383817478503
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0085",
+      "split": "train",
+      "label": "图片 4",
+      "order": 4,
+      "description": "train 第 4/100 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        256,
+        0,
+        448,
+        192
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_036_002_cam_00_frame.0085/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0 到 K=3 Point Rel 相对改善最大的五张",
+        "rank": 4,
+        "total": 100,
+        "relativeImprovement": 0.5272839879208713
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_036_002_cam_00_frame.0085/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "2d732d8890f09106a49e8c9ddbabc042c7bf3b28e88ab775d939cc78e1f2d298",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.5463345050811768,
+              "zShift": -0.5157289505004883
+            },
+            "bounds": {
+              "min": [
+                -0.5938130021095276,
+                -0.6586906909942627,
+                0.38531723618507385
+              ],
+              "max": [
+                1.0256688594818115,
+                0.7168787121772766,
+                2.043973684310913
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.047379981726408005,
+                "depth_rel": 0.04205835983157158,
+                "depth_delta_1.01": 0.274566650390625,
+                "depth_delta_1.25": 0.9853159785270691,
+                "boundary_f1": 0.7641639113426208
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.02236340381205082,
+                "depth_rel": 0.01895883120596409,
+                "depth_delta_1.01": 0.3115505576133728,
+                "depth_delta_1.25": 0.9959309697151184,
+                "boundary_f1": 0.8211737871170044
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.026754548773169518,
+                "depth_rel": 0.020250296220183372,
+                "depth_delta_1.01": 0.410698801279068,
+                "depth_delta_1.25": 0.9931640625,
+                "boundary_f1": 0.8226873874664307
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_036_002_cam_00_frame.0085/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "16edf0ceb717e3a5f80248ecf0146e6778c24b0e247cbadd2073f6231f88a401",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.6234357357025146,
+              "zShift": -0.5070481300354004
+            },
+            "bounds": {
+              "min": [
+                -0.582099437713623,
+                -0.6512330770492554,
+                0.38012924790382385
+              ],
+              "max": [
+                1.0010217428207397,
+                0.6968811750411987,
+                1.9955967664718628
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.036088086664676666,
+                "depth_rel": 0.031111106276512146,
+                "depth_delta_1.01": 0.3403218686580658,
+                "depth_delta_1.25": 0.9907989501953125,
+                "boundary_f1": 0.7619595527648926
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.018486440181732178,
+                "depth_rel": 0.015213847160339355,
+                "depth_delta_1.01": 0.427300363779068,
+                "depth_delta_1.25": 0.9959852695465088,
+                "boundary_f1": 0.821063756942749
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.022877151146531105,
+                "depth_rel": 0.016584379598498344,
+                "depth_delta_1.01": 0.4652235209941864,
+                "depth_delta_1.25": 0.9930012822151184,
+                "boundary_f1": 0.8185189366340637
+              }
+            },
+            "pointRelReductionFromK0": 0.23832628570723186
+          },
+          "3": {
+            "url": "/data/exp20/ai_036_002_cam_00_frame.0085/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "a3053c8e38b44c49957bc248c90fde3b6cbdd9e75aa67d8618b6926bdea3df56",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.740295648574829,
+              "zShift": -0.44370460510253906
+            },
+            "bounds": {
+              "min": [
+                -0.5581410527229309,
+                -0.631022036075592,
+                0.36447301506996155
+              ],
+              "max": [
+                0.9497696757316589,
+                0.6609174609184265,
+                1.9013631343841553
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.022397276014089584,
+                "depth_rel": 0.015061257407069206,
+                "depth_delta_1.01": 0.6629689931869507,
+                "depth_delta_1.25": 0.9914703369140625,
+                "boundary_f1": 0.7537274956703186
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.014561502262949944,
+                "depth_rel": 0.010789775289595127,
+                "depth_delta_1.01": 0.7421061396598816,
+                "depth_delta_1.25": 0.9958767294883728,
+                "boundary_f1": 0.8318780064582825
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.01926373317837715,
+                "depth_rel": 0.01404444221407175,
+                "depth_delta_1.01": 0.6559244990348816,
+                "depth_delta_1.25": 0.99267578125,
+                "boundary_f1": 0.8282092213630676
+              }
+            },
+            "pointRelReductionFromK0": 0.5272839879208713
+          },
+          "5": {
+            "url": "/data/exp20/ai_036_002_cam_00_frame.0085/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "5a8189f27aae56ae7e20f1ead5a953938c792f83c1a1d3bcac029c7b7965f793",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.924818754196167,
+              "zShift": -0.4600210189819336
+            },
+            "bounds": {
+              "min": [
+                -0.5572511553764343,
+                -0.612373948097229,
+                0.33030208945274353
+              ],
+              "max": [
+                0.8993001580238342,
+                0.6339689493179321,
+                1.8133314847946167
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.03622300550341606,
+                "depth_rel": 0.02626911923289299,
+                "depth_delta_1.01": 0.4498799741268158,
+                "depth_delta_1.25": 0.9885762929916382,
+                "boundary_f1": 0.7522083520889282
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.019585533067584038,
+                "depth_rel": 0.015494657680392265,
+                "depth_delta_1.01": 0.4714626669883728,
+                "depth_delta_1.25": 0.9960395097732544,
+                "boundary_f1": 0.8347383737564087
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.024007050320506096,
+                "depth_rel": 0.01773843541741371,
+                "depth_delta_1.01": 0.5182291865348816,
+                "depth_delta_1.25": 0.9928928017616272,
+                "boundary_f1": 0.8145025968551636
+              }
+            },
+            "pointRelReductionFromK0": 0.235478694091041
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_018_007_cam_00_frame.0000",
+      "split": "train",
+      "label": "图片 5",
+      "order": 5,
+      "description": "train 第 5/100 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        224,
+        160,
+        416,
+        352
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18433
+      },
+      "rgbUrl": "/data/exp20/ai_018_007_cam_00_frame.0000/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0 到 K=3 Point Rel 相对改善最大的五张",
+        "rank": 5,
+        "total": 100,
+        "relativeImprovement": 0.5254898160451658
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_018_007_cam_00_frame.0000/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "2f28a3d8c9fc84846a2d67821daf7428bc15699b60d11dabd4f18024a639183f",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.6203806400299072,
+              "zShift": 0.012521743774414062
+            },
+            "bounds": {
+              "min": [
+                -0.7472280263900757,
+                -0.9707622528076172,
+                0.6720149517059326
+              ],
+              "max": [
+                1.1593549251556396,
+                0.30422618985176086,
+                2.2483277320861816
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.030666565522551537,
+                "depth_rel": 0.0275067538022995,
+                "depth_delta_1.01": 0.2606964111328125,
+                "depth_delta_1.25": 0.9971160888671875,
+                "boundary_f1": 0.8076602220535278
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.030572758987545967,
+                "depth_rel": 0.02930057793855667,
+                "depth_delta_1.01": 0.2508409321308136,
+                "depth_delta_1.25": 0.9912109375,
+                "boundary_f1": 0.8023151159286499
+              },
+              "structure": {
+                "pixels": 18433,
+                "point_rel": 0.025685403496026993,
+                "depth_rel": 0.023946652188897133,
+                "depth_delta_1.01": 0.2595345377922058,
+                "depth_delta_1.25": 0.9981554746627808,
+                "boundary_f1": 0.7009532451629639
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_018_007_cam_00_frame.0000/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "d00e441775b632312096f567ba9febee8735814a20005f1cc21c3d46ec10fd26",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.6819756031036377,
+              "zShift": 0.03162050247192383
+            },
+            "bounds": {
+              "min": [
+                -0.737449049949646,
+                -0.9580578804016113,
+                0.6477682590484619
+              ],
+              "max": [
+                1.1342136859893799,
+                0.297506183385849,
+                2.196661949157715
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.01971512660384178,
+                "depth_rel": 0.017947405576705933,
+                "depth_delta_1.01": 0.3841094970703125,
+                "depth_delta_1.25": 0.9970144033432007,
+                "boundary_f1": 0.8079842925071716
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.020490288734436035,
+                "depth_rel": 0.01985589787364006,
+                "depth_delta_1.01": 0.5164116621017456,
+                "depth_delta_1.25": 0.9914008378982544,
+                "boundary_f1": 0.8072105646133423
+              },
+              "structure": {
+                "pixels": 18433,
+                "point_rel": 0.011856687255203724,
+                "depth_rel": 0.011225584894418716,
+                "depth_delta_1.01": 0.7097596526145935,
+                "depth_delta_1.25": 0.9983182549476624,
+                "boundary_f1": 0.701858639717102
+              }
+            },
+            "pointRelReductionFromK0": 0.35711331647674405
+          },
+          "3": {
+            "url": "/data/exp20/ai_018_007_cam_00_frame.0000/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "64d22f4ff5bfba95a7c48e9400834218db8dbdfa7bb1d1bd022d80a24f7f9b4d",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.8343465328216553,
+              "zShift": 0.06858682632446289
+            },
+            "bounds": {
+              "min": [
+                -0.7186149954795837,
+                -0.9335895776748657,
+                0.6095512509346008
+              ],
+              "max": [
+                1.085633397102356,
+                0.28507938981056213,
+                2.1582062244415283
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.014551597647368908,
+                "depth_rel": 0.01240532286465168,
+                "depth_delta_1.01": 0.6442362666130066,
+                "depth_delta_1.25": 0.9969482421875,
+                "boundary_f1": 0.8102279305458069
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.017203541472554207,
+                "depth_rel": 0.015825018286705017,
+                "depth_delta_1.01": 0.6137424111366272,
+                "depth_delta_1.25": 0.9911566972732544,
+                "boundary_f1": 0.79377281665802
+              },
+              "structure": {
+                "pixels": 18433,
+                "point_rel": 0.013095144182443619,
+                "depth_rel": 0.011662859469652176,
+                "depth_delta_1.01": 0.6831226944923401,
+                "depth_delta_1.25": 0.9977214932441711,
+                "boundary_f1": 0.6784982681274414
+              }
+            },
+            "pointRelReductionFromK0": 0.5254898160451658
+          },
+          "5": {
+            "url": "/data/exp20/ai_018_007_cam_00_frame.0000/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "d4565078a57be8ea7fdc8b11ba0c62214c98b5586b080c4d40ea931c1313056b",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.9693679809570312,
+              "zShift": 0.10723543167114258
+            },
+            "bounds": {
+              "min": [
+                -0.712091326713562,
+                -0.935337245464325,
+                0.5743558406829834
+              ],
+              "max": [
+                1.0661094188690186,
+                0.27509909868240356,
+                2.1476263999938965
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.026590002700686455,
+                "depth_rel": 0.022772712633013725,
+                "depth_delta_1.01": 0.4134725034236908,
+                "depth_delta_1.25": 0.9966481924057007,
+                "boundary_f1": 0.7924186587333679
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.02713540941476822,
+                "depth_rel": 0.02491130866110325,
+                "depth_delta_1.01": 0.3734537661075592,
+                "depth_delta_1.25": 0.9905056357383728,
+                "boundary_f1": 0.7720944285392761
+              },
+              "structure": {
+                "pixels": 18433,
+                "point_rel": 0.024727070704102516,
+                "depth_rel": 0.021647978574037552,
+                "depth_delta_1.01": 0.44013455510139465,
+                "depth_delta_1.25": 0.9974502325057983,
+                "boundary_f1": 0.6490061283111572
+              }
+            },
+            "pointRelReductionFromK0": 0.13293183479797452
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0099",
+      "split": "val",
+      "label": "图片 1",
+      "order": 1,
+      "description": "val 第 1/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        320,
+        192,
+        512,
+        384
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_047_001_cam_00_frame.0099/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 1,
+        "total": 16,
+        "relativeImprovement": 0.06113054437208454
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0099/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "41135877bbf95044dab09b8acf81cde82f9711717b22d098f62f55eda99bd0db",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 2.9480667114257812,
+              "zShift": 0.19604110717773438
+            },
+            "bounds": {
+              "min": [
+                -1.7480608224868774,
+                -0.5682191848754883,
+                0.44148555397987366
+              ],
+              "max": [
+                1.4061245918273926,
+                0.7781032919883728,
+                4.611693382263184
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.13065189123153687,
+                "depth_rel": 0.12409913539886475,
+                "depth_delta_1.01": 0.0617116317152977,
+                "depth_delta_1.25": 0.78851318359375,
+                "boundary_f1": 0.9164124131202698
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.1421429067850113,
+                "depth_rel": 0.13009962439537048,
+                "depth_delta_1.01": 0.1162109375,
+                "depth_delta_1.25": 0.8239203691482544,
+                "boundary_f1": 0.955894947052002
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.21275486052036285,
+                "depth_rel": 0.19630704820156097,
+                "depth_delta_1.01": 0.012858073227107525,
+                "depth_delta_1.25": 0.7396376132965088,
+                "boundary_f1": 0.9032624959945679
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0099/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "2571c4237503b89919255431649d5acbd161e8aa77a8d8efc6bca59d1fc61ca7",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 2.994046926498413,
+              "zShift": 0.21750235557556152
+            },
+            "bounds": {
+              "min": [
+                -1.7073990106582642,
+                -0.5589821338653564,
+                0.4342169761657715
+              ],
+              "max": [
+                1.3717596530914307,
+                0.762681782245636,
+                4.507612705230713
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.12817823886871338,
+                "depth_rel": 0.12187069654464722,
+                "depth_delta_1.01": 0.0629679411649704,
+                "depth_delta_1.25": 0.7951406240463257,
+                "boundary_f1": 0.9138836860656738
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.1404312700033188,
+                "depth_rel": 0.12810996174812317,
+                "depth_delta_1.01": 0.1079372838139534,
+                "depth_delta_1.25": 0.8319770097732544,
+                "boundary_f1": 0.9544658660888672
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.20848627388477325,
+                "depth_rel": 0.19115561246871948,
+                "depth_delta_1.01": 0.0267469622194767,
+                "depth_delta_1.25": 0.7548285722732544,
+                "boundary_f1": 0.9070623517036438
+              }
+            },
+            "pointRelReductionFromK0": 0.01893315389089748
+          },
+          "3": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0099/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "0975e4d9d546e4a7aba8d06746f4dd57e6a10c571be6387ecacd126e62b97f6f",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.1084368228912354,
+              "zShift": 0.23612308502197266
+            },
+            "bounds": {
+              "min": [
+                -1.649815559387207,
+                -0.5624439120292664,
+                0.4144589304924011
+              ],
+              "max": [
+                1.2874789237976074,
+                0.7294157147407532,
+                4.297972202301025
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.12266506999731064,
+                "depth_rel": 0.11573409289121628,
+                "depth_delta_1.01": 0.06060791015625,
+                "depth_delta_1.25": 0.8427378535270691,
+                "boundary_f1": 0.9032028317451477
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.1361103355884552,
+                "depth_rel": 0.12264832109212875,
+                "depth_delta_1.01": 0.1166178360581398,
+                "depth_delta_1.25": 0.8380262851715088,
+                "boundary_f1": 0.9425491690635681
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.19913725554943085,
+                "depth_rel": 0.17999258637428284,
+                "depth_delta_1.01": 0.066297747194767,
+                "depth_delta_1.25": 0.7664387822151184,
+                "boundary_f1": 0.8974320888519287
+              }
+            },
+            "pointRelReductionFromK0": 0.06113054437208454
+          },
+          "5": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0099/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "a165a3f2477a7e3ee263ff051dfedd533fb3692f8e83b84089b89040eb5dda73",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.2388174533843994,
+              "zShift": 0.26949024200439453
+            },
+            "bounds": {
+              "min": [
+                -1.685033917427063,
+                -0.5679389834403992,
+                0.38753652572631836
+              ],
+              "max": [
+                1.2062052488327026,
+                0.7133236527442932,
+                4.113198757171631
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.1183026060461998,
+                "depth_rel": 0.11032287776470184,
+                "depth_delta_1.01": 0.0584971122443676,
+                "depth_delta_1.25": 0.860809326171875,
+                "boundary_f1": 0.8743859529495239
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.13740679621696472,
+                "depth_rel": 0.12339671701192856,
+                "depth_delta_1.01": 0.0783148854970932,
+                "depth_delta_1.25": 0.8433430790901184,
+                "boundary_f1": 0.9221975207328796
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.20193515717983246,
+                "depth_rel": 0.18142907321453094,
+                "depth_delta_1.01": 0.0453016497194767,
+                "depth_delta_1.25": 0.7757704257965088,
+                "boundary_f1": 0.8687918782234192
+              }
+            },
+            "pointRelReductionFromK0": 0.09452052372860092
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0042",
+      "split": "val",
+      "label": "图片 2",
+      "order": 2,
+      "description": "val 第 5/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        304,
+        64,
+        496,
+        256
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_047_001_cam_00_frame.0042/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 5,
+        "total": 16,
+        "relativeImprovement": -0.004334479296395403
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0042/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "084ee5e6431b2296ad1ba94a3e89bfb4895437dc0e6c353483be599aedb2d0e7",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.43461012840271,
+              "zShift": 0.3723897933959961
+            },
+            "bounds": {
+              "min": [
+                -1.0169849395751953,
+                -0.4908832013607025,
+                0.38655808568000793
+              ],
+              "max": [
+                2.199911594390869,
+                0.46778687834739685,
+                4.618509292602539
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.13187822699546814,
+                "depth_rel": 0.12231578677892685,
+                "depth_delta_1.01": 0.0345560722053051,
+                "depth_delta_1.25": 0.9574127197265625,
+                "boundary_f1": 0.8760395050048828
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.12495377659797668,
+                "depth_rel": 0.11984807997941971,
+                "depth_delta_1.01": 0.012071398086845875,
+                "depth_delta_1.25": 0.9660915732383728,
+                "boundary_f1": 0.8443145155906677
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.13744203746318817,
+                "depth_rel": 0.13202841579914093,
+                "depth_delta_1.01": 0.0116102434694767,
+                "depth_delta_1.25": 0.9469401240348816,
+                "boundary_f1": 0.7347138524055481
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0042/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "07c3af2f306a9f59601696ca46f9eaff45b932bddbcce626573389b58b1700b9",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.4846906661987305,
+              "zShift": 0.3899860382080078
+            },
+            "bounds": {
+              "min": [
+                -0.9930494427680969,
+                -0.47430363297462463,
+                0.38781479001045227
+              ],
+              "max": [
+                2.2257139682769775,
+                0.45824283361434937,
+                4.5189290046691895
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.13158917427062988,
+                "depth_rel": 0.12134548276662827,
+                "depth_delta_1.01": 0.0362396240234375,
+                "depth_delta_1.25": 0.9532216787338257,
+                "boundary_f1": 0.8738083839416504
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.12341631948947906,
+                "depth_rel": 0.11778031289577484,
+                "depth_delta_1.01": 0.02766927145421505,
+                "depth_delta_1.25": 0.9651692509651184,
+                "boundary_f1": 0.8348377346992493
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.13615486025810242,
+                "depth_rel": 0.1294921189546585,
+                "depth_delta_1.01": 0.0384657122194767,
+                "depth_delta_1.25": 0.9431423544883728,
+                "boundary_f1": 0.7286856770515442
+              }
+            },
+            "pointRelReductionFromK0": 0.002191815369554444
+          },
+          "3": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0042/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "4854ac369bd40f93bd06748e2a573bbbeeab167a0c4eade307cad57574ee228a",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.5993692874908447,
+              "zShift": 0.4504566192626953
+            },
+            "bounds": {
+              "min": [
+                -0.9397904276847839,
+                -0.45681872963905334,
+                0.37942779064178467
+              ],
+              "max": [
+                2.2954261302948,
+                0.45641985535621643,
+                4.500030994415283
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.13244985044002533,
+                "depth_rel": 0.12030892819166183,
+                "depth_delta_1.01": 0.0390879325568676,
+                "depth_delta_1.25": 0.9335429072380066,
+                "boundary_f1": 0.857896089553833
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.1286187618970871,
+                "depth_rel": 0.12151657044887543,
+                "depth_delta_1.01": 0.0438368059694767,
+                "depth_delta_1.25": 0.9574924111366272,
+                "boundary_f1": 0.811139702796936
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.1412593126296997,
+                "depth_rel": 0.13188987970352173,
+                "depth_delta_1.01": 0.0722113698720932,
+                "depth_delta_1.25": 0.9289821982383728,
+                "boundary_f1": 0.6911101937294006
+              }
+            },
+            "pointRelReductionFromK0": -0.004334479296395403
+          },
+          "5": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0042/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "cb0bf84ef9a5df80af9ffe05364df13660e3d7c95a71d673d7b545195c4c5639",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.7418694496154785,
+              "zShift": 0.445101261138916
+            },
+            "bounds": {
+              "min": [
+                -1.008933424949646,
+                -0.4439503252506256,
+                0.3726802468299866
+              ],
+              "max": [
+                2.2572829723358154,
+                0.5038098096847534,
+                5.287167549133301
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.13370797038078308,
+                "depth_rel": 0.12125005573034286,
+                "depth_delta_1.01": 0.0442454032599926,
+                "depth_delta_1.25": 0.9272715449333191,
+                "boundary_f1": 0.8368861675262451
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.1316809058189392,
+                "depth_rel": 0.12358430027961731,
+                "depth_delta_1.01": 0.0421820767223835,
+                "depth_delta_1.25": 0.958360493183136,
+                "boundary_f1": 0.7879738807678223
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.1405210644006729,
+                "depth_rel": 0.12952639162540436,
+                "depth_delta_1.01": 0.0711263045668602,
+                "depth_delta_1.25": 0.9313693642616272,
+                "boundary_f1": 0.6690636873245239
+              }
+            },
+            "pointRelReductionFromK0": -0.013874491847527027
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0085",
+      "split": "val",
+      "label": "图片 3",
+      "order": 3,
+      "description": "val 第 9/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        320,
+        32,
+        512,
+        224
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_047_001_cam_00_frame.0085/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 9,
+        "total": 16,
+        "relativeImprovement": -0.05413159999221208
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0085/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "9c8ec24bfcf447d18c2bf88a7ca7c509ef37574325384370d97e577adaa0eb86",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.6201303005218506,
+              "zShift": 0.05609464645385742
+            },
+            "bounds": {
+              "min": [
+                -0.8041547536849976,
+                -0.7920003533363342,
+                0.5881049036979675
+              ],
+              "max": [
+                2.367985725402832,
+                0.5619187355041504,
+                4.770674228668213
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.10332189500331879,
+                "depth_rel": 0.09814401715993881,
+                "depth_delta_1.01": 0.0762736052274704,
+                "depth_delta_1.25": 0.929351806640625,
+                "boundary_f1": 0.8053218126296997
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.17698200047016144,
+                "depth_rel": 0.16763262450695038,
+                "depth_delta_1.01": 0.0277235247194767,
+                "depth_delta_1.25": 0.7919379472732544,
+                "boundary_f1": 0.8194512724876404
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.1713743805885315,
+                "depth_rel": 0.16243380308151245,
+                "depth_delta_1.01": 0.0380316860973835,
+                "depth_delta_1.25": 0.8331705927848816,
+                "boundary_f1": 0.7562657594680786
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0085/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "5318fade5e57b377a72b70a2ec156109373b31332533da115a826b0316ce1e15",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.687418222427368,
+              "zShift": 0.06268978118896484
+            },
+            "bounds": {
+              "min": [
+                -0.7740520238876343,
+                -0.7983357310295105,
+                0.5834881663322449
+              ],
+              "max": [
+                2.4291059970855713,
+                0.5490345358848572,
+                4.634170055389404
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.10491126030683517,
+                "depth_rel": 0.09959733486175537,
+                "depth_delta_1.01": 0.0702616423368454,
+                "depth_delta_1.25": 0.9282023310661316,
+                "boundary_f1": 0.800246000289917
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.18435761332511902,
+                "depth_rel": 0.1740686446428299,
+                "depth_delta_1.01": 0.0405002161860466,
+                "depth_delta_1.25": 0.7871636152267456,
+                "boundary_f1": 0.8182387351989746
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.17521758377552032,
+                "depth_rel": 0.16538357734680176,
+                "depth_delta_1.01": 0.0631510391831398,
+                "depth_delta_1.25": 0.8273112177848816,
+                "boundary_f1": 0.751807451248169
+              }
+            },
+            "pointRelReductionFromK0": -0.015382657310585876
+          },
+          "3": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0085/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "1a50814a7fa55d14ba6a3f6313a23877d14a857d2589b3c0afb20bf686ad80b1",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.8334643840789795,
+              "zShift": 0.0486292839050293
+            },
+            "bounds": {
+              "min": [
+                -0.7150935530662537,
+                -0.8055070638656616,
+                0.5581695437431335
+              ],
+              "max": [
+                2.3730688095092773,
+                0.5180225968360901,
+                4.801821708679199
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.10891487449407578,
+                "depth_rel": 0.1032838374376297,
+                "depth_delta_1.01": 0.0628611296415329,
+                "depth_delta_1.25": 0.9250742793083191,
+                "boundary_f1": 0.7793967127799988
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.1957133412361145,
+                "depth_rel": 0.183510884642601,
+                "depth_delta_1.01": 0.0386013463139534,
+                "depth_delta_1.25": 0.770751953125,
+                "boundary_f1": 0.7992556691169739
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.18136341869831085,
+                "depth_rel": 0.1696898639202118,
+                "depth_delta_1.01": 0.0461697056889534,
+                "depth_delta_1.25": 0.8221571445465088,
+                "boundary_f1": 0.721870481967926
+              }
+            },
+            "pointRelReductionFromK0": -0.05413159999221208
+          },
+          "5": {
+            "url": "/data/exp20/ai_047_001_cam_00_frame.0085/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "a3ec0ef287315aa629b84935c75686ea64c8d1edfc85adf4db21eac1bd09f351",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.9662563800811768,
+              "zShift": 0.05743074417114258
+            },
+            "bounds": {
+              "min": [
+                -0.6790054440498352,
+                -0.8024113774299622,
+                0.5396613478660583
+              ],
+              "max": [
+                2.3761677742004395,
+                0.49878084659576416,
+                5.299732685089111
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.11308485269546509,
+                "depth_rel": 0.10682334750890732,
+                "depth_delta_1.01": 0.0570882186293602,
+                "depth_delta_1.25": 0.9236196279525757,
+                "boundary_f1": 0.7625208497047424
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.2094375491142273,
+                "depth_rel": 0.19527457654476166,
+                "depth_delta_1.01": 0.02568901889026165,
+                "depth_delta_1.25": 0.7599555253982544,
+                "boundary_f1": 0.7904331684112549
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.18651984632015228,
+                "depth_rel": 0.17319001257419586,
+                "depth_delta_1.01": 0.01708984375,
+                "depth_delta_1.25": 0.8210178017616272,
+                "boundary_f1": 0.7185104489326477
+              }
+            },
+            "pointRelReductionFromK0": -0.09449069523775873
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_043_002_cam_00_frame.0099",
+      "split": "val",
+      "label": "图片 4",
+      "order": 4,
+      "description": "val 第 12/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        224,
+        192,
+        416,
+        384
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_043_002_cam_00_frame.0099/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 12,
+        "total": 16,
+        "relativeImprovement": -0.15011045802807926
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_043_002_cam_00_frame.0099/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "ee944a393fd37dd608f28119a217c864a1511aca2a4fd002496874868ffaf256",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.344165086746216,
+              "zShift": -0.029371976852416992
+            },
+            "bounds": {
+              "min": [
+                -0.8819006681442261,
+                -0.7229610681533813,
+                0.5002272725105286
+              ],
+              "max": [
+                0.8920765519142151,
+                0.4257914423942566,
+                2.2949776649475098
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196607,
+                "point_rel": 0.02623533457517624,
+                "depth_rel": 0.023257313296198845,
+                "depth_delta_1.01": 0.36164534091949463,
+                "depth_delta_1.25": 0.9919230341911316,
+                "boundary_f1": 0.8610747456550598
+              },
+              "crop": {
+                "pixels": 36863,
+                "point_rel": 0.053720343858003616,
+                "depth_rel": 0.04997734725475311,
+                "depth_delta_1.01": 0.18330031633377075,
+                "depth_delta_1.25": 0.9731437563896179,
+                "boundary_f1": 0.8544584512710571
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.05960523337125778,
+                "depth_rel": 0.05393153801560402,
+                "depth_delta_1.01": 0.0720486119389534,
+                "depth_delta_1.25": 0.9862196445465088,
+                "boundary_f1": 0.662889838218689
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_043_002_cam_00_frame.0099/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "82e4076b0c1723da8b79a7d6812118a218e1cfda463c71b57e2b6423cab3f5d1",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.405518054962158,
+              "zShift": -0.025907516479492188
+            },
+            "bounds": {
+              "min": [
+                -0.8572142720222473,
+                -0.7183898687362671,
+                0.4941081702709198
+              ],
+              "max": [
+                0.8686953783035278,
+                0.41207098960876465,
+                2.258098840713501
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196607,
+                "point_rel": 0.02714124321937561,
+                "depth_rel": 0.024314112961292267,
+                "depth_delta_1.01": 0.2427075356245041,
+                "depth_delta_1.25": 0.9914143681526184,
+                "boundary_f1": 0.8566519618034363
+              },
+              "crop": {
+                "pixels": 36863,
+                "point_rel": 0.05254474654793739,
+                "depth_rel": 0.04921332746744156,
+                "depth_delta_1.01": 0.12901824712753296,
+                "depth_delta_1.25": 0.9736592173576355,
+                "boundary_f1": 0.8511467576026917
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.054873719811439514,
+                "depth_rel": 0.04996611177921295,
+                "depth_delta_1.01": 0.0821940079331398,
+                "depth_delta_1.25": 0.9869791865348816,
+                "boundary_f1": 0.6449452042579651
+              }
+            },
+            "pointRelReductionFromK0": -0.03453009686625221
+          },
+          "3": {
+            "url": "/data/exp20/ai_043_002_cam_00_frame.0099/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "17fc94b6cf303818130d7ac6c74f72794407b5ef2e5e30f597c8b84d3e573001",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.522789716720581,
+              "zShift": -0.009284019470214844
+            },
+            "bounds": {
+              "min": [
+                -0.816157877445221,
+                -0.7117168307304382,
+                0.4565211236476898
+              ],
+              "max": [
+                0.841436505317688,
+                0.3876151740550995,
+                2.187324285507202
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196607,
+                "point_rel": 0.03017353266477585,
+                "depth_rel": 0.027348782867193222,
+                "depth_delta_1.01": 0.3442247807979584,
+                "depth_delta_1.25": 0.989654541015625,
+                "boundary_f1": 0.8392682671546936
+              },
+              "crop": {
+                "pixels": 36863,
+                "point_rel": 0.05720203369855881,
+                "depth_rel": 0.05422253534197807,
+                "depth_delta_1.01": 0.09212489426136017,
+                "depth_delta_1.25": 0.9692916870117188,
+                "boundary_f1": 0.8360768556594849
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.05542793124914169,
+                "depth_rel": 0.05145108699798584,
+                "depth_delta_1.01": 0.06494140625,
+                "depth_delta_1.25": 0.986924946308136,
+                "boundary_f1": 0.605759859085083
+              }
+            },
+            "pointRelReductionFromK0": -0.15011045802807926
+          },
+          "5": {
+            "url": "/data/exp20/ai_043_002_cam_00_frame.0099/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "023df26cf3fe2ff37eb2680d9419c1f51f69927b15db40e70b6c016e920cdcee",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.6399354934692383,
+              "zShift": 0.011973857879638672
+            },
+            "bounds": {
+              "min": [
+                -0.8027945160865784,
+                -0.7051199674606323,
+                0.4027799367904663
+              ],
+              "max": [
+                0.8189963698387146,
+                0.37786269187927246,
+                2.132211685180664
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196607,
+                "point_rel": 0.03386703133583069,
+                "depth_rel": 0.030839554965496063,
+                "depth_delta_1.01": 0.3720569610595703,
+                "depth_delta_1.25": 0.9888661503791809,
+                "boundary_f1": 0.8099827766418457
+              },
+              "crop": {
+                "pixels": 36863,
+                "point_rel": 0.06378002464771271,
+                "depth_rel": 0.060838744044303894,
+                "depth_delta_1.01": 0.12668529152870178,
+                "depth_delta_1.25": 0.9661720395088196,
+                "boundary_f1": 0.8101096749305725
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.06000061333179474,
+                "depth_rel": 0.056482382118701935,
+                "depth_delta_1.01": 0.1047092005610466,
+                "depth_delta_1.25": 0.9875759482383728,
+                "boundary_f1": 0.5671533346176147
+              }
+            },
+            "pointRelReductionFromK0": -0.2908938225577473
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_043_002_cam_00_frame.0042",
+      "split": "val",
+      "label": "图片 5",
+      "order": 5,
+      "description": "val 第 16/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        192,
+        160,
+        384,
+        352
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_043_002_cam_00_frame.0042/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 16,
+        "total": 16,
+        "relativeImprovement": -0.3708918080546044
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_043_002_cam_00_frame.0042/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "634b69c72ad0703948a7cbfa03463d5b523e8ee4742c504ed41ff5be53f7dfd4",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.815425157546997,
+              "zShift": 0.021911144256591797
+            },
+            "bounds": {
+              "min": [
+                -0.9287863969802856,
+                -0.572216272354126,
+                0.7276173830032349
+              ],
+              "max": [
+                0.7303330898284912,
+                0.4693494141101837,
+                2.0526912212371826
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196605,
+                "point_rel": 0.021413354203104973,
+                "depth_rel": 0.020191289484500885,
+                "depth_delta_1.01": 0.23461253941059113,
+                "depth_delta_1.25": 0.994094729423523,
+                "boundary_f1": 0.8217293620109558
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.033346984535455704,
+                "depth_rel": 0.032420117408037186,
+                "depth_delta_1.01": 0.2304144948720932,
+                "depth_delta_1.25": 0.9759114384651184,
+                "boundary_f1": 0.8746809363365173
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.027351561933755875,
+                "depth_rel": 0.026358211413025856,
+                "depth_delta_1.01": 0.3070746660232544,
+                "depth_delta_1.25": 0.9905598759651184,
+                "boundary_f1": 0.6832256317138672
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_043_002_cam_00_frame.0042/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "7aeec18944ed3005ca7620bf43a6baba77124acef0f07dc7f820d51d0a403e21",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.8910422325134277,
+              "zShift": 0.008609294891357422
+            },
+            "bounds": {
+              "min": [
+                -0.9104901552200317,
+                -0.5587722659111023,
+                0.719251275062561
+              ],
+              "max": [
+                0.7194254398345947,
+                0.4584929347038269,
+                1.9874197244644165
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196605,
+                "point_rel": 0.022321702912449837,
+                "depth_rel": 0.020962907001376152,
+                "depth_delta_1.01": 0.2729075849056244,
+                "depth_delta_1.25": 0.9942371249198914,
+                "boundary_f1": 0.8195199966430664
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.033621855080127716,
+                "depth_rel": 0.03274989128112793,
+                "depth_delta_1.01": 0.2516547441482544,
+                "depth_delta_1.25": 0.976806640625,
+                "boundary_f1": 0.8709247708320618
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.02766498550772667,
+                "depth_rel": 0.026717113330960274,
+                "depth_delta_1.01": 0.3209092915058136,
+                "depth_delta_1.25": 0.9924587607383728,
+                "boundary_f1": 0.6828662753105164
+              }
+            },
+            "pointRelReductionFromK0": -0.04241973026407753
+          },
+          "3": {
+            "url": "/data/exp20/ai_043_002_cam_00_frame.0042/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "102fc1a5b72c9ae27b77171f2cf89e2c5179ff5cf7d91b34e4c3e6fec2e5b190",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 4.0383782386779785,
+              "zShift": -0.01048731803894043
+            },
+            "bounds": {
+              "min": [
+                -0.8604517579078674,
+                -0.5407745242118835,
+                0.6996663808822632
+              ],
+              "max": [
+                0.7006397247314453,
+                0.43653419613838196,
+                1.8789584636688232
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196605,
+                "point_rel": 0.02935539186000824,
+                "depth_rel": 0.02725221961736679,
+                "depth_delta_1.01": 0.2581368684768677,
+                "depth_delta_1.25": 0.994125247001648,
+                "boundary_f1": 0.8003900051116943
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.04133923351764679,
+                "depth_rel": 0.04020582512021065,
+                "depth_delta_1.01": 0.2341851145029068,
+                "depth_delta_1.25": 0.9763454794883728,
+                "boundary_f1": 0.8543968796730042
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.038610417395830154,
+                "depth_rel": 0.037212301045656204,
+                "depth_delta_1.01": 0.2529296875,
+                "depth_delta_1.25": 0.9915907382965088,
+                "boundary_f1": 0.6645097732543945
+              }
+            },
+            "pointRelReductionFromK0": -0.3708918080546044
+          },
+          "5": {
+            "url": "/data/exp20/ai_043_002_cam_00_frame.0042/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "0609d326099b6d46466a151b5465186e3bea829ad2b3da69cca34ced4d292d7c",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 4.198663234710693,
+              "zShift": -0.016445159912109375
+            },
+            "bounds": {
+              "min": [
+                -0.8231341242790222,
+                -0.5220292806625366,
+                0.6732272505760193
+              ],
+              "max": [
+                0.6735432147979736,
+                0.42346706986427307,
+                1.7935690879821777
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196605,
+                "point_rel": 0.03672151267528534,
+                "depth_rel": 0.03406175598502159,
+                "depth_delta_1.01": 0.23458710312843323,
+                "depth_delta_1.25": 0.9932351112365723,
+                "boundary_f1": 0.785509467124939
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.05366877466440201,
+                "depth_rel": 0.052203744649887085,
+                "depth_delta_1.01": 0.1910264790058136,
+                "depth_delta_1.25": 0.9736870527267456,
+                "boundary_f1": 0.836240828037262
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.05891866236925125,
+                "depth_rel": 0.0569571852684021,
+                "depth_delta_1.01": 0.1797960102558136,
+                "depth_delta_1.25": 0.9777560830116272,
+                "boundary_f1": 0.6473475694656372
+              }
+            },
+            "pointRelReductionFromK0": -0.7148883975384229
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0071",
+      "split": "test",
+      "label": "图片 1",
+      "order": 1,
+      "description": "test 第 1/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        80,
+        16,
+        272,
+        208
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_046_001_cam_00_frame.0071/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 1,
+        "total": 16,
+        "relativeImprovement": 0.11105551155861962
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0071/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "417b6d8a84df0a0dd840cd3ef53b86ed8c1e2368b235235a106f6077c06f1bfd",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.8320071697235107,
+              "zShift": -0.07973480224609375
+            },
+            "bounds": {
+              "min": [
+                -1.4752528667449951,
+                -0.7975314259529114,
+                0.613724410533905
+              ],
+              "max": [
+                0.4676671624183655,
+                0.42813098430633545,
+                3.0672459602355957
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.044504325836896896,
+                "depth_rel": 0.04026876017451286,
+                "depth_delta_1.01": 0.1082967147231102,
+                "depth_delta_1.25": 0.9741007685661316,
+                "boundary_f1": 0.7387630939483643
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.08573273569345474,
+                "depth_rel": 0.0820610374212265,
+                "depth_delta_1.01": 0.1286349892616272,
+                "depth_delta_1.25": 0.8984646201133728,
+                "boundary_f1": 0.6783139109611511
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.06140356510877609,
+                "depth_rel": 0.05818952992558479,
+                "depth_delta_1.01": 0.1673177033662796,
+                "depth_delta_1.25": 0.9689127802848816,
+                "boundary_f1": 0.4411134123802185
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0071/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "42fcba8b2bcea0bcc85a2b89d4029e5d1dd1b75d13b954f7bd1d60c51998ab90",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.892322301864624,
+              "zShift": -0.06005859375
+            },
+            "bounds": {
+              "min": [
+                -1.4593921899795532,
+                -0.7779110670089722,
+                0.6078675389289856
+              ],
+              "max": [
+                0.457062691450119,
+                0.4211444854736328,
+                2.998548984527588
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.04133868217468262,
+                "depth_rel": 0.03765669837594032,
+                "depth_delta_1.01": 0.1618601530790329,
+                "depth_delta_1.25": 0.9734344482421875,
+                "boundary_f1": 0.734977126121521
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.08673853427171707,
+                "depth_rel": 0.08312559872865677,
+                "depth_delta_1.01": 0.1382921040058136,
+                "depth_delta_1.25": 0.8946940302848816,
+                "boundary_f1": 0.670522928237915
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.060285210609436035,
+                "depth_rel": 0.057476870715618134,
+                "depth_delta_1.01": 0.1923285573720932,
+                "depth_delta_1.25": 0.9679904580116272,
+                "boundary_f1": 0.4410440921783447
+              }
+            },
+            "pointRelReductionFromK0": 0.07113114517936953
+          },
+          "3": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0071/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "9e72518bb288e8e256d80c61dd94ffdc733c5e1fc67e2532f10774dbdeb0fddc",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 4.037039756774902,
+              "zShift": -0.04279470443725586
+            },
+            "bounds": {
+              "min": [
+                -1.4231531620025635,
+                -0.7474159598350525,
+                0.585250735282898
+              ],
+              "max": [
+                0.4336424469947815,
+                0.4072355628013611,
+                2.8605337142944336
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.03956187516450882,
+                "depth_rel": 0.0358971543610096,
+                "depth_delta_1.01": 0.3124644160270691,
+                "depth_delta_1.25": 0.9726664423942566,
+                "boundary_f1": 0.7310609817504883
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.09245322644710541,
+                "depth_rel": 0.08859910070896149,
+                "depth_delta_1.01": 0.1154513880610466,
+                "depth_delta_1.25": 0.8935275673866272,
+                "boundary_f1": 0.6768290996551514
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.06431284546852112,
+                "depth_rel": 0.0615302138030529,
+                "depth_delta_1.01": 0.1537000834941864,
+                "depth_delta_1.25": 0.9675564169883728,
+                "boundary_f1": 0.4596644937992096
+              }
+            },
+            "pointRelReductionFromK0": 0.11105551155861962
+          },
+          "5": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0071/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "c926a77673b7513ec941dcd40b8be2a2927d7b05c3106c30e8c4a2df26361b3a",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 4.196103096008301,
+              "zShift": -0.023061275482177734
+            },
+            "bounds": {
+              "min": [
+                -1.363968014717102,
+                -0.7394939661026001,
+                0.56226646900177
+              ],
+              "max": [
+                0.41365450620651245,
+                0.39384758472442627,
+                2.7144320011138916
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.040780529379844666,
+                "depth_rel": 0.03737886995077133,
+                "depth_delta_1.01": 0.330230712890625,
+                "depth_delta_1.25": 0.9703267812728882,
+                "boundary_f1": 0.7387300133705139
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.09840179979801178,
+                "depth_rel": 0.09432000666856766,
+                "depth_delta_1.01": 0.1032443568110466,
+                "depth_delta_1.25": 0.8815104365348816,
+                "boundary_f1": 0.696578860282898
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.07323203235864639,
+                "depth_rel": 0.07023093104362488,
+                "depth_delta_1.01": 0.1268446147441864,
+                "depth_delta_1.25": 0.957139790058136,
+                "boundary_f1": 0.4642692804336548
+              }
+            },
+            "pointRelReductionFromK0": 0.08367268545308394
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_050_001_cam_00_frame.0014",
+      "split": "test",
+      "label": "图片 2",
+      "order": 2,
+      "description": "test 第 5/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        320,
+        112,
+        512,
+        304
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_050_001_cam_00_frame.0014/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 5,
+        "total": 16,
+        "relativeImprovement": -0.008023175134119693
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_050_001_cam_00_frame.0014/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "04796503031e2dd74aca35a8ee86756e482a3afd242dcaadb150a60923a4dc87",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.159705638885498,
+              "zShift": 0.40058469772338867
+            },
+            "bounds": {
+              "min": [
+                -1.341474175453186,
+                -0.6893048286437988,
+                0.5115299820899963
+              ],
+              "max": [
+                1.222504734992981,
+                0.4534492492675781,
+                2.123877763748169
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.08596907556056976,
+                "depth_rel": 0.08434079587459564,
+                "depth_delta_1.01": 0.0770111083984375,
+                "depth_delta_1.25": 0.9725087881088257,
+                "boundary_f1": 0.8705061078071594
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.08366819471120834,
+                "depth_rel": 0.0828544870018959,
+                "depth_delta_1.01": 0.02533637173473835,
+                "depth_delta_1.25": 0.9990776777267456,
+                "boundary_f1": 0.7555320262908936
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.06428306549787521,
+                "depth_rel": 0.06305509060621262,
+                "depth_delta_1.01": 0.0506727434694767,
+                "depth_delta_1.25": 0.9987521767616272,
+                "boundary_f1": 0.7650460004806519
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_050_001_cam_00_frame.0014/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "f9a71904ca20f90a033da52bbe57256d8ce7b80204534a5776c9827938d71f7f",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.2194840908050537,
+              "zShift": 0.40515708923339844
+            },
+            "bounds": {
+              "min": [
+                -1.331333041191101,
+                -0.6801531910896301,
+                0.49797624349594116
+              ],
+              "max": [
+                1.1914139986038208,
+                0.4409404397010803,
+                2.093170404434204
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.08588328212499619,
+                "depth_rel": 0.08419432491064072,
+                "depth_delta_1.01": 0.0768330916762352,
+                "depth_delta_1.25": 0.972808837890625,
+                "boundary_f1": 0.8551223874092102
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.08388735353946686,
+                "depth_rel": 0.08305750042200089,
+                "depth_delta_1.01": 0.02848307229578495,
+                "depth_delta_1.25": 0.9990776777267456,
+                "boundary_f1": 0.7379652261734009
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.06626062840223312,
+                "depth_rel": 0.06498192250728607,
+                "depth_delta_1.01": 0.0569661445915699,
+                "depth_delta_1.25": 0.9987521767616272,
+                "boundary_f1": 0.7108025550842285
+              }
+            },
+            "pointRelReductionFromK0": 0.0009979569399130256
+          },
+          "3": {
+            "url": "/data/exp20/ai_050_001_cam_00_frame.0014/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "25077c481002778008f4d97aa1e7d21af40d34f1f2a158185e3cef4f068b167d",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.352318286895752,
+              "zShift": 0.40462827682495117
+            },
+            "bounds": {
+              "min": [
+                -1.3196337223052979,
+                -0.6550337076187134,
+                0.4700232446193695
+              ],
+              "max": [
+                1.1451176404953003,
+                0.4207345247268677,
+                2.052753448486328
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.08665882050991058,
+                "depth_rel": 0.08408832550048828,
+                "depth_delta_1.01": 0.0793965682387352,
+                "depth_delta_1.25": 0.971282958984375,
+                "boundary_f1": 0.8060656189918518
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.08435550332069397,
+                "depth_rel": 0.08329860121011734,
+                "depth_delta_1.01": 0.02739800326526165,
+                "depth_delta_1.25": 0.9940592646598816,
+                "boundary_f1": 0.7188668251037598
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.07148510217666626,
+                "depth_rel": 0.06967208534479141,
+                "depth_delta_1.01": 0.0547960065305233,
+                "depth_delta_1.25": 0.9887152910232544,
+                "boundary_f1": 0.6682934165000916
+              }
+            },
+            "pointRelReductionFromK0": -0.008023175134119693
+          },
+          "5": {
+            "url": "/data/exp20/ai_050_001_cam_00_frame.0014/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "bba4bcda4b0a7d00008749f23d51e9f932bed7c71b429bc216629d43a6f7433e",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.488830327987671,
+              "zShift": 0.4069068431854248
+            },
+            "bounds": {
+              "min": [
+                -1.272457242012024,
+                -0.647553563117981,
+                0.42167574167251587
+              ],
+              "max": [
+                1.123660683631897,
+                0.40141451358795166,
+                1.991733193397522
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.08716706931591034,
+                "depth_rel": 0.08355239033699036,
+                "depth_delta_1.01": 0.1007843017578125,
+                "depth_delta_1.25": 0.9682261347770691,
+                "boundary_f1": 0.7462783455848694
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.08498022705316544,
+                "depth_rel": 0.0835607647895813,
+                "depth_delta_1.01": 0.0282118059694767,
+                "depth_delta_1.25": 0.9892578125,
+                "boundary_f1": 0.6922835111618042
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.07558093965053558,
+                "depth_rel": 0.07304991036653519,
+                "depth_delta_1.01": 0.0564236119389534,
+                "depth_delta_1.25": 0.9844292402267456,
+                "boundary_f1": 0.6036582589149475
+              }
+            },
+            "pointRelReductionFromK0": -0.013935170845201496
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0000",
+      "split": "test",
+      "label": "图片 3",
+      "order": 3,
+      "description": "test 第 9/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        256,
+        144,
+        448,
+        336
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_046_001_cam_00_frame.0000/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 9,
+        "total": 16,
+        "relativeImprovement": -0.08331313834116627
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0000/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "2e329bf93a38fd32fee6a9ca2b32ca6abcb5ed8f32c9b09e27ae8c9405506a85",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 4.554825305938721,
+              "zShift": 0.052883148193359375
+            },
+            "bounds": {
+              "min": [
+                -1.4281413555145264,
+                -0.6640360355377197,
+                0.6989427208900452
+              ],
+              "max": [
+                0.7707371115684509,
+                0.33522048592567444,
+                2.975363254547119
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.05675405263900757,
+                "depth_rel": 0.052413519471883774,
+                "depth_delta_1.01": 0.2591298520565033,
+                "depth_delta_1.25": 0.9619089961051941,
+                "boundary_f1": 0.8150812983512878
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.0865684300661087,
+                "depth_rel": 0.08301258087158203,
+                "depth_delta_1.01": 0.158447265625,
+                "depth_delta_1.25": 0.9120008945465088,
+                "boundary_f1": 0.9265996217727661
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.07237827777862549,
+                "depth_rel": 0.06943544745445251,
+                "depth_delta_1.01": 0.2877604067325592,
+                "depth_delta_1.25": 0.9164496660232544,
+                "boundary_f1": 0.8393355011940002
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0000/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "c4da82ea2d356e69f9b6b114b4c5880bfd319f88180a8d2f7a0ee025127d4b80",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 4.6584978103637695,
+              "zShift": 0.041593074798583984
+            },
+            "bounds": {
+              "min": [
+                -1.3983675241470337,
+                -0.6486600637435913,
+                0.689759373664856
+              ],
+              "max": [
+                0.7556729912757874,
+                0.3289371132850647,
+                2.89003849029541
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.058033064007759094,
+                "depth_rel": 0.05371382459998131,
+                "depth_delta_1.01": 0.2743784785270691,
+                "depth_delta_1.25": 0.9616851806640625,
+                "boundary_f1": 0.8090022206306458
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.08787982165813446,
+                "depth_rel": 0.08432742208242416,
+                "depth_delta_1.01": 0.1582573801279068,
+                "depth_delta_1.25": 0.9114040732383728,
+                "boundary_f1": 0.9223392605781555
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.07470260560512543,
+                "depth_rel": 0.07164352387189865,
+                "depth_delta_1.01": 0.2870008647441864,
+                "depth_delta_1.25": 0.9135199785232544,
+                "boundary_f1": 0.8312857151031494
+              }
+            },
+            "pointRelReductionFromK0": -0.022536035917767216
+          },
+          "3": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0000/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "d112839163118c4e410f08e23de463b81526d8720ddcf461bad20b5559cd875a",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 4.857646942138672,
+              "zShift": 0.03673601150512695
+            },
+            "bounds": {
+              "min": [
+                -1.3395569324493408,
+                -0.6237015128135681,
+                0.6588829755783081
+              ],
+              "max": [
+                0.7082654237747192,
+                0.32207509875297546,
+                2.7225229740142822
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.06148241087794304,
+                "depth_rel": 0.05697060748934746,
+                "depth_delta_1.01": 0.2485504150390625,
+                "depth_delta_1.25": 0.9622853994369507,
+                "boundary_f1": 0.8037455081939697
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.09026132524013519,
+                "depth_rel": 0.08665645122528076,
+                "depth_delta_1.01": 0.156494140625,
+                "depth_delta_1.25": 0.9205729365348816,
+                "boundary_f1": 0.918280303478241
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.08100651949644089,
+                "depth_rel": 0.07762102037668228,
+                "depth_delta_1.01": 0.2842881977558136,
+                "depth_delta_1.25": 0.9124348759651184,
+                "boundary_f1": 0.8173603415489197
+              }
+            },
+            "pointRelReductionFromK0": -0.08331313834116627
+          },
+          "5": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0000/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "b23193998e2143e6da3bcae9eb610feefb9d887c66f8d98850f2a8f347c54387",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 5.055444240570068,
+              "zShift": 0.038327693939208984
+            },
+            "bounds": {
+              "min": [
+                -1.28502357006073,
+                -0.6014883518218994,
+                0.5477467775344849
+              ],
+              "max": [
+                0.6753946542739868,
+                0.3169671893119812,
+                2.593266487121582
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.06619612127542496,
+                "depth_rel": 0.06142561137676239,
+                "depth_delta_1.01": 0.2096608579158783,
+                "depth_delta_1.25": 0.9561869502067566,
+                "boundary_f1": 0.7983677387237549
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.09571252763271332,
+                "depth_rel": 0.09196814149618149,
+                "depth_delta_1.01": 0.129909947514534,
+                "depth_delta_1.25": 0.91015625,
+                "boundary_f1": 0.9114798307418823
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.0905715748667717,
+                "depth_rel": 0.08677434921264648,
+                "depth_delta_1.01": 0.2407769113779068,
+                "depth_delta_1.25": 0.8934462070465088,
+                "boundary_f1": 0.8015633821487427
+              }
+            },
+            "pointRelReductionFromK0": -0.1663681833696537
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_050_001_cam_00_frame.0057",
+      "split": "test",
+      "label": "图片 4",
+      "order": 4,
+      "description": "test 第 12/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        304,
+        192,
+        496,
+        384
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_050_001_cam_00_frame.0057/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 12,
+        "total": 16,
+        "relativeImprovement": -0.11550842931132425
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_050_001_cam_00_frame.0057/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "bc09e4c1cbc0f650fd689c7cad01c99d17a6d274043ab29e46ca195bcd0cb1b3",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 2.6855077743530273,
+              "zShift": 0.38431882858276367
+            },
+            "bounds": {
+              "min": [
+                -1.5788666009902954,
+                -0.7981988191604614,
+                0.5708038210868835
+              ],
+              "max": [
+                0.8683828711509705,
+                0.4301176369190216,
+                2.6621711254119873
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.05664030835032463,
+                "depth_rel": 0.054873988032341,
+                "depth_delta_1.01": 0.1309611052274704,
+                "depth_delta_1.25": 0.9980723261833191,
+                "boundary_f1": 0.889880895614624
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.07585131376981735,
+                "depth_rel": 0.07511818408966064,
+                "depth_delta_1.01": 0.1541069895029068,
+                "depth_delta_1.25": 0.9957682490348816,
+                "boundary_f1": 0.8680757880210876
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.12174439430236816,
+                "depth_rel": 0.1214575245976448,
+                "depth_delta_1.01": 5.425347262644209e-05,
+                "depth_delta_1.25": 0.994249165058136,
+                "boundary_f1": 0.7061096429824829
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_050_001_cam_00_frame.0057/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "7ec64dd73945d4ed828d7af41637b54ad30f2a1b09cdb2511443964e995296c1",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 2.7360196113586426,
+              "zShift": 0.3999307155609131
+            },
+            "bounds": {
+              "min": [
+                -1.5655516386032104,
+                -0.7788367867469788,
+                0.5578391551971436
+              ],
+              "max": [
+                0.8767244219779968,
+                0.42450278997421265,
+                2.5811028480529785
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.0582447275519371,
+                "depth_rel": 0.05670100450515747,
+                "depth_delta_1.01": 0.1278228759765625,
+                "depth_delta_1.25": 0.99652099609375,
+                "boundary_f1": 0.8789076805114746
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.07949696481227875,
+                "depth_rel": 0.078847236931324,
+                "depth_delta_1.01": 0.1717122346162796,
+                "depth_delta_1.25": 0.9918348789215088,
+                "boundary_f1": 0.8639203310012817
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.129005566239357,
+                "depth_rel": 0.12873409688472748,
+                "depth_delta_1.01": 0.00021701389050576836,
+                "depth_delta_1.25": 0.9863823652267456,
+                "boundary_f1": 0.7103583812713623
+              }
+            },
+            "pointRelReductionFromK0": -0.02832645598765136
+          },
+          "3": {
+            "url": "/data/exp20/ai_050_001_cam_00_frame.0057/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "bc0e1da0a45ceff67f3e69c97fc02d6da2324c62a82adf84a13b4c36c9fcfd8f",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 2.8365771770477295,
+              "zShift": 0.427842378616333
+            },
+            "bounds": {
+              "min": [
+                -1.5307385921478271,
+                -0.7471177577972412,
+                0.5488726496696472
+              ],
+              "max": [
+                0.8718243837356567,
+                0.4202881157398224,
+                2.489724636077881
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.06318274140357971,
+                "depth_rel": 0.061189185827970505,
+                "depth_delta_1.01": 0.1339772641658783,
+                "depth_delta_1.25": 0.9934183955192566,
+                "boundary_f1": 0.8399534225463867
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.08943549543619156,
+                "depth_rel": 0.08864022046327591,
+                "depth_delta_1.01": 0.1767578125,
+                "depth_delta_1.25": 0.9828287959098816,
+                "boundary_f1": 0.852202296257019
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.1447717845439911,
+                "depth_rel": 0.14443057775497437,
+                "depth_delta_1.01": 0.00016276042151730508,
+                "depth_delta_1.25": 0.96875,
+                "boundary_f1": 0.7019167542457581
+              }
+            },
+            "pointRelReductionFromK0": -0.11550842931132425
+          },
+          "5": {
+            "url": "/data/exp20/ai_050_001_cam_00_frame.0057/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "ad1b690536121cf7db2f4d8a290e259114740d7bf0d62fb427986792edbaabb3",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 2.947126626968384,
+              "zShift": 0.4422440528869629
+            },
+            "bounds": {
+              "min": [
+                -1.4975814819335938,
+                -0.7387183904647827,
+                0.5282576084136963
+              ],
+              "max": [
+                0.8596826791763306,
+                0.4010806083679199,
+                2.3793747425079346
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.0680723786354065,
+                "depth_rel": 0.06498419493436813,
+                "depth_delta_1.01": 0.14300537109375,
+                "depth_delta_1.25": 0.9902750849723816,
+                "boundary_f1": 0.7975569367408752
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.09847370535135269,
+                "depth_rel": 0.09739295393228531,
+                "depth_delta_1.01": 0.2128363698720932,
+                "depth_delta_1.25": 0.9825032353401184,
+                "boundary_f1": 0.847711443901062
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.1595592051744461,
+                "depth_rel": 0.15893979370594025,
+                "depth_delta_1.01": 0.00010850694525288418,
+                "depth_delta_1.25": 0.9685329794883728,
+                "boundary_f1": 0.6847783923149109
+              }
+            },
+            "pointRelReductionFromK0": -0.20183630029648914
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0099",
+      "split": "test",
+      "label": "图片 5",
+      "order": 5,
+      "description": "test 第 16/16 名",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        160,
+        96,
+        352,
+        288
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/exp20/ai_046_001_cam_00_frame.0099/source_rgb.jpg",
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "按 K=0 到 K=3 Point Rel 相对改善排序，固定选择第 1、5、9、12、16 名",
+        "rank": 16,
+        "total": 16,
+        "relativeImprovement": -0.5609944448040282
+      },
+      "stages": {
+        "final": {
+          "0": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0099/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "cc459904ca273c5a3caf785dcab7ebc540c17ead43e24b46d96f39796a3d4593",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.59236478805542,
+              "zShift": -0.07349872589111328
+            },
+            "bounds": {
+              "min": [
+                -1.0907789468765259,
+                -1.025367021560669,
+                0.42213547229766846
+              ],
+              "max": [
+                1.538144826889038,
+                0.3621252179145813,
+                2.7822561264038086
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.03338225185871124,
+                "depth_rel": 0.028678666800260544,
+                "depth_delta_1.01": 0.7166087031364441,
+                "depth_delta_1.25": 0.9747314453125,
+                "boundary_f1": 0.878513753414154
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.030537256971001625,
+                "depth_rel": 0.02992933988571167,
+                "depth_delta_1.01": 0.5110676884651184,
+                "depth_delta_1.25": 0.9652506709098816,
+                "boundary_f1": 0.8942578434944153
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.030459323897957802,
+                "depth_rel": 0.02976338006556034,
+                "depth_delta_1.01": 0.3620876669883728,
+                "depth_delta_1.25": 0.9913737177848816,
+                "boundary_f1": 0.7498834729194641
+              }
+            },
+            "pointRelReductionFromK0": 0.0
+          },
+          "1": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0099/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "01e6d7219ec76e9e36d06b9b9110977f40cff0370c0a2bd91a14370bb1c2c746",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.709185838699341,
+              "zShift": -0.1371002197265625
+            },
+            "bounds": {
+              "min": [
+                -1.0600517988204956,
+                -1.0037459135055542,
+                0.41477417945861816
+              ],
+              "max": [
+                1.5042608976364136,
+                0.3616325855255127,
+                2.720965623855591
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.03832259029150009,
+                "depth_rel": 0.030745085328817368,
+                "depth_delta_1.01": 0.5498911738395691,
+                "depth_delta_1.25": 0.9746145009994507,
+                "boundary_f1": 0.8722903728485107
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.031333018094301224,
+                "depth_rel": 0.030355775728821754,
+                "depth_delta_1.01": 0.4625650942325592,
+                "depth_delta_1.25": 0.9637858271598816,
+                "boundary_f1": 0.8779723048210144
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.0316285565495491,
+                "depth_rel": 0.030348440632224083,
+                "depth_delta_1.01": 0.3345811665058136,
+                "depth_delta_1.25": 0.9912651777267456,
+                "boundary_f1": 0.7562206983566284
+              }
+            },
+            "pointRelReductionFromK0": -0.14799296505516138
+          },
+          "3": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0099/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "84b1cac8d372c8bd9f59aa6bc9fb83841fdc98c4e31b948f62cf4ad9395217b3",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 3.937295436859131,
+              "zShift": -0.24306941032409668
+            },
+            "bounds": {
+              "min": [
+                -1.0001530647277832,
+                -0.9878917932510376,
+                0.39941373467445374
+              ],
+              "max": [
+                1.4394111633300781,
+                0.3522730767726898,
+                2.6036627292633057
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.05210950970649719,
+                "depth_rel": 0.039798304438591,
+                "depth_delta_1.01": 0.1917978972196579,
+                "depth_delta_1.25": 0.9735565185546875,
+                "boundary_f1": 0.8597291707992554
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.03929050639271736,
+                "depth_rel": 0.037860605865716934,
+                "depth_delta_1.01": 0.1366644948720932,
+                "depth_delta_1.25": 0.9629448652267456,
+                "boundary_f1": 0.8522319197654724
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.040172554552555084,
+                "depth_rel": 0.03797922283411026,
+                "depth_delta_1.01": 0.1870659738779068,
+                "depth_delta_1.25": 0.9909939169883728,
+                "boundary_f1": 0.7457462549209595
+              }
+            },
+            "pointRelReductionFromK0": -0.5609944448040282
+          },
+          "5": {
+            "url": "/data/exp20/ai_046_001_cam_00_frame.0099/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "3b7cfa1dd87c780f820e6de24ff11aa1508e921588b108ba89e0caba63ff52d4",
+            "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+            "alignment": {
+              "scale": 4.167550086975098,
+              "zShift": -0.3584446907043457
+            },
+            "bounds": {
+              "min": [
+                -0.9490494728088379,
+                -0.9677540063858032,
+                0.3847363591194153
+              ],
+              "max": [
+                1.3751721382141113,
+                0.3427271246910095,
+                2.487464666366577
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.06781310588121414,
+                "depth_rel": 0.049916453659534454,
+                "depth_delta_1.01": 0.1199290007352829,
+                "depth_delta_1.25": 0.9696807861328125,
+                "boundary_f1": 0.8462785482406616
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.05140968784689903,
+                "depth_rel": 0.04937680438160896,
+                "depth_delta_1.01": 0.1032443568110466,
+                "depth_delta_1.25": 0.9607747197151184,
+                "boundary_f1": 0.8326100707054138
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.050976645201444626,
+                "depth_rel": 0.047764766961336136,
+                "depth_delta_1.01": 0.1178927943110466,
+                "depth_delta_1.25": 0.9904513955116272,
+                "boundary_f1": 0.7343624830245972
+              }
+            },
+            "pointRelReductionFromK0": -1.0314119661019219
+          }
+        }
+      }
+    }
+  ],
+  "provenance": {
+    "sourceExperiment": "exp15_detached_head_ssr_coadaptation",
+    "checkpointStep": 800,
+    "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+    "inferencePolicy": "current_batch_statistics_without_running_buffers",
+    "selectionMetric": "full_point_rel_relative_reduction_k0_to_k3"
+  }
+}

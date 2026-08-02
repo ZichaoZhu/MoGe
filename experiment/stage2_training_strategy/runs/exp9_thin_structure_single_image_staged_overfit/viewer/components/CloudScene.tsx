@@ -28,6 +28,7 @@ import {
   type RasterScope,
 } from "@/lib/geometry";
 import { shouldApplyCameraFit } from "@/lib/camera";
+import { dataUrl } from "@/lib/dataUrl";
 import type {
   CoordinateMode,
   PointCloudAsset,
@@ -142,7 +143,7 @@ function PointMap({
   CloudSceneProps,
   "asset" | "manifest" | "sample" | "coordinateMode" | "rasterScope"
 > & { onBounds: (bounds: Bounds) => void }) {
-  const source = useLoader(PLYLoader, asset.url);
+  const source = useLoader(PLYLoader, dataUrl(asset.url));
   const geometry = useMemo(() => {
     const sourcePosition = source.getAttribute("position");
     const sourceColor = source.getAttribute("color");
@@ -218,7 +219,7 @@ function VoxelShell({
 }: Pick<CloudSceneProps, "asset" | "manifest" | "sample"> & {
   onBounds: (bounds: Bounds) => void;
 }) {
-  const source = useLoader(PLYLoader, asset.url);
+  const source = useLoader(PLYLoader, dataUrl(asset.url));
   const mesh = useRef<THREE.InstancedMesh>(null);
   const instances = useMemo(() => {
     const sourcePosition = source.getAttribute("position");

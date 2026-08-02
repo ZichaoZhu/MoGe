@@ -108,4 +108,14 @@ Next.js 构建；vinext 仅作为 Sites 所需的兼容部署后端，不改变�
 Vercel 使用 `vercel.json` 中的 `npm run build:next`，直接部署原生 Next.js
 产物；它与 Sites 的 vinext 构建互不影响。
 
+当部署包不需要重复携带大型点云时，可以在构建 Sites 前设置静态资产源：
+
+```bash
+NEXT_PUBLIC_POINT_CLOUD_ASSET_ORIGIN=https://moge3-exp9-viewer.vercel.app \
+  npm run build:sites
+```
+
+此时实验目录、清单、RGB 与 PLY 均从 Vercel 的 `/data/*` 读取；Vercel 对该路径
+返回跨域读取头。普通本地和 Vercel 构建不设置此变量，仍使用同源相对路径。
+
 公开生产地址：<https://moge3-exp9-viewer.vercel.app>

@@ -8,6 +8,7 @@ import {
   type InteractionMode,
 } from "@/components/CloudScene";
 import type { RasterScope } from "@/lib/geometry";
+import { dataUrl } from "@/lib/dataUrl";
 import {
   REFINEMENT_STEPS,
   defaultManifestSplit,
@@ -311,7 +312,7 @@ export function PointCloudComparison() {
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch("/data/experiments.json", { signal: controller.signal })
+    fetch(dataUrl("/data/experiments.json"), { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(`实验目录请求失败：HTTP ${response.status}`);
@@ -344,7 +345,7 @@ export function PointCloudComparison() {
     if (!experiment) return;
     const controller = new AbortController();
     setLoadError(null);
-    fetch(experiment.manifestUrl, { signal: controller.signal })
+    fetch(dataUrl(experiment.manifestUrl), { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(
@@ -582,7 +583,7 @@ export function PointCloudComparison() {
               })
             }
           >
-            <img src={item.rgbUrl} alt="" />
+            <img src={dataUrl(item.rgbUrl)} alt="" />
             <span>
               <strong>{item.label}</strong>
               <small className="sample-id">{item.id}</small>

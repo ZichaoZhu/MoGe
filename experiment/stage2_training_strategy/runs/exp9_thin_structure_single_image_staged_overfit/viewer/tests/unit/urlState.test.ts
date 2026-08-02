@@ -8,6 +8,8 @@ describe("viewer URL state", () => {
       experiment: "exp20",
       split: "train",
       sample: 3,
+      leftStage: "initial",
+      rightStage: "final",
       leftK: 1,
       rightK: 5,
     });
@@ -15,6 +17,8 @@ describe("viewer URL state", () => {
       experiment: "exp20",
       split: "train",
       sample: 3,
+      leftStage: "initial",
+      rightStage: "final",
       leftK: 1,
       rightK: 5,
     });
@@ -22,11 +26,15 @@ describe("viewer URL state", () => {
 
   it("drops invalid split, picture and K values", () => {
     expect(
-      parseViewerUrl("?split=other&sample=8&leftK=2&rightK=3"),
+      parseViewerUrl(
+        "?split=other&sample=8&leftStage=middle&rightStage=final&leftK=2&rightK=3",
+      ),
     ).toEqual({
       experiment: undefined,
       split: undefined,
       sample: undefined,
+      leftStage: undefined,
+      rightStage: "final",
       leftK: undefined,
       rightK: 3,
     });

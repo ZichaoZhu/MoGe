@@ -163,4 +163,22 @@ describe("split-aware v2 manifest", () => {
       manifest.websiteSampleOrderBySplit!.test!.slice(0, 4);
     expect(() => validateManifest(manifest)).toThrow(/五个/);
   });
+
+  it("defaults to training-before versus training-after when both stages exist", () => {
+    const manifest = v2Manifest();
+    for (const sample of manifest.samples) {
+      sample.stages.initial = {
+        "0": asset,
+        "1": { alias: "initial.0" },
+        "3": { alias: "initial.0" },
+        "5": { alias: "initial.0" },
+      };
+    }
+    manifest.availableStages = ["initial", "final"];
+    manifest.defaultStages = { left: "initial", right: "final" };
+    const sample = websiteSamples(manifest, "train")[0];
+    expect(() => validateManifest(manifest)).not.toThrow();
+    expect(defaultStage(manifest, sample, "left")).toBe("initial");
+    expect(defaultStage(manifest, sample, "right")).toBe("final");
+  });
 });

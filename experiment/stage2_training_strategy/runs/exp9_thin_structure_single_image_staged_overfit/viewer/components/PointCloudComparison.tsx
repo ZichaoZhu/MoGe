@@ -260,7 +260,8 @@ function ViewerPane({
         <span>s={asset.alignment.scale.toPrecision(5)}</span>
         <span>t={asset.alignment.zShift.toPrecision(5)}</span>
         <span title={asset.checkpointSha256}>
-          ckpt {asset.checkpointSha256.slice(0, 8)}
+          {pane.stage === "initial" ? "init" : "ckpt"}{" "}
+          {asset.checkpointSha256.slice(0, 8)}
         </span>
       </footer>
     </section>
@@ -381,15 +382,24 @@ export function PointCloudComparison() {
         setSplit(requestedSplit);
         setSampleId(selectedSample.id);
         setCameraSnapshot(null);
+        const selectedStages = sampleStages(selectedSample);
         setLeft((value) => ({
           ...value,
-          stage: defaultStage(loaded, selectedSample, "left"),
+          stage:
+            initialUrlState.leftStage &&
+            selectedStages.includes(initialUrlState.leftStage)
+              ? initialUrlState.leftStage
+              : defaultStage(loaded, selectedSample, "left"),
           step: initialUrlState.leftK ?? 0,
           fitNonce: value.fitNonce + 1,
         }));
         setRight((value) => ({
           ...value,
-          stage: defaultStage(loaded, selectedSample, "right"),
+          stage:
+            initialUrlState.rightStage &&
+            selectedStages.includes(initialUrlState.rightStage)
+              ? initialUrlState.rightStage
+              : defaultStage(loaded, selectedSample, "right"),
           step: initialUrlState.rightK ?? 3,
           fitNonce: value.fitNonce + 1,
         }));
@@ -402,7 +412,9 @@ export function PointCloudComparison() {
   }, [
     experiment,
     initialUrlState.leftK,
+    initialUrlState.leftStage,
     initialUrlState.rightK,
+    initialUrlState.rightStage,
     initialUrlState.sample,
     initialUrlState.split,
   ]);
@@ -430,6 +442,8 @@ export function PointCloudComparison() {
       experiment: experimentId,
       split: split ?? undefined,
       sample: sample.order,
+      leftStage: left.stage,
+      rightStage: right.stage,
       leftK: left.step,
       rightK: right.step,
     });
@@ -441,8 +455,10 @@ export function PointCloudComparison() {
   }, [
     catalog,
     experimentId,
+    left.stage,
     left.step,
     manifest,
+    right.stage,
     right.step,
     sample,
     split,
@@ -519,8 +535,12 @@ export function PointCloudComparison() {
         <section className="provenance-warning" role="status">
           <strong>结果口径</strong>
           <span>
-            当前入口使用 {manifest.provenance.sourceExperiment} 的 step{" "}
-            {manifest.provenance.checkpointStep} 权重；SSR 采用单图即时
+            训练前为
+            {manifest.provenance.initialization
+              ? ` ${manifest.provenance.initialization}`
+              : "原始初始化"}
+            ；训练后使用 {manifest.provenance.sourceExperiment} 的 step{" "}
+            {manifest.provenance.checkpointStep} 权重，SSR 采用单图即时
             BatchNorm 统计。这是训练域数值最佳的推理诊断，不是新的训练权重，
             也不代表验证集或测试集泛化成功。
           </span>

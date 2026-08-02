@@ -28,6 +28,13 @@
   },
   "checkpointStep": 800,
   "checkpointSha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+  "initialization": {
+    "pretrained": "Ruicheng/moge-2-vitl-normal",
+    "ssr": "zero-initialized",
+    "seed": 151,
+    "stateSha256": "fd0e1e5d703b1a323e71963d7e9620baa5de12d308246c9b633c97644e61a914",
+    "zeroIdentityMaxError": 0.0
+  },
   "inferencePolicy": "current_batch_statistics_without_running_buffers",
   "batchNormRunningState": {
     "beforeSha256": "ec2b3499b559511901ec3f32376c59b7245485e92e63cc667f07b82776c6fc1c",
@@ -40,8 +47,9 @@
     3,
     5
   ],
-  "pointCloudCount": 60,
-  "pointCloudBytes": 176966700,
+  "pointCloudCount": 75,
+  "logicalPointCloudCount": 120,
+  "pointCloudBytes": 221208375,
   "pointCloudChecksums": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/exp20/pointcloud_sha256.json",
   "metricValidation": {
     "requestedTolerance": 1e-05,

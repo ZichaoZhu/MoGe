@@ -9,11 +9,11 @@
       "summary": "使用 Exp15 step 800 权重与单图即时 BatchNorm 统计；训练集 K=3 Point Rel 为 3.919%，但验证与测试整体未同步改善。",
       "manifestUrl": "/data/exp20/manifest.json",
       "stageLabels": {
-        "initial": "未使用",
-        "final": "Exp20 推理"
+        "initial": "训练前",
+        "final": "训练后"
       },
       "stageDetails": {
-        "initial": "该实验没有独立训练前快照",
+        "initial": "官方 MoGe-2 初始化 · 零初始化 SSR",
         "final": "Exp15 step 800 权重 · SSR 单图即时 BatchNorm 统计"
       }
     },

@@ -10,6 +10,7 @@ from tools.moge3.export_viewer_experiment import (
     batch_norm_state_sha256,
     batch_norm_states_equal,
     depth_edge_crop,
+    state_dict_sha256,
     validate_selection,
 )
 
@@ -79,3 +80,18 @@ def test_batch_norm_state_hash_detects_mutation():
     assert batch_norm_state_sha256(state) == batch_norm_state_sha256(same)
     assert not batch_norm_states_equal(state, changed)
     assert batch_norm_state_sha256(state) != batch_norm_state_sha256(changed)
+
+
+def test_model_state_hash_is_order_independent_and_detects_mutation():
+    state = {
+        "weight": torch.arange(6, dtype=torch.float32).reshape(2, 3),
+        "counter": torch.tensor(2, dtype=torch.int64),
+    }
+    reordered = {
+        "counter": state["counter"].clone(),
+        "weight": state["weight"].clone(),
+    }
+    changed = copy.deepcopy(state)
+    changed["weight"][0, 0] = -1
+    assert state_dict_sha256(state) == state_dict_sha256(reordered)
+    assert state_dict_sha256(state) != state_dict_sha256(changed)

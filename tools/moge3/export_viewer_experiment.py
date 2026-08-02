@@ -94,6 +94,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--edge-relative-threshold", type=float, default=0.05)
     parser.add_argument("--boundary-threshold", type=float, default=0.03)
     parser.add_argument("--metric-tolerance", type=float, default=1e-5)
+    parser.add_argument(
+        "--initial-seed",
+        type=int,
+        default=151,
+        help=(
+            "Torch seed used before constructing the MoGe-2 + zero-initialized "
+            "SSR training-start model."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -102,6 +111,19 @@ def sha256_file(path: Path, chunk_size: int = 8 << 20) -> str:
     with path.open("rb") as handle:
         while chunk := handle.read(chunk_size):
             digest.update(chunk)
+    return digest.hexdigest()
+
+
+def state_dict_sha256(state: Mapping[str, torch.Tensor]) -> str:
+    """Hash an in-memory model state without materializing a checkpoint file."""
+    digest = hashlib.sha256()
+    for name in sorted(state):
+        tensor = state[name].detach().cpu().contiguous()
+        digest.update(name.encode("utf-8"))
+        digest.update(str(tensor.dtype).encode("ascii"))
+        digest.update(np.asarray(tensor.shape, dtype=np.int64).tobytes())
+        byte_view = tensor.reshape(-1).view(torch.uint8).numpy()
+        digest.update(memoryview(byte_view))
     return digest.hexdigest()
 
 
@@ -316,18 +338,9 @@ def canonical_full_metrics(
     }
 
 
-def load_checkpoint_model(
-    checkpoint_path: Path,
-    *,
-    device: torch.device,
-) -> tuple[MoGeModel, Mapping[str, Any]]:
-    from moge.model.v3 import MoGeModel
-
-    checkpoint = torch.load(
-        checkpoint_path,
-        map_location="cpu",
-        weights_only=False,
-    )
+def checkpoint_model_metadata(
+    checkpoint: Mapping[str, Any],
+) -> tuple[str, str]:
     pretrained = checkpoint.get("pretrained")
     if not pretrained:
         raise ValueError("Checkpoint does not identify its pretrained base model")
@@ -337,12 +350,41 @@ def load_checkpoint_model(
     )
     if normalization != "batch_norm":
         raise ValueError("Exp20 requires the BatchNorm SSR checkpoint")
+    return str(pretrained), str(normalization)
+
+
+def construct_initial_model(
+    checkpoint: Mapping[str, Any],
+    *,
+    seed: int,
+    device: torch.device,
+) -> tuple[MoGeModel, str]:
+    from moge.model.v3 import MoGeModel
+
+    pretrained, normalization = checkpoint_model_metadata(checkpoint)
+    torch.manual_seed(seed)
     model = MoGeModel.from_pretrained(
-        str(pretrained),
+        pretrained,
         model_kwargs={"ssr": {"normalization": normalization}},
-    ).to(device).eval()
+    ).eval()
+    state_digest = state_dict_sha256(model.state_dict())
+    return model.to(device), state_digest
+
+
+def construct_checkpoint_model(
+    checkpoint: Mapping[str, Any],
+    *,
+    device: torch.device,
+) -> MoGeModel:
+    from moge.model.v3 import MoGeModel
+
+    pretrained, normalization = checkpoint_model_metadata(checkpoint)
+    model = MoGeModel.from_pretrained(
+        pretrained,
+        model_kwargs={"ssr": {"normalization": normalization}},
+    )
     model.load_state_dict(checkpoint["model"], strict=True)
-    return model, checkpoint
+    return model.to(device).eval()
 
 
 @torch.no_grad()
@@ -543,18 +585,111 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
 
     device = torch.device(args.device)
     checkpoint_digest = sha256_file(checkpoint_path)
-    model, checkpoint = load_checkpoint_model(
+    checkpoint = torch.load(
         checkpoint_path,
-        device=device,
+        map_location="cpu",
+        weights_only=False,
     )
     if int(checkpoint.get("step", -1)) != 800:
         raise ValueError(f"Exp20 requires checkpoint step 800, got {checkpoint.get('step')}")
-    before_state = capture_batch_norm_running_state(model.ssr)
-    before_sha = batch_norm_state_sha256(before_state)
+    pretrained_name = str(checkpoint["pretrained"])
     checksums: list[Dict[str, Any]] = []
     sample_records: list[Dict[str, Any]] = []
     metric_records: Dict[str, Any] = {}
     validation_differences: Dict[str, Dict[str, Dict[str, float]]] = {}
+    initial_assets_by_id: Dict[str, Dict[str, Any]] = {}
+    initial_metrics_by_id: Dict[str, Dict[str, Any]] = {}
+    structure_pixels_by_id: Dict[str, int] = {}
+
+    initial_model, initialization_digest = construct_initial_model(
+        checkpoint,
+        seed=args.initial_seed,
+        device=device,
+    )
+    zero_identity_max_error = 0.0
+    for sample in prepared:
+        raw_by_k, metrics_by_k, structure_pixels = predict_and_measure(
+            initial_model,
+            sample["image"].to(device),
+            sample["gt_points"],
+            crop=sample["crop"],
+            num_tokens=args.num_tokens,
+            steps=steps,
+            boundary_threshold=args.boundary_threshold,
+        )
+        initial_points = raw_by_k[0]
+        for step in steps[1:]:
+            difference = float(
+                np.max(np.abs(raw_by_k[step] - initial_points))
+            )
+            zero_identity_max_error = max(zero_identity_max_error, difference)
+            if difference != 0.0:
+                raise RuntimeError(
+                    f"{sample['id']} zero-initialized SSR is not an exact "
+                    f"identity at K={step}: max error {difference}"
+                )
+        output = output_root / sample["id"] / "initial_k0.ply"
+        write_binary_ply(
+            output,
+            initial_points,
+            sample["colors"],
+            width=args.width,
+            height=args.height,
+        )
+        decoded_points, decoded_colors, comments = read_binary_ply(output)
+        np.testing.assert_array_equal(
+            decoded_points,
+            initial_points.reshape(-1, 3),
+        )
+        np.testing.assert_array_equal(
+            decoded_colors,
+            sample["colors"].reshape(-1, 3),
+        )
+        if comments.get("vertex_order") != "row_major_one_vertex_per_pixel":
+            raise ValueError("PLY raster order was not preserved")
+        initial_metrics = metrics_by_k[0]
+        initial_asset = point_asset(
+            output,
+            public_root=public_root,
+            points=initial_points,
+            checkpoint_digest=initialization_digest,
+            alignment=initial_metrics["alignment"],
+            metrics={
+                scope: initial_metrics[scope]
+                for scope in ("full", "crop", "structure")
+            },
+        )
+        initial_asset["pointRelReductionFromK0"] = 0.0
+        initial_assets_by_id[sample["id"]] = {
+            "0": initial_asset,
+            "1": {"alias": "initial.0"},
+            "3": {"alias": "initial.0"},
+            "5": {"alias": "initial.0"},
+        }
+        initial_metrics_by_id[sample["id"]] = {
+            "0": initial_asset["metrics"],
+        }
+        structure_pixels_by_id[sample["id"]] = structure_pixels
+        checksums.append(
+            {
+                "sample": sample["id"],
+                "split": sample["split"],
+                "stage": "initial",
+                "k": 0,
+                "aliases": [1, 3, 5],
+                "url": initial_asset["url"],
+                "bytes": output.stat().st_size,
+                "sha256": initial_asset["sha256"],
+            }
+        )
+    del initial_model
+    gc.collect()
+    if device.type == "cuda":
+        torch.cuda.empty_cache()
+
+    model = construct_checkpoint_model(checkpoint, device=device)
+    before_state = capture_batch_norm_running_state(model.ssr)
+    before_sha = batch_norm_state_sha256(before_state)
     with stateless_batch_statistics(model.ssr):
         for sample in prepared:
             raw_by_k, metrics_by_k, structure_pixels = predict_and_measure(
@@ -566,6 +701,8 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
                 steps=steps,
                 boundary_threshold=args.boundary_threshold,
             )
+            if structure_pixels != structure_pixels_by_id[sample["id"]]:
+                raise RuntimeError("GT structure mask changed between stages")
             reference = reference_by_id[sample["id"]]
             validation_differences[sample["id"]] = {}
             for step in steps:
@@ -674,13 +811,17 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
                 },
                 "rgbUrl": sample["rgb_url"],
                 "selection": selection_record,
-                "stages": {"final": stage_assets},
+                "stages": {
+                    "initial": initial_assets_by_id[sample["id"]],
+                    "final": stage_assets,
+                },
             }
             sample_records.append(sample_record)
             metric_records[sample["id"]] = {
                 "split": sample["split"],
                 "cropXYXY": sample["crop"],
                 "selection": selection_record,
+                "initial": initial_metrics_by_id[sample["id"]],
                 "final": {
                     step: stage_assets[step]["metrics"]
                     for step in stage_assets
@@ -723,13 +864,18 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
         "availableSplits": list(splits),
         "defaultSplit": "train" if "train" in splits else splits[0],
         "websiteSampleOrderBySplit": order_by_split,
-        "availableStages": ["final"],
-        "defaultStages": {"left": "final", "right": "final"},
+        "availableStages": ["initial", "final"],
+        "defaultStages": {"left": "initial", "right": "final"},
         "samples": sample_records,
         "provenance": {
             "sourceExperiment": (
                 "exp15_detached_head_ssr_coadaptation"
             ),
+            "initialization": (
+                "官方 MoGe-2 ViT-L 与零初始化 SSR"
+            ),
+            "initializationSeed": args.initial_seed,
+            "initializationStateSha256": initialization_digest,
             "checkpointStep": 800,
             "checkpointSha256": checkpoint_digest,
             "inferencePolicy": (
@@ -756,6 +902,13 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
         "splits": order_by_split,
         "checkpointStep": 800,
         "checkpointSha256": checkpoint_digest,
+        "initialization": {
+            "pretrained": pretrained_name,
+            "ssr": "zero-initialized",
+            "seed": args.initial_seed,
+            "stateSha256": initialization_digest,
+            "zeroIdentityMaxError": zero_identity_max_error,
+        },
         "inferencePolicy": (
             "current_batch_statistics_without_running_buffers"
         ),
@@ -766,6 +919,7 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
         },
         "evaluationSteps": list(steps),
         "pointCloudCount": len(checksums),
+        "logicalPointCloudCount": len(prepared) * 8,
         "pointCloudBytes": sum(int(item["bytes"]) for item in checksums),
         "pointCloudChecksums": str(checksum_path),
         "metricValidation": {

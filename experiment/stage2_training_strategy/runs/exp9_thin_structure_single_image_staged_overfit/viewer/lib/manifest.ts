@@ -103,6 +103,9 @@ export type PointCloudManifest = {
   defaultStages?: { left: StageName; right: StageName };
   provenance?: {
     sourceExperiment: string;
+    initialization?: string;
+    initializationSeed?: number;
+    initializationStateSha256?: string;
     checkpointStep: number;
     checkpointSha256: string;
     inferencePolicy: string;

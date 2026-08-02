@@ -249,19 +249,18 @@ test("browses Exp20 by split, picture and K without resetting the camera", async
   page,
 }) => {
   await page.goto(
-    "/?experiment=exp20_stateless_ssr_batch_statistics&split=train&sample=1&leftK=0&rightK=3",
+    "/?experiment=exp20_stateless_ssr_batch_statistics&split=train&sample=1&leftStage=initial&rightStage=final&leftK=0&rightK=3",
   );
   await expect(page.getByText("Exp20 · 训练域最佳推理配置").first()).toBeVisible();
   await expect(page.getByTestId("sample-1")).toContainText(
     "ai_013_001_cam_00_frame.0000",
   );
   await expect(page.locator(".sample-switcher button")).toHaveCount(5);
-  await expect(page.getByTestId("left-stage")).toHaveCount(0);
   await expect(page.getByTestId("viewer-left")).toContainText(
-    "Exp20 推理 · K=0",
+    "训练前 · K=0",
   );
   await expect(page.getByTestId("viewer-right")).toContainText(
-    "Exp20 推理 · K=3",
+    "训练后 · K=3",
   );
 
   const leftCanvas = page.locator("canvas").first();
@@ -272,13 +271,35 @@ test("browses Exp20 by split, picture and K without resetting the camera", async
     .getByRole("button", { name: "K=1" })
     .click();
   await expect(page.getByTestId("viewer-left")).toContainText(
-    "Exp20 推理 · K=1",
+    "训练前 · K=1",
   );
+  await expect(page.getByTestId("viewer-left")).toContainText("资源别名");
   await expect(leftCanvas).toHaveAttribute(
     "data-camera-snapshot",
     cameraBefore!,
   );
   await expect(page).toHaveURL(/leftK=1/);
+
+  const cameraBeforeStageChange = await leftCanvas.getAttribute(
+    "data-camera-snapshot",
+  );
+  const initialSource = await leftCanvas.getAttribute("data-scene-source");
+  await page
+    .getByTestId("left-stage")
+    .getByRole("button", { name: "训练后" })
+    .click();
+  await expect(page.getByTestId("viewer-left")).toContainText(
+    "训练后 · K=1",
+  );
+  await expect(leftCanvas).not.toHaveAttribute(
+    "data-scene-source",
+    initialSource!,
+  );
+  await expect(leftCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    cameraBeforeStageChange!,
+  );
+  await expect(page).toHaveURL(/leftStage=final/);
 
   for (const split of ["val", "test", "train"] as const) {
     await page.getByTestId(`split-${split}`).click();
@@ -297,6 +318,14 @@ test("browses Exp20 by split, picture and K without resetting the camera", async
     await page
       .getByTestId("left-k")
       .getByRole("button", { name: "K=0" })
+      .click();
+    await page
+      .getByTestId("left-stage")
+      .getByRole("button", { name: "训练前" })
+      .click();
+    await page
+      .getByTestId("right-stage")
+      .getByRole("button", { name: "训练后" })
       .click();
     await page
       .getByTestId("right-k")

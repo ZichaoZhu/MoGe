@@ -1,13 +1,14 @@
 # MoGe-3 多实验双窗口点云查看器
 
 本目录提供 Exp9、Exp12 与 Exp20 点云的统一交互式浏览器。页面依次选择
-实验、数据划分和图片；两个窗口可独立选择 K，拥有多个检查点的旧实验还可选择
-阶段。默认入口为 `Exp20 → Train → 图片 1`，左侧显示 K=0，右侧显示 K=3。
+实验、数据划分和图片；两个窗口都可独立选择训练前/后与 K。默认入口为
+`Exp20 → Train → 图片 1`，左侧显示训练前 K=0，右侧显示训练后 K=3。
 
 - Exp9：开放样本 05、04、06，展示三项彼此独立的单图极限过拟合；
 - Exp12：开放一张训练、一张验证和一张测试图片，展示 100 张训练图联合微调前后；
 - Exp20：每个 train/val/test 划分开放五张，展示 Exp15 step 800 权重使用
-  单图即时 BatchNorm 统计时的 K=0/1/3/5；
+  单图即时 BatchNorm 统计时的 K=0/1/3/5，并与 Exp15 训练开始前的
+  MoGe-2 初始化比较；
 - Exp12 的训练样本与 Exp9 样本 04 是同一帧，可直接比较单图过拟合与百图训练。
 
 实验目录位于 `public/data/experiments.json`。Exp9 清单保持
@@ -21,12 +22,13 @@
   \(P_{\mathrm{aligned}}=sP_{\mathrm{raw}}+(0,0,t)\)；
 - Three.js 显示坐标使用 `[x,-y,-z]`；
 - 训练前 SSR 为零初始化，K=0/1/3/5 逐元素相同，因此只保存一份
-  `initial_k0.ply`，其他 K 在清单中使用别名；此规则仅适用于 Exp9；
+  `initial_k0.ply`，其他 K 在清单中使用别名；此规则适用于 Exp9 与 Exp20；
 - Exp12 的“联合前”是已经训练到 step 3000 的 Exp11 模型，其 SSR 不为零，
   因此联合前/后均实际保存 K=0/1/3/5，不使用别名；
-- Exp20 不是一份新权重。它恢复 Exp15 step 800，在不读取或更新 running
-  buffers 的情况下让 SSR 使用当前单图稀疏特征统计。页面因此隐藏阶段选择，
-  只比较同一推理配置的 K；
+- Exp20 不是一份新权重。其“训练前”严格重建 Exp15 的起点：官方
+  `Ruicheng/moge-2-vitl-normal`、seed 151 与零初始化 SSR；“训练后”恢复
+  Exp15 step 800，并在不读取或更新 running buffers 的情况下让 SSR 使用当前
+  单图稀疏特征统计；
 - SSR 体素模式使用 `[depth,row,column]`，其中
   `depth=round(200*log(Z_raw))`。为了显示居中只减去当前裁剪的中位 depth bin，
   不改变体素间相对关系。
@@ -39,7 +41,9 @@ Exp12 为三个锁定样本保存联合前/后 K=0/1/3/5，共 24 份 PLY、70,7
 字节。文件校验位于 `public/data/exp12/pointcloud_sha256.json`。样本仅依据
 RGB 与 GT 细结构候选联系表选定，在查看任何 Exp12 预测前已锁定。
 
-Exp20 保存 15 张图片的 K=0/1/3/5，共 60 份 PLY、176,966,700 字节。
+Exp20 保存 15 张图片的训练前 K=0，以及训练后 K=0/1/3/5；训练前
+K=1/3/5 使用严格恒等别名，因此共 75 份唯一 PLY、120 个逻辑点云、
+221,208,375 字节。
 Train 选择 K=3 相对 K=0 改善最大的五张；Validation/Test 固定选择改善排序
 第 1、5、9、12、16 名，既展示成功案例也保留退化案例。选择依据、裁剪框和
 SHA-256 分别归档在 Exp20 的 `viewer_selection.json`、导出报告与
@@ -72,11 +76,12 @@ npm run dev
 页面会把当前选择写入 URL，例如：
 
 ```text
-?experiment=exp20_stateless_ssr_batch_statistics&split=train&sample=1&leftK=0&rightK=3
+?experiment=exp20_stateless_ssr_batch_statistics&split=train&sample=1&leftStage=initial&rightStage=final&leftK=0&rightK=3
 ```
 
-刷新或分享链接后会恢复实验、划分、图片和左右 K。切换 K 只替换点云几何，
-不会重置旋转、平移或缩放；切换实验、划分或图片会自动适配一次视野。
+刷新或分享链接后会恢复实验、划分、图片、左右阶段和 K。切换阶段或 K
+只替换点云几何，不会重置旋转、平移或缩放；切换实验、划分或图片会自动适配
+一次视野。
 
 ## 验证
 

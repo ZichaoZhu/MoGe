@@ -1,0 +1,20 @@
+{
+  "experiment_id": "exp3_fine_structure_visualization",
+  "date": "2026-07-25",
+  "source_experiment": "exp2_hypersim_smallset_overfit",
+  "checkpoint_step": 2000,
+  "image_height": 192,
+  "image_width": 256,
+  "num_tokens": 1200,
+  "max_refinement_steps": 5,
+  "crop_height": 96,
+  "crop_width": 96,
+  "crop_stride": 16,
+  "minimum_fine_pixels": 24,
+  "train_sample_id": "ai_036_002_cam_00_frame.0042",
+  "val_sample_id": "ai_055_003_cam_00_frame.0057",
+  "novel_view_yaw_degrees": 28.0,
+  "novel_view_pitch_degrees": -8.0,
+  "physical_gpu": 2,
+  "normal_prediction": false
+}

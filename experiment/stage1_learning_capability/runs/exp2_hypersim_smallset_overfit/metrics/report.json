@@ -1,0 +1,89 @@
+{
+  "status": "complete",
+  "experiment": "Hypersim multi-scene small-set SSR overfit",
+  "counts": {
+    "train": 24,
+    "val": 8
+  },
+  "shape": [
+    192,
+    256
+  ],
+  "cuda_visible_devices": "2",
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "base_frozen": true,
+  "normal_prediction": false,
+  "refinement_steps": 3,
+  "optimization_steps": 2000,
+  "batch_size": 2,
+  "identity_max_error": 0.0,
+  "initial_loss": 0.047936804592609406,
+  "final_loss": 0.019139502197504044,
+  "baseline": {
+    "train": {
+      "point_rel": 0.03665579420824846,
+      "depth_rel": 0.03163445834070444,
+      "depth_delta_1.01": 0.3963955705985427,
+      "depth_delta_1.25": 0.9828542048732439,
+      "boundary_f1": 0.8699843138456345
+    },
+    "val": {
+      "point_rel": 0.08277704054489732,
+      "depth_rel": 0.06997265294194221,
+      "depth_delta_1.01": 0.1943766586482525,
+      "depth_delta_1.25": 0.9367982521653175,
+      "boundary_f1": 0.8778845518827438
+    }
+  },
+  "zero_initialized_k3": {
+    "train": {
+      "point_rel": 0.03665579420824846,
+      "depth_rel": 0.03163445834070444,
+      "depth_delta_1.01": 0.3963955705985427,
+      "depth_delta_1.25": 0.9828542048732439,
+      "boundary_f1": 0.8699843138456345
+    },
+    "val": {
+      "point_rel": 0.08277704054489732,
+      "depth_rel": 0.06997265294194221,
+      "depth_delta_1.01": 0.1943766586482525,
+      "depth_delta_1.25": 0.9367982521653175,
+      "boundary_f1": 0.8778845518827438
+    }
+  },
+  "final": {
+    "train": {
+      "point_rel": 0.019116566613471758,
+      "depth_rel": 0.012708006019238383,
+      "depth_delta_1.01": 0.7263859398663044,
+      "depth_delta_1.25": 0.9932666470607122,
+      "boundary_f1": 0.8843654071291288
+    },
+    "val": {
+      "point_rel": 0.08789357542991638,
+      "depth_rel": 0.07361756777390838,
+      "depth_delta_1.01": 0.15657661948353052,
+      "depth_delta_1.25": 0.9342609196901321,
+      "boundary_f1": 0.8536691889166832
+    }
+  },
+  "train_depth_rel_reduction": 0.5982859613914477,
+  "val_depth_rel_reduction": -0.0520905622227934,
+  "train_fraction_improved": 1.0,
+  "val_fraction_improved": 0.375,
+  "elapsed_seconds": 1243.707440958009,
+  "seconds_per_step": 0.6218537204790046,
+  "peak_memory_bytes": 6390742528,
+  "boundary_definition": {
+    "log_depth_jump_threshold": 0.03,
+    "matching_radius_pixels": 1
+  },
+  "artifacts": {
+    "checkpoint": "checkpoint.pt",
+    "training_history": "training_history.csv",
+    "evaluation_history": "evaluation_history.csv",
+    "per_frame_metrics": "per_frame_metrics.csv",
+    "training_curves": "training_curves.png",
+    "qualitative_comparison": "qualitative_comparison.png"
+  }
+}

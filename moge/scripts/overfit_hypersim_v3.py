@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import math
 import random
 import time
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 import cv2
 import h5py
@@ -15,9 +16,9 @@ import torch
 from PIL import Image
 
 from moge.model.v3 import MoGeModel
-from moge.train.losses import edge_loss
 from moge.train.losses_v3 import (
     affine_invariant_global_loss_v3,
+    edge_angle_loss_v3,
     radial_partition_local_loss,
     solve_global_affine_alignment,
 )
@@ -44,6 +45,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--local-weight", type=float, default=1.0)
     parser.add_argument("--edge-weight", type=float, default=1.0)
     parser.add_argument("--local-scales", type=int, nargs="*", default=[4, 16, 64])
+    parser.add_argument("--loss-smoothing-window", type=int, default=10)
     parser.add_argument("--log-every", type=int, default=10)
     parser.add_argument("--seed", type=int, default=17)
     return parser.parse_args()
@@ -107,6 +109,7 @@ def geometry_loss(
     edge_weight: float,
     local_scales: Tuple[int, ...],
     generator: torch.Generator,
+    tensor_records: Optional[Dict[str, torch.Tensor]] = None,
 ) -> Tuple[torch.Tensor, Dict[str, float]]:
     total = gt_points.new_zeros(())
     records: Dict[str, float] = {}
@@ -124,7 +127,7 @@ def geometry_loss(
         else:
             local_term = global_term.new_zeros(())
         if edge_weight:
-            edge_term = edge_loss(points, gt_points)[0].mean()
+            edge_term = edge_angle_loss_v3(points, gt_points)[0].mean()
         else:
             edge_term = global_term.new_zeros(())
         total = total + (
@@ -135,6 +138,10 @@ def geometry_loss(
         records[f"k{index + 1}/global"] = float(global_term.detach())
         records[f"k{index + 1}/local"] = float(local_term.detach())
         records[f"k{index + 1}/edge"] = float(edge_term.detach())
+        if tensor_records is not None:
+            tensor_records[f"k{index + 1}/global"] = global_term
+            tensor_records[f"k{index + 1}/local"] = local_term
+            tensor_records[f"k{index + 1}/edge"] = edge_term
     return total, records
 
 
@@ -165,12 +172,92 @@ def aligned_metrics(
 
 def colorize_depth(depth: np.ndarray, valid: np.ndarray, lo: float, hi: float) -> np.ndarray:
     normalized = np.clip((depth - lo) / max(hi - lo, 1e-8), 0.0, 1.0)
+    normalized = np.where(valid, normalized, 0.0)
     colored = cv2.applyColorMap(
         np.round(255.0 * (1.0 - normalized)).astype(np.uint8),
         cv2.COLORMAP_TURBO,
     )
     colored[~valid] = 0
     return colored
+
+
+def moving_average(values: np.ndarray, window: int) -> np.ndarray:
+    """Trailing moving average aligned to the final record in each window."""
+    values = np.asarray(values, dtype=np.float64)
+    if window <= 0:
+        raise ValueError("Moving-average window must be positive")
+    result = np.full(values.shape, np.nan, dtype=np.float64)
+    if values.size < window:
+        return result
+    weights = np.ones(window, dtype=np.float64) / float(window)
+    result[window - 1 :] = np.convolve(values, weights, mode="valid")
+    return result
+
+
+def save_loss_curve(
+    output: Path,
+    losses: List[float],
+    smoothing_window: int = 10,
+) -> None:
+    """Save publication-style loss plots and their exact numeric source."""
+    import matplotlib
+
+    matplotlib.use("Agg", force=True)
+    import matplotlib.pyplot as plt
+
+    values = np.asarray(losses, dtype=np.float64)
+    steps = np.arange(1, values.size + 1)
+    window = min(smoothing_window, max(1, values.size))
+    smooth = moving_average(values, window)
+
+    with (output / "loss_curve.csv").open("w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file, lineterminator="\n")
+        writer.writerow(("step", "loss", f"moving_mean_{window}"))
+        for step, loss, mean in zip(steps, values, smooth):
+            writer.writerow(
+                (
+                    int(step),
+                    f"{loss:.10g}",
+                    "" if not np.isfinite(mean) else f"{mean:.10g}",
+                )
+            )
+
+    plt.style.use("seaborn-v0_8-whitegrid")
+    figure, axis = plt.subplots(figsize=(11, 6))
+    if values.size:
+        axis.plot(
+            steps,
+            values,
+            color="#5B8FF9",
+            alpha=0.28,
+            linewidth=0.9,
+            label="Per-step geometry loss",
+        )
+        axis.plot(
+            steps,
+            smooth,
+            color="#1D4ED8",
+            linewidth=2.2,
+            label=f"{window}-step moving mean",
+        )
+        axis.scatter(
+            (steps[0], steps[-1]),
+            (values[0], values[-1]),
+            color="#D94841",
+            s=30,
+            zorder=3,
+            label=f"Start {values[0]:.5f} / final {values[-1]:.5f}",
+        )
+        axis.set_xlim(1, max(2, int(steps[-1])))
+        axis.set_ylim(0.0, float(values.max()) * 1.12)
+    axis.set_xlabel("Optimization step")
+    axis.set_ylabel("Geometry loss")
+    axis.set_title("MoGe-3 Hypersim Single-Batch Overfit Loss")
+    axis.legend(loc="upper right")
+    figure.tight_layout()
+    figure.savefig(output / "loss_curve.png", dpi=180)
+    figure.savefig(output / "loss_curve.pdf")
+    plt.close(figure)
 
 
 def save_visuals(
@@ -180,6 +267,7 @@ def save_visuals(
     before: torch.Tensor,
     after: torch.Tensor,
     losses: List[float],
+    loss_smoothing_window: int = 10,
 ) -> None:
     rgb = (
         image[0].detach().cpu().permute(1, 2, 0).numpy().clip(0, 1)[:, :, ::-1] * 255
@@ -209,25 +297,7 @@ def save_visuals(
     comparison = np.concatenate([panel for _, panel in panels], axis=1)
     cv2.imwrite(str(output / "comparison.png"), comparison)
 
-    canvas = np.full((360, 720, 3), 255, dtype=np.uint8)
-    if losses:
-        values = np.log10(np.asarray(losses, dtype=np.float64).clip(1e-12))
-        y_lo, y_hi = float(values.min()), float(values.max())
-        xs = np.linspace(50, 690, len(values))
-        ys = 320 - (values - y_lo) / max(y_hi - y_lo, 1e-12) * 280
-        polyline = np.stack((xs, ys), axis=-1).round().astype(np.int32)
-        cv2.polylines(canvas, [polyline], False, (40, 90, 220), 2, cv2.LINE_AA)
-        cv2.putText(
-            canvas,
-            f"log10(loss), {losses[0]:.5g} -> {losses[-1]:.5g}",
-            (50, 28),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.6,
-            (0, 0, 0),
-            1,
-            cv2.LINE_AA,
-        )
-    cv2.imwrite(str(output / "loss_curve.png"), canvas)
+    save_loss_curve(output, losses, smoothing_window=loss_smoothing_window)
     np.save(output / "gt_depth.npy", gt_depth)
     np.save(output / "depth_k0_aligned.npy", before_depth)
     np.save(output / "depth_refined_aligned.npy", after_depth)
@@ -239,6 +309,8 @@ def main() -> None:
         raise ValueError("Image dimensions must be positive")
     if not 1 <= args.refinement_steps <= 7:
         raise ValueError("--refinement-steps must be in [1, 7]")
+    if args.loss_smoothing_window <= 0:
+        raise ValueError("--loss-smoothing-window must be positive")
 
     data_dir = assert_safe_path(args.data, safe_root=args.safe_root, must_exist=True)
     output = assert_safe_path(args.output, safe_root=args.safe_root, writable=True)
@@ -373,6 +445,7 @@ def main() -> None:
         before_aligned,
         after_aligned,
         losses,
+        loss_smoothing_window=args.loss_smoothing_window,
     )
     report = {
         "status": "complete",
@@ -410,6 +483,8 @@ def main() -> None:
             "checkpoint": "checkpoint.pt",
             "comparison": "comparison.png",
             "loss_curve": "loss_curve.png",
+            "loss_curve_pdf": "loss_curve.pdf",
+            "loss_curve_data": "loss_curve.csv",
         },
     }
     (output / "report.json").write_text(

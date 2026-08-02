@@ -1,0 +1,17 @@
+{
+  "status": "locked-before-rendering",
+  "selection_inputs": "RGB and ground truth only; no predictions",
+  "selection_rule": "exp1 只有一张训练图；在该图中选择轮廓清晰的圆形毛巾环及其支架",
+  "shape": [192, 256],
+  "splits": {
+    "train": {
+      "id": "ai_001_001_cam_00_frame.0000",
+      "crop_xyxy": [24, 64, 96, 152],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.30
+      },
+      "description": "唯一训练帧左侧的完整圆形金属毛巾架、墙面支架及悬挂毛巾"
+    }
+  }
+}

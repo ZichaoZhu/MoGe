@@ -1,0 +1,63 @@
+{
+  "experiment_id": "exp2_hypersim_smallset_overfit",
+  "date": "2026-07-25",
+  "server": "ZJU3DV-S115",
+  "device": "cuda:0",
+  "physical_gpu": 2,
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "normal_prediction": false,
+  "data": {
+    "dataset": "Hypersim",
+    "train_scenes": 3,
+    "train_frames": 24,
+    "val_scenes": 1,
+    "val_frames": 8,
+    "modalities": ["tonemapped_rgb", "euclidean_depth_meters"]
+  },
+  "model": {
+    "base_frozen": true,
+    "base_features_cached": true,
+    "trainable_module": "SSR",
+    "refinement_steps": 3,
+    "num_tokens": 1200,
+    "voxel_resolution": 200,
+    "image_height": 192,
+    "image_width": 256
+  },
+  "optimization": {
+    "steps": 2000,
+    "batch_size": 2,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "seed": 23
+  },
+  "loss": {
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "edge_weight": 1.0,
+    "local_scales": [4, 16, 64]
+  },
+  "evaluation": {
+    "interval_steps": 200,
+    "boundary_log_depth_threshold": 0.03,
+    "boundary_matching_radius_pixels": 1
+  },
+  "train_rod_gallery": {
+    "selection_status": "locked-before-rendering",
+    "selection_inputs": "RGB and ground truth only; no predictions",
+    "samples": 24,
+    "crop_height": 96,
+    "crop_width": 96,
+    "display_mask": "nearest 35% of ground-truth crop depth",
+    "checkpoint_step": 2000,
+    "refinement_steps": 3,
+    "physical_gpus": [3, 1, 2, 0],
+    "yaw_degrees": [-90, 90],
+    "motion": "one-way",
+    "frames": 46,
+    "frame_duration_ms": 110,
+    "wall_time_seconds": 205.625
+  }
+}

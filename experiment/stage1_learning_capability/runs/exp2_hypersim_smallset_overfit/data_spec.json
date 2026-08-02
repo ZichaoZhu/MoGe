@@ -1,0 +1,29 @@
+{
+  "format": "moge3-hypersim-smallset-spec-v1",
+  "splits": {
+    "train": [
+      {
+        "scene": "ai_001_001",
+        "camera": "cam_00",
+        "frames": [0, 14, 28, 43, 56, 71, 85, 99]
+      },
+      {
+        "scene": "ai_018_003",
+        "camera": "cam_00",
+        "frames": [0, 14, 28, 42, 57, 71, 85, 99]
+      },
+      {
+        "scene": "ai_036_002",
+        "camera": "cam_00",
+        "frames": [0, 14, 28, 42, 57, 71, 85, 99]
+      }
+    ],
+    "val": [
+      {
+        "scene": "ai_055_003",
+        "camera": "cam_00",
+        "frames": [0, 14, 28, 42, 57, 71, 85, 99]
+      }
+    ]
+  }
+}

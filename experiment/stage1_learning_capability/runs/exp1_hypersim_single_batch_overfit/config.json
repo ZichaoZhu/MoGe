@@ -1,0 +1,68 @@
+{
+  "experiment_id": "exp1_hypersim_single_batch_overfit",
+  "date": "2026-07-24",
+  "implementation_commit": "d71fc96",
+  "server": "ZJU3DV-S115",
+  "device": "cuda:0",
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "normal_prediction": false,
+  "data": {
+    "dataset": "Hypersim",
+    "scene": "ai_001_001",
+    "camera": "cam_00",
+    "frames": [
+      0
+    ],
+    "modalities": [
+      "tonemapped_rgb",
+      "euclidean_depth_meters"
+    ]
+  },
+  "model": {
+    "base_frozen": true,
+    "trainable_module": "SSR",
+    "refinement_steps": 3,
+    "num_tokens": 1200,
+    "voxel_resolution": 200,
+    "image_height": 192,
+    "image_width": 256
+  },
+  "optimization": {
+    "steps": 200,
+    "batch_size": 1,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0002,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "loss_smoothing_window": 10,
+    "seed": 17
+  },
+  "loss": {
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "edge_weight": 1.0,
+    "local_scales": [
+      4,
+      16,
+      64
+    ]
+  },
+  "visualization": {
+    "artifact": "artifacts/single_batch_point_map_orbit.gif",
+    "columns": [
+      "GT",
+      "K=0 base",
+      "K=3 refined"
+    ],
+    "affine_aligned_before_rendering": true,
+    "yaw_degrees": [
+      -35,
+      35
+    ],
+    "unique_yaw_frames": 15,
+    "output_frames": 28,
+    "pitch_degrees": -8,
+    "duration_ms": 110,
+    "point_stride": 1
+  }
+}

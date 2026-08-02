@@ -1,0 +1,36 @@
+{
+  "status": "locked-before-rendering",
+  "selection_inputs": "RGB and ground truth only; no predictions",
+  "selection_rule": "从 exp4 自身 train/val/test 的 RGB/GT 候选表中人工锁定清晰细杆区域；exp5/6 复用相同合法样本",
+  "candidate_artifacts": "artifacts/rod_selection_candidates",
+  "shape": [384, 512],
+  "splits": {
+    "train": {
+      "id": "ai_001_001_cam_00_frame.0032",
+      "crop_xyxy": [32, 192, 160, 320],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4
+      },
+      "description": "浴室暖气片的平行细杆"
+    },
+    "val": {
+      "id": "ai_043_002_cam_00_frame.0086",
+      "crop_xyxy": [208, 256, 336, 384],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4
+      },
+      "description": "窗下暖气片的平行细杆"
+    },
+    "test": {
+      "id": "ai_048_001_cam_00_frame.0046",
+      "crop_xyxy": [256, 144, 384, 272],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.25
+      },
+      "description": "环形灯架的弧形轨道与横杆"
+    }
+  }
+}

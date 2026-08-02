@@ -1,0 +1,46 @@
+{
+  "format": "moge3-hypersim-single-batch-v1",
+  "source_root": "/nas1/datasets/hypersim/raw",
+  "source_access": "read-only",
+  "scene": "ai_001_001",
+  "camera": "cam_00",
+  "height": 768,
+  "width": 1024,
+  "meters_per_asset_unit": 0.02539999969303608,
+  "M_cam_from_uv": [
+    [
+      0.5773502886169104,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.4330127164626828,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0
+    ]
+  ],
+  "coordinate_conversion": "[x,y,z]_hypersim -> [x,-y,-z]_moge",
+  "depth_semantics": "Euclidean distance in meters from camera optical center",
+  "samples": [
+    {
+      "frame": 0,
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0000.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0000.tonemap.jpg",
+        "bytes": 59816,
+        "sha256": "b5928ced209895eba11c2394bf7960e7d690c065f30d8e96c3b037edf2874106"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0000.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0000.depth_meters.hdf5",
+        "bytes": 230323,
+        "sha256": "ddbc54d7e5bbc111ef726173f027ea52539c408f9fdaf807106ae0547993fccb"
+      }
+    }
+  ]
+}

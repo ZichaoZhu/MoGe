@@ -1,0 +1,205 @@
+{"step": 1, "loss": 0.04317532479763031, "grad_norm": 0.5824993252754211, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 8.319686430040747, "k1/global": 0.008605793118476868, "k1/local": 0.005907023325562477, "k1/edge": 0.00026782089844346046, "k2/global": 0.008605793118476868, "k2/local": 0.005201063118875027, "k2/edge": 0.00026782089844346046, "k3/global": 0.008605793118476868, "k3/local": 0.005446393974125385, "k3/edge": 0.00026782089844346046}
+{"step": 50, "loss": 0.039719607681035995, "grad_norm": 1.14425790309906, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 52.01365578803234, "k1/global": 0.0065804715268313885, "k1/local": 0.00614210357889533, "k1/edge": 0.0003692804602906108, "k2/global": 0.006626363378018141, "k2/local": 0.00611898535862565, "k2/edge": 0.0003940636815968901, "k3/global": 0.006734923459589481, "k3/local": 0.006337346043437719, "k3/edge": 0.00041607083403505385}
+{"step": 100, "loss": 0.04614773020148277, "grad_norm": 1.0091873407363892, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 96.21158353798091, "k1/global": 0.009088991209864616, "k1/local": 0.006169383879750967, "k1/edge": 0.0003761493135243654, "k2/global": 0.00866442546248436, "k2/local": 0.0067629627883434296, "k2/edge": 0.00041552112088538706, "k3/global": 0.00829173345118761, "k3/local": 0.005929266102612019, "k3/edge": 0.00044929469004273415}
+{"step": 150, "loss": 0.034956905990839005, "grad_norm": 1.3071606159210205, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 141.0153906319756, "k1/global": 0.005842955783009529, "k1/local": 0.004617799073457718, "k1/edge": 0.0003626843390520662, "k2/global": 0.0060402629896998405, "k2/local": 0.005482538137584925, "k2/edge": 0.00039454916259273887, "k3/global": 0.006308048963546753, "k3/local": 0.005489305127412081, "k3/edge": 0.00041876285104081035}
+{"step": 200, "loss": 0.11063826084136963, "grad_norm": 1.9210366010665894, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 184.96877268794924, "k1/global": 0.024975046515464783, "k1/local": 0.012304471805691719, "k1/edge": 0.0004747921775560826, "k2/global": 0.024158146232366562, "k2/local": 0.011331253685057163, "k2/edge": 0.0005047705490142107, "k3/global": 0.023416491225361824, "k3/local": 0.012939434498548508, "k3/edge": 0.0005338533082976937}
+{"step": 250, "loss": 0.11162544786930084, "grad_norm": 1.0074659585952759, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 228.62428221094888, "k1/global": 0.018098393455147743, "k1/local": 0.017597559839487076, "k1/edge": 0.000469539372716099, "k2/global": 0.018279554322361946, "k2/local": 0.018552780151367188, "k2/edge": 0.0004958173958584666, "k3/global": 0.018644442781805992, "k3/local": 0.018967989832162857, "k3/edge": 0.0005193734541535378}
+{"step": 300, "loss": 0.13679489493370056, "grad_norm": 1.6158555746078491, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 271.74670045496896, "k1/global": 0.023796305060386658, "k1/local": 0.014110211282968521, "k1/edge": 0.0005539415287785232, "k2/global": 0.024203717708587646, "k2/local": 0.024975497275590897, "k2/edge": 0.0005823028041049838, "k3/global": 0.024708004668354988, "k3/local": 0.023258985951542854, "k3/edge": 0.0006059263832867146}
+{"step": 350, "loss": 0.05222576856613159, "grad_norm": 0.4940292537212372, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 315.6238362659933, "k1/global": 0.008901722729206085, "k1/local": 0.008446766994893551, "k1/edge": 0.0003658495843410492, "k2/global": 0.008784027770161629, "k2/local": 0.008250783197581768, "k2/edge": 0.000388163432944566, "k3/global": 0.008766270242631435, "k3/local": 0.007912866771221161, "k3/edge": 0.0004093144088983536}
+{"step": 400, "loss": 0.06975682824850082, "grad_norm": 0.6946462988853455, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 358.65979649394285, "k1/global": 0.013705983757972717, "k1/local": 0.009247591719031334, "k1/edge": 0.00040514997090213, "k2/global": 0.013527283445000648, "k2/local": 0.009629499167203903, "k2/edge": 0.0004238559340592474, "k3/global": 0.013383772224187851, "k3/local": 0.008991158567368984, "k3/edge": 0.00044253357918933034}
+{"step": 450, "loss": 0.05475326254963875, "grad_norm": 0.7031915187835693, "best_step": 0, "best_val_point_rel": 0.06414470527670346, "elapsed_seconds": 402.34895050595514, "k1/global": 0.009523500688374043, "k1/local": 0.008456170558929443, "k1/edge": 0.00035765254870057106, "k2/global": 0.009585995227098465, "k2/local": 0.008164705708622932, "k2/edge": 0.0003703692927956581, "k3/global": 0.009664398618042469, "k3/local": 0.008247568272054195, "k3/edge": 0.00038290105294436216}
+{"step": 500, "loss": 0.13524305820465088, "grad_norm": 1.404593825340271, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 470.90122891194187, "k1/global": 0.020378142595291138, "k1/local": 0.0217166505753994, "k1/edge": 0.0007790470262989402, "k2/global": 0.020323876291513443, "k2/local": 0.024663057178258896, "k2/edge": 0.0007891934947110713, "k3/global": 0.02027125470340252, "k3/local": 0.025514455512166023, "k3/edge": 0.0008073701756075025}
+{"step": 550, "loss": 0.16315871477127075, "grad_norm": 0.6430385112762451, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 515.034414462978, "k1/global": 0.03535700961947441, "k1/local": 0.019855862483382225, "k1/edge": 0.0005545468884520233, "k2/global": 0.03500265255570412, "k2/local": 0.021125920116901398, "k2/edge": 0.0005952232168056071, "k3/global": 0.03472480550408363, "k3/local": 0.015312852337956429, "k3/edge": 0.0006298365769907832}
+/pytorch/aten/src/ATen/native/cuda/IndexKernel.cu:113: operator(): block: [6,0,0], thread: [99,0,0] Assertion `-sizes[i] <= index && index < sizes[i] && "index out of bounds"` failed.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 694, in <module>
+    main()
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 427, in main
+    loss, terms = geometry_loss(
+                  ^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/overfit_hypersim_v3.py", line 119, in geometry_loss
+    local_term = radial_partition_local_loss(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/train/losses_v3.py", line 217, in radial_partition_local_loss
+    shifts = grouped_weighted_median(valid_residual, valid_weight, inverse)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/train/losses_v3.py", line 122, in grouped_weighted_median
+    counts = torch.bincount(sorted_groups, minlength=num_groups)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+{"event":"resume_after_grouped_median_fix","from_step":500}
+{"step": 550, "loss": 0.163137748837471, "grad_norm": 0.6434566378593445, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 51.96126692497637, "k1/global": 0.03535572439432144, "k1/local": 0.01985534280538559, "k1/edge": 0.0005537534598261118, "k2/global": 0.0350007563829422, "k2/local": 0.021122507750988007, "k2/edge": 0.0005930795450694859, "k3/global": 0.03472233936190605, "k3/local": 0.015307756140828133, "k3/edge": 0.0006264925468713045}
+{"step": 600, "loss": 0.13554443418979645, "grad_norm": 1.066757321357727, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 96.5291438519489, "k1/global": 0.017957469448447227, "k1/local": 0.026908189058303833, "k1/edge": 0.0005671349936164916, "k2/global": 0.018273673951625824, "k2/local": 0.026281464844942093, "k2/edge": 0.0005892387125641108, "k3/global": 0.01866285689175129, "k3/local": 0.02569476142525673, "k3/edge": 0.0006096391007304192}
+{"step": 650, "loss": 0.1790306121110916, "grad_norm": 0.5072042346000671, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 140.6999422359513, "k1/global": 0.039044614881277084, "k1/local": 0.02019578218460083, "k1/edge": 0.0004289965727366507, "k2/global": 0.038883473724126816, "k2/local": 0.01966334879398346, "k2/edge": 0.0004529519355855882, "k3/global": 0.03873216733336449, "k3/local": 0.021151123568415642, "k3/edge": 0.000478158937767148}
+{"step": 700, "loss": 0.1384592354297638, "grad_norm": 0.9643916487693787, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 184.49084846291225, "k1/global": 0.02431461215019226, "k1/local": 0.02111637033522129, "k1/edge": 0.0005201809108257294, "k2/global": 0.023932090029120445, "k2/local": 0.02092931419610977, "k2/edge": 0.000531983096152544, "k3/global": 0.02362596057355404, "k3/local": 0.02294316329061985, "k3/edge": 0.0005455591017380357}
+{"step": 750, "loss": 0.09387087821960449, "grad_norm": 0.43382057547569275, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 227.84992473199964, "k1/global": 0.016177712008357048, "k1/local": 0.012389477342367172, "k1/edge": 0.00045015435898676515, "k2/global": 0.016263309866189957, "k2/local": 0.01578158512711525, "k2/edge": 0.0004637364763766527, "k3/global": 0.016467643901705742, "k3/local": 0.01539907231926918, "k3/edge": 0.00047819482279010117}
+{"step": 800, "loss": 0.15561696887016296, "grad_norm": 0.5509147644042969, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 271.4094193079509, "k1/global": 0.025630388408899307, "k1/local": 0.026469595730304718, "k1/edge": 0.0007571423193439841, "k2/global": 0.025704793632030487, "k2/local": 0.026451755315065384, "k2/edge": 0.0007619865937158465, "k3/global": 0.025818772614002228, "k3/local": 0.023252815008163452, "k3/edge": 0.0007697247201576829}
+{"step": 850, "loss": 0.06943387538194656, "grad_norm": 0.7470055818557739, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 315.0800287799211, "k1/global": 0.011410702019929886, "k1/local": 0.010805071331560612, "k1/edge": 0.0004609865427482873, "k2/global": 0.011623934842646122, "k2/local": 0.011812495067715645, "k2/edge": 0.00047847229870967567, "k3/global": 0.012021536938846111, "k3/local": 0.010323082096874714, "k3/edge": 0.000497597036883235}
+{"step": 900, "loss": 0.05855490267276764, "grad_norm": 1.4167364835739136, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 358.23097862896975, "k1/global": 0.009940868243575096, "k1/local": 0.008493183180689812, "k1/edge": 0.0004094090545549989, "k2/global": 0.009999321773648262, "k2/local": 0.008816883899271488, "k2/edge": 0.0004581943212542683, "k3/global": 0.010616971179842949, "k3/local": 0.009312211535871029, "k3/edge": 0.0005078563117422163}
+{"step": 950, "loss": 0.07835336774587631, "grad_norm": 1.1082834005355835, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 401.8276712569641, "k1/global": 0.017267821356654167, "k1/local": 0.009258587844669819, "k1/edge": 0.00042479560943320394, "k2/global": 0.0164828822016716, "k2/local": 0.008473176509141922, "k2/edge": 0.0004787684010807425, "k3/global": 0.016010038554668427, "k3/local": 0.00942476186901331, "k3/edge": 0.0005325374659150839}
+{"step": 1000, "loss": 0.06185869500041008, "grad_norm": 1.1384774446487427, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 469.0840171959717, "k1/global": 0.010535908862948418, "k1/local": 0.008728602901101112, "k1/edge": 0.0004755435511469841, "k2/global": 0.010725006461143494, "k2/local": 0.009652898646891117, "k2/edge": 0.0005240979371592402, "k3/global": 0.011047502979636192, "k3/local": 0.009599274955689907, "k3/edge": 0.0005698578897863626}
+{"step": 1050, "loss": 0.06829698383808136, "grad_norm": 0.8015435934066772, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 511.7423808989115, "k1/global": 0.011735593900084496, "k1/local": 0.010264490731060505, "k1/edge": 0.0005456215003505349, "k2/global": 0.01182616502046585, "k2/local": 0.009606249630451202, "k2/edge": 0.0005849279114045203, "k3/global": 0.012108439579606056, "k3/local": 0.010997049510478973, "k3/edge": 0.0006284465780481696}
+{"step": 1100, "loss": 0.05458178371191025, "grad_norm": 0.67121422290802, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 555.1448558359407, "k1/global": 0.010975899174809456, "k1/local": 0.006676302291452885, "k1/edge": 0.0003945856587961316, "k2/global": 0.01055254228413105, "k2/local": 0.007268182002007961, "k2/edge": 0.0004665336455218494, "k3/global": 0.01021245215088129, "k3/local": 0.007494563236832619, "k3/edge": 0.0005407218704931438}
+{"step": 1150, "loss": 0.06801265478134155, "grad_norm": 0.3379074037075043, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 598.7975018559955, "k1/global": 0.013438372872769833, "k1/local": 0.009194577112793922, "k1/edge": 0.0002990344655700028, "k2/global": 0.013417708687484264, "k2/local": 0.008882096037268639, "k2/edge": 0.00033168966183438897, "k3/global": 0.01343874167650938, "k3/local": 0.008642946369946003, "k3/edge": 0.0003674843464978039}
+{"step": 1200, "loss": 0.07835973799228668, "grad_norm": 1.2845020294189453, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 642.5693468709942, "k1/global": 0.018796341493725777, "k1/local": 0.0068026576191186905, "k1/edge": 0.00035271013621240854, "k2/global": 0.019108742475509644, "k2/local": 0.006720557808876038, "k2/edge": 0.00039650427061133087, "k3/global": 0.0194607675075531, "k3/local": 0.006286115385591984, "k3/edge": 0.0004353457479737699}
+{"step": 1250, "loss": 0.08976437151432037, "grad_norm": 1.5693665742874146, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 686.1019070469774, "k1/global": 0.020329982042312622, "k1/local": 0.009850416332483292, "k1/edge": 0.0004456081078387797, "k2/global": 0.018916795030236244, "k2/local": 0.010156756266951561, "k2/edge": 0.00048972072545439, "k3/global": 0.017874255776405334, "k3/local": 0.011164756491780281, "k3/edge": 0.000536079634912312}
+{"step": 1300, "loss": 0.04627969115972519, "grad_norm": 0.6132600903511047, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 729.0068640189711, "k1/global": 0.009124388918280602, "k1/local": 0.0066719697788357735, "k1/edge": 0.00031417710124514997, "k2/global": 0.008630309253931046, "k2/local": 0.006216837093234062, "k2/edge": 0.0003661949303932488, "k3/global": 0.008227938786149025, "k3/local": 0.006312000565230846, "k3/edge": 0.00041587281157262623}
+{"step": 1350, "loss": 0.7088931798934937, "grad_norm": 2.494598388671875, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 771.7831091799308, "k1/global": 0.1549197882413864, "k1/local": 0.03211061283946037, "k1/edge": 0.0012047021882608533, "k2/global": 0.15420927107334137, "k2/local": 0.11365876346826553, "k2/edge": 0.0012563994387164712, "k3/global": 0.1540355682373047, "k3/local": 0.09620700031518936, "k3/edge": 0.0012910813093185425}
+{"step": 1400, "loss": 0.10839255154132843, "grad_norm": 0.9604252576828003, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 814.2495307489298, "k1/global": 0.02214724011719227, "k1/local": 0.013366246595978737, "k1/edge": 0.000571825890801847, "k2/global": 0.021972976624965668, "k2/local": 0.014303101226687431, "k2/edge": 0.0006676143384538591, "k3/global": 0.02184917777776718, "k3/local": 0.012757088989019394, "k3/edge": 0.0007572822505608201}
+{"step": 1450, "loss": 0.06866732239723206, "grad_norm": 1.2869129180908203, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 857.4569266278995, "k1/global": 0.013018317520618439, "k1/local": 0.008870059624314308, "k1/edge": 0.0008872859179973602, "k2/global": 0.012752871960401535, "k2/local": 0.008980510756373405, "k2/edge": 0.0010883007198572159, "k3/global": 0.012626915238797665, "k3/local": 0.009246792644262314, "k3/edge": 0.0011962690623477101}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 842, in <module>
+    main()
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 580, in main
+    raise RuntimeError(f"Non-finite gradient at step {step}")
+RuntimeError: Non-finite gradient at step 1493
+{"event":"resume_with_microbatch_fix","from_step":1000,"microbatch_size":1}
+{"step": 1050, "loss": 0.06808878853917122, "grad_norm": 0.9464224576950073, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 53.22433037601877, "k1/global": 0.011661562137305737, "k1/local": 0.00989681901410222, "k1/edge": 0.0005677066801581532, "k2/global": 0.011745461728423834, "k2/local": 0.010829182341694832, "k2/edge": 0.0006271876627579331, "k3/global": 0.0120566850528121, "k3/local": 0.010019570821896195, "k3/edge": 0.0006846126634627581}
+{"step": 1100, "loss": 0.05443922244012356, "grad_norm": 0.5997650027275085, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 103.43381648196373, "k1/global": 0.01091878954321146, "k1/local": 0.006964676547795534, "k1/edge": 0.0004045240639243275, "k2/global": 0.010429156012833118, "k2/local": 0.00758240488357842, "k2/edge": 0.00043875741539523005, "k3/global": 0.01005330285988748, "k3/local": 0.007176617160439491, "k3/edge": 0.0004709942440968007}
+{"step": 1150, "loss": 0.06921342201530933, "grad_norm": 0.6833812594413757, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 153.11983650899492, "k1/global": 0.013471797108650208, "k1/local": 0.009029750246554613, "k1/edge": 0.00030453332874458283, "k2/global": 0.013498982414603233, "k2/local": 0.008670691167935729, "k2/edge": 0.00033947074552997947, "k3/global": 0.013601444428786635, "k3/local": 0.009925903286784887, "k3/edge": 0.0003708502190420404}
+{"step": 1200, "loss": 0.07786190137267113, "grad_norm": 1.49049711227417, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 202.59921359596774, "k1/global": 0.018839988857507706, "k1/local": 0.006463239900767803, "k1/edge": 0.0003576375311240554, "k2/global": 0.019166791811585426, "k2/local": 0.006532866507768631, "k2/edge": 0.0004030889249406755, "k3/global": 0.01948687434196472, "k3/local": 0.006160554708912969, "k3/edge": 0.0004508611746132374}
+{"step": 1250, "loss": 0.08414217829704285, "grad_norm": 1.78077232837677, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 252.0672038079938, "k1/global": 0.018131197430193424, "k1/local": 0.011325139086693525, "k1/edge": 0.0005015053611714393, "k2/global": 0.015818778425455093, "k2/local": 0.011162139475345612, "k2/edge": 0.0005837576172780246, "k3/global": 0.014875094406306744, "k3/local": 0.011100322008132935, "k3/edge": 0.0006442448357120156}
+{"step": 1300, "loss": 0.049294354394078255, "grad_norm": 0.8263945579528809, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 301.0380294129718, "k1/global": 0.009049481712281704, "k1/local": 0.007836555829271674, "k1/edge": 0.000414417139836587, "k2/global": 0.008529728278517723, "k2/local": 0.006244643824175, "k2/edge": 0.0005263285711407661, "k3/global": 0.008128126617521048, "k3/local": 0.007956700632348657, "k3/edge": 0.0006083733169361949}
+{"step": 1350, "loss": 0.5170607268810272, "grad_norm": 9.02764892578125, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 350.70573093695566, "k1/global": 0.12883537262678146, "k1/local": 0.030928393825888634, "k1/edge": 0.001378701883368194, "k2/global": 0.12906997837126255, "k2/local": 0.06454075500369072, "k2/edge": 0.001457798935007304, "k3/global": 0.1294204192236066, "k3/local": 0.029934776946902275, "k3/edge": 0.0014945309376344085}
+{"step": 1400, "loss": 0.11464828997850418, "grad_norm": 1.3645399808883667, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 400.3078977810219, "k1/global": 0.02212414424866438, "k1/local": 0.01395415049046278, "k1/edge": 0.0010263482108712196, "k2/global": 0.021955461241304874, "k2/local": 0.015907949302345514, "k2/edge": 0.0011951546766795218, "k3/global": 0.021853341720998287, "k3/local": 0.015391141641885042, "k3/edge": 0.0012405984452925622}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 930, in <module>
+    main()
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 657, in main
+    raise RuntimeError(f"Non-finite gradient at step {step}")
+RuntimeError: Non-finite gradient at step 1421
+{"event":"resume_with_native_spconv","from_step":1000,"microbatch_size":1,"spconv_algo":"Native"}
+{"step": 1050, "loss": 0.06807400099933147, "grad_norm": 0.9800056219100952, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 66.6650996899698, "k1/global": 0.011654880363494158, "k1/local": 0.009900312405079603, "k1/edge": 0.0005683567724190652, "k2/global": 0.01174100348725915, "k2/local": 0.010833603329956532, "k2/edge": 0.0006288435833994299, "k3/global": 0.012052167672663927, "k3/local": 0.010006299708038568, "k3/edge": 0.0006885351322125643}
+{"step": 1100, "loss": 0.05453472398221493, "grad_norm": 0.6058515906333923, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 132.50781471503433, "k1/global": 0.010947595350444317, "k1/local": 0.006953911855816841, "k1/edge": 0.0004030968848383054, "k2/global": 0.010476176394149661, "k2/local": 0.007584783248603344, "k2/edge": 0.00043653076863847673, "k3/global": 0.01010433561168611, "k3/local": 0.007159782107919455, "k3/edge": 0.00046850991202518344}
+{"step": 1150, "loss": 0.06896652840077877, "grad_norm": 0.6603385210037231, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 197.85406724503264, "k1/global": 0.013484543422237039, "k1/local": 0.008989199995994568, "k1/edge": 0.00030452621285803616, "k2/global": 0.013517868239432573, "k2/local": 0.008605166338384151, "k2/edge": 0.00033965817419812083, "k3/global": 0.013594162184745073, "k3/local": 0.009756308514624834, "k3/edge": 0.0003750960895558819}
+{"step": 1200, "loss": 0.07748677581548691, "grad_norm": 1.3469372987747192, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 263.3777871109778, "k1/global": 0.018782135099172592, "k1/local": 0.006485476857051253, "k1/edge": 0.000369825167581439, "k2/global": 0.01903424598276615, "k2/local": 0.006485056132078171, "k2/edge": 0.0004208740429021418, "k3/global": 0.01927924156188965, "k3/local": 0.006149905500933528, "k3/edge": 0.00048001608229242265}
+{"step": 1250, "loss": 0.08806047961115837, "grad_norm": 2.462695837020874, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 328.1672268429538, "k1/global": 0.01915301103144884, "k1/local": 0.011655968148261309, "k1/edge": 0.00048691508709453046, "k2/global": 0.016779197845607996, "k2/local": 0.011460388079285622, "k2/edge": 0.0005771493015345186, "k3/global": 0.015468127094209194, "k3/local": 0.011829039081931114, "k3/edge": 0.000650683039566502}
+{"step": 1300, "loss": 0.04838893376290798, "grad_norm": 0.505325198173523, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 393.02067006903235, "k1/global": 0.009031292516738176, "k1/local": 0.007800055667757988, "k1/edge": 0.00035316607682034373, "k2/global": 0.008430758491158485, "k2/local": 0.006135083269327879, "k2/edge": 0.00043652544263750315, "k3/global": 0.007955866400152445, "k3/local": 0.007735712919384241, "k3/edge": 0.0005104739975649863}
+{"step": 1350, "loss": 0.5155585259199142, "grad_norm": 9.045979499816895, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 458.3001955699874, "k1/global": 0.12865864671766758, "k1/local": 0.03163472004234791, "k1/edge": 0.0013432311825454235, "k2/global": 0.12897233478724957, "k2/local": 0.06195934861898422, "k2/edge": 0.0014264642377384007, "k3/global": 0.12939448282122612, "k3/local": 0.030714351683855057, "k3/edge": 0.001454947516322136}
+{"step": 1400, "loss": 0.11212612688541412, "grad_norm": 0.5038015842437744, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 523.3428427040344, "k1/global": 0.02220176812261343, "k1/local": 0.013542798813432455, "k1/edge": 0.0006004275637678802, "k2/global": 0.022065031342208385, "k2/local": 0.015345237217843533, "k2/edge": 0.0006913954566698521, "k3/global": 0.021969851106405258, "k3/local": 0.014955367427319288, "k3/edge": 0.0007542514649685472}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 944, in <module>
+    main()
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 667, in main
+    raise RuntimeError(f"Non-finite gradient at step {step}")
+RuntimeError: Non-finite gradient at step 1447
+{"event":"resume_after_detached_global_alignment","from_step":1000,"microbatch_size":1,"spconv_algo":"Native","loss_gradient_check":true}
+{"step": 1050, "loss": 0.06794847920536995, "grad_norm": 0.8790894746780396, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 68.04631953209173, "k1/global": 0.011653936468064785, "k1/local": 0.009907498955726624, "k1/edge": 0.0005670993414241821, "k2/global": 0.011712411418557167, "k2/local": 0.010824144817888737, "k2/edge": 0.0006288457370828837, "k3/global": 0.01199106452986598, "k3/local": 0.009975117398425937, "k3/edge": 0.0006883576861582696}
+{"step": 1100, "loss": 0.05423637852072716, "grad_norm": 0.6516411900520325, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 135.21263297402766, "k1/global": 0.010883716866374016, "k1/local": 0.006941755767911673, "k1/edge": 0.0004073462332598865, "k2/global": 0.010364159476011992, "k2/local": 0.007563341176137328, "k2/edge": 0.0004474045417737216, "k3/global": 0.009969736449420452, "k3/local": 0.007166401715949178, "k3/edge": 0.0004925182729493827}
+{"step": 1150, "loss": 0.06888219714164734, "grad_norm": 0.5330871939659119, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 203.26690568309277, "k1/global": 0.013457922963425517, "k1/local": 0.009005715604871511, "k1/edge": 0.00030464101291727275, "k2/global": 0.013447660719975829, "k2/local": 0.008624936919659376, "k2/edge": 0.0003362756979186088, "k3/global": 0.01349219842813909, "k3/local": 0.009842055384069681, "k3/edge": 0.00037079007597640157}
+{"step": 1200, "loss": 0.07803294062614441, "grad_norm": 1.503030776977539, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 270.27227267599665, "k1/global": 0.018863428384065628, "k1/local": 0.006467490224167705, "k1/edge": 0.000366695923730731, "k2/global": 0.019216561689972878, "k2/local": 0.006506242789328098, "k2/edge": 0.0004143702972214669, "k3/global": 0.01959466002881527, "k3/local": 0.006129337241873145, "k3/edge": 0.00047415419248864055}
+{"step": 1250, "loss": 0.08494015410542488, "grad_norm": 1.6637356281280518, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 337.34834068699274, "k1/global": 0.018684159498661757, "k1/local": 0.011355497408658266, "k1/edge": 0.00048464458086527884, "k2/global": 0.016081785783171654, "k2/local": 0.011147203855216503, "k2/edge": 0.0005640952149406075, "k3/global": 0.014782182406634092, "k3/local": 0.011201580986380577, "k3/edge": 0.0006390048656612635}
+{"step": 1300, "loss": 0.04851498082280159, "grad_norm": 0.741284966468811, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 404.2253069510916, "k1/global": 0.009095930960029364, "k1/local": 0.007771540200337768, "k1/edge": 0.0003293101763119921, "k2/global": 0.008567611686885357, "k2/local": 0.006088120862841606, "k2/edge": 0.00038933585165068507, "k3/global": 0.008145279251039028, "k3/local": 0.007692122831940651, "k3/edge": 0.00043573096627369523}
+{"step": 1350, "loss": 0.5658141523599625, "grad_norm": 7.672964572906494, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 472.09641864709556, "k1/global": 0.1284484127536416, "k1/local": 0.0394141124561429, "k1/edge": 0.0019783948082476854, "k2/global": 0.12991505023092031, "k2/local": 0.07153327576816082, "k2/edge": 0.0020828060805797577, "k3/global": 0.13238259125500917, "k3/local": 0.05792077258229256, "k3/edge": 0.002138724084943533}
+{"step": 1400, "loss": 0.11206180602312088, "grad_norm": 0.7344539761543274, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 539.0051578360144, "k1/global": 0.022121643647551537, "k1/local": 0.013474246021360159, "k1/edge": 0.0006408781628124416, "k2/global": 0.02198190614581108, "k2/local": 0.015320568345487118, "k2/edge": 0.0007451342535205185, "k3/global": 0.021907413378357887, "k3/local": 0.015035307966172695, "k3/edge": 0.0008347122929990292}
+{"step": 1450, "loss": 0.26020006835460663, "grad_norm": 68.63555145263672, "best_step": 500, "best_val_point_rel": 0.06409706782142166, "elapsed_seconds": 609.4127211800078, "k1/global": 0.018251429311931133, "k1/local": 0.03502601757645607, "k1/edge": 0.0022379036527127028, "k2/global": 0.029330791905522346, "k2/local": 0.07344618812203407, "k2/edge": 0.0023929995950311422, "k3/global": 0.048930661752820015, "k3/local": 0.048118216916918755, "k3/edge": 0.0024658695328980684}
+Traceback (most recent call last):
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/spconv/pytorch/functional.py", line 312, in forward
+    return ops.indice_conv(features,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/spconv/pytorch/ops.py", line 860, in indice_conv
+    ConvGemmOps.indice_conv(alloc, ext_mm, GEMM_CPP, ALL_WEIGHT_IS_KRSC,
+RuntimeError: dev2host /tmp/pip-build-env-8o2mu3hi/overlay/lib/python3.12/site-packages/cumm/include/tensorview/cuda/driverops.h:105
+cuda failed with error 700 an illegal memory access was encountered. use CUDA_LAUNCH_BLOCKING=1 to get correct traceback.
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 1009, in <module>
+    main()
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_generalization_v3.py", line 616, in main
+    sequence = refine_cached(
+               ^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/train_hypersim_smallset_v3.py", line 186, in refine_cached
+    residual, _ = refiner(factorized, visual_features.float())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/model/ssr.py", line 569, in forward
+    residual, active_counts = self.unet(shell, visual_features)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/model/ssr.py", line 359, in forward
+    sparse = block(sparse)
+             ^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/model/ssr.py", line 186, in forward
+    out = self.conv1(out)
+          ^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/spconv/pytorch/conv.py", line 755, in forward
+    return self._conv_forward(self.training,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/spconv/pytorch/conv.py", line 327, in _conv_forward
+    out_features = Fsp.indice_subm_conv(
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/autograd/function.py", line 576, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/amp/autocast_mode.py", line 528, in decorate_fwd
+    return fwd(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/spconv/pytorch/functional.py", line 328, in forward
+    msg += f"pairnum={indice_pair_num},act={num_activate_out},algo={algo}"
+                     ^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/_tensor.py", line 1130, in __format__
+    return object.__format__(self, format_spec)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/_tensor.py", line 590, in __repr__
+    return torch._tensor_str._str(self, tensor_contents=tensor_contents)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/_tensor_str.py", line 726, in _str
+    return _str_intern(self, tensor_contents=tensor_contents)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/_tensor_str.py", line 647, in _str_intern
+    tensor_str = _tensor_str(self, indent)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/_tensor_str.py", line 379, in _tensor_str
+    formatter = _Formatter(get_summarized_data(self) if summarize else self)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/_tensor_str.py", line 142, in __init__
+    value_str = f"{value}"
+                  ^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/_tensor.py", line 1129, in __format__
+    return self.detach().item().__format__(format_spec)
+           ^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+{"event":"final_resume_low_lr","from_step":1000,"learning_rate":0.00002,"optimizer_reset":true,"microbatch_size":1,"spconv_algo":"MaskImplicitGemm","loss_gradient_check":true}

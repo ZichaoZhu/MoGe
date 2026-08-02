@@ -1,0 +1,153 @@
+{
+  "status": "complete",
+  "experiment": "exp4",
+  "selection": {
+    "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp4_hypersim_multiscene_generalization/rod_selection.json",
+    "status": "locked-before-rendering",
+    "inputs": "RGB and ground truth only; no predictions"
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "display_mask": {
+    "definition": "split-specific ground-truth depth rule locked before model predictions and used only to isolate the displayed structure",
+    "dilation_pixels": 0,
+    "scope": "Visualization-only diagnostic mask; not used for training, checkpoint selection, or paper Local benchmark evaluation."
+  },
+  "checkpoints": [
+    {
+      "label": "K=3",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp4_hypersim_multiscene_generalization/artifacts/training_final/latest_checkpoint.pt",
+      "sha256": "013a36487d924e2338370ea71e17e030dfc1d8152d5e7234842e7cee600150a9",
+      "step": 8000,
+      "kind": "ssr_only",
+      "refinement_steps": 3
+    }
+  ],
+  "render": {
+    "yaw_degrees": [
+      -90.0,
+      90.0
+    ],
+    "pitch_degrees": -8.0,
+    "motion": "one-way",
+    "frame_duration_ms": 110,
+    "angular_step_degrees": 4.0,
+    "angular_speed_degrees_per_second": 36.36363636363637,
+    "forward_frames": 46,
+    "total_frames": 46,
+    "loop_duration_ms": 5060,
+    "camera_basis": "selected ground-truth fine-structure points only"
+  },
+  "splits": {
+    "train": {
+      "sample": {
+        "id": "ai_001_001_cam_00_frame.0032",
+        "scene": "ai_001_001",
+        "frame": 32
+      },
+      "crop_xyxy": [
+        32,
+        192,
+        160,
+        320
+      ],
+      "display_mask_pixels": 6554,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4,
+        "resolved_maximum_depth_m": 0.5379490852355957
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 6554,
+          "point_rel": 0.0654146820306778,
+          "depth_rel": 0.028925390914082527
+        },
+        "K=3": {
+          "pixels": 6554,
+          "point_rel": 0.04851510748267174,
+          "depth_rel": 0.016724450513720512
+        }
+      },
+      "fixed_camera_radius_m": 0.13621446132659912,
+      "artifacts": {
+        "orbit": "train_rod_orbit.gif",
+        "preview": "train_rod_preview.png"
+      }
+    },
+    "val": {
+      "sample": {
+        "id": "ai_043_002_cam_00_frame.0086",
+        "scene": "ai_043_002",
+        "frame": 86
+      },
+      "crop_xyxy": [
+        208,
+        256,
+        336,
+        384
+      ],
+      "display_mask_pixels": 6554,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4,
+        "resolved_maximum_depth_m": 3.187582015991211
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 6554,
+          "point_rel": 0.011187910102307796,
+          "depth_rel": 0.009885807521641254
+        },
+        "K=3": {
+          "pixels": 6554,
+          "point_rel": 0.008366024121642113,
+          "depth_rel": 0.007282176986336708
+        }
+      },
+      "fixed_camera_radius_m": 0.6478888535499573,
+      "artifacts": {
+        "orbit": "val_rod_orbit.gif",
+        "preview": "val_rod_preview.png"
+      }
+    },
+    "test": {
+      "sample": {
+        "id": "ai_048_001_cam_00_frame.0046",
+        "scene": "ai_048_001",
+        "frame": 46
+      },
+      "crop_xyxy": [
+        256,
+        144,
+        384,
+        272
+      ],
+      "display_mask_pixels": 4096,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.25,
+        "resolved_maximum_depth_m": 1.16160249710083
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 4096,
+          "point_rel": 0.07494264096021652,
+          "depth_rel": 0.07205579429864883
+        },
+        "K=3": {
+          "pixels": 4096,
+          "point_rel": 0.07540955394506454,
+          "depth_rel": 0.0706024169921875
+        }
+      },
+      "fixed_camera_radius_m": 0.250124477148056,
+      "artifacts": {
+        "orbit": "test_rod_orbit.gif",
+        "preview": "test_rod_preview.png"
+      }
+    }
+  }
+}

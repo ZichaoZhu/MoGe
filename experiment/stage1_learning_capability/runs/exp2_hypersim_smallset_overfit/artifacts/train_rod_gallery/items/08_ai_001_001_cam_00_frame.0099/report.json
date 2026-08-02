@@ -1,0 +1,81 @@
+{
+  "status": "complete",
+  "experiment": "exp2 / 08",
+  "selection": {
+    "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp2_hypersim_smallset_overfit/artifacts/train_rod_gallery/generated_selections/08_ai_001_001_cam_00_frame.0099.json",
+    "status": "locked-before-rendering",
+    "inputs": "RGB and ground truth only; no predictions"
+  },
+  "shape": [
+    192,
+    256
+  ],
+  "display_mask": {
+    "definition": "split-specific ground-truth depth rule locked before model predictions and used only to isolate the displayed structure",
+    "dilation_pixels": 0,
+    "scope": "Visualization-only diagnostic mask; not used for training, checkpoint selection, or paper Local benchmark evaluation."
+  },
+  "checkpoints": [
+    {
+      "label": "K=3",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp2_hypersim_smallset_overfit/artifacts/checkpoint.pt",
+      "sha256": "cbb63bccac283492c9fe2fb6451dfb9258157a37803a86fde56f616c320d719f",
+      "step": 2000,
+      "kind": "ssr_only",
+      "refinement_steps": 3
+    }
+  ],
+  "render": {
+    "yaw_degrees": [
+      -90.0,
+      90.0
+    ],
+    "pitch_degrees": -8.0,
+    "motion": "one-way",
+    "frame_duration_ms": 110,
+    "angular_step_degrees": 4.0,
+    "angular_speed_degrees_per_second": 36.36363636363637,
+    "forward_frames": 46,
+    "total_frames": 46,
+    "loop_duration_ms": 5060,
+    "camera_basis": "selected ground-truth fine-structure points only"
+  },
+  "splits": {
+    "train": {
+      "sample": {
+        "id": "ai_001_001_cam_00_frame.0099",
+        "scene": "ai_001_001",
+        "frame": 99
+      },
+      "crop_xyxy": [
+        144,
+        96,
+        240,
+        192
+      ],
+      "display_mask_pixels": 3226,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.35,
+        "resolved_maximum_depth_m": 1.675658106803894
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 3226,
+          "point_rel": 0.10149972140789032,
+          "depth_rel": 0.06273932754993439
+        },
+        "K=3": {
+          "pixels": 3226,
+          "point_rel": 0.04133617877960205,
+          "depth_rel": 0.01981637068092823
+        }
+      },
+      "fixed_camera_radius_m": 0.7012595558166504,
+      "artifacts": {
+        "orbit": "train_rod_orbit.gif",
+        "preview": "train_rod_preview.png"
+      }
+    }
+  }
+}

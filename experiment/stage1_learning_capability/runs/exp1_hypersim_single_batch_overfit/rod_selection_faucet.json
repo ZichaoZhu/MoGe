@@ -1,0 +1,17 @@
+{
+  "status": "locked-before-rendering",
+  "selection_inputs": "RGB and ground truth only; no predictions",
+  "selection_rule": "按用户在完整输入图中标出的左下蓝框，选择浴缸水龙头与金属支架",
+  "shape": [192, 256],
+  "splits": {
+    "train": {
+      "id": "ai_001_001_cam_00_frame.0000",
+      "crop_xyxy": [0, 128, 44, 184],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4
+      },
+      "description": "左下角浴缸的弧形水龙头、旋钮与金属支架"
+    }
+  }
+}

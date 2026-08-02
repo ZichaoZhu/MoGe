@@ -1,0 +1,77 @@
+{
+  "experiment_id": "exp5_ssr_refinement_stability_ablation",
+  "date": "2026-07-26",
+  "hypothesis": "Reducing the training refinement count to K=1 and/or strengthening the edge loss can preserve held-out boundaries while retaining an SSR point-map improvement.",
+  "paper_relation": {
+    "reference": "The paper trains with K=3 and supervises every intermediate point map.",
+    "ablation": "This screen changes training K and the edge-loss weight while keeping the frozen base model, data, optimizer, sampling seed, resolution, and evaluation protocol fixed."
+  },
+  "data": {
+    "manifest": "../exp4_hypersim_multiscene_generalization/data/manifest.json",
+    "train_frames": 320,
+    "validation_frames": 64,
+    "test_frames": 64,
+    "scene_groups_disjoint": true,
+    "normal_data_used": false
+  },
+  "common": {
+    "pretrained": "Ruicheng/moge-2-vitl-normal",
+    "base_frozen": true,
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "evaluation_refinement_steps": [0, 1, 3, 5],
+    "steps": 2000,
+    "batch_size": 2,
+    "microbatch_size": 1,
+    "learning_rate": 0.00002,
+    "weight_decay": 0.01,
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "local_scales": [4, 16, 64],
+    "eval_every": 250,
+    "periodic_train_samples": 64,
+    "boundary_threshold": 0.03,
+    "seed": 47,
+    "diagnose_loss_gradients": true
+  },
+  "arms": [
+    {
+      "id": "arm_a_k1_edge1",
+      "training_refinement_steps": 1,
+      "edge_weight": 1.0,
+      "steps": 2000
+    },
+    {
+      "id": "arm_b_k1_edge4",
+      "training_refinement_steps": 1,
+      "edge_weight": 4.0,
+      "steps": 2000
+    },
+    {
+      "id": "arm_c_k3_edge1",
+      "training_refinement_steps": 3,
+      "edge_weight": 1.0,
+      "steps": 2000
+    },
+    {
+      "id": "arm_d_k3_edge4",
+      "training_refinement_steps": 3,
+      "edge_weight": 4.0,
+      "steps": 2000
+    }
+  ],
+  "acceptance": {
+    "primary_split": "val",
+    "primary_metric": "point_rel",
+    "primary_checkpoint": "minimum validation point Rel",
+    "maximum_validation_boundary_f1_drop": 0.005,
+    "test_used_for_selection": false,
+    "screening_seeds": 1,
+    "follow_up": "Only an eligible arm proceeds to a longer multi-seed confirmation."
+  },
+  "hardware": {
+    "allowed_physical_gpus": [2, 3],
+    "parallel_runs": 2
+  }
+}

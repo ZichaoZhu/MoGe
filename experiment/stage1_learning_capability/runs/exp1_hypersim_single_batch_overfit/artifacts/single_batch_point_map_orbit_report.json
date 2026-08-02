@@ -1,0 +1,49 @@
+{
+  "status": "complete",
+  "experiment": "exp1 Hypersim single-batch point-map orbit",
+  "scene": "ai_001_001",
+  "camera": "cam_00",
+  "frame": 0,
+  "shape": [
+    192,
+    256
+  ],
+  "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp1_hypersim_single_batch_overfit/artifacts/checkpoint.pt",
+  "checkpoint_step": 200,
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "refinement_steps": 3,
+  "metrics": {
+    "k0": {
+      "point_rel": 0.0200817808508873,
+      "depth_rel": 0.018443888053297997,
+      "depth_delta_1.01": 0.5118001699447632,
+      "depth_delta_1.25": 0.9990031123161316,
+      "alignment_scale": 2.077054500579834,
+      "alignment_z_shift": -0.004464864730834961
+    },
+    "k3": {
+      "point_rel": 0.0038111871108412743,
+      "depth_rel": 0.002782705007120967,
+      "depth_delta_1.01": 0.9656982421875,
+      "depth_delta_1.25": 0.9998576045036316,
+      "alignment_scale": 2.1070313453674316,
+      "alignment_z_shift": 0.004525423049926758
+    }
+  },
+  "rendering": {
+    "columns": [
+      "GT",
+      "K=0 base",
+      "K=3 refined"
+    ],
+    "yaw_min_degrees": -35.0,
+    "yaw_max_degrees": 35.0,
+    "unique_yaw_frames": 15,
+    "output_frames": 28,
+    "pitch_degrees": -8.0,
+    "duration_ms": 110,
+    "point_stride": 1,
+    "affine_aligned_before_rendering": true
+  },
+  "artifact": "single_batch_point_map_orbit.gif"
+}

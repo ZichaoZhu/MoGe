@@ -1,0 +1,1229 @@
+{
+  "format": "moge3-hypersim-smallset-v1",
+  "source_root": "/nas1/datasets/hypersim/raw",
+  "source_access": "read-only",
+  "depth_semantics": "Euclidean distance in meters from camera optical center",
+  "coordinate_conversion": "[x,y,z]_hypersim -> [x,-y,-z]_moge",
+  "counts": {
+    "train": 24,
+    "val": 8
+  },
+  "samples": [
+    {
+      "id": "ai_001_001_cam_00_frame.0000",
+      "split": "train",
+      "scene": "ai_001_001",
+      "camera": "cam_00",
+      "frame": 0,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5773502886169104,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4330127164626828,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0000.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0000.tonemap.jpg",
+        "bytes": 59816,
+        "sha256": "b5928ced209895eba11c2394bf7960e7d690c065f30d8e96c3b037edf2874106"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0000.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0000.depth_meters.hdf5",
+        "bytes": 230323,
+        "sha256": "ddbc54d7e5bbc111ef726173f027ea52539c408f9fdaf807106ae0547993fccb"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0014",
+      "split": "train",
+      "scene": "ai_001_001",
+      "camera": "cam_00",
+      "frame": 14,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5773502886169104,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4330127164626828,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0014.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0014.tonemap.jpg",
+        "bytes": 48260,
+        "sha256": "9ff128c69c9eee57c18c8c58e95fee4128fe22a6b49007fd1767222ada3bc81a"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0014.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0014.depth_meters.hdf5",
+        "bytes": 189092,
+        "sha256": "1f6153c018ba809df1d48a78898a8fcbe42edf5d02e24bdb0e5d5e79679694c6"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0028",
+      "split": "train",
+      "scene": "ai_001_001",
+      "camera": "cam_00",
+      "frame": 28,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5773502886169104,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4330127164626828,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0028.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0028.tonemap.jpg",
+        "bytes": 55338,
+        "sha256": "af6422a1ec04a77bf622e07d4d7d43cb080378011e2c29f178fa328fe3a083cb"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0028.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0028.depth_meters.hdf5",
+        "bytes": 217174,
+        "sha256": "84a4caffc876bfc0dcd44b0c45b01093b292b16f414fbd89ee7f41b667eeae72"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0043",
+      "split": "train",
+      "scene": "ai_001_001",
+      "camera": "cam_00",
+      "frame": 43,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5773502886169104,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4330127164626828,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0043.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0043.tonemap.jpg",
+        "bytes": 40692,
+        "sha256": "c47c15f1ddfb11f5d72adffe5a5d9fca2b05de8a62cb717930d38df2cab7b27b"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0043.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0043.depth_meters.hdf5",
+        "bytes": 157235,
+        "sha256": "c3a0b51ec764154dfd687c5c6aaf40c3f5205a981c3347bcbe21dba2a4df5f34"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0056",
+      "split": "train",
+      "scene": "ai_001_001",
+      "camera": "cam_00",
+      "frame": 56,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5773502886169104,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4330127164626828,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0056.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0056.tonemap.jpg",
+        "bytes": 35462,
+        "sha256": "87df5a521982fc0c41118aa4c4757baaa5829f1a3f66a2eef28cf580e87a7e56"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0056.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0056.depth_meters.hdf5",
+        "bytes": 151966,
+        "sha256": "863f54119b2401ffb84e02f1fe523f5d9f2eb1f27c14307377d9d91e84ec6f65"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0071",
+      "split": "train",
+      "scene": "ai_001_001",
+      "camera": "cam_00",
+      "frame": 71,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5773502886169104,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4330127164626828,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0071.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0071.tonemap.jpg",
+        "bytes": 48635,
+        "sha256": "49b9cd28984fa65c40544e0e713b6abb5df5df2ce134fbc322f2f6a373771db1"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0071.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0071.depth_meters.hdf5",
+        "bytes": 226301,
+        "sha256": "4150b4877c379a6c45fa372ebcd3bff313eba7e5e92b2968ce22783f3a89ac27"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0085",
+      "split": "train",
+      "scene": "ai_001_001",
+      "camera": "cam_00",
+      "frame": 85,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5773502886169104,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4330127164626828,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0085.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0085.tonemap.jpg",
+        "bytes": 57380,
+        "sha256": "4a2fc25f58f9d9be387502665f0193ba907f5fbcd3ee19b1ad6f89a346d5cd87"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0085.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0085.depth_meters.hdf5",
+        "bytes": 201729,
+        "sha256": "b8da61f7d1893d6528632f6a696df33d8dc30acb93d8160a6d6690a0f57df12c"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0099",
+      "split": "train",
+      "scene": "ai_001_001",
+      "camera": "cam_00",
+      "frame": 99,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5773502886169104,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.4330127164626828,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_final_preview/frame.0099.tonemap.jpg",
+        "file": "ai_001_001_cam_00_frame.0099.tonemap.jpg",
+        "bytes": 46415,
+        "sha256": "a718f85ff3a8209eb97408dd7dbcd8a8a1219a924b2006b2b270dc981a11805e"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_001_001/images/scene_cam_00_geometry_hdf5/frame.0099.depth_meters.hdf5",
+        "file": "ai_001_001_cam_00_frame.0099.depth_meters.hdf5",
+        "bytes": 188754,
+        "sha256": "69dbbd24f12fe309fd7ff3d45a4abee1ac48be6122d31e05f6f6b5df393be9b6"
+      }
+    },
+    {
+      "id": "ai_018_003_cam_00_frame.0000",
+      "split": "train",
+      "scene": "ai_018_003",
+      "camera": "cam_00",
+      "frame": 0,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5774769476934031,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127234036723,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.009070308650207482,
+          -1.0002193799662127
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_final_preview/frame.0000.tonemap.jpg",
+        "file": "ai_018_003_cam_00_frame.0000.tonemap.jpg",
+        "bytes": 57772,
+        "sha256": "d9ed8951918997bf5b3a8f890e2c7501a357615406b754c0b3aaa4465194c1c8"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_geometry_hdf5/frame.0000.depth_meters.hdf5",
+        "file": "ai_018_003_cam_00_frame.0000.depth_meters.hdf5",
+        "bytes": 220083,
+        "sha256": "feac4668c4dfcb39aba509fbf66f3576e4eac602a63c604bc98dee53251db56f"
+      }
+    },
+    {
+      "id": "ai_018_003_cam_00_frame.0014",
+      "split": "train",
+      "scene": "ai_018_003",
+      "camera": "cam_00",
+      "frame": 14,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5774769476934031,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127234036723,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.009070308650207482,
+          -1.0002193799662127
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_final_preview/frame.0014.tonemap.jpg",
+        "file": "ai_018_003_cam_00_frame.0014.tonemap.jpg",
+        "bytes": 56826,
+        "sha256": "88eecbe218e9c2e063c74049a702d3d72c25ac9f2f21a27fe21ba3a95265a224"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_geometry_hdf5/frame.0014.depth_meters.hdf5",
+        "file": "ai_018_003_cam_00_frame.0014.depth_meters.hdf5",
+        "bytes": 205353,
+        "sha256": "27782bb470e6acef2af0222c93f7bf16585cf4c8e794721e19eea6e7ea5107ca"
+      }
+    },
+    {
+      "id": "ai_018_003_cam_00_frame.0028",
+      "split": "train",
+      "scene": "ai_018_003",
+      "camera": "cam_00",
+      "frame": 28,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5774769476934031,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127234036723,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.009070308650207482,
+          -1.0002193799662127
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_final_preview/frame.0028.tonemap.jpg",
+        "file": "ai_018_003_cam_00_frame.0028.tonemap.jpg",
+        "bytes": 57416,
+        "sha256": "a1ba1f070edeb6f6c7695a5af4ef3cb715a347d5514d713bf25b5866e6d67fcb"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_geometry_hdf5/frame.0028.depth_meters.hdf5",
+        "file": "ai_018_003_cam_00_frame.0028.depth_meters.hdf5",
+        "bytes": 222196,
+        "sha256": "0e046db5f58e0e7a177766d76628bea50cc0a78de7a36b5eb33b67d608b854c0"
+      }
+    },
+    {
+      "id": "ai_018_003_cam_00_frame.0042",
+      "split": "train",
+      "scene": "ai_018_003",
+      "camera": "cam_00",
+      "frame": 42,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5774769476934031,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127234036723,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.009070308650207482,
+          -1.0002193799662127
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_final_preview/frame.0042.tonemap.jpg",
+        "file": "ai_018_003_cam_00_frame.0042.tonemap.jpg",
+        "bytes": 56636,
+        "sha256": "11ad8d58dae7e869ff268154bb87bd5a0e90d6f13aaa7a96edc7d18db0a22477"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_geometry_hdf5/frame.0042.depth_meters.hdf5",
+        "file": "ai_018_003_cam_00_frame.0042.depth_meters.hdf5",
+        "bytes": 202553,
+        "sha256": "c3b879b416fd589c95cde62f7cc9f986c3579c0c23ee7bc3d5bd6de698aa8ead"
+      }
+    },
+    {
+      "id": "ai_018_003_cam_00_frame.0057",
+      "split": "train",
+      "scene": "ai_018_003",
+      "camera": "cam_00",
+      "frame": 57,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5774769476934031,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127234036723,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.009070308650207482,
+          -1.0002193799662127
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_final_preview/frame.0057.tonemap.jpg",
+        "file": "ai_018_003_cam_00_frame.0057.tonemap.jpg",
+        "bytes": 64042,
+        "sha256": "142d2cbd5d10a62e75f56759d50a32181435b4f02328a8c732de1e7a6ba61639"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_geometry_hdf5/frame.0057.depth_meters.hdf5",
+        "file": "ai_018_003_cam_00_frame.0057.depth_meters.hdf5",
+        "bytes": 241659,
+        "sha256": "8e3085aa5470d554e3caa18a87ebd854b072505af65d2210a60d474416f754e7"
+      }
+    },
+    {
+      "id": "ai_018_003_cam_00_frame.0071",
+      "split": "train",
+      "scene": "ai_018_003",
+      "camera": "cam_00",
+      "frame": 71,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5774769476934031,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127234036723,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.009070308650207482,
+          -1.0002193799662127
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_final_preview/frame.0071.tonemap.jpg",
+        "file": "ai_018_003_cam_00_frame.0071.tonemap.jpg",
+        "bytes": 39125,
+        "sha256": "6566fae7a6da3567447e90b3213924680e853e61d6befec406bd5d8c7bdf5baf"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_geometry_hdf5/frame.0071.depth_meters.hdf5",
+        "file": "ai_018_003_cam_00_frame.0071.depth_meters.hdf5",
+        "bytes": 176732,
+        "sha256": "633b96fb3c6e2d618ab40b6349e4bc5cdd2a7474cdfbf4806b2b0812cfe0c42c"
+      }
+    },
+    {
+      "id": "ai_018_003_cam_00_frame.0085",
+      "split": "train",
+      "scene": "ai_018_003",
+      "camera": "cam_00",
+      "frame": 85,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5774769476934031,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127234036723,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.009070308650207482,
+          -1.0002193799662127
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_final_preview/frame.0085.tonemap.jpg",
+        "file": "ai_018_003_cam_00_frame.0085.tonemap.jpg",
+        "bytes": 61676,
+        "sha256": "d9efdd8822cd44edbe6fa4abfb24776db85ce06245137ac6967f2a3bd78194ec"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_geometry_hdf5/frame.0085.depth_meters.hdf5",
+        "file": "ai_018_003_cam_00_frame.0085.depth_meters.hdf5",
+        "bytes": 222144,
+        "sha256": "15948b0b3143d0e07ee4e87fce88c6da1ac9216425b7af9a49ba39cf8b02d9d7"
+      }
+    },
+    {
+      "id": "ai_018_003_cam_00_frame.0099",
+      "split": "train",
+      "scene": "ai_018_003",
+      "camera": "cam_00",
+      "frame": 99,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5774769476934031,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127234036723,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.009070308650207482,
+          -1.0002193799662127
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_final_preview/frame.0099.tonemap.jpg",
+        "file": "ai_018_003_cam_00_frame.0099.tonemap.jpg",
+        "bytes": 65798,
+        "sha256": "68553a3497c5f2c7099bb9857fccca7418f2511b14d2b54bdc6309f09b4ce9f6"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_018_003/images/scene_cam_00_geometry_hdf5/frame.0099.depth_meters.hdf5",
+        "file": "ai_018_003_cam_00_frame.0099.depth_meters.hdf5",
+        "bytes": 231796,
+        "sha256": "7dcb4ce2c37a44c8150feec924bdf43b600433187f3eac5bcd2b871204ba2af0"
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0000",
+      "split": "train",
+      "scene": "ai_036_002",
+      "camera": "cam_00",
+      "frame": 0,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5838461390347766,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.43303058466341215,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.06501876196979468,
+          -1.0112511436234175
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_final_preview/frame.0000.tonemap.jpg",
+        "file": "ai_036_002_cam_00_frame.0000.tonemap.jpg",
+        "bytes": 159642,
+        "sha256": "e02275dd3c89e8559acad1fd58308cffc60d43e31de87730544084dfa8bdec60"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_geometry_hdf5/frame.0000.depth_meters.hdf5",
+        "file": "ai_036_002_cam_00_frame.0000.depth_meters.hdf5",
+        "bytes": 317319,
+        "sha256": "ba38f3703476e307e48704f5ec0eddba3993cf6f6dc5d500378d47c9a07754a4"
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0014",
+      "split": "train",
+      "scene": "ai_036_002",
+      "camera": "cam_00",
+      "frame": 14,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5838461390347766,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.43303058466341215,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.06501876196979468,
+          -1.0112511436234175
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_final_preview/frame.0014.tonemap.jpg",
+        "file": "ai_036_002_cam_00_frame.0014.tonemap.jpg",
+        "bytes": 155946,
+        "sha256": "204e1021cb25f78ddd4625e0f0429f2c316a32147342a38d6335ad169d7cb8e1"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_geometry_hdf5/frame.0014.depth_meters.hdf5",
+        "file": "ai_036_002_cam_00_frame.0014.depth_meters.hdf5",
+        "bytes": 279834,
+        "sha256": "2bb6ed119151f504e7602211625a75adc2cda336dd64e5be9d0dd582bc28ab91"
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0028",
+      "split": "train",
+      "scene": "ai_036_002",
+      "camera": "cam_00",
+      "frame": 28,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5838461390347766,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.43303058466341215,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.06501876196979468,
+          -1.0112511436234175
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_final_preview/frame.0028.tonemap.jpg",
+        "file": "ai_036_002_cam_00_frame.0028.tonemap.jpg",
+        "bytes": 124443,
+        "sha256": "937607486c3f90d23f25f4e782fd4d99ab6636966ac51f822273568e7708c4f8"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_geometry_hdf5/frame.0028.depth_meters.hdf5",
+        "file": "ai_036_002_cam_00_frame.0028.depth_meters.hdf5",
+        "bytes": 271611,
+        "sha256": "0bd9312f14e3e87661841f6e8d1b462c2abe1528f9617ca046c08617462329d5"
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0042",
+      "split": "train",
+      "scene": "ai_036_002",
+      "camera": "cam_00",
+      "frame": 42,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5838461390347766,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.43303058466341215,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.06501876196979468,
+          -1.0112511436234175
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_final_preview/frame.0042.tonemap.jpg",
+        "file": "ai_036_002_cam_00_frame.0042.tonemap.jpg",
+        "bytes": 140751,
+        "sha256": "57a3f765a0bb2437ae8f44230ebb8e5cc1f06d28474c5c0561fd64f92aca436e"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_geometry_hdf5/frame.0042.depth_meters.hdf5",
+        "file": "ai_036_002_cam_00_frame.0042.depth_meters.hdf5",
+        "bytes": 245975,
+        "sha256": "77ccfccbcdf2516b7780cc414c8c5477d2b0f41ae8c993ff5095e0b44bd51184"
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0057",
+      "split": "train",
+      "scene": "ai_036_002",
+      "camera": "cam_00",
+      "frame": 57,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5838461390347766,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.43303058466341215,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.06501876196979468,
+          -1.0112511436234175
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_final_preview/frame.0057.tonemap.jpg",
+        "file": "ai_036_002_cam_00_frame.0057.tonemap.jpg",
+        "bytes": 139827,
+        "sha256": "85d7f754d2f6c0989ef7eb092dcc807ecdea3d2bbe9f058d45deae60b175e3c3"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_geometry_hdf5/frame.0057.depth_meters.hdf5",
+        "file": "ai_036_002_cam_00_frame.0057.depth_meters.hdf5",
+        "bytes": 308504,
+        "sha256": "6e97475ad978222243659c3da02d529787907846a1fc8ee876f15bc22d002c02"
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0071",
+      "split": "train",
+      "scene": "ai_036_002",
+      "camera": "cam_00",
+      "frame": 71,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5838461390347766,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.43303058466341215,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.06501876196979468,
+          -1.0112511436234175
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_final_preview/frame.0071.tonemap.jpg",
+        "file": "ai_036_002_cam_00_frame.0071.tonemap.jpg",
+        "bytes": 134928,
+        "sha256": "2b6a8933eccfb3cea13c2dac05ba24c6aa7e95c7e436971adb10263e37cd9413"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_geometry_hdf5/frame.0071.depth_meters.hdf5",
+        "file": "ai_036_002_cam_00_frame.0071.depth_meters.hdf5",
+        "bytes": 277158,
+        "sha256": "7b2a6efe7b862aaf043d42a4f9bcb0e8e736e844245b244864c1b86276407b04"
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0085",
+      "split": "train",
+      "scene": "ai_036_002",
+      "camera": "cam_00",
+      "frame": 85,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5838461390347766,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.43303058466341215,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.06501876196979468,
+          -1.0112511436234175
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_final_preview/frame.0085.tonemap.jpg",
+        "file": "ai_036_002_cam_00_frame.0085.tonemap.jpg",
+        "bytes": 108799,
+        "sha256": "77f77bf37f6244a694fd2e3f1caf5206b55b4bc06e71c0a48f8c9353344483e3"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_geometry_hdf5/frame.0085.depth_meters.hdf5",
+        "file": "ai_036_002_cam_00_frame.0085.depth_meters.hdf5",
+        "bytes": 253087,
+        "sha256": "770d827fb435501075f234c1800bc19463cdaa78852671e241c737139987b895"
+      }
+    },
+    {
+      "id": "ai_036_002_cam_00_frame.0099",
+      "split": "train",
+      "scene": "ai_036_002",
+      "camera": "cam_00",
+      "frame": 99,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5838461390347766,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.43303058466341215,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.06501876196979468,
+          -1.0112511436234175
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_final_preview/frame.0099.tonemap.jpg",
+        "file": "ai_036_002_cam_00_frame.0099.tonemap.jpg",
+        "bytes": 139523,
+        "sha256": "8c400f4cd324e17f5317cc1d3e30c7ff918200846dffb505b716d1e0908c149c"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_036_002/images/scene_cam_00_geometry_hdf5/frame.0099.depth_meters.hdf5",
+        "file": "ai_036_002_cam_00_frame.0099.depth_meters.hdf5",
+        "bytes": 312351,
+        "sha256": "2c69509adf8620f88844e30d47488ae2376725d392f648b7675f7147b8f9de29"
+      }
+    },
+    {
+      "id": "ai_055_003_cam_00_frame.0000",
+      "split": "val",
+      "scene": "ai_055_003",
+      "camera": "cam_00",
+      "frame": 0,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5775160435827495,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127282160341,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.010376236690640424,
+          -1.0002870969599942
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_final_preview/frame.0000.tonemap.jpg",
+        "file": "ai_055_003_cam_00_frame.0000.tonemap.jpg",
+        "bytes": 146660,
+        "sha256": "99d8467ed5b9d4fd989648337ff321e9b9344f4943768b59bfc51712fd64de84"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_geometry_hdf5/frame.0000.depth_meters.hdf5",
+        "file": "ai_055_003_cam_00_frame.0000.depth_meters.hdf5",
+        "bytes": 379616,
+        "sha256": "8ed6bd91b119dc3be7dde1af9c0d05594f2012c81c1a115bd4d707d875c67289"
+      }
+    },
+    {
+      "id": "ai_055_003_cam_00_frame.0014",
+      "split": "val",
+      "scene": "ai_055_003",
+      "camera": "cam_00",
+      "frame": 14,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5775160435827495,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127282160341,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.010376236690640424,
+          -1.0002870969599942
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_final_preview/frame.0014.tonemap.jpg",
+        "file": "ai_055_003_cam_00_frame.0014.tonemap.jpg",
+        "bytes": 163875,
+        "sha256": "7fe749c8ecfb4bfac2402ceac37a8142be9641d9920a8d24fc0b4acb3ea33ef9"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_geometry_hdf5/frame.0014.depth_meters.hdf5",
+        "file": "ai_055_003_cam_00_frame.0014.depth_meters.hdf5",
+        "bytes": 386658,
+        "sha256": "62eb194fff4f7f3ac2f0617615ca7313007da7d41f19abc3af09e22873d0a151"
+      }
+    },
+    {
+      "id": "ai_055_003_cam_00_frame.0028",
+      "split": "val",
+      "scene": "ai_055_003",
+      "camera": "cam_00",
+      "frame": 28,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5775160435827495,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127282160341,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.010376236690640424,
+          -1.0002870969599942
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_final_preview/frame.0028.tonemap.jpg",
+        "file": "ai_055_003_cam_00_frame.0028.tonemap.jpg",
+        "bytes": 144849,
+        "sha256": "c7a066c809382a0f6bef37c1e1ea7f2ee295c89142795258ab3ed7f697dc9813"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_geometry_hdf5/frame.0028.depth_meters.hdf5",
+        "file": "ai_055_003_cam_00_frame.0028.depth_meters.hdf5",
+        "bytes": 361981,
+        "sha256": "c039382f51eab627ad3e0255c47a7321ef2a5449052b24e87dbcdaa40df36641"
+      }
+    },
+    {
+      "id": "ai_055_003_cam_00_frame.0042",
+      "split": "val",
+      "scene": "ai_055_003",
+      "camera": "cam_00",
+      "frame": 42,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5775160435827495,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127282160341,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.010376236690640424,
+          -1.0002870969599942
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_final_preview/frame.0042.tonemap.jpg",
+        "file": "ai_055_003_cam_00_frame.0042.tonemap.jpg",
+        "bytes": 119695,
+        "sha256": "b0ade806f984596f50e99dcbd7377389a39a2d1e3a64a06848a46154db8da676"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_geometry_hdf5/frame.0042.depth_meters.hdf5",
+        "file": "ai_055_003_cam_00_frame.0042.depth_meters.hdf5",
+        "bytes": 335895,
+        "sha256": "e991ed4887d554c7e959b4b29f23fca50059ea7f940abf1a34ea5a6d463c57bc"
+      }
+    },
+    {
+      "id": "ai_055_003_cam_00_frame.0057",
+      "split": "val",
+      "scene": "ai_055_003",
+      "camera": "cam_00",
+      "frame": 57,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5775160435827495,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127282160341,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.010376236690640424,
+          -1.0002870969599942
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_final_preview/frame.0057.tonemap.jpg",
+        "file": "ai_055_003_cam_00_frame.0057.tonemap.jpg",
+        "bytes": 88602,
+        "sha256": "e7193832fe3e2e00f7bbd07afde8d9834ccef51846548d3e4a4a1b4c4e5b8388"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_geometry_hdf5/frame.0057.depth_meters.hdf5",
+        "file": "ai_055_003_cam_00_frame.0057.depth_meters.hdf5",
+        "bytes": 258495,
+        "sha256": "793bcbbb514b37c601df2a582c4ffff04fb68784ccb49de0201e1680295df332"
+      }
+    },
+    {
+      "id": "ai_055_003_cam_00_frame.0071",
+      "split": "val",
+      "scene": "ai_055_003",
+      "camera": "cam_00",
+      "frame": 71,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5775160435827495,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127282160341,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.010376236690640424,
+          -1.0002870969599942
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_final_preview/frame.0071.tonemap.jpg",
+        "file": "ai_055_003_cam_00_frame.0071.tonemap.jpg",
+        "bytes": 140680,
+        "sha256": "9447e1155349df5c966775ac512378ceaa5a6ebe20ebc8d20cefbee71812dbc1"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_geometry_hdf5/frame.0071.depth_meters.hdf5",
+        "file": "ai_055_003_cam_00_frame.0071.depth_meters.hdf5",
+        "bytes": 363064,
+        "sha256": "9670c2e3b10bb31ccf363f4fb36daccba0090ae0ed97cca69f459ca93efb7154"
+      }
+    },
+    {
+      "id": "ai_055_003_cam_00_frame.0085",
+      "split": "val",
+      "scene": "ai_055_003",
+      "camera": "cam_00",
+      "frame": 85,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5775160435827495,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127282160341,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.010376236690640424,
+          -1.0002870969599942
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_final_preview/frame.0085.tonemap.jpg",
+        "file": "ai_055_003_cam_00_frame.0085.tonemap.jpg",
+        "bytes": 101194,
+        "sha256": "1f5ce5856230aa37b18bb57b92bf3fc3628a5523b29e24f2421003afe9c0a791"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_geometry_hdf5/frame.0085.depth_meters.hdf5",
+        "file": "ai_055_003_cam_00_frame.0085.depth_meters.hdf5",
+        "bytes": 312996,
+        "sha256": "97692b0dd07b18d4b62c57b1fdf6e7c6f87f63e3f8040ddfc971d4b47d589ee4"
+      }
+    },
+    {
+      "id": "ai_055_003_cam_00_frame.0099",
+      "split": "val",
+      "scene": "ai_055_003",
+      "camera": "cam_00",
+      "frame": 99,
+      "height": 768,
+      "width": 1024,
+      "M_cam_from_uv": [
+        [
+          0.5775160435827495,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.4330127282160341,
+          -0.0
+        ],
+        [
+          -0.0,
+          -0.010376236690640424,
+          -1.0002870969599942
+        ]
+      ],
+      "rgb": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_final_preview/frame.0099.tonemap.jpg",
+        "file": "ai_055_003_cam_00_frame.0099.tonemap.jpg",
+        "bytes": 116077,
+        "sha256": "8f5975d7dd374ae222697ea3c3c62bb212b0a69c2521931ea144a0916a3198f7"
+      },
+      "depth": {
+        "source": "/nas1/datasets/hypersim/raw/ai_055_003/images/scene_cam_00_geometry_hdf5/frame.0099.depth_meters.hdf5",
+        "file": "ai_055_003_cam_00_frame.0099.depth_meters.hdf5",
+        "bytes": 338696,
+        "sha256": "0872bc21e58b1c3a9316d8bce44b2c114768b47c13df2388597488ccb897fbdb"
+      }
+    }
+  ]
+}

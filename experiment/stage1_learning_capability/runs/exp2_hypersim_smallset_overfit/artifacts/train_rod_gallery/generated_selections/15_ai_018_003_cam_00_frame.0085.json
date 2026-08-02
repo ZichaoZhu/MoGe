@@ -1,0 +1,25 @@
+{
+  "status": "locked-before-rendering",
+  "selection_inputs": "RGB and ground truth only; no predictions",
+  "selection_rule": "覆盖 exp2 全部 24 张训练图；仅根据 RGB 与真值深度人工选择每张图中较清晰的细杆、格栅、框架或细长边缘区域",
+  "shape": [
+    192,
+    256
+  ],
+  "splits": {
+    "train": {
+      "id": "ai_018_003_cam_00_frame.0085",
+      "crop_xyxy": [
+        0,
+        48,
+        96,
+        144
+      ],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.35
+      },
+      "description": "窗格与邻近竖直框架"
+    }
+  }
+}

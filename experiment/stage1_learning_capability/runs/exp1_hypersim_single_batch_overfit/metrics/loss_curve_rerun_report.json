@@ -1,0 +1,61 @@
+{
+  "status": "complete",
+  "experiment": "real Hypersim fixed-batch SSR overfit",
+  "scene": "ai_001_001",
+  "camera": "cam_00",
+  "frames": [
+    0
+  ],
+  "batch_size": 1,
+  "shape": [
+    192,
+    256
+  ],
+  "valid_pixel_ratio": 1.0,
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "base_frozen": true,
+  "normal_head_present": false,
+  "refinement_steps": 3,
+  "optimization_steps": 200,
+  "loss_weights": {
+    "global": 1.0,
+    "local": 1.0,
+    "edge": 1.0
+  },
+  "local_scales": [
+    4,
+    16,
+    64
+  ],
+  "initial_zero_residual_max": 0.0,
+  "initial_loss": 0.04832770675420761,
+  "final_loss": 0.014684034511446953,
+  "loss_reduction": 0.3038429815453327,
+  "before": {
+    "point_rel": 0.0200817808508873,
+    "depth_rel": 0.018443888053297997,
+    "depth_delta_1.01": 0.5118001699447632,
+    "depth_delta_1.25": 0.9990031123161316,
+    "alignment_scale": 2.077054500579834,
+    "alignment_z_shift": -0.004464864730834961
+  },
+  "after": {
+    "point_rel": 0.004171277862042189,
+    "depth_rel": 0.0031797788105905056,
+    "depth_delta_1.01": 0.9614054560661316,
+    "depth_delta_1.25": 0.9998576045036316,
+    "alignment_scale": 2.1050052642822266,
+    "alignment_z_shift": 0.006342411041259766
+  },
+  "elapsed_seconds": 82.38861747796182,
+  "seconds_per_step": 0.41194308738980906,
+  "peak_memory_bytes": 4633753600,
+  "final_residual_rms": 0.0125389229681854,
+  "artifacts": {
+    "checkpoint": "checkpoint.pt",
+    "comparison": "comparison.png",
+    "loss_curve": "loss_curve.png",
+    "loss_curve_pdf": "loss_curve.pdf",
+    "loss_curve_data": "loss_curve.csv"
+  }
+}

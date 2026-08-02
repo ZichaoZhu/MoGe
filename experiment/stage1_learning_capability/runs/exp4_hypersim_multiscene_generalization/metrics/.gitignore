@@ -1,0 +1,5 @@
+*
+!.gitignore
+!training_report.json
+!latest_checkpoint/
+!latest_checkpoint/**

@@ -1,0 +1,8 @@
+checkpoint.pt
+latest_checkpoint.pt
+*.ply
+!prepare_and_select.log
+!train.log
+!train_final.log
+!presentation_generation.log
+!presentation_test_results.txt

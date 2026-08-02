@@ -62,6 +62,11 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
+# Keep compact, reproducible experiment artifacts under version control.
+# Individual experiment directories exclude large checkpoints explicitly.
+!experiment/**/artifacts/
+!experiment/**/artifacts/**
+
 # ASP.NET Scaffolding
 ScaffoldingReadMe.txt
 

@@ -1,0 +1,27 @@
+{
+  "status": "locked-before-rendering",
+  "selection_inputs": "RGB and ground truth only; no predictions",
+  "selection_rule": "从 exp2 自身 train/val 的 RGB/GT 候选表中人工锁定清晰细杆区域",
+  "candidate_artifacts": "artifacts/rod_selection_candidates",
+  "shape": [192, 256],
+  "splits": {
+    "train": {
+      "id": "ai_001_001_cam_00_frame.0014",
+      "crop_xyxy": [0, 48, 96, 144],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.35
+      },
+      "description": "浴室毛巾架的平行细杆"
+    },
+    "val": {
+      "id": "ai_055_003_cam_00_frame.0014",
+      "crop_xyxy": [48, 16, 144, 112],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.35
+      },
+      "description": "餐厅隔断中完整可见的交错木格栅细杆"
+    }
+  }
+}

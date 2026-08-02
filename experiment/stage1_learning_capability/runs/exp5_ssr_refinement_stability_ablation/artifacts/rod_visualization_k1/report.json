@@ -1,0 +1,176 @@
+{
+  "status": "complete",
+  "experiment": "exp5-K1",
+  "selection": {
+    "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp4_hypersim_multiscene_generalization/rod_selection.json",
+    "status": "locked-before-rendering",
+    "inputs": "RGB and ground truth only; no predictions"
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "display_mask": {
+    "definition": "split-specific ground-truth depth rule locked before model predictions and used only to isolate the displayed structure",
+    "dilation_pixels": 0,
+    "scope": "Visualization-only diagnostic mask; not used for training, checkpoint selection, or paper Local benchmark evaluation."
+  },
+  "checkpoints": [
+    {
+      "label": "A-K1-edge1",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp5_ssr_refinement_stability_ablation/artifacts/runs/arm_a_k1_edge1/latest_checkpoint.pt",
+      "sha256": "132e0e0cd3a84ec1a5bb54e6744a425704285e32c5ffa71a7ffb1f62b3328eec",
+      "step": 2000,
+      "kind": "ssr_only",
+      "refinement_steps": 1
+    },
+    {
+      "label": "B-K1-edge4",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp5_ssr_refinement_stability_ablation/artifacts/runs/arm_b_k1_edge4/latest_checkpoint.pt",
+      "sha256": "b603e415081117f8df680c0bd0245730b0444ff09c70cee97f8211e96c32a3bb",
+      "step": 2000,
+      "kind": "ssr_only",
+      "refinement_steps": 1
+    }
+  ],
+  "render": {
+    "yaw_degrees": [
+      -90.0,
+      90.0
+    ],
+    "pitch_degrees": -8.0,
+    "motion": "one-way",
+    "frame_duration_ms": 110,
+    "angular_step_degrees": 4.0,
+    "angular_speed_degrees_per_second": 36.36363636363637,
+    "forward_frames": 46,
+    "total_frames": 46,
+    "loop_duration_ms": 5060,
+    "camera_basis": "selected ground-truth fine-structure points only"
+  },
+  "splits": {
+    "train": {
+      "sample": {
+        "id": "ai_001_001_cam_00_frame.0032",
+        "scene": "ai_001_001",
+        "frame": 32
+      },
+      "crop_xyxy": [
+        32,
+        192,
+        160,
+        320
+      ],
+      "display_mask_pixels": 6554,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4,
+        "resolved_maximum_depth_m": 0.5379490852355957
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 6554,
+          "point_rel": 0.0654146820306778,
+          "depth_rel": 0.028925390914082527
+        },
+        "A-K1-edge1": {
+          "pixels": 6554,
+          "point_rel": 0.08189061284065247,
+          "depth_rel": 0.02698829025030136
+        },
+        "B-K1-edge4": {
+          "pixels": 6554,
+          "point_rel": 0.08703599125146866,
+          "depth_rel": 0.03251184523105621
+        }
+      },
+      "fixed_camera_radius_m": 0.13621446132659912,
+      "artifacts": {
+        "orbit": "train_rod_orbit.gif",
+        "preview": "train_rod_preview.png"
+      }
+    },
+    "val": {
+      "sample": {
+        "id": "ai_043_002_cam_00_frame.0086",
+        "scene": "ai_043_002",
+        "frame": 86
+      },
+      "crop_xyxy": [
+        208,
+        256,
+        336,
+        384
+      ],
+      "display_mask_pixels": 6554,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4,
+        "resolved_maximum_depth_m": 3.187582015991211
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 6554,
+          "point_rel": 0.011187910102307796,
+          "depth_rel": 0.009885807521641254
+        },
+        "A-K1-edge1": {
+          "pixels": 6554,
+          "point_rel": 0.012308121658861637,
+          "depth_rel": 0.011014369316399097
+        },
+        "B-K1-edge4": {
+          "pixels": 6554,
+          "point_rel": 0.017589300870895386,
+          "depth_rel": 0.016185859218239784
+        }
+      },
+      "fixed_camera_radius_m": 0.6478888535499573,
+      "artifacts": {
+        "orbit": "val_rod_orbit.gif",
+        "preview": "val_rod_preview.png"
+      }
+    },
+    "test": {
+      "sample": {
+        "id": "ai_048_001_cam_00_frame.0046",
+        "scene": "ai_048_001",
+        "frame": 46
+      },
+      "crop_xyxy": [
+        256,
+        144,
+        384,
+        272
+      ],
+      "display_mask_pixels": 4096,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.25,
+        "resolved_maximum_depth_m": 1.16160249710083
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 4096,
+          "point_rel": 0.07494264096021652,
+          "depth_rel": 0.07205579429864883
+        },
+        "A-K1-edge1": {
+          "pixels": 4096,
+          "point_rel": 0.07121363282203674,
+          "depth_rel": 0.06525425612926483
+        },
+        "B-K1-edge4": {
+          "pixels": 4096,
+          "point_rel": 0.06973549723625183,
+          "depth_rel": 0.06348490715026855
+        }
+      },
+      "fixed_camera_radius_m": 0.250124477148056,
+      "artifacts": {
+        "orbit": "test_rod_orbit.gif",
+        "preview": "test_rod_preview.png"
+      }
+    }
+  }
+}

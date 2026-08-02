@@ -1,0 +1,51 @@
+{
+  "experiment_id": "exp28_smooth_bounded_residual_joint",
+  "objective": "从Exp15 step 800进入联合阶段，以每轮0.1的平滑对数深度残差上限检验训练稳定性和拟合收益。",
+  "controlled_against": "exp16_post_detach_short_joint",
+  "data": {
+    "source_experiment": "exp11_hypersim_100_train_staged_joint_overfit",
+    "train": 100,
+    "validation": 16,
+    "test": 16,
+    "fine_structure_rois": "exp13_fixed_base_ssr_diagnostic/fine_structure_rois.json"
+  },
+  "warm_start": {
+    "source_experiment": "exp15_detached_head_ssr_coadaptation",
+    "step": 800,
+    "checkpoint_sha256": "f602855f9e5628e27393734f121a5ffa2f485e1cbfd1c410a2ed0850ca5200fa",
+    "fresh_optimizer": true
+  },
+  "gradient_routing": {
+    "refiner_detach_steps": 800,
+    "first_joint_step": 801,
+    "dino_backbone": "frozen",
+    "neck_and_points_head": "trainable",
+    "ssr": "trainable"
+  },
+  "optimization": {
+    "maximum_step": 1000,
+    "new_joint_steps": 200,
+    "global_batch_size": 8,
+    "microbatch_size": 1,
+    "refinement_steps": 3,
+    "ssr_learning_rate": 2e-06,
+    "head_learning_rate": 5e-07,
+    "backbone_learning_rate": 0.0,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "seed": 161
+  },
+  "residual_control": {
+    "type": "smooth_tanh",
+    "formula": "applied = limit * tanh(raw / limit)",
+    "per_iteration_limit": 0.1,
+    "maximum_raw_residual_safety_limit": 2.0,
+    "saturation_threshold_fraction": 0.95
+  },
+  "evaluation": {
+    "every_steps": 50,
+    "selection_split": "train",
+    "selection_scope": "structure",
+    "steps": [0, 3]
+  }
+}

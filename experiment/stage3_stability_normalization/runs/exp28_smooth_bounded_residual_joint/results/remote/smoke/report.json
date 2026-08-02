@@ -1,0 +1,148 @@
+{
+  "status": "complete",
+  "experiment": "Hypersim two-stage joint MoGe-3 fine-tuning",
+  "paper_alignment": {
+    "base_and_ssr_jointly_optimized": true,
+    "refiner_detached_during_warmup": true,
+    "fixed_base_diagnostic_ablation": false,
+    "dino_bfloat16_geometry_float32": true,
+    "normal_prediction": false,
+    "synthetic_only_controlled_screen": true,
+    "real_data_routing_exercised": false
+  },
+  "distributed": {
+    "backend": "nccl",
+    "world_size": 1,
+    "global_batch_size": 2,
+    "local_batch_size": 2
+  },
+  "counts": {
+    "train": 4,
+    "val": 4,
+    "test": 4
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "ssr_normalization": "batch_norm",
+  "smooth_log_depth_residual_bound": 0.1,
+  "optimization_steps": 804,
+  "refiner_detach_steps": 800,
+  "backbone_frozen": true,
+  "complete_base_and_2d_heads_frozen": false,
+  "backbone_freeze_steps": 0,
+  "backbone_warmup_end": 1,
+  "learning_rates": {
+    "ssr": 2e-06,
+    "heads": 5e-07,
+    "backbone": 0.0,
+    "schedule": "constant",
+    "decay_start_step": 0,
+    "decay_end_step": 0,
+    "final_scale": 1.0
+  },
+  "batch_size": 2,
+  "microbatch_size": 1,
+  "best_step": 804,
+  "selection_split": "train",
+  "best_k3_point_rel": 0.005897439201362431,
+  "initial_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.008871909463778138,
+        "depth_rel": 0.0076627073576673865,
+        "depth_delta_1.01": 0.7962341606616974,
+        "depth_delta_1.25": 0.9996719509363174,
+        "boundary_f1": 0.894366666674614
+      },
+      "val": {
+        "point_rel": 0.021979297045618296,
+        "depth_rel": 0.02021522121503949,
+        "depth_delta_1.01": 0.4098534621298313,
+        "depth_delta_1.25": 0.9931918382644653,
+        "boundary_f1": 0.8508867472410202
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.008024908602237701,
+        "depth_rel": 0.006986224791035056,
+        "depth_delta_1.01": 0.8143475949764252,
+        "depth_delta_1.25": 0.9994532465934753,
+        "boundary_f1": 0.8902386426925659
+      },
+      "val": {
+        "point_rel": 0.024735354352742434,
+        "depth_rel": 0.02258073049597442,
+        "depth_delta_1.01": 0.3574792742729187,
+        "depth_delta_1.25": 0.9933469891548157,
+        "boundary_f1": 0.8437122851610184
+      }
+    }
+  },
+  "latest_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.008756196708418429,
+        "depth_rel": 0.007616899907588959,
+        "depth_delta_1.01": 0.7986119836568832,
+        "depth_delta_1.25": 0.9996732175350189,
+        "boundary_f1": 0.8957825601100922
+      },
+      "val": {
+        "point_rel": 0.02197020431049168,
+        "depth_rel": 0.020177084719762206,
+        "depth_delta_1.01": 0.4119795523583889,
+        "depth_delta_1.25": 0.9931867718696594,
+        "boundary_f1": 0.8511824756860733
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.005897439201362431,
+        "depth_rel": 0.004895042744465172,
+        "depth_delta_1.01": 0.9025294035673141,
+        "depth_delta_1.25": 0.999387115240097,
+        "boundary_f1": 0.888173371553421
+      },
+      "val": {
+        "point_rel": 0.024124423041939735,
+        "depth_rel": 0.022273162845522165,
+        "depth_delta_1.01": 0.3486480042338371,
+        "depth_delta_1.25": 0.9930608868598938,
+        "boundary_f1": 0.8363783955574036
+      }
+    }
+  },
+  "initial_loss": 0.021370126865804195,
+  "final_loss": 0.027952028438448906,
+  "training_seconds_including_periodic_eval": 29.70618742215447,
+  "total_seconds": 59.069868406048045,
+  "peak_memory_bytes": 8702824960,
+  "peak_memory_bytes_by_process": [
+    8702824960
+  ],
+  "stability": {
+    "max_preclip_grad_norm": 100.0,
+    "max_abs_applied_log_depth_residual": 0.100001,
+    "max_abs_raw_log_depth_residual": 2.0,
+    "skipped_preclip_steps": 0,
+    "max_skipped_preclip_steps": 5,
+    "max_consecutive_skipped_preclip_steps": 2
+  },
+  "resumed_from": null,
+  "warm_started_from": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp15_detached_head_ssr_coadaptation/artifacts/formal/checkpoint.pt",
+  "cuda_visible_devices": "0",
+  "requested_device": "cuda:0",
+  "artifacts": {
+    "best_checkpoint": "checkpoint.pt",
+    "latest_checkpoint": "latest_checkpoint.pt",
+    "resume_checkpoint": "resume_checkpoint.pt",
+    "training_history": "training_history.csv",
+    "evaluation_history": "evaluation_history.csv",
+    "training_curves": "training_curves.png",
+    "stability_events": "stability_events.jsonl"
+  }
+}

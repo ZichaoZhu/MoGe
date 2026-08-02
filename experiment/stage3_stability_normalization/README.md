@@ -18,6 +18,7 @@
 | [Exp22](runs/exp22_batch_independent_normalization_screen/README.md) | LayerNorm/GroupNorm 筛选 | 极端残差消失，但 SSR 修正接近恒等 |
 | [Exp23](runs/exp23_true_microbatch2_batchnorm/README.md) | 真实双图 microbatch 短程对照 | 短程无离群，尚不足以检验强修正阶段 |
 | [Exp24](runs/exp24_microbatch2_long_detached/README.md) | 真实双图 microbatch 长程对照 | 训练改善约 21%，离群和最大残差下降，留出集仍退化 |
+| [Exp28](runs/exp28_smooth_bounded_residual_joint/README.md) | 平滑有界残差联合训练 | 稳定完成 200 次联合更新并改善训练集，验证集全图仍退化 |
 
 ## 因果链
 
@@ -42,5 +43,7 @@ eval 模式产生异常对数深度残差
 - 更大的真实 microbatch 可以改善统计质量和稳定性，但不能解决留出集退化。
 - LayerNorm/GroupNorm 能消除极端残差，却同时使有效精修接近消失，所以“替换 Norm”
   不是已经成立的最终方案。
+- `0.1*tanh(raw/0.1)` 能阻止单轮几何更新越界并让联合训练继续，但它没有
+  自动带来留出域收益。
 - 数据集多样性不足主要解释过拟合；它与 batch 统计问题相关，但尚未被证明是残差
   爆炸的直接原因。

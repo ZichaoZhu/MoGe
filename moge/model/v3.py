@@ -12,6 +12,7 @@ from .ssr import (
     SelfGuidedSparseRefiner,
     factorize_points,
     load_batch_norm_running_state,
+    smooth_bound_log_depth_residual,
 )
 from .v2 import MoGeModel as MoGeModelV2
 
@@ -151,6 +152,7 @@ class MoGeModel(MoGeModelV2):
         num_refinement_steps: Optional[int] = None,
         return_intermediates: bool = False,
         detach_base_from_refiner: bool = False,
+        smooth_log_depth_residual_bound: Optional[float] = None,
         ssr_batch_norm_states: Optional[
             List[Dict[str, Dict[str, torch.Tensor]]]
         ] = None,
@@ -172,6 +174,7 @@ class MoGeModel(MoGeModelV2):
         visual_features = output.pop("_visual_features")
         points_sequence = [base_points]
         residuals = []
+        raw_residuals = []
         voxel_stats = []
 
         if num_refinement_steps:
@@ -190,7 +193,14 @@ class MoGeModel(MoGeModelV2):
                             self.ssr,
                             ssr_batch_norm_states[iteration],
                         )
-                    residual, stats = self.ssr(factorized, visual_for_refiner)
+                    raw_residual, stats = self.ssr(
+                        factorized,
+                        visual_for_refiner,
+                    )
+                    residual = smooth_bound_log_depth_residual(
+                        raw_residual,
+                        smooth_log_depth_residual_bound,
+                    )
                     factorized = torch.cat(
                         (
                             factorized[..., :2],
@@ -202,6 +212,7 @@ class MoGeModel(MoGeModelV2):
                     # equally. Multiplication by exp(0)=1 makes the
                     # zero-initialized SSR a bitwise identity.
                     refined_points = refined_points * residual.exp()[..., None]
+                    raw_residuals.append(raw_residual)
                     residuals.append(residual)
                     voxel_stats.append(stats)
                     points_sequence.append(refined_points)
@@ -210,6 +221,7 @@ class MoGeModel(MoGeModelV2):
         if return_intermediates:
             output["points_sequence"] = points_sequence
             output["log_depth_residuals"] = residuals
+            output["raw_log_depth_residuals"] = raw_residuals
             output["voxel_stats"] = voxel_stats
         return output
 

@@ -1,0 +1,24 @@
+{
+  "storage": "server_only",
+  "server_directory": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage3_stability_normalization/runs/exp28_smooth_bounded_residual_joint/artifacts/formal",
+  "checkpoints": [
+    {
+      "name": "checkpoint.pt",
+      "role": "best_step_950",
+      "bytes": 1508133087,
+      "sha256": "7864b652c7e1bdb9bd9c76581005c47bb4eb3bf4321eb6301d1b8bc590a38492"
+    },
+    {
+      "name": "latest_checkpoint.pt",
+      "role": "final_step_1000",
+      "bytes": 2034633545,
+      "sha256": "d9c96805b5008af87ef4f758fd5aa0b7913645e0c73e8903711bf82e529b45ba"
+    },
+    {
+      "name": "resume_checkpoint.pt",
+      "role": "resume_step_1000",
+      "bytes": 2034633545,
+      "sha256": "8f82fb9e17cf997645e9c321a1ae3becdfe693ae3e51c71e1f32bc09b0647728"
+    }
+  ]
+}

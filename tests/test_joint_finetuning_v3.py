@@ -49,6 +49,8 @@ def _args(**overrides):
         "selection_scope": "full",
         "max_preclip_grad_norm": 0.0,
         "max_abs_log_depth_residual": 0.0,
+        "smooth_log_depth_residual_bound": 0.0,
+        "max_abs_raw_log_depth_residual": 0.0,
         "max_refined_point_rel": 0.0,
         "max_refined_to_base_ratio": 0.0,
         "max_skipped_preclip_steps": 0,
@@ -131,6 +133,13 @@ def test_scaled_two_stage_schedule_is_valid():
     with pytest.raises(ValueError, match="Final learning-rate scale"):
         validate_joint_schedule(
             _args(learning_rate_final_scale=0.0)
+        )
+    validate_joint_schedule(
+        _args(smooth_log_depth_residual_bound=0.1)
+    )
+    with pytest.raises(ValueError, match="negative"):
+        validate_joint_schedule(
+            _args(smooth_log_depth_residual_bound=-0.1)
         )
 
 

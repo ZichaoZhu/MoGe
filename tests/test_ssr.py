@@ -7,9 +7,37 @@ from moge.model.ssr import (
     factorize_points,
     gather_features_at_coordinates,
     sample_visual_features_for_voxels,
+    smooth_bound_log_depth_residual,
     unfactorize_points,
     voxelize_factorized,
 )
+
+
+def test_smooth_log_depth_residual_bound_is_identity_near_zero_and_bounded():
+    raw = torch.tensor(
+        [-float("inf"), -1.0, -1e-6, 0.0, 1e-6, 1.0, float("inf")],
+        requires_grad=True,
+    )
+    bounded = smooth_bound_log_depth_residual(raw, 0.1)
+    assert torch.isneginf(bounded[0])
+    assert torch.isposinf(bounded[-1])
+    assert bounded[1:-1].abs().max() <= 0.1
+    torch.testing.assert_close(
+        bounded[2:5],
+        raw[2:5],
+        atol=1e-10,
+        rtol=1e-6,
+    )
+    bounded[3].backward()
+    assert raw.grad[3].item() == pytest.approx(1.0)
+
+
+def test_disabled_smooth_log_depth_residual_bound_preserves_tensor():
+    raw = torch.randn(2, 3)
+    assert smooth_bound_log_depth_residual(raw, 0.0) is raw
+    assert smooth_bound_log_depth_residual(raw, None) is raw
+    with pytest.raises(ValueError, match="finite and non-negative"):
+        smooth_bound_log_depth_residual(raw, float("nan"))
 
 
 def _plane_points(batch: int = 1, height: int = 4, width: int = 5) -> torch.Tensor:

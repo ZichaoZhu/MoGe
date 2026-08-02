@@ -1,0 +1,35 @@
+{
+  "experiment": "exp28_smooth_bounded_residual_joint",
+  "status": "complete",
+  "start_step": 800,
+  "final_step": 1000,
+  "best_step": 950,
+  "runtime_seconds": 1734.6148160549346,
+  "peak_memory_bytes": 11457088000,
+  "stability": {
+    "events": 0,
+    "maximum_applied_residual": 0.0999869778752327,
+    "maximum_raw_residual": 0.4819587171077728,
+    "maximum_saturation_fraction": 0.0173594169318676,
+    "maximum_preclip_gradient_norm": 3.259478807449341
+  },
+  "metrics_percent": {
+    "step_800": {
+      "train_k0_point_rel": 5.272518354468048,
+      "train_k3_point_rel": 4.50532430736348,
+      "train_k3_structure_point_rel": 5.097034715889198,
+      "validation_k0_point_rel": 8.653977431822568,
+      "validation_k3_point_rel": 8.882924460340291,
+      "validation_k3_structure_point_rel": 8.65146815776825
+    },
+    "step_950": {
+      "train_k0_point_rel": 5.2221090430393815,
+      "train_k3_point_rel": 4.303463074378669,
+      "train_k3_structure_point_rel": 4.8887305664566325,
+      "validation_k0_point_rel": 8.583332545822486,
+      "validation_k3_point_rel": 9.02913617901504,
+      "validation_k3_structure_point_rel": 8.465208113193512
+    }
+  },
+  "conclusion": "平滑残差上限使短程联合训练稳定完成并改善训练集，但没有解决验证集全图K=3退化。"
+}

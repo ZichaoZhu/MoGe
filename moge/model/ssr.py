@@ -2,11 +2,34 @@ from __future__ import annotations
 
 from contextlib import contextmanager
 from dataclasses import dataclass
+import math
 from typing import Dict, List, Sequence, Tuple
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+
+def smooth_bound_log_depth_residual(
+    residual: torch.Tensor,
+    max_abs: float | None,
+) -> torch.Tensor:
+    """
+    Smoothly constrain an SSR log-depth update without changing its local scale.
+
+    ``limit * tanh(raw / limit)`` is first-order identical to ``raw`` around
+    zero, remains differentiable, and prevents one refinement cycle from
+    moving a point by more than ``limit`` in log-depth. Non-finite raw values
+    deliberately remain non-finite so that the training safety checks cannot
+    be hidden by the bound.
+    """
+    if max_abs is None or float(max_abs) == 0.0:
+        return residual
+    limit = float(max_abs)
+    if not math.isfinite(limit) or limit < 0.0:
+        raise ValueError("Log-depth residual bound must be finite and non-negative")
+    bounded = limit * torch.tanh(residual / limit)
+    return torch.where(torch.isfinite(residual), bounded, residual)
 
 
 def factorize_points(points: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:

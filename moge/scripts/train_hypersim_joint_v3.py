@@ -169,6 +169,24 @@ def parse_args() -> argparse.Namespace:
         help="Abort before backward when any SSR log-depth residual exceeds this value; 0 disables.",
     )
     parser.add_argument(
+        "--smooth-log-depth-residual-bound",
+        type=float,
+        default=0.0,
+        help=(
+            "Apply limit*tanh(raw/limit) to every SSR log-depth update before "
+            "geometry update and re-voxelization; 0 disables."
+        ),
+    )
+    parser.add_argument(
+        "--max-abs-raw-log-depth-residual",
+        type=float,
+        default=0.0,
+        help=(
+            "Abort before backward when the pre-bound SSR residual exceeds "
+            "this value; 0 disables."
+        ),
+    )
+    parser.add_argument(
         "--max-refined-point-rel",
         type=float,
         default=0.0,
@@ -252,10 +270,14 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
     if min(
         args.max_preclip_grad_norm,
         args.max_abs_log_depth_residual,
+        args.smooth_log_depth_residual_bound,
+        args.max_abs_raw_log_depth_residual,
         args.max_refined_point_rel,
         args.max_refined_to_base_ratio,
     ) < 0:
         raise ValueError("Instability thresholds cannot be negative")
+    if not math.isfinite(args.smooth_log_depth_residual_bound):
+        raise ValueError("Smooth residual bound must be finite")
     if min(
         args.max_skipped_preclip_steps,
         args.max_consecutive_skipped_preclip_steps,
@@ -602,6 +624,7 @@ def evaluate_model(
     refinement_steps: Sequence[int],
     batch_size: int,
     boundary_threshold: float,
+    smooth_log_depth_residual_bound: float = 0.0,
     ssr_batch_norm_states: List[
         Dict[str, Dict[str, torch.Tensor]]
     ]
@@ -627,6 +650,7 @@ def evaluate_model(
             num_tokens=num_tokens,
             num_refinement_steps=requested[-1],
             return_intermediates=True,
+            smooth_log_depth_residual_bound=smooth_log_depth_residual_bound,
             ssr_batch_norm_states=ssr_batch_norm_states,
         )
         sequence = output["points_sequence"]
@@ -1154,6 +1178,9 @@ def main() -> None:
                 refinement_steps=(0, args.refinement_steps),
                 batch_size=args.eval_batch_size,
                 boundary_threshold=args.boundary_threshold,
+                smooth_log_depth_residual_bound=(
+                    args.smooth_log_depth_residual_bound
+                ),
             )
             initial_periodic = aggregate_evaluation(initial_records)
         initial_periodic = broadcast_main_object(initial_periodic, accelerator)
@@ -1242,6 +1269,8 @@ def main() -> None:
         local_terms: Dict[str, float] = defaultdict(float)
         step_maxima = {
             "ssr_max_abs_log_depth_residual": 0.0,
+            "ssr_max_abs_raw_log_depth_residual": 0.0,
+            "ssr_max_bound_saturation_fraction": 0.0,
             "ssr_max_depth_span": 0.0,
         }
         for microbatch_start in range(
@@ -1264,13 +1293,36 @@ def main() -> None:
                     args.train_refiner_only
                     or step <= args.refiner_detach_steps
                 ),
+                smooth_log_depth_residual_bound=(
+                    args.smooth_log_depth_residual_bound
+                ),
             )
+            raw_residuals = output_dict["raw_log_depth_residuals"]
+            if args.smooth_log_depth_residual_bound > 0:
+                saturation_fraction = max(
+                    float(
+                        (
+                            residual.detach().abs()
+                            >= 0.95 * args.smooth_log_depth_residual_bound
+                        )
+                        .float()
+                        .mean()
+                    )
+                    for residual in output_dict["log_depth_residuals"]
+                )
+            else:
+                saturation_fraction = 0.0
             microbatch_maxima = distributed_max_dict(
                 {
                     "ssr_max_abs_log_depth_residual": max(
                         float(residual.detach().abs().amax())
                         for residual in output_dict["log_depth_residuals"]
                     ),
+                    "ssr_max_abs_raw_log_depth_residual": max(
+                        float(residual.detach().abs().amax())
+                        for residual in raw_residuals
+                    ),
+                    "ssr_max_bound_saturation_fraction": saturation_fraction,
                     "ssr_max_depth_span": max(
                         float(stats["depth_span"].detach().amax())
                         for stats in output_dict["voxel_stats"]
@@ -1299,6 +1351,33 @@ def main() -> None:
                     )
                 raise RuntimeError(
                     "SSR log-depth residual exceeded the configured safety limit"
+                )
+            if (
+                args.max_abs_raw_log_depth_residual > 0
+                and microbatch_maxima[
+                    "ssr_max_abs_raw_log_depth_residual"
+                ]
+                > args.max_abs_raw_log_depth_residual
+            ):
+                if accelerator.is_main_process:
+                    write_instability_event(
+                        output,
+                        {
+                            "event": "raw_log_depth_residual_limit",
+                            "step": step,
+                            "stage": stage,
+                            "threshold": (
+                                args.max_abs_raw_log_depth_residual
+                            ),
+                            **microbatch_maxima,
+                            "action": (
+                                "aborted before backward and optimizer step"
+                            ),
+                        },
+                    )
+                raise RuntimeError(
+                    "Raw SSR log-depth residual exceeded the configured "
+                    "safety limit"
                 )
             sequence = output_dict["points_sequence"]
             base_loss, base_terms = geometry_loss(
@@ -1436,6 +1515,9 @@ def main() -> None:
                     refinement_steps=(0, args.refinement_steps),
                     batch_size=args.eval_batch_size,
                     boundary_threshold=args.boundary_threshold,
+                    smooth_log_depth_residual_bound=(
+                        args.smooth_log_depth_residual_bound
+                    ),
                 )
                 periodic = aggregate_evaluation(periodic_records)
             periodic = broadcast_main_object(periodic, accelerator)
@@ -1605,6 +1687,9 @@ def main() -> None:
             "shape": [args.height, args.width],
             "num_tokens": args.num_tokens,
             "ssr_normalization": args.ssr_normalization,
+            "smooth_log_depth_residual_bound": (
+                args.smooth_log_depth_residual_bound
+            ),
             "optimization_steps": args.steps,
             "refiner_detach_steps": args.refiner_detach_steps,
             "backbone_frozen": args.freeze_backbone or args.train_refiner_only,
@@ -1648,6 +1733,12 @@ def main() -> None:
             "peak_memory_bytes_by_process": peak_memory_by_process,
             "stability": {
                 "max_preclip_grad_norm": args.max_preclip_grad_norm,
+                "max_abs_applied_log_depth_residual": (
+                    args.max_abs_log_depth_residual
+                ),
+                "max_abs_raw_log_depth_residual": (
+                    args.max_abs_raw_log_depth_residual
+                ),
                 "skipped_preclip_steps": skipped_preclip_total,
                 "max_skipped_preclip_steps": (
                     args.max_skipped_preclip_steps

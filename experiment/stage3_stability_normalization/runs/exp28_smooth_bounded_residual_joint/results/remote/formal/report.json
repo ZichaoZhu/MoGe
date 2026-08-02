@@ -1,0 +1,188 @@
+{
+  "status": "complete",
+  "experiment": "Hypersim two-stage joint MoGe-3 fine-tuning",
+  "paper_alignment": {
+    "base_and_ssr_jointly_optimized": true,
+    "refiner_detached_during_warmup": true,
+    "fixed_base_diagnostic_ablation": false,
+    "dino_bfloat16_geometry_float32": true,
+    "normal_prediction": false,
+    "synthetic_only_controlled_screen": true,
+    "real_data_routing_exercised": false
+  },
+  "distributed": {
+    "backend": "nccl",
+    "world_size": 1,
+    "global_batch_size": 8,
+    "local_batch_size": 8
+  },
+  "counts": {
+    "train": 100,
+    "val": 16,
+    "test": 16
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "ssr_normalization": "batch_norm",
+  "smooth_log_depth_residual_bound": 0.1,
+  "optimization_steps": 1000,
+  "refiner_detach_steps": 800,
+  "backbone_frozen": true,
+  "complete_base_and_2d_heads_frozen": false,
+  "backbone_freeze_steps": 0,
+  "backbone_warmup_end": 1,
+  "learning_rates": {
+    "ssr": 2e-06,
+    "heads": 5e-07,
+    "backbone": 0.0,
+    "schedule": "constant",
+    "decay_start_step": 0,
+    "decay_end_step": 0,
+    "final_scale": 1.0
+  },
+  "batch_size": 8,
+  "microbatch_size": 1,
+  "best_step": 950,
+  "selection_split": "train",
+  "best_k3_point_rel": 0.048887305664566325,
+  "initial_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.052725183544680476,
+        "depth_rel": 0.04442902552429587,
+        "depth_delta_1.01": 0.3868109165877104,
+        "depth_delta_1.25": 0.9611541497707367,
+        "boundary_f1": 0.8005988436937332,
+        "crop_point_rel": 0.08538843601731197,
+        "crop_depth_rel": 0.07473643396471469,
+        "crop_depth_delta_1.01": 0.2796048211320391,
+        "crop_depth_delta_1.25": 0.9166843373820467,
+        "crop_boundary_f1": 0.7796665629688299,
+        "structure_point_rel": 0.062340739411565496,
+        "structure_depth_rel": 0.051756549951673114,
+        "structure_depth_delta_1.01": 0.29063231585863625,
+        "structure_depth_delta_1.25": 0.9690320862914031,
+        "structure_boundary_f1": 0.6073361179738674
+      },
+      "val": {
+        "point_rel": 0.08653977431822568,
+        "depth_rel": 0.06673888675868511,
+        "depth_delta_1.01": 0.1996227849740535,
+        "depth_delta_1.25": 0.956520639359951,
+        "boundary_f1": 0.8550957553088665,
+        "crop_point_rel": 0.06728290021419525,
+        "crop_depth_rel": 0.06628545373678207,
+        "crop_depth_delta_1.01": 0.037353515625,
+        "crop_depth_delta_1.25": 0.9814995527267456,
+        "crop_boundary_f1": 0.8538358211517334,
+        "structure_point_rel": 0.08108149468898773,
+        "structure_depth_rel": 0.07978402823209763,
+        "structure_depth_delta_1.01": 0.0464952252805233,
+        "structure_depth_delta_1.25": 0.9826931357383728,
+        "structure_boundary_f1": 0.7584583163261414
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.045053243073634806,
+        "depth_rel": 0.037261981340125205,
+        "depth_delta_1.01": 0.4497941828519106,
+        "depth_delta_1.25": 0.9656162869930267,
+        "boundary_f1": 0.7989669281244278,
+        "crop_point_rel": 0.07561322222551647,
+        "crop_depth_rel": 0.06536170017887961,
+        "crop_depth_delta_1.01": 0.355412982404232,
+        "crop_depth_delta_1.25": 0.92106631117047,
+        "crop_boundary_f1": 0.7774655110431168,
+        "structure_point_rel": 0.050970347158891975,
+        "structure_depth_rel": 0.04124975345044766,
+        "structure_depth_delta_1.01": 0.3607262180028659,
+        "structure_depth_delta_1.25": 0.9712510333870942,
+        "structure_boundary_f1": 0.608318141749445
+      },
+      "val": {
+        "point_rel": 0.08882924460340291,
+        "depth_rel": 0.06960059719858691,
+        "depth_delta_1.01": 0.17784797120839357,
+        "depth_delta_1.25": 0.9566821381449699,
+        "boundary_f1": 0.840909656137228,
+        "crop_point_rel": 0.07128453254699707,
+        "crop_depth_rel": 0.06995034962892532,
+        "crop_depth_delta_1.01": 0.0477430559694767,
+        "crop_depth_delta_1.25": 0.9826388955116272,
+        "crop_boundary_f1": 0.8421648144721985,
+        "structure_point_rel": 0.0865146815776825,
+        "structure_depth_rel": 0.08506540209054947,
+        "structure_depth_delta_1.01": 0.0324978306889534,
+        "structure_depth_delta_1.25": 0.9820963740348816,
+        "structure_boundary_f1": 0.7914575934410095
+      }
+    }
+  },
+  "latest_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.05210606130771339,
+        "depth_rel": 0.04393637527246028,
+        "depth_delta_1.01": 0.39258541524410245,
+        "depth_delta_1.25": 0.9616573888063431,
+        "boundary_f1": 0.8112515503168106
+      },
+      "val": {
+        "point_rel": 0.08592199411941692,
+        "depth_rel": 0.06636397453257814,
+        "depth_delta_1.01": 0.2019866518676281,
+        "depth_delta_1.25": 0.9572063386440277,
+        "boundary_f1": 0.8654070757329464
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.043610824546776714,
+        "depth_rel": 0.035798675287514924,
+        "depth_delta_1.01": 0.4639236070215702,
+        "depth_delta_1.25": 0.9666413760185242,
+        "boundary_f1": 0.8019973960518837
+      },
+      "val": {
+        "point_rel": 0.09113296505529433,
+        "depth_rel": 0.07096064160577953,
+        "depth_delta_1.01": 0.17836357769556344,
+        "depth_delta_1.25": 0.9525378011167049,
+        "boundary_f1": 0.8420862071216106
+      }
+    }
+  },
+  "initial_loss": 0.16033056750893593,
+  "final_loss": 0.24404858518391848,
+  "training_seconds_including_periodic_eval": 1660.7962889759801,
+  "total_seconds": 1734.6148160549346,
+  "peak_memory_bytes": 11457088000,
+  "peak_memory_bytes_by_process": [
+    11457088000
+  ],
+  "stability": {
+    "max_preclip_grad_norm": 100.0,
+    "max_abs_applied_log_depth_residual": 0.100001,
+    "max_abs_raw_log_depth_residual": 2.0,
+    "skipped_preclip_steps": 0,
+    "max_skipped_preclip_steps": 5,
+    "max_consecutive_skipped_preclip_steps": 2
+  },
+  "resumed_from": null,
+  "warm_started_from": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp15_detached_head_ssr_coadaptation/artifacts/formal/checkpoint.pt",
+  "cuda_visible_devices": "0",
+  "requested_device": "cuda:0",
+  "artifacts": {
+    "best_checkpoint": "checkpoint.pt",
+    "latest_checkpoint": "latest_checkpoint.pt",
+    "resume_checkpoint": "resume_checkpoint.pt",
+    "training_history": "training_history.csv",
+    "evaluation_history": "evaluation_history.csv",
+    "training_curves": "training_curves.png",
+    "stability_events": "stability_events.jsonl"
+  }
+}

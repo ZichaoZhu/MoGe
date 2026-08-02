@@ -1,0 +1,54 @@
+{
+  "experiment_id": "exp12_hypersim_100_immediate_joint_finetuning",
+  "objective": "从Exp11 step 3000最佳点立即进入联合训练，验证小数据下提前解除detach、扩大有效batch并衰减学习率能否继续改善训练集拟合且避免漂移。",
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16,
+    "augmentation": false
+  },
+  "warm_start": {
+    "step": 3000,
+    "checkpoint": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/artifacts/training/checkpoint.pt",
+    "sha256": "1a665e760516fde4e00082b9743a0fd8c7eed98d298cb76bb012b813227c98ce",
+    "fresh_optimizer": true
+  },
+  "model": {
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "refinement_steps": 3,
+    "normal_prediction": false
+  },
+  "optimization": {
+    "first_new_step": 3001,
+    "maximum_step": 5000,
+    "refiner_detach_steps": 3000,
+    "global_batch_size": 16,
+    "microbatch_size_per_process": 1,
+    "ssr_peak_learning_rate": 5e-7,
+    "head_peak_learning_rate": 2e-7,
+    "backbone_peak_learning_rate": 1e-8,
+    "schedule": "cosine",
+    "decay_start_step": 3000,
+    "decay_end_step": 5000,
+    "final_scale": 0.1,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 100,
+    "selection_split": "train",
+    "seed": 121
+  },
+  "automatic_stop": {
+    "metric": "train/k3_point_rel",
+    "patience_evaluations": 5,
+    "minimum_relative_improvement": 0.002
+  },
+  "distributed": {
+    "backend": "gloo",
+    "maximum_gpu_count": 2,
+    "minimum_free_memory_mib": 18000,
+    "maximum_prelaunch_utilization_percent": 10
+  }
+}

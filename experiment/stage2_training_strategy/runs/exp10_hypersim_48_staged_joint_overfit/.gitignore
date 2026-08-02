@@ -1,0 +1,7 @@
+artifacts/*
+!artifacts/.gitignore
+data/*
+!data/.gitignore
+!data/manifest.json
+**/*.pt
+*.pid

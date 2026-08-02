@@ -1,0 +1,118 @@
+{
+  "status": "complete",
+  "experiment": "Hypersim two-stage joint MoGe-3 fine-tuning",
+  "paper_alignment": {
+    "base_and_ssr_jointly_optimized": true,
+    "refiner_detached_during_warmup": true,
+    "dino_bfloat16_geometry_float32": true,
+    "normal_prediction": false,
+    "synthetic_only_controlled_screen": true,
+    "real_data_routing_exercised": false
+  },
+  "counts": {
+    "train": 320,
+    "val": 64,
+    "test": 64
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "optimization_steps": 2500,
+  "refiner_detach_steps": 500,
+  "backbone_freeze_steps": 100,
+  "backbone_warmup_end": 200,
+  "learning_rates": {
+    "ssr": 2e-05,
+    "heads": 1e-05,
+    "backbone": 5e-07
+  },
+  "batch_size": 2,
+  "microbatch_size": 1,
+  "best_step": 250,
+  "best_val_k3_point_rel": 0.06269239947141614,
+  "initial_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.06090342369861901,
+        "depth_rel": 0.05411726098100189,
+        "depth_delta_1.01": 0.34023498857277445,
+        "depth_delta_1.25": 0.942622453905642,
+        "boundary_f1": 0.8085876451805234
+      },
+      "val": {
+        "point_rel": 0.06414470527670346,
+        "depth_rel": 0.05565687808848452,
+        "depth_delta_1.01": 0.3344591731438413,
+        "depth_delta_1.25": 0.945982662960887,
+        "boundary_f1": 0.8234827499836683
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.06090342369861901,
+        "depth_rel": 0.05411726098100189,
+        "depth_delta_1.01": 0.34023498857277445,
+        "depth_delta_1.25": 0.942622453905642,
+        "boundary_f1": 0.8085876451805234
+      },
+      "val": {
+        "point_rel": 0.06414470527670346,
+        "depth_rel": 0.05565687808848452,
+        "depth_delta_1.01": 0.3344591731438413,
+        "depth_delta_1.25": 0.945982662960887,
+        "boundary_f1": 0.8234827499836683
+      }
+    }
+  },
+  "latest_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.10730596983921714,
+        "depth_rel": 0.09652121480030473,
+        "depth_delta_1.01": 0.22995933995116502,
+        "depth_delta_1.25": 0.9220162704586983,
+        "boundary_f1": 0.7335556880570948
+      },
+      "val": {
+        "point_rel": 0.09677848048158921,
+        "depth_rel": 0.08362066466361284,
+        "depth_delta_1.01": 0.13300493243150413,
+        "depth_delta_1.25": 0.9096110071986914,
+        "boundary_f1": 0.7116849860176444
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.10575105450698175,
+        "depth_rel": 0.09524857715587132,
+        "depth_delta_1.01": 0.251484077074565,
+        "depth_delta_1.25": 0.9213426923379302,
+        "boundary_f1": 0.734353007748723
+      },
+      "val": {
+        "point_rel": 0.09522506140638143,
+        "depth_rel": 0.08232938387664035,
+        "depth_delta_1.01": 0.1409749831946101,
+        "depth_delta_1.25": 0.9117610333487391,
+        "boundary_f1": 0.709743604529649
+      }
+    }
+  },
+  "initial_loss": 1.1551441550254822,
+  "final_loss": 0.12332078441977501,
+  "training_seconds_including_periodic_eval": 4378.886400040006,
+  "total_seconds": 4453.941960075172,
+  "peak_memory_bytes": 16002554368,
+  "resumed_from": null,
+  "cuda_visible_devices": "3",
+  "artifacts": {
+    "best_checkpoint": "checkpoint.pt",
+    "latest_checkpoint": "latest_checkpoint.pt",
+    "resume_checkpoint": "resume_checkpoint.pt",
+    "training_history": "training_history.csv",
+    "evaluation_history": "evaluation_history.csv",
+    "training_curves": "training_curves.png"
+  }
+}

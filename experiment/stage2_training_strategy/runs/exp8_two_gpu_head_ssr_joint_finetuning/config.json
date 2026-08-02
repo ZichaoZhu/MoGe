@@ -1,0 +1,63 @@
+{
+  "experiment_id": "exp8_two_gpu_head_ssr_joint_finetuning",
+  "date": "2026-07-28",
+  "hypothesis": "在冻结DINO的条件下，联合优化二维几何模块与SSR，能够比exp7的SSR-only路线更有效地形成细结构精修。",
+  "data": {
+    "dataset": "Hypersim",
+    "reuse": "../exp7_ssr_thin_structure_training/data",
+    "train_frames": 24,
+    "validation_frames": 16,
+    "test_frames": 16,
+    "split_scene_groups_disjoint": true,
+    "normal_data_used": false
+  },
+  "model": {
+    "base": "Ruicheng/moge-2-vitl-normal",
+    "trainable": ["2D geometry modules", "SSR"],
+    "dino_backbone_frozen": true,
+    "normal_prediction": false,
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "training_refinement_steps": 3,
+    "evaluation_refinement_steps": [0, 1, 3, 5]
+  },
+  "distributed": {
+    "strategy": "DistributedDataParallel",
+    "backend": "gloo",
+    "backend_reason": "服务器当前PyTorch 2.8.0+cu128的NCCL在DDP参数形状校验阶段触发SIGSEGV；仓库原有最小DDP程序可复现，Gloo双卡前后向正常。",
+    "world_size": 2,
+    "global_batch_size": 2,
+    "local_batch_size": 1,
+    "microbatch_size": 1
+  },
+  "optimization": {
+    "pilot_steps": 600,
+    "equivalent_epochs": 50,
+    "refiner_detach_steps": 300,
+    "ssr_learning_rate": 0.00002,
+    "head_learning_rate": 0.000001,
+    "backbone_learning_rate": 0.0,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 50,
+    "optimizer": "AdamW",
+    "seed": 81
+  },
+  "loss": {
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "edge_weight": 1.0,
+    "local_scales": [4, 16, 64],
+    "supervised_iterations": [0, 1, 2, 3]
+  },
+  "selection": {
+    "primary": "minimum full-validation K=3 point Rel",
+    "diagnostics": [
+      "initial K=0 versus current K=0",
+      "same-checkpoint K=0 versus K=3",
+      "initial K=0 versus current K=3"
+    ],
+    "test_used_for_selection": false
+  }
+}

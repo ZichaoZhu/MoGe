@@ -1,0 +1,130 @@
+{
+  "status": "complete",
+  "experiment": "Hypersim two-stage joint MoGe-3 fine-tuning",
+  "paper_alignment": {
+    "base_and_ssr_jointly_optimized": true,
+    "refiner_detached_during_warmup": true,
+    "dino_bfloat16_geometry_float32": true,
+    "normal_prediction": false,
+    "synthetic_only_controlled_screen": true,
+    "real_data_routing_exercised": false
+  },
+  "distributed": {
+    "backend": "gloo",
+    "world_size": 2,
+    "global_batch_size": 2,
+    "local_batch_size": 1
+  },
+  "counts": {
+    "train": 24,
+    "val": 16,
+    "test": 16
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "optimization_steps": 600,
+  "refiner_detach_steps": 300,
+  "backbone_frozen": true,
+  "backbone_freeze_steps": 0,
+  "backbone_warmup_end": 1,
+  "learning_rates": {
+    "ssr": 2e-05,
+    "heads": 1e-06,
+    "backbone": 0.0
+  },
+  "batch_size": 2,
+  "microbatch_size": 1,
+  "best_step": 0,
+  "best_val_k3_point_rel": 0.08903866010950878,
+  "initial_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.07349634496495128,
+        "depth_rel": 0.0630310974859943,
+        "depth_delta_1.01": 0.2504615643216918,
+        "depth_delta_1.25": 0.9384124701221784,
+        "boundary_f1": 0.7962314573427042
+      },
+      "val": {
+        "point_rel": 0.08903866010950878,
+        "depth_rel": 0.07076855562627316,
+        "depth_delta_1.01": 0.2160824581515044,
+        "depth_delta_1.25": 0.9456039294600487,
+        "boundary_f1": 0.8567267879843712
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.07349634496495128,
+        "depth_rel": 0.0630310974859943,
+        "depth_delta_1.01": 0.2504615643216918,
+        "depth_delta_1.25": 0.9384124701221784,
+        "boundary_f1": 0.7962314573427042
+      },
+      "val": {
+        "point_rel": 0.08903866010950878,
+        "depth_rel": 0.07076855562627316,
+        "depth_delta_1.01": 0.2160824581515044,
+        "depth_delta_1.25": 0.9456039294600487,
+        "boundary_f1": 0.8567267879843712
+      }
+    }
+  },
+  "latest_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.0617768750526011,
+        "depth_rel": 0.05354268468605975,
+        "depth_delta_1.01": 0.3294071579972903,
+        "depth_delta_1.25": 0.9460348536570867,
+        "boundary_f1": 0.8076870106160641
+      },
+      "val": {
+        "point_rel": 0.08774233213625848,
+        "depth_rel": 0.06806095573119819,
+        "depth_delta_1.01": 0.19493491458706558,
+        "depth_delta_1.25": 0.9534141905605793,
+        "boundary_f1": 0.8658309802412987
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.055515448873241745,
+        "depth_rel": 0.04695931379683316,
+        "depth_delta_1.01": 0.4106661765836179,
+        "depth_delta_1.25": 0.9494143178065618,
+        "boundary_f1": 0.7997172375520071
+      },
+      "val": {
+        "point_rel": 0.09164684475399554,
+        "depth_rel": 0.07048172573558986,
+        "depth_delta_1.01": 0.18637997470796108,
+        "depth_delta_1.25": 0.9506758823990822,
+        "boundary_f1": 0.8507317751646042
+      }
+    }
+  },
+  "initial_loss": 0.35461968183517456,
+  "final_loss": 0.17196767032146454,
+  "training_seconds_including_periodic_eval": 819.2162729499396,
+  "total_seconds": 860.5547458610963,
+  "peak_memory_bytes": 12769388032,
+  "peak_memory_bytes_by_process": [
+    12769388032,
+    12754752512
+  ],
+  "resumed_from": null,
+  "cuda_visible_devices": "0,2",
+  "requested_device": "cuda:0",
+  "artifacts": {
+    "best_checkpoint": "checkpoint.pt",
+    "latest_checkpoint": "latest_checkpoint.pt",
+    "resume_checkpoint": "resume_checkpoint.pt",
+    "training_history": "training_history.csv",
+    "evaluation_history": "evaluation_history.csv",
+    "training_curves": "training_curves.png"
+  }
+}

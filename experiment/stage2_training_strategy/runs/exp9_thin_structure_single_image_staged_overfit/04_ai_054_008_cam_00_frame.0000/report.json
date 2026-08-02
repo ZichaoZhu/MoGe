@@ -1,0 +1,588 @@
+{
+  "status": "complete",
+  "experiment": "exp9 paper-style single-image fine-structure overfit",
+  "sample_id": "ai_054_008_cam_00_frame.0000",
+  "scene": "ai_054_008",
+  "frame": 0,
+  "selection": {
+    "order": 4,
+    "id": "ai_054_008_cam_00_frame.0000",
+    "candidate": "H07",
+    "crop_xyxy": [
+      192,
+      192,
+      384,
+      384
+    ],
+    "display_mask": {
+      "type": "near_quantile",
+      "quantile": 0.5
+    },
+    "description": "悬空楼梯踏板与支架"
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "training_refinement_steps": 3,
+  "evaluation_refinement_steps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "parameter_counts": {
+    "ssr": 50739073,
+    "neck": 6157376,
+    "points_head": 4692323,
+    "backbone": 304368640
+  },
+  "normal_prediction": false,
+  "augmentation": "disabled",
+  "stage1_end_step": 2000,
+  "best_joint_step": 2200,
+  "last_step": 4000,
+  "joint_stop_reason": "detected_plateau",
+  "best_joint_score": 0.01886584796011448,
+  "elapsed_seconds": 3961.959293799009,
+  "peak_memory_bytes": 13361580544,
+  "cuda_visible_devices": "0",
+  "initial": {
+    "status": "complete",
+    "sample_id": "ai_054_008_cam_00_frame.0000",
+    "snapshot": "initial",
+    "step": 0,
+    "stage": "initial",
+    "stop_reason": "before_training",
+    "metrics": {
+      "k0": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.08209394663572311,
+          "depth_rel": 0.07726428657770157,
+          "depth_delta_1.01": 0.26069217920303345,
+          "depth_delta_1.25": 0.8848801255226135,
+          "boundary_f1": 0.47751644253730774
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.07926885783672333,
+          "depth_rel": 0.0761057510972023,
+          "depth_delta_1.01": 0.17985065281391144,
+          "depth_delta_1.25": 0.9282009601593018,
+          "boundary_f1": 0.7443040609359741
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.06855541467666626,
+          "depth_rel": 0.064018115401268,
+          "depth_delta_1.01": 0.2093629390001297,
+          "depth_delta_1.25": 0.9745288491249084,
+          "boundary_f1": 0.4126317501068115
+        },
+        "alignment": {
+          "scale": 4.351247310638428,
+          "z_shift": -0.06155252456665039
+        }
+      },
+      "k1": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.08209394663572311,
+          "depth_rel": 0.07726428657770157,
+          "depth_delta_1.01": 0.26069217920303345,
+          "depth_delta_1.25": 0.8848801255226135,
+          "boundary_f1": 0.47751644253730774
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.07926885783672333,
+          "depth_rel": 0.0761057510972023,
+          "depth_delta_1.01": 0.17985065281391144,
+          "depth_delta_1.25": 0.9282009601593018,
+          "boundary_f1": 0.7443040609359741
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.06855541467666626,
+          "depth_rel": 0.064018115401268,
+          "depth_delta_1.01": 0.2093629390001297,
+          "depth_delta_1.25": 0.9745288491249084,
+          "boundary_f1": 0.4126317501068115
+        },
+        "alignment": {
+          "scale": 4.351247310638428,
+          "z_shift": -0.06155252456665039
+        }
+      },
+      "k3": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.08209394663572311,
+          "depth_rel": 0.07726428657770157,
+          "depth_delta_1.01": 0.26069217920303345,
+          "depth_delta_1.25": 0.8848801255226135,
+          "boundary_f1": 0.47751644253730774
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.07926885783672333,
+          "depth_rel": 0.0761057510972023,
+          "depth_delta_1.01": 0.17985065281391144,
+          "depth_delta_1.25": 0.9282009601593018,
+          "boundary_f1": 0.7443040609359741
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.06855541467666626,
+          "depth_rel": 0.064018115401268,
+          "depth_delta_1.01": 0.2093629390001297,
+          "depth_delta_1.25": 0.9745288491249084,
+          "boundary_f1": 0.4126317501068115
+        },
+        "alignment": {
+          "scale": 4.351247310638428,
+          "z_shift": -0.06155252456665039
+        }
+      },
+      "k5": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.08209394663572311,
+          "depth_rel": 0.07726428657770157,
+          "depth_delta_1.01": 0.26069217920303345,
+          "depth_delta_1.25": 0.8848801255226135,
+          "boundary_f1": 0.47751644253730774
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.07926885783672333,
+          "depth_rel": 0.0761057510972023,
+          "depth_delta_1.01": 0.17985065281391144,
+          "depth_delta_1.25": 0.9282009601593018,
+          "boundary_f1": 0.7443040609359741
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.06855541467666626,
+          "depth_rel": 0.064018115401268,
+          "depth_delta_1.01": 0.2093629390001297,
+          "depth_delta_1.25": 0.9745288491249084,
+          "boundary_f1": 0.4126317501068115
+        },
+        "alignment": {
+          "scale": 4.351247310638428,
+          "z_shift": -0.06155252456665039
+        }
+      }
+    },
+    "zero_identity_max_abs_error": 0.0
+  },
+  "stage1": {
+    "status": "complete",
+    "sample_id": "ai_054_008_cam_00_frame.0000",
+    "snapshot": "stage1",
+    "step": 2000,
+    "stage": "detached",
+    "stop_reason": "detected_plateau",
+    "metrics": {
+      "k0": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.017359856516122818,
+          "depth_rel": 0.015430239960551262,
+          "depth_delta_1.01": 0.6230738162994385,
+          "depth_delta_1.25": 0.9930101037025452,
+          "boundary_f1": 0.8219345211982727
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.018529826775193214,
+          "depth_rel": 0.017133181914687157,
+          "depth_delta_1.01": 0.47494909167289734,
+          "depth_delta_1.25": 0.9929938912391663,
+          "boundary_f1": 0.9415526986122131
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.01710948348045349,
+          "depth_rel": 0.015719464048743248,
+          "depth_delta_1.01": 0.3569217324256897,
+          "depth_delta_1.25": 0.9984250068664551,
+          "boundary_f1": 0.7675890326499939
+        },
+        "alignment": {
+          "scale": 146608.390625,
+          "z_shift": -0.4495868682861328
+        }
+      },
+      "k1": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.015660056844353676,
+          "depth_rel": 0.01373787596821785,
+          "depth_delta_1.01": 0.6384272575378418,
+          "depth_delta_1.25": 0.994032621383667,
+          "boundary_f1": 0.859411358833313
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.01397749874740839,
+          "depth_rel": 0.012593170627951622,
+          "depth_delta_1.01": 0.5767549276351929,
+          "depth_delta_1.25": 0.9966327548027039,
+          "boundary_f1": 0.969378650188446
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.013622342608869076,
+          "depth_rel": 0.01230840664356947,
+          "depth_delta_1.01": 0.4452832043170929,
+          "depth_delta_1.25": 0.9998913407325745,
+          "boundary_f1": 0.8973360061645508
+        },
+        "alignment": {
+          "scale": 151540.9375,
+          "z_shift": -0.44957733154296875
+        }
+      },
+      "k3": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.01259345281869173,
+          "depth_rel": 0.01068960316479206,
+          "depth_delta_1.01": 0.7225045561790466,
+          "depth_delta_1.25": 0.9942514300346375,
+          "boundary_f1": 0.9035576581954956
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.010804065503180027,
+          "depth_rel": 0.009404934011399746,
+          "depth_delta_1.01": 0.7084046006202698,
+          "depth_delta_1.25": 0.9970672130584717,
+          "boundary_f1": 0.9807242155075073
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.010639358311891556,
+          "depth_rel": 0.009372692555189133,
+          "depth_delta_1.01": 0.6160864233970642,
+          "depth_delta_1.25": 0.9997827410697937,
+          "boundary_f1": 0.9819260835647583
+        },
+        "alignment": {
+          "scale": 161811.140625,
+          "z_shift": -0.44830799102783203
+        }
+      },
+      "k5": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.012959836050868034,
+          "depth_rel": 0.010944226756691933,
+          "depth_delta_1.01": 0.7256332635879517,
+          "depth_delta_1.25": 0.9948262572288513,
+          "boundary_f1": 0.9200479984283447
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.010357278399169445,
+          "depth_rel": 0.009008361026644707,
+          "depth_delta_1.01": 0.756361186504364,
+          "depth_delta_1.25": 0.9969857335090637,
+          "boundary_f1": 0.9765244126319885
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.00966565776616335,
+          "depth_rel": 0.008475707843899727,
+          "depth_delta_1.01": 0.7178623676300049,
+          "depth_delta_1.25": 0.9997284412384033,
+          "boundary_f1": 0.9824182987213135
+        },
+        "alignment": {
+          "scale": 172388.359375,
+          "z_shift": -0.4429435729980469
+        }
+      }
+    },
+    "plateau_trackers": {
+      "stage1_best": {
+        "k0": 0.0101857278496027,
+        "k3": 0.006828716024756432
+      },
+      "stage1_stale": {
+        "k0": 13,
+        "k3": 7
+      },
+      "joint_best_score": null,
+      "joint_stale": 0,
+      "success_streak": 0
+    }
+  },
+  "final": {
+    "status": "complete",
+    "sample_id": "ai_054_008_cam_00_frame.0000",
+    "snapshot": "final",
+    "step": 2200,
+    "stage": "joint_best",
+    "stop_reason": "minimum_full_plus_structure_k3_point_rel",
+    "metrics": {
+      "k0": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.017095832154154778,
+          "depth_rel": 0.015873095020651817,
+          "depth_delta_1.01": 0.6541061997413635,
+          "depth_delta_1.25": 0.9929541349411011,
+          "boundary_f1": 0.8201402425765991
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.018047140911221504,
+          "depth_rel": 0.017443131655454636,
+          "depth_delta_1.01": 0.4660964012145996,
+          "depth_delta_1.25": 0.99277663230896,
+          "boundary_f1": 0.9309486746788025
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.014283038675785065,
+          "depth_rel": 0.013669607229530811,
+          "depth_delta_1.01": 0.48606961965560913,
+          "depth_delta_1.25": 0.9985879063606262,
+          "boundary_f1": 0.7540792226791382
+        },
+        "alignment": {
+          "scale": 549329.5,
+          "z_shift": -0.3922872543334961
+        }
+      },
+      "k1": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.015428159385919571,
+          "depth_rel": 0.014214460738003254,
+          "depth_delta_1.01": 0.653465211391449,
+          "depth_delta_1.25": 0.9941394925117493,
+          "boundary_f1": 0.8630769848823547
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.015177156776189804,
+          "depth_rel": 0.01462771650403738,
+          "depth_delta_1.01": 0.47511202096939087,
+          "depth_delta_1.25": 0.9968499541282654,
+          "boundary_f1": 0.9661587476730347
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.01135244220495224,
+          "depth_rel": 0.010676941834390163,
+          "depth_delta_1.01": 0.6088089942932129,
+          "depth_delta_1.25": 0.9998913407325745,
+          "boundary_f1": 0.8953219652175903
+        },
+        "alignment": {
+          "scale": 568038.9375,
+          "z_shift": -0.38817787170410156
+        }
+      },
+      "k3": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.01148639339953661,
+          "depth_rel": 0.010440018959343433,
+          "depth_delta_1.01": 0.7524533271789551,
+          "depth_delta_1.25": 0.9965711832046509,
+          "boundary_f1": 0.9098633527755737
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.011349333450198174,
+          "depth_rel": 0.010862368158996105,
+          "depth_delta_1.01": 0.6202308535575867,
+          "depth_delta_1.25": 0.9972572922706604,
+          "boundary_f1": 0.9812938570976257
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.007379454560577869,
+          "depth_rel": 0.0067898789420723915,
+          "depth_delta_1.01": 0.772551953792572,
+          "depth_delta_1.25": 0.9998913407325745,
+          "boundary_f1": 0.9781726002693176
+        },
+        "alignment": {
+          "scale": 612475.3125,
+          "z_shift": -0.3927302360534668
+        }
+      },
+      "k5": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.013942253775894642,
+          "depth_rel": 0.012837422080338001,
+          "depth_delta_1.01": 0.809156060218811,
+          "depth_delta_1.25": 0.994419276714325,
+          "boundary_f1": 0.9263217449188232
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.008402111940085888,
+          "depth_rel": 0.007767730392515659,
+          "depth_delta_1.01": 0.7976374626159668,
+          "depth_delta_1.25": 0.9971486926078796,
+          "boundary_f1": 0.9816024899482727
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.005080610513687134,
+          "depth_rel": 0.004340709652751684,
+          "depth_delta_1.01": 0.9457448124885559,
+          "depth_delta_1.25": 0.9997284412384033,
+          "boundary_f1": 0.982771098613739
+        },
+        "alignment": {
+          "scale": 657729.75,
+          "z_shift": -0.39722156524658203
+        }
+      }
+    },
+    "last_step": 4000,
+    "joint_stop_reason": "detected_plateau",
+    "selection_score": 0.01886584796011448
+  },
+  "last": {
+    "status": "complete",
+    "sample_id": "ai_054_008_cam_00_frame.0000",
+    "snapshot": "last",
+    "step": 4000,
+    "stage": "joint",
+    "stop_reason": "detected_plateau",
+    "metrics": {
+      "k0": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.0172384325414896,
+          "depth_rel": 0.015464776195585728,
+          "depth_delta_1.01": 0.5513890981674194,
+          "depth_delta_1.25": 0.9930711388587952,
+          "boundary_f1": 0.8187088966369629
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.016490822657942772,
+          "depth_rel": 0.015185434371232986,
+          "depth_delta_1.01": 0.5821860432624817,
+          "depth_delta_1.25": 0.9934012293815613,
+          "boundary_f1": 0.9447247982025146
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.013102689757943153,
+          "depth_rel": 0.011431091465055943,
+          "depth_delta_1.01": 0.6481290459632874,
+          "depth_delta_1.25": 0.9985879063606262,
+          "boundary_f1": 0.7712427973747253
+        },
+        "alignment": {
+          "scale": 12062865.0,
+          "z_shift": -0.3666410446166992
+        }
+      },
+      "k1": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.0167100727558136,
+          "depth_rel": 0.014920161105692387,
+          "depth_delta_1.01": 0.5515264272689819,
+          "depth_delta_1.25": 0.9931474924087524,
+          "boundary_f1": 0.8235005140304565
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.016762293875217438,
+          "depth_rel": 0.01545090414583683,
+          "depth_delta_1.01": 0.5570672154426575,
+          "depth_delta_1.25": 0.99359130859375,
+          "boundary_f1": 0.9449678659439087
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.01397205051034689,
+          "depth_rel": 0.012277894653379917,
+          "depth_delta_1.01": 0.5976755619049072,
+          "depth_delta_1.25": 0.9985336065292358,
+          "boundary_f1": 0.7678884267807007
+        },
+        "alignment": {
+          "scale": 12324450.0,
+          "z_shift": -0.3681669235229492
+        }
+      },
+      "k3": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.01485601905733347,
+          "depth_rel": 0.013100900687277317,
+          "depth_delta_1.01": 0.5812564492225647,
+          "depth_delta_1.25": 0.9942615628242493,
+          "boundary_f1": 0.8351048231124878
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.01629588007926941,
+          "depth_rel": 0.014971076510846615,
+          "depth_delta_1.01": 0.5865037441253662,
+          "depth_delta_1.25": 0.9936184883117676,
+          "boundary_f1": 0.9449586868286133
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.013711302541196346,
+          "depth_rel": 0.011999856680631638,
+          "depth_delta_1.01": 0.6108184456825256,
+          "depth_delta_1.25": 0.9985879063606262,
+          "boundary_f1": 0.7664874196052551
+        },
+        "alignment": {
+          "scale": 12843545.0,
+          "z_shift": -0.36898040771484375
+        }
+      },
+      "k5": {
+        "full": {
+          "pixels": 196569,
+          "point_rel": 0.015601999126374722,
+          "depth_rel": 0.01382517535239458,
+          "depth_delta_1.01": 0.6075271368026733,
+          "depth_delta_1.25": 0.9935595393180847,
+          "boundary_f1": 0.8399680256843567
+        },
+        "crop": {
+          "pixels": 36825,
+          "point_rel": 0.01617155782878399,
+          "depth_rel": 0.014853966422379017,
+          "depth_delta_1.01": 0.5811812877655029,
+          "depth_delta_1.25": 0.9935641884803772,
+          "boundary_f1": 0.9433646202087402
+        },
+        "structure": {
+          "pixels": 18413,
+          "point_rel": 0.01302060391753912,
+          "depth_rel": 0.01129479706287384,
+          "depth_delta_1.01": 0.6510074138641357,
+          "depth_delta_1.25": 0.9985879063606262,
+          "boundary_f1": 0.7671023011207581
+        },
+        "alignment": {
+          "scale": 13361721.0,
+          "z_shift": -0.3697509765625
+        }
+      }
+    }
+  }
+}

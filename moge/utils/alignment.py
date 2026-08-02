@@ -248,7 +248,13 @@ def align_points_scale(points_src: torch.Tensor, points_tgt: torch.Tensor, weigh
     return scale
 
 
-def align_points_scale_z_shift(points_src: torch.Tensor, points_tgt: torch.Tensor, weight: Optional[torch.Tensor], trunc: Optional[Union[float, torch.Tensor]] = None):
+def align_points_scale_z_shift(
+    points_src: torch.Tensor,
+    points_tgt: torch.Tensor,
+    weight: Optional[torch.Tensor],
+    trunc: Optional[Union[float, torch.Tensor]] = None,
+    max_anchor_elements: int = 2 ** 20,
+):
     """
     Align `points_src` to `points_tgt` with respect to a shared xyz scale and z shift. 
     It is similar to `align_affine` but scale and shift are applied to different dimensions.
@@ -269,26 +275,72 @@ def align_points_scale_z_shift(points_src: torch.Tensor, points_tgt: torch.Tenso
     batch_size = math.prod(batch_shape)
     points_src, points_tgt, weight = points_src.reshape(batch_size, n, 3), points_tgt.reshape(batch_size, n, 3), weight.reshape(batch_size, n)
 
-    # Take anchors
+    if max_anchor_elements <= 0:
+        raise ValueError("max_anchor_elements must be positive")
+
+    # Take anchors. Process them in chunks before constructing the
+    # (anchors, n, 3) tensors: splitting only inside align() is too late and
+    # leaves several O(n^2) tensors resident at once for a 64x64 alignment.
     anchor_where_batch, anchor_where_n = torch.where(weight > 0)
     with torch.no_grad():
-        zeros = torch.zeros(anchor_where_batch.shape[0], device=device, dtype=dtype)
-        points_src_anchor = torch.stack([zeros, zeros, points_src[anchor_where_batch, anchor_where_n, 2]], dim=-1)      # (anchors, 3)
-        points_tgt_anchor = torch.stack([zeros, zeros, points_tgt[anchor_where_batch, anchor_where_n, 2]], dim=-1)      # (anchors, 3)
+        anchor_chunk_size = max(1, max_anchor_elements // max(1, 3 * n))
+        best_loss = torch.full(
+            (batch_size,), torch.inf, device=device, dtype=dtype
+        )
+        best_anchor = torch.full(
+            (batch_size,), -1, device=device, dtype=torch.long
+        )
+        best_index_2 = torch.full(
+            (batch_size,), -1, device=device, dtype=torch.long
+        )
+        for start in range(0, anchor_where_batch.numel(), anchor_chunk_size):
+            stop = min(start + anchor_chunk_size, anchor_where_batch.numel())
+            chunk_batch = anchor_where_batch[start:stop]
+            chunk_n = anchor_where_n[start:stop]
+            zeros = torch.zeros(stop - start, device=device, dtype=dtype)
+            points_src_anchor = torch.stack(
+                [zeros, zeros, points_src[chunk_batch, chunk_n, 2]], dim=-1
+            )
+            points_tgt_anchor = torch.stack(
+                [zeros, zeros, points_tgt[chunk_batch, chunk_n, 2]], dim=-1
+            )
+            points_src_anchored = (
+                points_src[chunk_batch] - points_src_anchor[..., None, :]
+            )
+            points_tgt_anchored = (
+                points_tgt[chunk_batch] - points_tgt_anchor[..., None, :]
+            )
+            weight_anchored = weight[chunk_batch, :, None].expand(-1, -1, 3)
 
-        points_src_anchored = points_src[anchor_where_batch, :, :] - points_src_anchor[..., None, :]    # (anchors, n, 3)
-        points_tgt_anchored = points_tgt[anchor_where_batch, :, :] - points_tgt_anchor[..., None, :]    # (anchors, n, 3)
-        weight_anchored = weight[anchor_where_batch, :, None].expand(-1, -1, 3)                         # (anchors, n, 3)
+            _, chunk_loss, chunk_index_2 = align(
+                points_src_anchored.flatten(-2),
+                points_tgt_anchored.flatten(-2),
+                weight_anchored.flatten(-2),
+                trunc,
+            )
+            chunk_min, chunk_argmin = scatter_min(
+                size=batch_size,
+                dim=0,
+                index=chunk_batch,
+                src=chunk_loss,
+            )
+            chunk_valid = chunk_argmin >= 0
+            improve = chunk_valid & (chunk_min < best_loss)
+            safe_argmin = chunk_argmin.clamp_min(0)
+            best_loss = torch.where(improve, chunk_min, best_loss)
+            best_anchor = torch.where(
+                improve, safe_argmin + start, best_anchor
+            )
+            best_index_2 = torch.where(
+                improve, chunk_index_2[safe_argmin], best_index_2
+            )
 
-        # Solve optimal scale and shift for each anchor
-        MAX_ELEMENTS = 2 ** 20
-        scale, loss, index = split_batch_fwd(align, MAX_ELEMENTS // n, points_src_anchored.flatten(-2), points_tgt_anchored.flatten(-2), weight_anchored.flatten(-2), trunc)   # (anchors,)
-
-        loss, index_anchor = scatter_min(size=batch_size, dim=0, index=anchor_where_batch, src=loss)    # (batch_size,)
+        if (best_anchor < 0).any():
+            raise ValueError("Every batch item must contain a positive-weight anchor")
 
     # Reproduce by indexing for shorter compute graph
-    index_2 = index[index_anchor]                               # (batch_size,) [0, 3n)
-    index_1 = anchor_where_n[index_anchor] * 3 + index_2 % 3    # (batch_size,) [0, 3n)
+    index_2 = best_index_2                                      # (batch_size,) [0, 3n)
+    index_1 = anchor_where_n[best_anchor] * 3 + index_2 % 3     # (batch_size,) [0, 3n)
 
     zeros = torch.zeros((batch_size, n), device=device, dtype=dtype)
     points_tgt_00z, points_src_00z = torch.stack([zeros, zeros, points_tgt[..., 2]], dim=-1), torch.stack([zeros, zeros, points_src[..., 2]], dim=-1)

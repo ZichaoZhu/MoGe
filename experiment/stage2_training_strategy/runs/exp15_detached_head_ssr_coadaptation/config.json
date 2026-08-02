@@ -1,0 +1,59 @@
+{
+  "experiment_id": "exp15_detached_head_ssr_coadaptation",
+  "objective": "从同一个MoGe-2与零初始化SSR重新开始，在detached阶段同步训练二维几何头和SSR，检验渐进共适应能否避免Exp14的突然分布错配。",
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16,
+    "augmentation": false,
+    "fine_structure_rois": "experiment/stage2_training_strategy/runs/exp13_fixed_base_ssr_diagnostic/fine_structure_rois.json"
+  },
+  "initialization": {
+    "base": "Ruicheng/moge-2-vitl-normal",
+    "ssr_output": "zero",
+    "warm_start": null
+  },
+  "trainable_modules": {
+    "dino_backbone": false,
+    "neck_and_points_head": true,
+    "ssr": true,
+    "normal_prediction": false
+  },
+  "gradient_routing": {
+    "base_k0_loss_updates_head": true,
+    "refined_k1_k2_k3_loss_updates_ssr": true,
+    "refined_loss_updates_head": false,
+    "refiner_detach_steps": 800
+  },
+  "optimization": {
+    "steps": 800,
+    "global_batch_size": 8,
+    "microbatch_size": 1,
+    "ssr_learning_rate": 2e-5,
+    "head_learning_rate": 1e-6,
+    "backbone_learning_rate": 0,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "schedule": "constant",
+    "evaluation_every_steps": 100,
+    "seed": 151
+  },
+  "checkpoint_selection": {
+    "split": "train",
+    "scope": "structure",
+    "metric": "K=3 Point Rel",
+    "mode": "min"
+  },
+  "decision_questions": [
+    "二维头K0是否像Exp14一样稳定改善",
+    "SSR是否能在移动但detach的Base输入上持续保持K3增益",
+    "最终K3是否同时优于原始K0和同检查点K0",
+    "K5与留出场景稳定性是否优于Exp13和Exp14"
+  ],
+  "monitoring": {
+    "interval_seconds": 600,
+    "minimum_free_memory_mib": 30000,
+    "do_not_terminate_other_jobs": true
+  }
+}

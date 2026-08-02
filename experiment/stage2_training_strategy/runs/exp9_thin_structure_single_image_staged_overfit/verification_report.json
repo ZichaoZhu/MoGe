@@ -1,0 +1,42 @@
+{
+  "status": "complete",
+  "date": "2026-07-28",
+  "scheduler": {
+    "status": "complete",
+    "failures": 0
+  },
+  "smoke_test": {
+    "sample_id": "ai_002_003_cam_00_frame.0000",
+    "shape": [384, 512],
+    "steps": 4,
+    "zero_identity_max_abs_error": 0.0,
+    "observed_nvidia_smi_increment_peak_bytes": 14456717312
+  },
+  "formal_runs": {
+    "samples": 5,
+    "complete_reports": 5,
+    "final_k3_better_than_k0_full": 3,
+    "final_k3_better_than_k0_structure": 3,
+    "full_depth_rel_below_1_percent": 2,
+    "full_delta_1.01_above_95_percent": 2,
+    "structure_point_rel_below_2_percent": 3
+  },
+  "artifacts": {
+    "gifs": 10,
+    "frames_per_gif": 46,
+    "duration_ms_per_frame": 110,
+    "all_frames_decoded": true,
+    "metric_summary_rows": 180
+  },
+  "checkpoints": {
+    "files": 30,
+    "size_bytes": 89229500203,
+    "sha256_complete": true,
+    "stored_on_server_only": true
+  },
+  "tests": {
+    "passed": 67,
+    "warnings": 16,
+    "elapsed_seconds": 13.77
+  }
+}

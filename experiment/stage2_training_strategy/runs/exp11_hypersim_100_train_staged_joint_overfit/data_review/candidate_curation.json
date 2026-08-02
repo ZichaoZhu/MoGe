@@ -1,0 +1,36 @@
+{
+  "status": "manually-reviewed-before-user-review",
+  "review_inputs": "RGB contact sheets and the GT-only detector crop; no model predictions or held-out metrics",
+  "replacements": [
+    {
+      "remove": "ai_021_010_cam_00_frame.0099",
+      "add": "ai_036_006_cam_00_frame.0000",
+      "reason": "用裸露顶棚管线和细支架替换主要由窗帘纹理触发的候选"
+    },
+    {
+      "remove": "ai_005_003_cam_00_frame.0010",
+      "add": "ai_005_006_cam_00_frame.0099",
+      "reason": "用玻璃楼梯和栏杆替换以粗柱为主的候选"
+    },
+    {
+      "remove": "ai_037_005_cam_01_frame.0099",
+      "add": "ai_013_004_cam_00_frame.0000",
+      "reason": "用玻璃隔断、吊灯细杆和桌椅腿替换普通花盆候选"
+    },
+    {
+      "remove": "ai_054_004_cam_01_frame.0099",
+      "add": "ai_039_007_cam_00_frame.0099",
+      "reason": "用树枝分叉结构替换主要由透明窗帘纹理触发的候选"
+    },
+    {
+      "remove": "ai_014_010_cam_00_frame.0000",
+      "add": "ai_038_006_cam_00_frame.0000",
+      "reason": "用成排吊灯支架和椅子扶手替换以普通台面为主的候选"
+    },
+    {
+      "remove": "ai_007_004_cam_00_frame.0000",
+      "add": "ai_032_005_cam_00_frame.0000",
+      "reason": "用旋转楼梯及栏杆替换缺少显著细结构的洗手台候选"
+    }
+  ]
+}

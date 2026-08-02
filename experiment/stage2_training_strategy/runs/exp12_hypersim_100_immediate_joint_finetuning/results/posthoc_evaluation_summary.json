@@ -1,0 +1,96 @@
+{
+  "status": "complete",
+  "evaluation_protocol": {
+    "shape": [
+      384,
+      512
+    ],
+    "num_tokens": 2500,
+    "refinement_steps": [
+      0,
+      1,
+      3,
+      5
+    ],
+    "counts": {
+      "train": 100,
+      "val": 16,
+      "test": 16
+    },
+    "note": "联合前后均使用同一离线检查点评测器重新计算，数值可能与训练期间的周期评测有微小实现差异。"
+  },
+  "checkpoints": {
+    "initial": {
+      "step": 3000,
+      "sha256": "1a665e760516fde4e00082b9743a0fd8c7eed98d298cb76bb012b813227c98ce"
+    },
+    "final": {
+      "step": 3300,
+      "sha256": "80b62541db30e4a2c2cef34a8608d01eb53f9b81ae3ad44cd5309381e5d35f1c"
+    }
+  },
+  "point_rel_percent": {
+    "train": {
+      "initial": {
+        "k0": 3.354103801073507,
+        "k1": 3.3482887260615826,
+        "k3": 3.345028674695641,
+        "k5": 3.3500560396350925
+      },
+      "final": {
+        "k0": 3.333752949023619,
+        "k1": 3.3231054842472076,
+        "k3": 3.3191354018636052,
+        "k5": 3.3325146143324673
+      },
+      "k3_stage_relative_improvement_percent": 0.7740822381557572
+    },
+    "val": {
+      "initial": {
+        "k0": 10.340062621980906,
+        "k1": 10.336781712248921,
+        "k3": 10.33166036941111,
+        "k5": 10.32910895301029
+      },
+      "final": {
+        "k0": 10.541685915086418,
+        "k1": 10.540064086671919,
+        "k3": 10.540088894777,
+        "k5": 10.542631382122636
+      },
+      "k3_stage_relative_improvement_percent": -2.017376858253899
+    },
+    "test": {
+      "initial": {
+        "k0": 5.797969189006835,
+        "k1": 5.798488075379282,
+        "k3": 5.800848198123276,
+        "k5": 5.806300661060959
+      },
+      "final": {
+        "k0": 5.847553291823715,
+        "k1": 5.845193134155124,
+        "k3": 5.844644783064723,
+        "k5": 5.849481420591474
+      },
+      "k3_stage_relative_improvement_percent": -0.7550031210197174
+    }
+  },
+  "final_ssr_k3_vs_k0": {
+    "train_point_rel_relative_reduction": 0.004384712179795747,
+    "val_point_rel_relative_reduction": 0.00015149572110972898,
+    "test_point_rel_relative_reduction": 0.0004973890127788483,
+    "fraction_of_frames_with_lower_point_rel": {
+      "train": 0.85,
+      "val": 0.5625,
+      "test": 0.375
+    }
+  },
+  "website": {
+    "sample_count": 3,
+    "point_cloud_count": 24,
+    "point_cloud_bytes": 70786680,
+    "sample_selection": "RGB 和 GT only；在查看模型预测前锁定",
+    "default_comparison": "联合前 K=0 vs 联合后 K=3"
+  }
+}

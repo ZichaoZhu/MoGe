@@ -1,0 +1,58 @@
+{
+  "experiment_id": "exp14_head_ssr_short_joint",
+  "objective": "从Exp13训练拟合最佳SSR检查点出发，仅解除二维几何头冻结并与SSR短程联合训练，隔离二维头参与联合反向传播的作用。",
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16,
+    "augmentation": false,
+    "fine_structure_rois": "experiment/stage2_training_strategy/runs/exp13_fixed_base_ssr_diagnostic/fine_structure_rois.json"
+  },
+  "warm_start": {
+    "source_experiment": "exp13_fixed_base_ssr_diagnostic",
+    "source_arm": "lr_2e5",
+    "step": 700,
+    "checkpoint": "experiment/stage2_training_strategy/runs/exp13_fixed_base_ssr_diagnostic/artifacts/lr_2e5/checkpoint.pt",
+    "sha256": "bcf6a3652cc9656a41bf3953ad7b621a5177937f0a35f068a71ee0bde91f034c",
+    "fresh_optimizer": true
+  },
+  "trainable_modules": {
+    "dino_backbone": false,
+    "neck_and_points_head": true,
+    "ssr": true,
+    "normal_prediction": false
+  },
+  "optimization": {
+    "first_new_step": 701,
+    "maximum_step": 900,
+    "new_steps": 200,
+    "global_batch_size": 8,
+    "microbatch_size": 1,
+    "ssr_learning_rate": 2e-6,
+    "head_learning_rate": 1e-6,
+    "backbone_learning_rate": 0,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "schedule": "constant",
+    "evaluation_every_steps": 50,
+    "seed": 141
+  },
+  "checkpoint_selection": {
+    "split": "train",
+    "scope": "structure",
+    "metric": "K=3 Point Rel",
+    "mode": "min"
+  },
+  "decision_questions": [
+    "K=0全图误差是否下降",
+    "K=3结构收益是否在二维头更新后保留",
+    "验证全图恶化是否比Exp13高学习率分支收敛",
+    "联合反向是否重新触发SSR残差或梯度不稳定"
+  ],
+  "monitoring": {
+    "interval_seconds": 600,
+    "physical_gpu": 1,
+    "do_not_terminate_other_jobs": true
+  }
+}

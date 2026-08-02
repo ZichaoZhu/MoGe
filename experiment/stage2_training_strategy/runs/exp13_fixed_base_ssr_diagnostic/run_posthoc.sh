@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SAFE_ROOT=/mnt/data/home/zhuzichao
+PROJECT_ROOT="$SAFE_ROOT/2026_TPAMI_InfiniGeometry"
+REPO="$PROJECT_ROOT/third_party/MoGe-3"
+ENVIRONMENT="$PROJECT_ROOT/envs/moge3"
+EXP_DIR="$REPO/experiment/stage2_training_strategy/runs/exp13_fixed_base_ssr_diagnostic"
+DATA="$REPO/experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data"
+ROIS="$EXP_DIR/fine_structure_rois.json"
+CACHE="$PROJECT_ROOT/cache/moge3"
+TMP="$PROJECT_ROOT/tmp/moge3"
+GPU="${1:?GPU编号不能为空}"
+ARM="${2:?学习率分支不能为空}"
+
+case "$GPU" in 0|1|2|3) ;; *) exit 92 ;; esac
+case "$ARM" in lr_2e6|lr_1e5|lr_2e5) ;; *) exit 93 ;; esac
+CHECKPOINT="$EXP_DIR/artifacts/$ARM/checkpoint.pt"
+OUTPUT="$EXP_DIR/artifacts/${ARM}_posthoc"
+LOGS="$EXP_DIR/artifacts/logs"
+
+test "$(realpath -e "$SAFE_ROOT")" = /mnt/data/home/zhuzichao
+test "$(realpath -e "$REPO")" = "$REPO"
+for path in "$EXP_DIR" "$DATA" "$ROIS" "$CHECKPOINT" "$OUTPUT" "$LOGS" \
+  "$CACHE" "$TMP"
+do
+  case "$(realpath -m "$path")/" in
+    "$SAFE_ROOT/"*) ;;
+    *) exit 91 ;;
+  esac
+done
+test -f "$CHECKPOINT"
+if [[ -f "$OUTPUT/report.json" ]]; then
+  exit 0
+fi
+
+install -d "$OUTPUT" "$LOGS" "$CACHE/huggingface" "$CACHE/torch" \
+  "$CACHE/pip" "$CACHE/xdg" "$TMP"
+cd "$REPO"
+export PYTHONPATH="$REPO"
+export TMPDIR="$TMP"
+export HF_HOME="$CACHE/huggingface"
+export TORCH_HOME="$CACHE/torch"
+export PIP_CACHE_DIR="$CACHE/pip"
+export XDG_CACHE_HOME="$CACHE/xdg"
+export HF_HUB_OFFLINE=1
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+export CUDA_VISIBLE_DEVICES="$GPU"
+
+"$ENVIRONMENT/bin/python" \
+  -m moge.scripts.evaluate_hypersim_checkpoint_rois_v3 \
+  --data "$DATA" \
+  --checkpoint "$CHECKPOINT" \
+  --fine-structure-rois "$ROIS" \
+  --output "$OUTPUT" \
+  --safe-root "$SAFE_ROOT" \
+  --device cuda:0 \
+  --height 384 \
+  --width 512 \
+  --num-tokens 2500 \
+  --evaluation-steps 0 1 3 5 \
+  --batch-size 1 \
+  --boundary-threshold 0.03 \
+  >>"$LOGS/posthoc_${ARM}.log" 2>&1

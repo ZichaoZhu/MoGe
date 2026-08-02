@@ -1,0 +1,95 @@
+{
+  "checked_at": "2026-08-01T04:22:25.347745+08:00",
+  "state": "failed",
+  "check_interval_seconds": 600,
+  "pipeline_pid": 1335483,
+  "pipeline_alive": false,
+  "selected_gpus": [
+    1,
+    0
+  ],
+  "gpus": [
+    {
+      "index": 0,
+      "memory_used_mib": 24898,
+      "memory_free_mib": 23611,
+      "utilization_percent": 0
+    },
+    {
+      "index": 1,
+      "memory_used_mib": 15192,
+      "memory_free_mib": 33317,
+      "utilization_percent": 0
+    },
+    {
+      "index": 2,
+      "memory_used_mib": 35883,
+      "memory_free_mib": 12626,
+      "utilization_percent": 0
+    },
+    {
+      "index": 3,
+      "memory_used_mib": 45268,
+      "memory_free_mib": 3241,
+      "utilization_percent": 0
+    }
+  ],
+  "smoke_report_available": true,
+  "formal_report_available": false,
+  "latest_training": {
+    "step": "4000",
+    "stage": "detached_warmup",
+    "loss": "0.15841807890683413",
+    "grad_norm": "1.15334153175354",
+    "lr_ssr": "5e-07",
+    "lr_heads": "5e-07",
+    "lr_backbone": "5e-08",
+    "base/k1/edge": "0.0006946244720893446",
+    "base/k1/global": "0.01608605426736176",
+    "base/k1/local": "0.025448821485042572",
+    "refined/k1/edge": "0.0006901314263814129",
+    "refined/k1/global": "0.016029512335080653",
+    "refined/k1/local": "0.022429357515648007",
+    "refined/k2/edge": "0.0006923304536030628",
+    "refined/k2/global": "0.016000424569938332",
+    "refined/k2/local": "0.021164917561691254",
+    "refined/k3/edge": "0.0006974223651923239",
+    "refined/k3/global": "0.015997038804925978",
+    "refined/k3/local": "0.022487442125566304",
+    "ssr_max_abs_log_depth_residual": "0.013519680127501488",
+    "ssr_max_depth_span": "758.0"
+  },
+  "latest_evaluation": {
+    "step": "4000",
+    "train/k0_point_rel": "0.03558534264098853",
+    "train/k0_depth_rel": "0.02890898778103292",
+    "train/k0_depth_delta_1.01": "0.5848536501824856",
+    "train/k0_depth_delta_1.25": "0.9724474602937698",
+    "train/k0_boundary_f1": "0.7991664311289788",
+    "train/k3_point_rel": "0.03536750909406692",
+    "train/k3_depth_rel": "0.02870013552252203",
+    "train/k3_depth_delta_1.01": "0.5954525551199913",
+    "train/k3_depth_delta_1.25": "0.9724551951885223",
+    "train/k3_boundary_f1": "0.8004990887641906",
+    "val/k0_point_rel": "0.12159745837561786",
+    "val/k0_depth_rel": "0.08621946140192449",
+    "val/k0_depth_delta_1.01": "0.1467033342923969",
+    "val/k0_depth_delta_1.25": "0.9211437292397022",
+    "val/k0_boundary_f1": "0.8380903080105782",
+    "val/k3_point_rel": "0.12142850062809885",
+    "val/k3_depth_rel": "0.08607226761523634",
+    "val/k3_depth_delta_1.01": "0.15052473626565188",
+    "val/k3_depth_delta_1.25": "0.9211821928620338",
+    "val/k3_boundary_f1": "0.8387339673936367"
+  },
+  "instability_event": null,
+  "pipeline_result": {
+    "status": "failed",
+    "exit_code": 1,
+    "physical_gpus": [
+      1,
+      0
+    ],
+    "finished_at": "2026-08-01T04:19:59.348686+08:00"
+  }
+}

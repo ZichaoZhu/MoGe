@@ -1,0 +1,57 @@
+{
+  "status": "complete",
+  "selectionStatus": "locked-before-rendering",
+  "manifest": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/exp12/manifest.json",
+  "samples": [
+    {
+      "id": "ai_054_008_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        160,
+        160,
+        352,
+        352
+      ],
+      "structurePixels": 18413
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0042",
+      "split": "val",
+      "cropXYXY": [
+        160,
+        96,
+        352,
+        288
+      ],
+      "structurePixels": 18432
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0000",
+      "split": "test",
+      "cropXYXY": [
+        224,
+        128,
+        416,
+        320
+      ],
+      "structurePixels": 18432
+    }
+  ],
+  "checkpointSteps": {
+    "initial": 3000,
+    "final": 3300
+  },
+  "checkpointSha256": {
+    "initial": "1a665e760516fde4e00082b9743a0fd8c7eed98d298cb76bb012b813227c98ce",
+    "final": "80b62541db30e4a2c2cef34a8608d01eb53f9b81ae3ad44cd5309381e5d35f1c"
+  },
+  "evaluationSteps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "pointCloudCount": 24,
+  "pointCloudBytes": 70786680,
+  "pointCloudChecksums": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/exp12/pointcloud_sha256.json"
+}

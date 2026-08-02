@@ -1,0 +1,81 @@
+{
+  "status": "complete",
+  "experiment": "exp8_two_gpu_head_ssr_joint_finetuning / 05",
+  "selection": {
+    "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp8_two_gpu_head_ssr_joint_finetuning/artifacts/gif_gallery/generated_selections/05_ai_053_018_cam_00_frame.0000.json",
+    "status": "locked-before-rendering",
+    "inputs": "RGB and ground truth only; no predictions"
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "display_mask": {
+    "definition": "split-specific ground-truth depth rule locked before model predictions and used only to isolate the displayed structure",
+    "dilation_pixels": 0,
+    "scope": "Visualization-only diagnostic mask; not used for training, checkpoint selection, or paper Local benchmark evaluation."
+  },
+  "checkpoints": [
+    {
+      "label": "K=3",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp8_two_gpu_head_ssr_joint_finetuning/artifacts/training/latest_checkpoint.pt",
+      "sha256": "2a05d61b2ae8a2617a299587c2494df1a892ac678fe4bf6fbae66cb4356cf871",
+      "step": 600,
+      "kind": "full_model",
+      "refinement_steps": 3
+    }
+  ],
+  "render": {
+    "yaw_degrees": [
+      -90.0,
+      90.0
+    ],
+    "pitch_degrees": -8.0,
+    "motion": "one-way",
+    "frame_duration_ms": 110,
+    "angular_step_degrees": 4.0,
+    "angular_speed_degrees_per_second": 36.36363636363637,
+    "forward_frames": 46,
+    "total_frames": 46,
+    "loop_duration_ms": 5060,
+    "camera_basis": "selected ground-truth fine-structure points only"
+  },
+  "splits": {
+    "train": {
+      "sample": {
+        "id": "ai_053_018_cam_00_frame.0000",
+        "scene": "ai_053_018",
+        "frame": 0
+      },
+      "crop_xyxy": [
+        320,
+        64,
+        512,
+        256
+      ],
+      "display_mask_pixels": 18429,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "resolved_maximum_depth_m": 11.388504028320312
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 18429,
+          "point_rel": 0.11173249781131744,
+          "depth_rel": 0.09515271335840225
+        },
+        "K=3": {
+          "pixels": 18429,
+          "point_rel": 0.11620410531759262,
+          "depth_rel": 0.09414045512676239
+        }
+      },
+      "fixed_camera_radius_m": 9.347647933959962,
+      "artifacts": {
+        "orbit": "train_rod_orbit.gif",
+        "preview": "train_rod_preview.png"
+      }
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "status": "complete",
+  "experiment": "exp6-best-step250",
+  "selection": {
+    "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp4_hypersim_multiscene_generalization/rod_selection.json",
+    "status": "locked-before-rendering",
+    "inputs": "RGB and ground truth only; no predictions"
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "display_mask": {
+    "definition": "split-specific ground-truth depth rule locked before model predictions and used only to isolate the displayed structure",
+    "dilation_pixels": 0,
+    "scope": "Visualization-only diagnostic mask; not used for training, checkpoint selection, or paper Local benchmark evaluation."
+  },
+  "checkpoints": [
+    {
+      "label": "K=3",
+      "path": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp6_two_stage_joint_finetuning/artifacts/training/checkpoint.pt",
+      "sha256": "ee4b6522ea264b06ae216d7bcfad8f964481a48f01fd3eb924028caae28f7368",
+      "step": 250,
+      "kind": "full_model",
+      "refinement_steps": 3
+    }
+  ],
+  "render": {
+    "yaw_degrees": [
+      -90.0,
+      90.0
+    ],
+    "pitch_degrees": -8.0,
+    "motion": "one-way",
+    "frame_duration_ms": 110,
+    "angular_step_degrees": 4.0,
+    "angular_speed_degrees_per_second": 36.36363636363637,
+    "forward_frames": 46,
+    "total_frames": 46,
+    "loop_duration_ms": 5060,
+    "camera_basis": "selected ground-truth fine-structure points only"
+  },
+  "splits": {
+    "train": {
+      "sample": {
+        "id": "ai_001_001_cam_00_frame.0032",
+        "scene": "ai_001_001",
+        "frame": 32
+      },
+      "crop_xyxy": [
+        32,
+        192,
+        160,
+        320
+      ],
+      "display_mask_pixels": 6554,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4,
+        "resolved_maximum_depth_m": 0.5379490852355957
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 6554,
+          "point_rel": 0.08090329170227051,
+          "depth_rel": 0.0297072883695364
+        },
+        "K=3": {
+          "pixels": 6554,
+          "point_rel": 0.08096130192279816,
+          "depth_rel": 0.029701733961701393
+        }
+      },
+      "fixed_camera_radius_m": 0.13621446132659912,
+      "artifacts": {
+        "orbit": "train_rod_orbit.gif",
+        "preview": "train_rod_preview.png"
+      }
+    },
+    "val": {
+      "sample": {
+        "id": "ai_043_002_cam_00_frame.0086",
+        "scene": "ai_043_002",
+        "frame": 86
+      },
+      "crop_xyxy": [
+        208,
+        256,
+        336,
+        384
+      ],
+      "display_mask_pixels": 6554,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.4,
+        "resolved_maximum_depth_m": 3.187582015991211
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 6554,
+          "point_rel": 0.018346482887864113,
+          "depth_rel": 0.016935529187321663
+        },
+        "K=3": {
+          "pixels": 6554,
+          "point_rel": 0.018423929810523987,
+          "depth_rel": 0.016994258388876915
+        }
+      },
+      "fixed_camera_radius_m": 0.6478888535499573,
+      "artifacts": {
+        "orbit": "val_rod_orbit.gif",
+        "preview": "val_rod_preview.png"
+      }
+    },
+    "test": {
+      "sample": {
+        "id": "ai_048_001_cam_00_frame.0046",
+        "scene": "ai_048_001",
+        "frame": 46
+      },
+      "crop_xyxy": [
+        256,
+        144,
+        384,
+        272
+      ],
+      "display_mask_pixels": 4096,
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.25,
+        "resolved_maximum_depth_m": 1.16160249710083
+      },
+      "metrics": {
+        "K=0": {
+          "pixels": 4096,
+          "point_rel": 0.08331219851970673,
+          "depth_rel": 0.08181128650903702
+        },
+        "K=3": {
+          "pixels": 4096,
+          "point_rel": 0.0833093672990799,
+          "depth_rel": 0.0818086564540863
+        }
+      },
+      "fixed_camera_radius_m": 0.250124477148056,
+      "artifacts": {
+        "orbit": "test_rod_orbit.gif",
+        "preview": "test_rod_preview.png"
+      }
+    }
+  }
+}

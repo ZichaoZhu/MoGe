@@ -1,0 +1,9 @@
+checkpoint.pt
+latest_checkpoint.pt
+resume_checkpoint.pt
+*.incomplete
+*.ply
+smoke/
+orchestrator.pid
+!logs/
+!logs/*.log

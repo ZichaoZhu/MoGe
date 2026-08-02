@@ -1,0 +1,143 @@
+{
+  "status": "complete",
+  "sample_id": "ai_019_004_cam_00_frame.0000",
+  "snapshot": "stage1",
+  "step": 2000,
+  "stage": "detached",
+  "stop_reason": "detected_plateau",
+  "metrics": {
+    "k0": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 1.0820695161819458,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 1.0283266305923462,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 1.0423243045806885,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "alignment": {
+        "scale": 0.0,
+        "z_shift": 0.0
+      }
+    },
+    "k1": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 1.0820695161819458,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 1.0283266305923462,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 1.0423243045806885,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "alignment": {
+        "scale": 0.0,
+        "z_shift": 0.0
+      }
+    },
+    "k3": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 1.0820695161819458,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 1.0283266305923462,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 1.0423243045806885,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "alignment": {
+        "scale": 0.0,
+        "z_shift": 0.0
+      }
+    },
+    "k5": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 1.0820695161819458,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 1.0283266305923462,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 1.0423243045806885,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "alignment": {
+        "scale": 0.0,
+        "z_shift": 0.0
+      }
+    }
+  },
+  "plateau_trackers": {
+    "stage1_best": {
+      "k0": 0.023957571014761925,
+      "k3": 0.01449991762638092
+    },
+    "stage1_stale": {
+      "k0": 16,
+      "k3": 16
+    },
+    "joint_best_score": null,
+    "joint_stale": 0,
+    "success_streak": 0
+  }
+}

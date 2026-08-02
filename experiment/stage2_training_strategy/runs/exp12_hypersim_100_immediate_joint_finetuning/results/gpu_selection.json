@@ -1,0 +1,34 @@
+{
+  "selected_at": "2026-08-01T14:27:26.567774+08:00",
+  "physical_gpus": [
+    1,
+    0
+  ],
+  "world_size": 2,
+  "launch_snapshot": [
+    {
+      "index": 0,
+      "memory_used_mib": 25242,
+      "memory_free_mib": 23267,
+      "utilization_percent": 0
+    },
+    {
+      "index": 1,
+      "memory_used_mib": 15192,
+      "memory_free_mib": 33317,
+      "utilization_percent": 0
+    },
+    {
+      "index": 2,
+      "memory_used_mib": 25300,
+      "memory_free_mib": 23209,
+      "utilization_percent": 0
+    },
+    {
+      "index": 3,
+      "memory_used_mib": 29952,
+      "memory_free_mib": 18557,
+      "utilization_percent": 50
+    }
+  ]
+}

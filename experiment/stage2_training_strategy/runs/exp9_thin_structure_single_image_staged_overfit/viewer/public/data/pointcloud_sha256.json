@@ -1,0 +1,138 @@
+[
+  {
+    "sample": "ai_019_004_cam_00_frame.0000",
+    "stage": "initial",
+    "k": 0,
+    "url": "/data/01_ai_019_004_cam_00_frame.0000/initial_k0.ply",
+    "bytes": 2949445,
+    "sha256": "24e45bcb2a661d77aed98f149096e6dccc92ab0c6b2157da2710b4c7b1670b7c"
+  },
+  {
+    "sample": "ai_054_008_cam_00_frame.0000",
+    "stage": "initial",
+    "k": 0,
+    "url": "/data/04_ai_054_008_cam_00_frame.0000/initial_k0.ply",
+    "bytes": 2949445,
+    "sha256": "4bb35e6fe93323f9d2b7cd77be4ab6b1eb99622f27a6fbaf049fba9212c39316"
+  },
+  {
+    "sample": "ai_054_008_cam_00_frame.0000",
+    "stage": "final",
+    "k": 0,
+    "url": "/data/04_ai_054_008_cam_00_frame.0000/final_k0.ply",
+    "bytes": 2949445,
+    "sha256": "5e5814ab74be5ac997ef255c548844d983d5aa34dd20337d1a336f405785c462"
+  },
+  {
+    "sample": "ai_054_008_cam_00_frame.0000",
+    "stage": "final",
+    "k": 1,
+    "url": "/data/04_ai_054_008_cam_00_frame.0000/final_k1.ply",
+    "bytes": 2949445,
+    "sha256": "3e816d0732082ea8c885cc46eb3223b41e4036d49db73fc2872da1430e5ff22b"
+  },
+  {
+    "sample": "ai_054_008_cam_00_frame.0000",
+    "stage": "final",
+    "k": 3,
+    "url": "/data/04_ai_054_008_cam_00_frame.0000/final_k3.ply",
+    "bytes": 2949445,
+    "sha256": "b471b07f9cc1d26e2c08c324fd64f262b4cea917482ed584829509e162dbe88a"
+  },
+  {
+    "sample": "ai_054_008_cam_00_frame.0000",
+    "stage": "final",
+    "k": 5,
+    "url": "/data/04_ai_054_008_cam_00_frame.0000/final_k5.ply",
+    "bytes": 2949445,
+    "sha256": "aa9099f9daf3aba97a6f3c80e61a96bfb79510d66df0d639bf11d34449eed283"
+  },
+  {
+    "sample": "ai_053_018_cam_00_frame.0000",
+    "stage": "initial",
+    "k": 0,
+    "url": "/data/05_ai_053_018_cam_00_frame.0000/initial_k0.ply",
+    "bytes": 2949445,
+    "sha256": "6cd705bd9ad1bc62a700266a9d6b0e4ad42a80f645bfe9770976c13af43e91a8"
+  },
+  {
+    "sample": "ai_053_018_cam_00_frame.0000",
+    "stage": "final",
+    "k": 0,
+    "url": "/data/05_ai_053_018_cam_00_frame.0000/final_k0.ply",
+    "bytes": 2949445,
+    "sha256": "2bdaec4d34d8ce4780e94b74f100f3bac37aeda490324945d31e06f2119c1a2c"
+  },
+  {
+    "sample": "ai_053_018_cam_00_frame.0000",
+    "stage": "final",
+    "k": 1,
+    "url": "/data/05_ai_053_018_cam_00_frame.0000/final_k1.ply",
+    "bytes": 2949445,
+    "sha256": "0eae19355446a9efc11be7f1c6dbf5f98d5a6732c85c92b0e509d98202786f15"
+  },
+  {
+    "sample": "ai_053_018_cam_00_frame.0000",
+    "stage": "final",
+    "k": 3,
+    "url": "/data/05_ai_053_018_cam_00_frame.0000/final_k3.ply",
+    "bytes": 2949445,
+    "sha256": "ba944dd830b578d922ab46b9183f170f965a2d68895f27b04d0e634d3ab02160"
+  },
+  {
+    "sample": "ai_053_018_cam_00_frame.0000",
+    "stage": "final",
+    "k": 5,
+    "url": "/data/05_ai_053_018_cam_00_frame.0000/final_k5.ply",
+    "bytes": 2949445,
+    "sha256": "0baffe6b479fe9761b9f1eb77c340e16f88f80d49d48620af8ac4b4899f25a5f"
+  },
+  {
+    "sample": "ai_002_003_cam_00_frame.0000",
+    "stage": "initial",
+    "k": 0,
+    "url": "/data/06_ai_002_003_cam_00_frame.0000/initial_k0.ply",
+    "bytes": 2949445,
+    "sha256": "ee8f0db9cdd62e7f9b5a222d636723f3a053a8e0d0b8d65530c1fb098dc457a7"
+  },
+  {
+    "sample": "ai_002_003_cam_00_frame.0000",
+    "stage": "final",
+    "k": 0,
+    "url": "/data/06_ai_002_003_cam_00_frame.0000/final_k0.ply",
+    "bytes": 2949445,
+    "sha256": "0fe88e50682badc0c344462449a961ab9191f55347362af4c1dc6717e9ad5428"
+  },
+  {
+    "sample": "ai_002_003_cam_00_frame.0000",
+    "stage": "final",
+    "k": 1,
+    "url": "/data/06_ai_002_003_cam_00_frame.0000/final_k1.ply",
+    "bytes": 2949445,
+    "sha256": "420cf55b6478d63b4bf31fa21f7b05e8986f2a2ad9af5da31705a2922193c87a"
+  },
+  {
+    "sample": "ai_002_003_cam_00_frame.0000",
+    "stage": "final",
+    "k": 3,
+    "url": "/data/06_ai_002_003_cam_00_frame.0000/final_k3.ply",
+    "bytes": 2949445,
+    "sha256": "fcb46197a0d19ed7e76f2c2e7234322f5cf03ec4a12060b68c7980cf9e4b2042"
+  },
+  {
+    "sample": "ai_002_003_cam_00_frame.0000",
+    "stage": "final",
+    "k": 5,
+    "url": "/data/06_ai_002_003_cam_00_frame.0000/final_k5.ply",
+    "bytes": 2949445,
+    "sha256": "0acf49b1968fa73dd25011e5f9a10901230e3382c04bdc41bbed58c88fc2c9e0"
+  },
+  {
+    "sample": "ai_019_004_cam_00_frame.0099",
+    "stage": "initial",
+    "k": 0,
+    "url": "/data/07_ai_019_004_cam_00_frame.0099/initial_k0.ply",
+    "bytes": 2949445,
+    "sha256": "6b17a8b0e5efdb85e32889eb449b64802e2ffc2bc03eddee183799ab135dcb81"
+  }
+]

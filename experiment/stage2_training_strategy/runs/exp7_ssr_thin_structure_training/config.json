@@ -1,0 +1,57 @@
+{
+  "experiment_id": "exp7_ssr_thin_structure_training",
+  "date": "2026-07-28",
+  "hypothesis": "A frozen-base SSR trained on deliberately selected fine-structure frames can learn stronger local geometric residuals than the scene-uniform exp2 subset.",
+  "paper_relation": "Refiner-only ablation setting; K=3 for training and K=0/1/3/5 for evaluation.",
+  "data": {
+    "dataset": "Hypersim",
+    "source": "/nas1/datasets/hypersim/raw",
+    "source_mode": "read-only",
+    "train_scene_groups": 15,
+    "train_scenes": 23,
+    "train_frames": 24,
+    "validation_scene_groups": 2,
+    "validation_frames": 16,
+    "test_scene_groups": 2,
+    "test_frames": 16,
+    "split_scene_groups_disjoint": true,
+    "training_selection": "all 24 user-approved fine-structure candidates",
+    "normal_data_used": false
+  },
+  "model": {
+    "base": "Ruicheng/moge-2-vitl-normal",
+    "base_frozen": true,
+    "base_features_cached": true,
+    "trainable": "SSR only",
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "voxel_resolution": 200,
+    "training_refinement_steps": 3,
+    "evaluation_refinement_steps": [0, 1, 3, 5]
+  },
+  "optimization": {
+    "steps": 4000,
+    "batch_size": 2,
+    "microbatch_size": 1,
+    "gradient_accumulation_steps": 2,
+    "optimizer": "AdamW",
+    "learning_rate": 0.00002,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 200,
+    "checkpoint_selection": "minimum validation point Rel",
+    "seed": 71,
+    "stability_adjustment": "A preliminary 2e-4 run diverged at step 380; restart from zero with the 384x512 learning rate already validated in exp4/exp5."
+  },
+  "loss": {
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "edge_weight": 1.0,
+    "local_scales": [4, 16, 64]
+  },
+  "hardware": {
+    "physical_gpu": 1,
+    "normal_prediction": false
+  }
+}

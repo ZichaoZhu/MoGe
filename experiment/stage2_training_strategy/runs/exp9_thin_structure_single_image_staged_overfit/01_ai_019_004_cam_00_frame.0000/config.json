@@ -1,0 +1,52 @@
+{
+  "order": 1,
+  "sample_id": "ai_019_004_cam_00_frame.0000",
+  "split": "train",
+  "crop_xyxy": [192, 160, 384, 352],
+  "structure_mask": {
+    "provenance": "exp7 locked before prediction rendering",
+    "type": "near_quantile",
+    "quantile": 0.5
+  },
+  "training": {
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "training_k": 3,
+    "evaluation_k": [0, 1, 3, 5],
+    "augmentation": false,
+    "seed": 91
+  },
+  "optimization": {
+    "optimizer": "AdamW",
+    "ssr_learning_rate": 0.00002,
+    "head_learning_rate": 0.00001,
+    "dino_learning_rate": 5e-7,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "dino_freeze_steps": 1000,
+    "dino_warmup_end": 2000
+  },
+  "loss": {
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "edge_weight": 1.0,
+    "local_scales": [4, 16, 64],
+    "supervised_iterations": [0, 1, 2, 3]
+  },
+  "stopping": {
+    "stage1_steps": [2000, 5000],
+    "joint_steps": [2000, 5000],
+    "eval_every": 100,
+    "relative_improvement": 0.005,
+    "patience_evaluations": 5,
+    "loss_window_steps": 500,
+    "success_patience_evaluations": 3,
+    "success_thresholds": {
+      "full_depth_rel_below": 0.01,
+      "full_delta_1.01_above": 0.95,
+      "structure_point_rel_below": 0.02,
+      "require_k3_better_than_k0": true
+    }
+  }
+}

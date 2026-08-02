@@ -1,0 +1,182 @@
+[
+  {
+    "sample_directory": "01_ai_019_004_cam_00_frame.0000",
+    "path": "01_ai_019_004_cam_00_frame.0000/checkpoints/best_joint.pt",
+    "size_bytes": 1509309023,
+    "sha256": "de8355574f784f442003dcc9005de58af89f096801d43d3450c9d1546ec9aadb"
+  },
+  {
+    "sample_directory": "01_ai_019_004_cam_00_frame.0000",
+    "path": "01_ai_019_004_cam_00_frame.0000/checkpoints/final.pt",
+    "size_bytes": 1510369206,
+    "sha256": "e12dec0f4d67df5b1390b38f5658558d6851215644cc066e50bf553269194f1b"
+  },
+  {
+    "sample_directory": "01_ai_019_004_cam_00_frame.0000",
+    "path": "01_ai_019_004_cam_00_frame.0000/checkpoints/initial.pt",
+    "size_bytes": 1508130976,
+    "sha256": "d0c6d9d9d2072a86acd1fc38f9659c08ae5e0ff85da8ba0d540abaf287686d06"
+  },
+  {
+    "sample_directory": "01_ai_019_004_cam_00_frame.0000",
+    "path": "01_ai_019_004_cam_00_frame.0000/checkpoints/last.pt",
+    "size_bytes": 4438490810,
+    "sha256": "dd90d7cd59814b30adad52880dc124f004ab44e897bd19350470e36448dc427c"
+  },
+  {
+    "sample_directory": "01_ai_019_004_cam_00_frame.0000",
+    "path": "01_ai_019_004_cam_00_frame.0000/checkpoints/resume.pt",
+    "size_bytes": 4438496032,
+    "sha256": "810c1b910633db9811fd4cc724103dd7d3f7dee7ff82b04f4b68b3ac55f09b0e"
+  },
+  {
+    "sample_directory": "01_ai_019_004_cam_00_frame.0000",
+    "path": "01_ai_019_004_cam_00_frame.0000/checkpoints/stage1.pt",
+    "size_bytes": 4437376288,
+    "sha256": "1fea09bcc9ca99e6245477973f788e2f35f7fe6251ad00fb42488d2c800e9829"
+  },
+  {
+    "sample_directory": "04_ai_054_008_cam_00_frame.0000",
+    "path": "04_ai_054_008_cam_00_frame.0000/checkpoints/best_joint.pt",
+    "size_bytes": 1509364767,
+    "sha256": "6b085fe44e9059cce0b1cf4b7e0e427940e10dd42094f5dcbaffe835cf44e70d"
+  },
+  {
+    "sample_directory": "04_ai_054_008_cam_00_frame.0000",
+    "path": "04_ai_054_008_cam_00_frame.0000/checkpoints/final.pt",
+    "size_bytes": 1510368950,
+    "sha256": "8ba06b0d66c90fa5f2f9f9202a5865c267efbdf5d52379b45eef0a9622a00e08"
+  },
+  {
+    "sample_directory": "04_ai_054_008_cam_00_frame.0000",
+    "path": "04_ai_054_008_cam_00_frame.0000/checkpoints/initial.pt",
+    "size_bytes": 1508130976,
+    "sha256": "9eb36acc71a2efa41cc9c37a5bd37835b136ff85e2c4d38954d91329391a8138"
+  },
+  {
+    "sample_directory": "04_ai_054_008_cam_00_frame.0000",
+    "path": "04_ai_054_008_cam_00_frame.0000/checkpoints/last.pt",
+    "size_bytes": 4438490554,
+    "sha256": "e43ca041d9c4dc1117ca7b4c9f8e8a7237214abb1db773d4ebbd59b377494cae"
+  },
+  {
+    "sample_directory": "04_ai_054_008_cam_00_frame.0000",
+    "path": "04_ai_054_008_cam_00_frame.0000/checkpoints/resume.pt",
+    "size_bytes": 4438495776,
+    "sha256": "af96b264fac1bbca79713fd4c8322b390c31ef966e797c02ee5f6dd79b969a34"
+  },
+  {
+    "sample_directory": "04_ai_054_008_cam_00_frame.0000",
+    "path": "04_ai_054_008_cam_00_frame.0000/checkpoints/stage1.pt",
+    "size_bytes": 4437375968,
+    "sha256": "c06b4d693209e9ed2b5329e932df5c1e485ae7404c4fcf53a1b3b9fc96785849"
+  },
+  {
+    "sample_directory": "05_ai_053_018_cam_00_frame.0000",
+    "path": "05_ai_053_018_cam_00_frame.0000/checkpoints/best_joint.pt",
+    "size_bytes": 1512052191,
+    "sha256": "4cb8ac4158bbee91f516b79f15742c8481ea42a2550ea82805dedde19fa07ded"
+  },
+  {
+    "sample_directory": "05_ai_053_018_cam_00_frame.0000",
+    "path": "05_ai_053_018_cam_00_frame.0000/checkpoints/final.pt",
+    "size_bytes": 1512160566,
+    "sha256": "c3e5d5ac887597afdf552c49fc30574268c823af06babfa1efad231b0fe139dc"
+  },
+  {
+    "sample_directory": "05_ai_053_018_cam_00_frame.0000",
+    "path": "05_ai_053_018_cam_00_frame.0000/checkpoints/initial.pt",
+    "size_bytes": 1508130976,
+    "sha256": "25177fff0e3d4d952b74ddb2dd3ed0c2943a872dc3ea4fe1868db693a690c62d"
+  },
+  {
+    "sample_directory": "05_ai_053_018_cam_00_frame.0000",
+    "path": "05_ai_053_018_cam_00_frame.0000/checkpoints/last.pt",
+    "size_bytes": 4440282170,
+    "sha256": "4e3b7574c07268fd50fc08e52dceeeab2a44064a05eac854bf689c4ec43aaa37"
+  },
+  {
+    "sample_directory": "05_ai_053_018_cam_00_frame.0000",
+    "path": "05_ai_053_018_cam_00_frame.0000/checkpoints/resume.pt",
+    "size_bytes": 4440287392,
+    "sha256": "ae6bda05c7605386268bb3f08dab19ce604fc58d2e0113f6c4a516aad0debec9"
+  },
+  {
+    "sample_directory": "05_ai_053_018_cam_00_frame.0000",
+    "path": "05_ai_053_018_cam_00_frame.0000/checkpoints/stage1.pt",
+    "size_bytes": 4439055584,
+    "sha256": "52857686df267cd15879242fbdebc8c3cdc841b0979db3248ba7cf238c195ff9"
+  },
+  {
+    "sample_directory": "06_ai_002_003_cam_00_frame.0000",
+    "path": "06_ai_002_003_cam_00_frame.0000/checkpoints/best_joint.pt",
+    "size_bytes": 1511380319,
+    "sha256": "941bd7a67316f247e6bae24d256ced63aa17995d1ad139aa478b989ce10db58a"
+  },
+  {
+    "sample_directory": "06_ai_002_003_cam_00_frame.0000",
+    "path": "06_ai_002_003_cam_00_frame.0000/checkpoints/final.pt",
+    "size_bytes": 1512048566,
+    "sha256": "a895690716e0a309c5a0e71b296418e23f33251039c83b8e9fd119dd4739fea0"
+  },
+  {
+    "sample_directory": "06_ai_002_003_cam_00_frame.0000",
+    "path": "06_ai_002_003_cam_00_frame.0000/checkpoints/initial.pt",
+    "size_bytes": 1508130976,
+    "sha256": "68bb69f389b1c44291f3730748c77809e8c3b3a7b7a53a0f8ba7548da01dbd82"
+  },
+  {
+    "sample_directory": "06_ai_002_003_cam_00_frame.0000",
+    "path": "06_ai_002_003_cam_00_frame.0000/checkpoints/last.pt",
+    "size_bytes": 4440170170,
+    "sha256": "35ec8d1c4f76c3bada05467f81d9baf6d0aa7dbdca88f1c64b6e3f27ba47109c"
+  },
+  {
+    "sample_directory": "06_ai_002_003_cam_00_frame.0000",
+    "path": "06_ai_002_003_cam_00_frame.0000/checkpoints/resume.pt",
+    "size_bytes": 4440175392,
+    "sha256": "f7e1c830699e9646f284e36f8af58586d3544a3d048906e1d53b58b2035e3069"
+  },
+  {
+    "sample_directory": "06_ai_002_003_cam_00_frame.0000",
+    "path": "06_ai_002_003_cam_00_frame.0000/checkpoints/stage1.pt",
+    "size_bytes": 4439055584,
+    "sha256": "17435f90d89d8f4bcf9074f96bea15de45701a74e3480014cc54c4ad6cf75e08"
+  },
+  {
+    "sample_directory": "07_ai_019_004_cam_00_frame.0099",
+    "path": "07_ai_019_004_cam_00_frame.0099/checkpoints/best_joint.pt",
+    "size_bytes": 1509308767,
+    "sha256": "27110065fbcf9f7366a9f6f63c7e8fa848b6baed118d4d1243ca8f84566198d2"
+  },
+  {
+    "sample_directory": "07_ai_019_004_cam_00_frame.0099",
+    "path": "07_ai_019_004_cam_00_frame.0099/checkpoints/final.pt",
+    "size_bytes": 1510368950,
+    "sha256": "748e6b4c2c5a8a0248d320330ed0fca7905ee8abac09362b4a0a857fa9890f5c"
+  },
+  {
+    "sample_directory": "07_ai_019_004_cam_00_frame.0099",
+    "path": "07_ai_019_004_cam_00_frame.0099/checkpoints/initial.pt",
+    "size_bytes": 1508130976,
+    "sha256": "5db57058f4a3b7d0adcf30da1f36c3705ee31c870297e281dc348b25ac166df6"
+  },
+  {
+    "sample_directory": "07_ai_019_004_cam_00_frame.0099",
+    "path": "07_ai_019_004_cam_00_frame.0099/checkpoints/last.pt",
+    "size_bytes": 4438490554,
+    "sha256": "e187bfc67807ee2a3147c9b69bccd87a43bd326852bcb4102a888b6497f21f34"
+  },
+  {
+    "sample_directory": "07_ai_019_004_cam_00_frame.0099",
+    "path": "07_ai_019_004_cam_00_frame.0099/checkpoints/resume.pt",
+    "size_bytes": 4438495776,
+    "sha256": "b752c79d2db4b63f5c80a8862da84c742cb0cb35d788306c0f242f324287fcbd"
+  },
+  {
+    "sample_directory": "07_ai_019_004_cam_00_frame.0099",
+    "path": "07_ai_019_004_cam_00_frame.0099/checkpoints/stage1.pt",
+    "size_bytes": 4437375968,
+    "sha256": "403d7207fa0e65816e6a447902511d7f44affa7cc74892006e6dd9668b64e67c"
+  }
+]

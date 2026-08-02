@@ -1,0 +1,329 @@
+{
+  "status": "complete",
+  "experiment": "Hypersim multi-scene SSR generalization",
+  "paper_alignment": {
+    "training_mode": "paper ablation-style refiner-only setting with frozen base model",
+    "training_refinement_steps": 3,
+    "evaluation_refinement_steps": [
+      0,
+      1,
+      3,
+      5
+    ],
+    "paper_main_evaluation_resolution": "approximately 840^2",
+    "current_resolution": [
+      384,
+      512
+    ]
+  },
+  "counts": {
+    "train": 24,
+    "val": 16,
+    "test": 16
+  },
+  "scene_groups": {
+    "train": [
+      "ai_019",
+      "ai_024",
+      "ai_052",
+      "ai_026",
+      "ai_055",
+      "ai_054",
+      "ai_044",
+      "ai_053",
+      "ai_008",
+      "ai_027",
+      "ai_048",
+      "ai_002",
+      "ai_034",
+      "ai_045",
+      "ai_009"
+    ],
+    "val": [
+      "ai_043",
+      "ai_047"
+    ],
+    "test": [
+      "ai_046",
+      "ai_050"
+    ]
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "spconv_algorithm": "MaskImplicitGemm",
+  "cuda_visible_devices": "1",
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "base_frozen": true,
+  "ssr_only_guard": {
+    "model_parameter_tensors": 607,
+    "base_parameter_tensors": 481,
+    "ssr_parameter_tensors": 126,
+    "trainable_parameter_tensors": 126,
+    "base_trainable_parameter_tensors": 0,
+    "cache_tensors_detached": true,
+    "base_digest_before_cache": "502c221fa55c99cdeec938a3d9dd3eaae6740ca5f8a3bea6130ee6cda7c34271",
+    "base_digest_after_cache": "502c221fa55c99cdeec938a3d9dd3eaae6740ca5f8a3bea6130ee6cda7c34271",
+    "base_digest_unchanged": true,
+    "optimizer_parameter_tensors": 126,
+    "base_released_before_optimizer_step": true,
+    "checkpoint_contains_ssr_only": true
+  },
+  "normal_prediction": false,
+  "optimization_steps": 4000,
+  "resumed_from": null,
+  "resumed_step": 0,
+  "resume_rng_restored_exactly": true,
+  "resume_optimizer_reset": false,
+  "batch_size": 2,
+  "microbatch_size": 1,
+  "gradient_accumulation_steps": 2,
+  "learning_rate": 2e-05,
+  "loss_weights": {
+    "global": 1.0,
+    "local": 1.0,
+    "edge": 1.0
+  },
+  "best_checkpoint_step": 0,
+  "checkpoint_selection": {
+    "split": "val",
+    "metric": "point_rel",
+    "mode": "min",
+    "score": 0.08903866010950878,
+    "test_evaluated_only_after_selection": true
+  },
+  "identity_max_error": 0.0,
+  "periodic_evaluation": {
+    "train_samples": 24,
+    "val_samples": 16,
+    "interval_steps": 200,
+    "baseline": {
+      "train": {
+        "point_rel": 0.07349634496495128,
+        "depth_rel": 0.0630310974859943,
+        "depth_delta_1.01": 0.2504615643216918,
+        "depth_delta_1.25": 0.9384124701221784,
+        "boundary_f1": 0.7962314573427042
+      },
+      "val": {
+        "point_rel": 0.08903866010950878,
+        "depth_rel": 0.07076855562627316,
+        "depth_delta_1.01": 0.2160824581515044,
+        "depth_delta_1.25": 0.9456039294600487,
+        "boundary_f1": 0.8567267879843712
+      }
+    },
+    "initial_refined": {
+      "train": {
+        "point_rel": 0.07349634496495128,
+        "depth_rel": 0.0630310974859943,
+        "depth_delta_1.01": 0.2504615643216918,
+        "depth_delta_1.25": 0.9384124701221784,
+        "boundary_f1": 0.7962314573427042
+      },
+      "val": {
+        "point_rel": 0.08903866010950878,
+        "depth_rel": 0.07076855562627316,
+        "depth_delta_1.01": 0.2160824581515044,
+        "depth_delta_1.25": 0.9456039294600487,
+        "boundary_f1": 0.8567267879843712
+      }
+    }
+  },
+  "metrics_by_k": {
+    "0": {
+      "train": {
+        "point_rel": 0.07349634496495128,
+        "depth_rel": 0.0630310974859943,
+        "depth_delta_1.01": 0.2504615643216918,
+        "depth_delta_1.25": 0.9384124701221784,
+        "boundary_f1": 0.7962314573427042
+      },
+      "val": {
+        "point_rel": 0.08903866010950878,
+        "depth_rel": 0.07076855562627316,
+        "depth_delta_1.01": 0.2160824581515044,
+        "depth_delta_1.25": 0.9456039294600487,
+        "boundary_f1": 0.8567267879843712
+      },
+      "test": {
+        "point_rel": 0.07314241176936775,
+        "depth_rel": 0.06703103252220899,
+        "depth_delta_1.01": 0.2270205880049616,
+        "depth_delta_1.25": 0.9508320577442646,
+        "boundary_f1": 0.8262888044118881
+      }
+    },
+    "1": {
+      "train": {
+        "point_rel": 0.07349634496495128,
+        "depth_rel": 0.0630310974859943,
+        "depth_delta_1.01": 0.2504615643216918,
+        "depth_delta_1.25": 0.9384124701221784,
+        "boundary_f1": 0.7962314573427042
+      },
+      "val": {
+        "point_rel": 0.08903866010950878,
+        "depth_rel": 0.07076855562627316,
+        "depth_delta_1.01": 0.2160824581515044,
+        "depth_delta_1.25": 0.9456039294600487,
+        "boundary_f1": 0.8567267879843712
+      },
+      "test": {
+        "point_rel": 0.07314241176936775,
+        "depth_rel": 0.06703103252220899,
+        "depth_delta_1.01": 0.2270205880049616,
+        "depth_delta_1.25": 0.9508320577442646,
+        "boundary_f1": 0.8262888044118881
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.07349634496495128,
+        "depth_rel": 0.0630310974859943,
+        "depth_delta_1.01": 0.2504615643216918,
+        "depth_delta_1.25": 0.9384124701221784,
+        "boundary_f1": 0.7962314573427042
+      },
+      "val": {
+        "point_rel": 0.08903866010950878,
+        "depth_rel": 0.07076855562627316,
+        "depth_delta_1.01": 0.2160824581515044,
+        "depth_delta_1.25": 0.9456039294600487,
+        "boundary_f1": 0.8567267879843712
+      },
+      "test": {
+        "point_rel": 0.07314241176936775,
+        "depth_rel": 0.06703103252220899,
+        "depth_delta_1.01": 0.2270205880049616,
+        "depth_delta_1.25": 0.9508320577442646,
+        "boundary_f1": 0.8262888044118881
+      }
+    },
+    "5": {
+      "train": {
+        "point_rel": 0.07349634496495128,
+        "depth_rel": 0.0630310974859943,
+        "depth_delta_1.01": 0.2504615643216918,
+        "depth_delta_1.25": 0.9384124701221784,
+        "boundary_f1": 0.7962314573427042
+      },
+      "val": {
+        "point_rel": 0.08903866010950878,
+        "depth_rel": 0.07076855562627316,
+        "depth_delta_1.01": 0.2160824581515044,
+        "depth_delta_1.25": 0.9456039294600487,
+        "boundary_f1": 0.8567267879843712
+      },
+      "test": {
+        "point_rel": 0.07314241176936775,
+        "depth_rel": 0.06703103252220899,
+        "depth_delta_1.01": 0.2270205880049616,
+        "depth_delta_1.25": 0.9508320577442646,
+        "boundary_f1": 0.8262888044118881
+      }
+    }
+  },
+  "k3_changes_from_k0": {
+    "train": {
+      "point_rel_reduction": 0.0,
+      "depth_rel_reduction": 0.0,
+      "depth_delta_1.01_change": 0.0,
+      "depth_delta_1.25_change": 0.0,
+      "boundary_f1_change": 0.0
+    },
+    "val": {
+      "point_rel_reduction": 0.0,
+      "depth_rel_reduction": 0.0,
+      "depth_delta_1.01_change": 0.0,
+      "depth_delta_1.25_change": 0.0,
+      "boundary_f1_change": 0.0
+    },
+    "test": {
+      "point_rel_reduction": 0.0,
+      "depth_rel_reduction": 0.0,
+      "depth_delta_1.01_change": 0.0,
+      "depth_delta_1.25_change": 0.0,
+      "boundary_f1_change": 0.0
+    }
+  },
+  "training_k_changes_from_k0": {
+    "train": {
+      "point_rel_reduction": 0.0,
+      "depth_rel_reduction": 0.0,
+      "depth_delta_1.01_change": 0.0,
+      "depth_delta_1.25_change": 0.0,
+      "boundary_f1_change": 0.0
+    },
+    "val": {
+      "point_rel_reduction": 0.0,
+      "depth_rel_reduction": 0.0,
+      "depth_delta_1.01_change": 0.0,
+      "depth_delta_1.25_change": 0.0,
+      "boundary_f1_change": 0.0
+    },
+    "test": {
+      "point_rel_reduction": 0.0,
+      "depth_rel_reduction": 0.0,
+      "depth_delta_1.01_change": 0.0,
+      "depth_delta_1.25_change": 0.0,
+      "boundary_f1_change": 0.0
+    }
+  },
+  "fraction_improved_k3_vs_k0": {
+    "train": {
+      "point_rel_improved": 0.0,
+      "depth_rel_improved": 0.0,
+      "boundary_f1_improved": 0.0
+    },
+    "val": {
+      "point_rel_improved": 0.0,
+      "depth_rel_improved": 0.0,
+      "boundary_f1_improved": 0.0
+    },
+    "test": {
+      "point_rel_improved": 0.0,
+      "depth_rel_improved": 0.0,
+      "boundary_f1_improved": 0.0
+    }
+  },
+  "fraction_improved_at_training_k_vs_k0": {
+    "train": {
+      "point_rel_improved": 0.0,
+      "depth_rel_improved": 0.0,
+      "boundary_f1_improved": 0.0
+    },
+    "val": {
+      "point_rel_improved": 0.0,
+      "depth_rel_improved": 0.0,
+      "boundary_f1_improved": 0.0
+    },
+    "test": {
+      "point_rel_improved": 0.0,
+      "depth_rel_improved": 0.0,
+      "boundary_f1_improved": 0.0
+    }
+  },
+  "initial_loss": 0.24729015305638313,
+  "final_loss": 0.07690515276044607,
+  "cache_seconds": 5.670257268007845,
+  "training_seconds_including_periodic_eval": 4863.385732260067,
+  "total_seconds": 4927.098015325842,
+  "seconds_per_continuation_step_including_periodic_eval": 1.2158464330650167,
+  "peak_memory_bytes": 10363250176,
+  "boundary_definition": {
+    "log_depth_jump_threshold": 0.03,
+    "matching_radius_pixels": 1
+  },
+  "artifacts": {
+    "best_checkpoint": "checkpoint.pt",
+    "latest_checkpoint": "latest_checkpoint.pt",
+    "training_history": "training_history.csv",
+    "evaluation_history": "evaluation_history.csv",
+    "per_frame_metrics": "per_frame_metrics.csv",
+    "training_curves": "training_curves.png",
+    "qualitative_comparison": "qualitative_comparison.png"
+  }
+}

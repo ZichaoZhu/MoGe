@@ -1,0 +1,218 @@
+[
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "index": 1,
+    "member": "ConstructionSite/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+    "trajectory": "P000",
+    "display_id": "T01"
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "index": 2,
+    "member": "ConstructionSite/Data_easy/P000/image_lcam_front/000566_lcam_front.png",
+    "trajectory": "P000",
+    "display_id": "T02"
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "index": 3,
+    "member": "ConstructionSite/Data_easy/P001/image_lcam_front/000036_lcam_front.png",
+    "trajectory": "P001",
+    "display_id": "T03"
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "index": 4,
+    "member": "ConstructionSite/Data_easy/P001/image_lcam_front/000602_lcam_front.png",
+    "trajectory": "P001",
+    "display_id": "T04"
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "index": 6,
+    "member": "ConstructionSite/Data_easy/P005/image_lcam_front/000109_lcam_front.png",
+    "trajectory": "P005",
+    "display_id": "T05"
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "index": 10,
+    "member": "ConstructionSite/Data_easy/P007/image_lcam_front/000101_lcam_front.png",
+    "trajectory": "P007",
+    "display_id": "T06"
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "index": 14,
+    "member": "ConstructionSite/Data_easy/P008/image_lcam_front/000883_lcam_front.png",
+    "trajectory": "P008",
+    "display_id": "T07"
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "index": 17,
+    "member": "ConstructionSite/Data_easy/P009/image_lcam_front/001501_lcam_front.png",
+    "trajectory": "P009",
+    "display_id": "T08"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 2,
+    "member": "CarWelding/Data_easy/P000/image_lcam_front/000431_lcam_front.png",
+    "trajectory": "P000",
+    "display_id": "T09"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 5,
+    "member": "CarWelding/Data_easy/P001/image_lcam_front/000658_lcam_front.png",
+    "trajectory": "P001",
+    "display_id": "T10"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 6,
+    "member": "CarWelding/Data_easy/P002/image_lcam_front/000373_lcam_front.png",
+    "trajectory": "P002",
+    "display_id": "T11"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 7,
+    "member": "CarWelding/Data_easy/P002/image_lcam_front/000804_lcam_front.png",
+    "trajectory": "P002",
+    "display_id": "T12"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 9,
+    "member": "CarWelding/Data_easy/P003/image_lcam_front/000721_lcam_front.png",
+    "trajectory": "P003",
+    "display_id": "T13"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 10,
+    "member": "CarWelding/Data_easy/P004/image_lcam_front/000034_lcam_front.png",
+    "trajectory": "P004",
+    "display_id": "T14"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 11,
+    "member": "CarWelding/Data_easy/P004/image_lcam_front/000465_lcam_front.png",
+    "trajectory": "P004",
+    "display_id": "T15"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 12,
+    "member": "CarWelding/Data_easy/P004/image_lcam_front/000896_lcam_front.png",
+    "trajectory": "P004",
+    "display_id": "T16"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 16,
+    "member": "CarWelding/Data_easy/P006/image_lcam_front/000577_lcam_front.png",
+    "trajectory": "P006",
+    "display_id": "T17"
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "index": 20,
+    "member": "CarWelding/Data_easy/P008/image_lcam_front/000599_lcam_front.png",
+    "trajectory": "P008",
+    "display_id": "T18"
+  },
+  {
+    "environment": "AmusementPark",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/AmusementPark/Data_easy/image_lcam_front.zip",
+    "index": 1,
+    "member": "AmusementPark/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+    "trajectory": "P000",
+    "display_id": "T19"
+  },
+  {
+    "environment": "AmusementPark",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/AmusementPark/Data_easy/image_lcam_front.zip",
+    "index": 3,
+    "member": "AmusementPark/Data_easy/P000/image_lcam_front/000948_lcam_front.png",
+    "trajectory": "P000",
+    "display_id": "T20"
+  },
+  {
+    "environment": "AmusementPark",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/AmusementPark/Data_easy/image_lcam_front.zip",
+    "index": 5,
+    "member": "AmusementPark/Data_easy/P001/image_lcam_front/000343_lcam_front.png",
+    "trajectory": "P001",
+    "display_id": "T21"
+  },
+  {
+    "environment": "AmusementPark",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/AmusementPark/Data_easy/image_lcam_front.zip",
+    "index": 9,
+    "member": "AmusementPark/Data_easy/P003/image_lcam_front/000156_lcam_front.png",
+    "trajectory": "P003",
+    "display_id": "T22"
+  },
+  {
+    "environment": "AmusementPark",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/AmusementPark/Data_easy/image_lcam_front.zip",
+    "index": 10,
+    "member": "AmusementPark/Data_easy/P003/image_lcam_front/000630_lcam_front.png",
+    "trajectory": "P003",
+    "display_id": "T23"
+  },
+  {
+    "environment": "AmusementPark",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/AmusementPark/Data_easy/image_lcam_front.zip",
+    "index": 13,
+    "member": "AmusementPark/Data_easy/P004/image_lcam_front/000503_lcam_front.png",
+    "trajectory": "P004",
+    "display_id": "T24"
+  }
+]

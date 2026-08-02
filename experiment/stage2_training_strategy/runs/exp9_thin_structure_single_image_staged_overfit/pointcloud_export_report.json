@@ -1,0 +1,16 @@
+{
+  "status": "complete",
+  "manifest": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/manifest.json",
+  "sampleCount": 5,
+  "websiteSampleCount": 3,
+  "uniquePointCloudCount": 17,
+  "pointCloudBytes": 50140565,
+  "initialIdentityMaxAbsError": {
+    "ai_019_004_cam_00_frame.0000": 0.0,
+    "ai_054_008_cam_00_frame.0000": 0.0,
+    "ai_053_018_cam_00_frame.0000": 0.0,
+    "ai_002_003_cam_00_frame.0000": 0.0,
+    "ai_019_004_cam_00_frame.0099": 0.0
+  },
+  "checksums": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/pointcloud_sha256.json"
+}

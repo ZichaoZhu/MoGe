@@ -1,0 +1,233 @@
+import { expect, test } from "@playwright/test";
+import { mkdir } from "node:fs/promises";
+import path from "node:path";
+
+test("switches experiments and preserves the Exp9 two-pane interactions", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(
+    page.getByRole("heading", { name: "多实验点云对比器" }),
+  ).toBeVisible();
+  await expect(
+    page.getByTestId(
+      "experiment-exp12_hypersim_100_immediate_joint_finetuning",
+    ),
+  ).toBeVisible();
+  await page
+    .getByTestId(
+      "experiment-exp9_thin_structure_single_image_staged_overfit",
+    )
+    .click();
+  await expect(page.getByText("Exp9 · 单图极限过拟合").first()).toBeVisible();
+  await expect(page.getByTestId("sample-5")).toBeVisible();
+  await expect(page.getByTestId("sample-4")).toBeVisible();
+  await expect(page.getByTestId("sample-6")).toBeVisible();
+  await expect(page.getByTestId("viewer-left")).toContainText("训练前 · K=0");
+  await expect(page.getByTestId("viewer-right")).toContainText("训练后 · K=3");
+  await expect(page.locator("canvas")).toHaveCount(2);
+
+  await page
+    .getByTestId("left-interaction")
+    .getByRole("button", { name: "平移" })
+    .click();
+  await expect(
+    page
+      .getByTestId("left-interaction")
+      .getByRole("button", { name: "平移" }),
+  ).toHaveAttribute("aria-pressed", "true");
+
+  await page.getByTestId("sample-4").click();
+  await expect(page.getByText("悬空楼梯踏板与支架").first()).toBeVisible();
+
+  await page
+    .getByTestId("left-k")
+    .getByRole("button", { name: "K=5" })
+    .click();
+  await expect(page.getByTestId("viewer-left")).toContainText(
+    "零初始化 SSR",
+  );
+  const leftCanvas = page.locator("canvas").first();
+  const preservationBox = await leftCanvas.boundingBox();
+  if (preservationBox) {
+    await page.mouse.move(
+      preservationBox.x + preservationBox.width * 0.55,
+      preservationBox.y + preservationBox.height * 0.52,
+    );
+    await page.mouse.down();
+    await page.mouse.move(
+      preservationBox.x + preservationBox.width * 0.63,
+      preservationBox.y + preservationBox.height * 0.47,
+      { steps: 5 },
+    );
+    await page.mouse.up();
+  }
+  await page.waitForTimeout(500);
+  const cameraBeforeStageChange = await leftCanvas.getAttribute(
+    "data-camera-snapshot",
+  );
+  expect(cameraBeforeStageChange).toBeTruthy();
+  const initialSceneSource = await leftCanvas.getAttribute(
+    "data-scene-source",
+  );
+  expect(initialSceneSource).toBeTruthy();
+  await page
+    .getByTestId("left-stage")
+    .getByRole("button", { name: "训练后" })
+    .click();
+  await expect(page.getByTestId("viewer-left")).toContainText("训练后 · K=5");
+  await expect(leftCanvas).not.toHaveAttribute(
+    "data-scene-source",
+    initialSceneSource!,
+  );
+  await expect(leftCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    cameraBeforeStageChange!,
+  );
+
+  const cameraBeforeStepChange = await leftCanvas.getAttribute(
+    "data-camera-snapshot",
+  );
+  const finalK5SceneSource = await leftCanvas.getAttribute(
+    "data-scene-source",
+  );
+  await page
+    .getByTestId("left-k")
+    .getByRole("button", { name: "K=1" })
+    .click();
+  await expect(page.getByTestId("viewer-left")).toContainText("训练后 · K=1");
+  await expect(leftCanvas).not.toHaveAttribute(
+    "data-scene-source",
+    finalK5SceneSource!,
+  );
+  await expect(leftCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    cameraBeforeStepChange!,
+  );
+
+  await page
+    .getByTestId("coordinate-mode")
+    .getByRole("button", { name: "原始输出" })
+    .click();
+  await expect(page.getByRole("status")).toContainText("相对尺度");
+
+  await page
+    .getByTestId("render-mode")
+    .getByRole("button", { name: "SSR 体素壳" })
+    .click();
+  await expect(page.getByText(/round\(200·log Z\)/)).toBeVisible();
+
+  await page
+    .getByTestId("render-mode")
+    .getByRole("button", { name: "彩色点云" })
+    .click();
+  await page
+    .getByTestId("coordinate-mode")
+    .getByRole("button", { name: "GT 对齐" })
+    .click();
+  await page
+    .getByTestId("left-k")
+    .getByRole("button", { name: "K=0" })
+    .click();
+  const cameraSync = page.getByRole("checkbox");
+  if (!(await cameraSync.isChecked())) {
+    await cameraSync.check();
+  }
+  await page
+    .getByTestId("raster-scope")
+    .getByRole("button", { name: "完整场景" })
+    .click();
+  await expect(page.locator(".canvas-error")).toHaveCount(0);
+  const canvasBox = await leftCanvas.boundingBox();
+  if (canvasBox) {
+    await page.mouse.move(
+      canvasBox.x + canvasBox.width * 0.55,
+      canvasBox.y + canvasBox.height * 0.52,
+    );
+    await page.mouse.down();
+    await page.mouse.move(
+      canvasBox.x + canvasBox.width * 0.65,
+      canvasBox.y + canvasBox.height * 0.48,
+      { steps: 5 },
+    );
+    await page.mouse.up();
+    await page.mouse.wheel(0, -180);
+  }
+  await page
+    .getByTestId("raster-scope")
+    .getByRole("button", { name: "细结构裁剪" })
+    .click();
+  const screenshotDirectory = path.resolve(
+    process.cwd(),
+    "../artifacts/viewer_acceptance",
+  );
+  await mkdir(screenshotDirectory, { recursive: true });
+  for (const order of [5, 4, 6]) {
+    await page.getByTestId(`sample-${order}`).click();
+    await expect(page.locator("canvas")).toHaveCount(2);
+    await page.waitForTimeout(800);
+    if (process.env.UPDATE_ACCEPTANCE_SCREENSHOTS === "1") {
+      await page.screenshot({
+        path: path.join(screenshotDirectory, `sample_${order}_dual_view.png`),
+        fullPage: true,
+      });
+    }
+  }
+});
+
+test("shows a clear startup error when the manifest cannot be loaded", async ({
+  page,
+}) => {
+  await page.route("**/data/experiments.json", (route) =>
+    route.fulfill({ status: 503, body: "unavailable" }),
+  );
+  await page.goto("/");
+  await expect(page.locator("main[role='alert']")).toContainText(
+    "实验目录请求失败：HTTP 503",
+  );
+});
+
+test("loads Exp12 train, validation, and test samples", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByText("Exp12 · 100 张联合微调").first()).toBeVisible();
+  await expect(page.getByTestId("sample-1")).toContainText("训练样本");
+  await expect(page.getByTestId("sample-2")).toContainText("验证样本");
+  await expect(page.getByTestId("sample-3")).toContainText("测试样本");
+  await expect(page.getByTestId("viewer-left")).toContainText(
+    "联合前 · K=0",
+  );
+  await expect(page.getByTestId("viewer-right")).toContainText(
+    "联合后 · K=3",
+  );
+  await page
+    .getByTestId("left-k")
+    .getByRole("button", { name: "K=5" })
+    .click();
+  await expect(page.getByTestId("viewer-left")).not.toContainText("资源别名");
+  await expect(page.locator(".canvas-error")).toHaveCount(0);
+  await page
+    .getByTestId("left-k")
+    .getByRole("button", { name: "K=0" })
+    .click();
+
+  if (process.env.UPDATE_ACCEPTANCE_SCREENSHOTS === "1") {
+    const screenshotDirectory = path.resolve(
+      process.cwd(),
+      "../../exp12_hypersim_100_immediate_joint_finetuning/results/viewer_acceptance",
+    );
+    await mkdir(screenshotDirectory, { recursive: true });
+    for (const order of [1, 2, 3]) {
+      await page.getByTestId(`sample-${order}`).click();
+      await expect(page.locator("canvas")).toHaveCount(2);
+      await expect(page.locator(".canvas-error")).toHaveCount(0);
+      await page.waitForTimeout(800);
+      await page.screenshot({
+        path: path.join(
+          screenshotDirectory,
+          `exp12_sample_${order}_dual_view.png`,
+        ),
+        fullPage: true,
+      });
+    }
+  }
+});

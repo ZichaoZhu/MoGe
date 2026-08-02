@@ -1,0 +1,59 @@
+{
+  "experiment_id": "exp6_two_stage_joint_finetuning",
+  "date": "2026-07-27",
+  "data": {
+    "source": "../exp4_hypersim_multiscene_generalization/data",
+    "train_scenes": 20,
+    "train_frames": 320,
+    "validation_scenes": 4,
+    "validation_frames": 64,
+    "test_scenes": 4,
+    "test_frames": 64,
+    "all_samples_are_synthetic": true,
+    "normal_data_used": false
+  },
+  "model": {
+    "base": "Ruicheng/moge-2-vitl-normal",
+    "trainable": ["DINO backbone", "2D geometry modules", "SSR"],
+    "normal_prediction": false,
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "training_refinement_steps": 3,
+    "evaluation_refinement_steps": [0, 1, 3, 5],
+    "gradient_checkpointing": true
+  },
+  "optimization": {
+    "steps": 2500,
+    "batch_size": 2,
+    "microbatch_size": 1,
+    "refiner_detach_steps": 500,
+    "backbone_freeze_steps": 100,
+    "backbone_warmup_end": 200,
+    "ssr_learning_rate": 0.00002,
+    "head_learning_rate": 0.00001,
+    "backbone_learning_rate": 0.0000005,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 250,
+    "seed": 61
+  },
+  "loss": {
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "edge_weight": 1.0,
+    "local_scales": [4, 16, 64]
+  },
+  "acceptance": {
+    "selection": "minimum full-validation K=3 point Rel",
+    "maximum_validation_boundary_f1_drop": 0.005,
+    "require_k3_better_than_initial_k0": true,
+    "require_k3_better_than_same_checkpoint_k0": true,
+    "test_used_for_selection": false
+  },
+  "hardware": {
+    "physical_gpu": 3,
+    "probe_peak_memory_bytes": 9171598336,
+    "probe_seconds_per_step": 5.338938629021868
+  }
+}

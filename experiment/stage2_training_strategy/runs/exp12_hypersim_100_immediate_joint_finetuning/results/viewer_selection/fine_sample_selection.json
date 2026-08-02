@@ -1,0 +1,59 @@
+{
+  "status": "locked-before-rendering",
+  "selection_inputs": "ground-truth depth and RGB only; no model prediction",
+  "selection_rule": "fixed ids were chosen from GT/RGB contact sheets before rendering model predictions",
+  "mask_scope": "Appendix B.1 coarse proposal without SAM2 expansion; diagnostic only",
+  "shape": [
+    384,
+    512
+  ],
+  "crop_shape": [
+    192,
+    192
+  ],
+  "train": {
+    "id": "ai_054_008_cam_00_frame.0000",
+    "split": "train",
+    "scene": "ai_054_008",
+    "frame": 0,
+    "fine_pixels": 35941,
+    "fine_fraction": 0.9749620225694444,
+    "selection_score": 35941.0,
+    "crop_x0": 160,
+    "crop_y0": 160,
+    "crop_x1": 352,
+    "crop_y1": 352
+  },
+  "val": {
+    "id": "ai_047_001_cam_00_frame.0042",
+    "split": "val",
+    "scene": "ai_047_001",
+    "frame": 42,
+    "fine_pixels": 34628,
+    "fine_fraction": 0.9393446180555556,
+    "selection_score": 34628.0,
+    "crop_x0": 160,
+    "crop_y0": 96,
+    "crop_x1": 352,
+    "crop_y1": 288
+  },
+  "test": {
+    "id": "ai_046_001_cam_00_frame.0000",
+    "split": "test",
+    "scene": "ai_046_001",
+    "frame": 0,
+    "fine_pixels": 33926,
+    "fine_fraction": 0.9203016493055556,
+    "selection_score": 33926.0,
+    "crop_x0": 224,
+    "crop_y0": 128,
+    "crop_x1": 416,
+    "crop_y1": 320
+  },
+  "artifacts": {
+    "ranking": "fine_sample_candidates.csv",
+    "train_contact_sheet": "train_fine_sample_candidates.png",
+    "val_contact_sheet": "val_fine_sample_candidates.png",
+    "test_contact_sheet": "test_fine_sample_candidates.png"
+  }
+}

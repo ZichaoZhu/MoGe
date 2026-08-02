@@ -1,0 +1,66 @@
+{
+  "experiment_id": "exp11_hypersim_100_train_staged_joint_overfit",
+  "objective": "在100张经审核的Hypersim训练图上，从同一个MoGe-2初始化进行论文式分离训练与联合训练，验证扩大训练图数量后Base与SSR的稳定拟合能力。",
+  "data": {
+    "exp10_training_frames": 48,
+    "new_reviewed_training_frames": 52,
+    "total_training_frames": 100,
+    "validation_frames": 16,
+    "test_frames": 16,
+    "augmentation": false,
+    "normal_data_used": false
+  },
+  "model": {
+    "base": "Ruicheng/moge-2-vitl-normal",
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "training_refinement_steps": 3,
+    "periodic_evaluation_refinement_steps": [0, 3],
+    "trainable": ["DINO backbone", "neck", "points head", "SSR"],
+    "frozen": ["normal head", "mask head", "metric-scale head"]
+  },
+  "distributed": {
+    "policy": "从满足显存门槛的GPU中选择尽可能多的卡，最多4卡",
+    "backend": "gloo",
+    "minimum_free_memory_mib": 18000,
+    "maximum_prelaunch_utilization_percent": 30,
+    "microbatch_size_per_process": 1,
+    "global_batch_size": {
+      "world_size_4": 8,
+      "world_size_3": 6,
+      "world_size_2": 8,
+      "world_size_1": 8
+    }
+  },
+  "optimization": {
+    "steps": 10000,
+    "refiner_detach_steps": 5000,
+    "backbone_freeze_steps": 1000,
+    "backbone_warmup_end": 2000,
+    "ssr_learning_rate": 1e-6,
+    "head_learning_rate": 1e-6,
+    "backbone_learning_rate": 1e-7,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 250,
+    "selection_split": "train",
+    "seed": 111
+  },
+  "stability_guards": {
+    "max_preclip_gradient_norm": 100.0,
+    "max_skipped_preclip_steps": 5,
+    "max_consecutive_skipped_preclip_steps": 2,
+    "max_absolute_log_depth_residual": 5.0,
+    "max_refined_point_rel": 0.1,
+    "max_refined_to_base_ratio": 3.0
+  },
+  "supervision": {
+    "interval_seconds": 600,
+    "records_gpu_state": true,
+    "records_latest_training_step": true,
+    "records_latest_evaluation": true,
+    "does_not_terminate_other_users_processes": true
+  }
+}

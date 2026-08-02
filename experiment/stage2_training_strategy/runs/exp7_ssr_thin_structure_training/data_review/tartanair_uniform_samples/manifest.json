@@ -1,0 +1,874 @@
+[
+  {
+    "environment": "AbandonedCable",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/AbandonedCable/Data_easy/image_lcam_front.zip",
+    "archive_images": 25448,
+    "contact_sheet": "AbandonedCable_Data_easy_contact_sheet.jpg",
+    "samples": [
+      {
+        "index": 1,
+        "member": "AbandonedCable/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 2,
+        "member": "AbandonedCable/Data_easy/P000/image_lcam_front/001339_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 3,
+        "member": "AbandonedCable/Data_easy/P000/image_lcam_front/002679_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 4,
+        "member": "AbandonedCable/Data_easy/P002/image_lcam_front/000112_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 5,
+        "member": "AbandonedCable/Data_easy/P002/image_lcam_front/001451_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 6,
+        "member": "AbandonedCable/Data_easy/P002/image_lcam_front/002791_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 7,
+        "member": "AbandonedCable/Data_easy/P002/image_lcam_front/004130_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 8,
+        "member": "AbandonedCable/Data_easy/P003/image_lcam_front/001338_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 9,
+        "member": "AbandonedCable/Data_easy/P003/image_lcam_front/002678_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 10,
+        "member": "AbandonedCable/Data_easy/P003/image_lcam_front/004017_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 11,
+        "member": "AbandonedCable/Data_easy/P004/image_lcam_front/000583_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 12,
+        "member": "AbandonedCable/Data_easy/P004/image_lcam_front/001922_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 13,
+        "member": "AbandonedCable/Data_easy/P005/image_lcam_front/000275_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 14,
+        "member": "AbandonedCable/Data_easy/P005/image_lcam_front/001614_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 15,
+        "member": "AbandonedCable/Data_easy/P005/image_lcam_front/002953_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 16,
+        "member": "AbandonedCable/Data_easy/P006/image_lcam_front/001331_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 17,
+        "member": "AbandonedCable/Data_easy/P006/image_lcam_front/002670_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 18,
+        "member": "AbandonedCable/Data_easy/P007/image_lcam_front/001066_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 19,
+        "member": "AbandonedCable/Data_easy/P007/image_lcam_front/002406_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 20,
+        "member": "AbandonedCable/Data_easy/P007/image_lcam_front/003745_lcam_front.png",
+        "trajectory": "P007"
+      }
+    ]
+  },
+  {
+    "environment": "AmusementPark",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/AmusementPark/Data_easy/image_lcam_front.zip",
+    "archive_images": 9011,
+    "contact_sheet": "AmusementPark_Data_easy_contact_sheet.jpg",
+    "samples": [
+      {
+        "index": 1,
+        "member": "AmusementPark/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 2,
+        "member": "AmusementPark/Data_easy/P000/image_lcam_front/000474_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 3,
+        "member": "AmusementPark/Data_easy/P000/image_lcam_front/000948_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 4,
+        "member": "AmusementPark/Data_easy/P000/image_lcam_front/001423_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 5,
+        "member": "AmusementPark/Data_easy/P001/image_lcam_front/000343_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 6,
+        "member": "AmusementPark/Data_easy/P001/image_lcam_front/000817_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 7,
+        "member": "AmusementPark/Data_easy/P002/image_lcam_front/000282_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 8,
+        "member": "AmusementPark/Data_easy/P002/image_lcam_front/000756_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 9,
+        "member": "AmusementPark/Data_easy/P003/image_lcam_front/000156_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 10,
+        "member": "AmusementPark/Data_easy/P003/image_lcam_front/000630_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 11,
+        "member": "AmusementPark/Data_easy/P003/image_lcam_front/001104_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 12,
+        "member": "AmusementPark/Data_easy/P004/image_lcam_front/000028_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 13,
+        "member": "AmusementPark/Data_easy/P004/image_lcam_front/000503_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 14,
+        "member": "AmusementPark/Data_easy/P005/image_lcam_front/000190_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 15,
+        "member": "AmusementPark/Data_easy/P005/image_lcam_front/000664_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 16,
+        "member": "AmusementPark/Data_easy/P006/image_lcam_front/000268_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 17,
+        "member": "AmusementPark/Data_easy/P006/image_lcam_front/000742_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 18,
+        "member": "AmusementPark/Data_easy/P007/image_lcam_front/000172_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 19,
+        "member": "AmusementPark/Data_easy/P007/image_lcam_front/000646_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 20,
+        "member": "AmusementPark/Data_easy/P007/image_lcam_front/001120_lcam_front.png",
+        "trajectory": "P007"
+      }
+    ]
+  },
+  {
+    "environment": "CarWelding",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/CarWelding/Data_easy/image_lcam_front.zip",
+    "archive_images": 8184,
+    "contact_sheet": "CarWelding_Data_easy_contact_sheet.jpg",
+    "samples": [
+      {
+        "index": 1,
+        "member": "CarWelding/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 2,
+        "member": "CarWelding/Data_easy/P000/image_lcam_front/000431_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 3,
+        "member": "CarWelding/Data_easy/P000/image_lcam_front/000861_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 4,
+        "member": "CarWelding/Data_easy/P001/image_lcam_front/000227_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 5,
+        "member": "CarWelding/Data_easy/P001/image_lcam_front/000658_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 6,
+        "member": "CarWelding/Data_easy/P002/image_lcam_front/000373_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 7,
+        "member": "CarWelding/Data_easy/P002/image_lcam_front/000804_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 8,
+        "member": "CarWelding/Data_easy/P003/image_lcam_front/000291_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 9,
+        "member": "CarWelding/Data_easy/P003/image_lcam_front/000721_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 10,
+        "member": "CarWelding/Data_easy/P004/image_lcam_front/000034_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 11,
+        "member": "CarWelding/Data_easy/P004/image_lcam_front/000465_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 12,
+        "member": "CarWelding/Data_easy/P004/image_lcam_front/000896_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 13,
+        "member": "CarWelding/Data_easy/P005/image_lcam_front/000220_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 14,
+        "member": "CarWelding/Data_easy/P005/image_lcam_front/000651_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 15,
+        "member": "CarWelding/Data_easy/P006/image_lcam_front/000147_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 16,
+        "member": "CarWelding/Data_easy/P006/image_lcam_front/000577_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 17,
+        "member": "CarWelding/Data_easy/P006/image_lcam_front/001008_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 18,
+        "member": "CarWelding/Data_easy/P007/image_lcam_front/000295_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 19,
+        "member": "CarWelding/Data_easy/P008/image_lcam_front/000168_lcam_front.png",
+        "trajectory": "P008"
+      },
+      {
+        "index": 20,
+        "member": "CarWelding/Data_easy/P008/image_lcam_front/000599_lcam_front.png",
+        "trajectory": "P008"
+      }
+    ]
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_easy/image_lcam_front.zip",
+    "archive_images": 10748,
+    "contact_sheet": "ConstructionSite_Data_easy_contact_sheet.jpg",
+    "samples": [
+      {
+        "index": 1,
+        "member": "ConstructionSite/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 2,
+        "member": "ConstructionSite/Data_easy/P000/image_lcam_front/000566_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 3,
+        "member": "ConstructionSite/Data_easy/P001/image_lcam_front/000036_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 4,
+        "member": "ConstructionSite/Data_easy/P001/image_lcam_front/000602_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 5,
+        "member": "ConstructionSite/Data_easy/P003/image_lcam_front/000112_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 6,
+        "member": "ConstructionSite/Data_easy/P005/image_lcam_front/000109_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 7,
+        "member": "ConstructionSite/Data_easy/P005/image_lcam_front/000675_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 8,
+        "member": "ConstructionSite/Data_easy/P006/image_lcam_front/000401_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 9,
+        "member": "ConstructionSite/Data_easy/P006/image_lcam_front/000967_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 10,
+        "member": "ConstructionSite/Data_easy/P007/image_lcam_front/000101_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 11,
+        "member": "ConstructionSite/Data_easy/P007/image_lcam_front/000666_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 12,
+        "member": "ConstructionSite/Data_easy/P007/image_lcam_front/001232_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 13,
+        "member": "ConstructionSite/Data_easy/P008/image_lcam_front/000318_lcam_front.png",
+        "trajectory": "P008"
+      },
+      {
+        "index": 14,
+        "member": "ConstructionSite/Data_easy/P008/image_lcam_front/000883_lcam_front.png",
+        "trajectory": "P008"
+      },
+      {
+        "index": 15,
+        "member": "ConstructionSite/Data_easy/P009/image_lcam_front/000370_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 16,
+        "member": "ConstructionSite/Data_easy/P009/image_lcam_front/000935_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 17,
+        "member": "ConstructionSite/Data_easy/P009/image_lcam_front/001501_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 18,
+        "member": "ConstructionSite/Data_easy/P011/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P011"
+      },
+      {
+        "index": 19,
+        "member": "ConstructionSite/Data_easy/P011/image_lcam_front/000565_lcam_front.png",
+        "trajectory": "P011"
+      },
+      {
+        "index": 20,
+        "member": "ConstructionSite/Data_easy/P011/image_lcam_front/001131_lcam_front.png",
+        "trajectory": "P011"
+      }
+    ]
+  },
+  {
+    "environment": "ConstructionSite",
+    "difficulty": "Data_hard",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ConstructionSite/Data_hard/image_lcam_front.zip",
+    "archive_images": 6181,
+    "contact_sheet": "ConstructionSite_Data_hard_contact_sheet.jpg",
+    "samples": [
+      {
+        "index": 1,
+        "member": "ConstructionSite/Data_hard/P000/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 2,
+        "member": "ConstructionSite/Data_hard/P000/image_lcam_front/000325_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 3,
+        "member": "ConstructionSite/Data_hard/P000/image_lcam_front/000651_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 4,
+        "member": "ConstructionSite/Data_hard/P001/image_lcam_front/000279_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 5,
+        "member": "ConstructionSite/Data_hard/P003/image_lcam_front/000031_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 6,
+        "member": "ConstructionSite/Data_hard/P005/image_lcam_front/000023_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 7,
+        "member": "ConstructionSite/Data_hard/P005/image_lcam_front/000349_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 8,
+        "member": "ConstructionSite/Data_hard/P006/image_lcam_front/000203_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 9,
+        "member": "ConstructionSite/Data_hard/P006/image_lcam_front/000528_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 10,
+        "member": "ConstructionSite/Data_hard/P007/image_lcam_front/000063_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 11,
+        "member": "ConstructionSite/Data_hard/P007/image_lcam_front/000389_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 12,
+        "member": "ConstructionSite/Data_hard/P007/image_lcam_front/000714_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 13,
+        "member": "ConstructionSite/Data_hard/P008/image_lcam_front/000184_lcam_front.png",
+        "trajectory": "P008"
+      },
+      {
+        "index": 14,
+        "member": "ConstructionSite/Data_hard/P008/image_lcam_front/000509_lcam_front.png",
+        "trajectory": "P008"
+      },
+      {
+        "index": 15,
+        "member": "ConstructionSite/Data_hard/P009/image_lcam_front/000254_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 16,
+        "member": "ConstructionSite/Data_hard/P009/image_lcam_front/000579_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 17,
+        "member": "ConstructionSite/Data_hard/P009/image_lcam_front/000904_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 18,
+        "member": "ConstructionSite/Data_hard/P010/image_lcam_front/000306_lcam_front.png",
+        "trajectory": "P010"
+      },
+      {
+        "index": 19,
+        "member": "ConstructionSite/Data_hard/P011/image_lcam_front/000242_lcam_front.png",
+        "trajectory": "P011"
+      },
+      {
+        "index": 20,
+        "member": "ConstructionSite/Data_hard/P011/image_lcam_front/000567_lcam_front.png",
+        "trajectory": "P011"
+      }
+    ]
+  },
+  {
+    "environment": "ForestEnv",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/ForestEnv/Data_easy/image_lcam_front.zip",
+    "archive_images": 23374,
+    "contact_sheet": "ForestEnv_Data_easy_contact_sheet.jpg",
+    "samples": [
+      {
+        "index": 1,
+        "member": "ForestEnv/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 2,
+        "member": "ForestEnv/Data_easy/P000/image_lcam_front/001230_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 3,
+        "member": "ForestEnv/Data_easy/P000/image_lcam_front/002460_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 4,
+        "member": "ForestEnv/Data_easy/P000/image_lcam_front/003690_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 5,
+        "member": "ForestEnv/Data_easy/P002/image_lcam_front/000993_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 6,
+        "member": "ForestEnv/Data_easy/P002/image_lcam_front/002223_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 7,
+        "member": "ForestEnv/Data_easy/P003/image_lcam_front/000270_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 8,
+        "member": "ForestEnv/Data_easy/P003/image_lcam_front/001500_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 9,
+        "member": "ForestEnv/Data_easy/P003/image_lcam_front/002730_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 10,
+        "member": "ForestEnv/Data_easy/P004/image_lcam_front/000554_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 11,
+        "member": "ForestEnv/Data_easy/P004/image_lcam_front/001785_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 12,
+        "member": "ForestEnv/Data_easy/P004/image_lcam_front/003015_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 13,
+        "member": "ForestEnv/Data_easy/P005/image_lcam_front/000879_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 14,
+        "member": "ForestEnv/Data_easy/P007/image_lcam_front/001194_lcam_front.png",
+        "trajectory": "P007"
+      },
+      {
+        "index": 15,
+        "member": "ForestEnv/Data_easy/P009/image_lcam_front/000138_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 16,
+        "member": "ForestEnv/Data_easy/P009/image_lcam_front/001368_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 17,
+        "member": "ForestEnv/Data_easy/P009/image_lcam_front/002599_lcam_front.png",
+        "trajectory": "P009"
+      },
+      {
+        "index": 18,
+        "member": "ForestEnv/Data_easy/P010/image_lcam_front/000086_lcam_front.png",
+        "trajectory": "P010"
+      },
+      {
+        "index": 19,
+        "member": "ForestEnv/Data_easy/P011/image_lcam_front/000543_lcam_front.png",
+        "trajectory": "P011"
+      },
+      {
+        "index": 20,
+        "member": "ForestEnv/Data_easy/P011/image_lcam_front/001773_lcam_front.png",
+        "trajectory": "P011"
+      }
+    ]
+  },
+  {
+    "environment": "IndustrialHangar",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/IndustrialHangar/Data_easy/image_lcam_front.zip",
+    "archive_images": 14362,
+    "contact_sheet": "IndustrialHangar_Data_easy_contact_sheet.jpg",
+    "samples": [
+      {
+        "index": 1,
+        "member": "IndustrialHangar/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 2,
+        "member": "IndustrialHangar/Data_easy/P000/image_lcam_front/000756_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 3,
+        "member": "IndustrialHangar/Data_easy/P001/image_lcam_front/000267_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 4,
+        "member": "IndustrialHangar/Data_easy/P001/image_lcam_front/001023_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 5,
+        "member": "IndustrialHangar/Data_easy/P001/image_lcam_front/001778_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 6,
+        "member": "IndustrialHangar/Data_easy/P001/image_lcam_front/002534_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 7,
+        "member": "IndustrialHangar/Data_easy/P002/image_lcam_front/000257_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 8,
+        "member": "IndustrialHangar/Data_easy/P002/image_lcam_front/001013_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 9,
+        "member": "IndustrialHangar/Data_easy/P002/image_lcam_front/001769_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 10,
+        "member": "IndustrialHangar/Data_easy/P003/image_lcam_front/000633_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 11,
+        "member": "IndustrialHangar/Data_easy/P003/image_lcam_front/001388_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 12,
+        "member": "IndustrialHangar/Data_easy/P004/image_lcam_front/000329_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 13,
+        "member": "IndustrialHangar/Data_easy/P004/image_lcam_front/001085_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 14,
+        "member": "IndustrialHangar/Data_easy/P004/image_lcam_front/001841_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 15,
+        "member": "IndustrialHangar/Data_easy/P005/image_lcam_front/000274_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 16,
+        "member": "IndustrialHangar/Data_easy/P005/image_lcam_front/001030_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 17,
+        "member": "IndustrialHangar/Data_easy/P005/image_lcam_front/001785_lcam_front.png",
+        "trajectory": "P005"
+      },
+      {
+        "index": 18,
+        "member": "IndustrialHangar/Data_easy/P006/image_lcam_front/000428_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 19,
+        "member": "IndustrialHangar/Data_easy/P006/image_lcam_front/001184_lcam_front.png",
+        "trajectory": "P006"
+      },
+      {
+        "index": 20,
+        "member": "IndustrialHangar/Data_easy/P006/image_lcam_front/001940_lcam_front.png",
+        "trajectory": "P006"
+      }
+    ]
+  },
+  {
+    "environment": "UrbanConstruction",
+    "difficulty": "Data_easy",
+    "archive": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/cache/moge3/datasets/official_100gb/tartanair_v2/UrbanConstruction/Data_easy/image_lcam_front.zip",
+    "archive_images": 8302,
+    "contact_sheet": "UrbanConstruction_Data_easy_contact_sheet.jpg",
+    "samples": [
+      {
+        "index": 1,
+        "member": "UrbanConstruction/Data_easy/P000/image_lcam_front/000000_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 2,
+        "member": "UrbanConstruction/Data_easy/P000/image_lcam_front/000437_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 3,
+        "member": "UrbanConstruction/Data_easy/P000/image_lcam_front/000874_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 4,
+        "member": "UrbanConstruction/Data_easy/P000/image_lcam_front/001311_lcam_front.png",
+        "trajectory": "P000"
+      },
+      {
+        "index": 5,
+        "member": "UrbanConstruction/Data_easy/P001/image_lcam_front/000056_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 6,
+        "member": "UrbanConstruction/Data_easy/P001/image_lcam_front/000492_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 7,
+        "member": "UrbanConstruction/Data_easy/P001/image_lcam_front/000929_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 8,
+        "member": "UrbanConstruction/Data_easy/P001/image_lcam_front/001366_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 9,
+        "member": "UrbanConstruction/Data_easy/P001/image_lcam_front/001803_lcam_front.png",
+        "trajectory": "P001"
+      },
+      {
+        "index": 10,
+        "member": "UrbanConstruction/Data_easy/P002/image_lcam_front/000151_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 11,
+        "member": "UrbanConstruction/Data_easy/P002/image_lcam_front/000588_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 12,
+        "member": "UrbanConstruction/Data_easy/P002/image_lcam_front/001025_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 13,
+        "member": "UrbanConstruction/Data_easy/P002/image_lcam_front/001462_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 14,
+        "member": "UrbanConstruction/Data_easy/P002/image_lcam_front/001899_lcam_front.png",
+        "trajectory": "P002"
+      },
+      {
+        "index": 15,
+        "member": "UrbanConstruction/Data_easy/P003/image_lcam_front/000096_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 16,
+        "member": "UrbanConstruction/Data_easy/P003/image_lcam_front/000532_lcam_front.png",
+        "trajectory": "P003"
+      },
+      {
+        "index": 17,
+        "member": "UrbanConstruction/Data_easy/P004/image_lcam_front/000234_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 18,
+        "member": "UrbanConstruction/Data_easy/P004/image_lcam_front/000671_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 19,
+        "member": "UrbanConstruction/Data_easy/P004/image_lcam_front/001108_lcam_front.png",
+        "trajectory": "P004"
+      },
+      {
+        "index": 20,
+        "member": "UrbanConstruction/Data_easy/P004/image_lcam_front/001545_lcam_front.png",
+        "trajectory": "P004"
+      }
+    ]
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "experiment_id": "exp12_hypersim_100_immediate_joint_finetuning",
+  "terminal_state": "stopped_on_plateau",
+  "started_at": "2026-08-01T14:27:00+08:00",
+  "stopped_at": "2026-08-01T17:02:53+08:00",
+  "warm_start_step": 3000,
+  "last_evaluated_step": 3600,
+  "best_step": 3300,
+  "automatic_stop": {
+    "metric": "train/k3_point_rel",
+    "minimum_relative_improvement": 0.002,
+    "patience_evaluations": 5,
+    "non_improving_window": [
+      3200,
+      3300,
+      3400,
+      3500,
+      3600
+    ]
+  },
+  "initial": {
+    "train_k0_point_rel": 0.03353704600362107,
+    "train_k3_point_rel": 0.03344780928920955,
+    "val_k0_point_rel": 0.10407649772241712,
+    "val_k3_point_rel": 0.10400825808756053
+  },
+  "best": {
+    "step": 3300,
+    "train_k0_point_rel": 0.033345945714972916,
+    "train_k3_point_rel": 0.03320341473212465,
+    "val_k0_point_rel": 0.10580500913783908,
+    "val_k3_point_rel": 0.10579288902226835,
+    "train_k3_relative_improvement_from_initial": 0.00730674,
+    "ssr_relative_point_rel_reduction": 0.00427431
+  },
+  "last": {
+    "step": 3600,
+    "train_k0_point_rel": 0.03343972308095545,
+    "train_k3_point_rel": 0.03325124463997781,
+    "val_k0_point_rel": 0.10709489032160491,
+    "val_k3_point_rel": 0.10704428725875914
+  },
+  "stability": {
+    "oom": false,
+    "instability_event": false,
+    "skipped_gradient_updates": 0,
+    "last_gradient_norm": 1.382448434829712,
+    "last_max_abs_log_depth_residual": 0.016721105203032494
+  },
+  "checkpoints": {
+    "best": {
+      "step": 3300,
+      "size_bytes": 1508131103,
+      "sha256": "80b62541db30e4a2c2cef34a8608d01eb53f9b81ae3ad44cd5309381e5d35f1c"
+    },
+    "resume": {
+      "step": 3600,
+      "best_step": 3300,
+      "size_bytes": 4469875345,
+      "sha256": "2caf3faed76dfa443240c4a11cdd3474bd1c4b4f76e79d3ab9deae60e68e1781"
+    }
+  },
+  "wrapper_exit_code": 1,
+  "wrapper_exit_code_note": "监督器在平台期主动向 torchrun 发送 SIGINT；该退出码不表示 OOM 或程序自身崩溃。"
+}

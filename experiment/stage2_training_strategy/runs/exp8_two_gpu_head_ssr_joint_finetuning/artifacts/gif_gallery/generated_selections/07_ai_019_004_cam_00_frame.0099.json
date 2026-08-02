@@ -1,0 +1,25 @@
+{
+  "status": "locked-before-rendering",
+  "selection_inputs": "RGB and ground truth only; no predictions",
+  "selection_rule": "Eight representative rod, railing, stair, divider, and column crops chosen from the 24 user-approved training candidates before reading model predictions.",
+  "shape": [
+    384,
+    512
+  ],
+  "splits": {
+    "train": {
+      "id": "ai_019_004_cam_00_frame.0099",
+      "crop_xyxy": [
+        0,
+        96,
+        192,
+        288
+      ],
+      "display_mask": {
+        "type": "near_quantile",
+        "quantile": 0.5
+      },
+      "description": "玻璃楼梯细拉杆"
+    }
+  }
+}

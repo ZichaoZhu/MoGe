@@ -1,0 +1,40 @@
+{
+  "format": "moge3-hypersim-generalization-spec-v1",
+  "frame_sampling": "The training split is exactly the 24 user-approved fine-structure frames. Validation and test frames are uniformly spaced within four held-out scene groups.",
+  "split_policy": "Each ai_XXX source scene group belongs to exactly one split.",
+  "splits": {
+    "train": [
+      {"scene": "ai_019_007", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_024_008", "camera": "cam_00", "frames": [99]},
+      {"scene": "ai_019_004", "camera": "cam_00", "frames": [0, 99]},
+      {"scene": "ai_052_008", "camera": "cam_01", "frames": [99]},
+      {"scene": "ai_026_013", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_055_006", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_054_008", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_044_009", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_052_010", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_052_004", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_053_018", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_054_006", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_008_004", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_027_009", "camera": "cam_02", "frames": [99]},
+      {"scene": "ai_048_007", "camera": "cam_00", "frames": [1]},
+      {"scene": "ai_002_003", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_044_006", "camera": "cam_01", "frames": [99]},
+      {"scene": "ai_027_005", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_034_003", "camera": "cam_00", "frames": [0]},
+      {"scene": "ai_045_005", "camera": "cam_03", "frames": [99]},
+      {"scene": "ai_009_001", "camera": "cam_00", "frames": [99]},
+      {"scene": "ai_055_002", "camera": "cam_01", "frames": [99]},
+      {"scene": "ai_044_002", "camera": "cam_01", "frames": [99]}
+    ],
+    "val": [
+      {"scene": "ai_043_002", "camera": "cam_00", "frames": [0, 14, 28, 42, 57, 71, 85, 99]},
+      {"scene": "ai_047_001", "camera": "cam_00", "frames": [0, 14, 28, 42, 57, 71, 85, 99]}
+    ],
+    "test": [
+      {"scene": "ai_046_001", "camera": "cam_00", "frames": [0, 14, 28, 42, 57, 71, 85, 99]},
+      {"scene": "ai_050_001", "camera": "cam_00", "frames": [0, 14, 28, 42, 57, 71, 85, 99]}
+    ]
+  }
+}

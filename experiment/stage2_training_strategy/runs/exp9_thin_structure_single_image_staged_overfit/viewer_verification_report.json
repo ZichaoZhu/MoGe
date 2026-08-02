@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "date": "2026-08-01",
+  "experiments": [
+    "exp9_thin_structure_single_image_staged_overfit",
+    "exp12_hypersim_100_immediate_joint_finetuning"
+  ],
+  "pointcloud_export": {
+    "exp9": {
+      "archived_initial_samples": 5,
+      "website_samples": 3,
+      "unique_ply_files": 17,
+      "pointcloud_bytes": 50140565,
+      "initial_identity_max_abs_error": 0.0
+    },
+    "exp12": {
+      "website_samples": 3,
+      "unique_ply_files": 24,
+      "pointcloud_bytes": 70786680,
+      "stages": [
+        "initial_step3000",
+        "final_step3300"
+      ]
+    },
+    "total_unique_ply_files": 41,
+    "total_pointcloud_bytes": 120927245,
+    "points_per_cloud": 196608,
+    "sha256_verified": true
+  },
+  "python": {
+    "exporter_command": "python -m pytest -q tests/test_exp9_pointcloud_export.py tests/test_exp12_pointcloud_export.py",
+    "exporter_result": "8 passed",
+    "server_regression_command": "python -m pytest -q",
+    "server_regression_result": "73 passed, 16 warnings in 11.78s (Exp9 initial viewer baseline)"
+  },
+  "frontend": {
+    "typecheck": "passed",
+    "unit_tests": "12 passed",
+    "next_production_build": "passed",
+    "vinext_bundle": "passed",
+    "e2e_tests": "3 passed",
+    "dependency_audit": "0 vulnerabilities"
+  },
+  "browser_scenarios": [
+    "Exp9 and Exp12 experiment switch",
+    "three samples in each experiment",
+    "two WebGL canvases",
+    "independent initial/final and K selectors",
+    "Exp9 initial K alias notice and Exp12 physical K assets",
+    "aligned/raw coordinate modes",
+    "crop/full point-cloud modes",
+    "SSR voxel-shell mode",
+    "camera orbit, pan, zoom and synchronization",
+    "camera preservation across stage and K changes",
+    "left-button rotate and pan interaction modes",
+    "manifest HTTP failure"
+  ],
+  "deployment": {
+    "vercel_status": "ready",
+    "vercel_url": "https://moge3-exp9-viewer.vercel.app",
+    "vercel_access": "public",
+    "sites_status": "succeeded",
+    "sites_access": "owner-only"
+  },
+  "acceptance_screenshots": [
+    "artifacts/viewer_acceptance/sample_5_dual_view.png",
+    "artifacts/viewer_acceptance/sample_4_dual_view.png",
+    "artifacts/viewer_acceptance/sample_6_dual_view.png",
+    "../exp12_hypersim_100_immediate_joint_finetuning/results/viewer_acceptance/exp12_sample_1_dual_view.png",
+    "../exp12_hypersim_100_immediate_joint_finetuning/results/viewer_acceptance/exp12_sample_2_dual_view.png",
+    "../exp12_hypersim_100_immediate_joint_finetuning/results/viewer_acceptance/exp12_sample_3_dual_view.png"
+  ]
+}

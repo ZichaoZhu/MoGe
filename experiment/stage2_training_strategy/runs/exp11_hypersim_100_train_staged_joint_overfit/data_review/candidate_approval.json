@@ -1,0 +1,8 @@
+{
+  "status": "approved",
+  "approved_at": "2026-07-31T12:38:49+08:00",
+  "candidate_count": 52,
+  "candidate_sha256": "3e83088aafca573f6f8dec860622322cdfdb269bfd4e0d665e9aad3d40b89920",
+  "approval_basis": "用户检查四页候选联系表后明确回复“可以的”",
+  "next_action": "与Exp10的48张训练图合并为100张训练集"
+}

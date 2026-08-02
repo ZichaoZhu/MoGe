@@ -1,0 +1,80 @@
+{
+  "experiment_id": "exp13_fixed_base_ssr_diagnostic",
+  "objective": "固定原始MoGe-2 Base与全部2D Head，仅训练SSR，判断百图条件下局部三维精修模块本身是否具有稳定学习能力。",
+  "data": {
+    "source": "experiment/stage2_training_strategy/runs/exp11_hypersim_100_train_staged_joint_overfit/data",
+    "train": 100,
+    "validation": 16,
+    "test": 16,
+    "augmentation": false,
+    "fine_structure_selection": "52个用户确认的训练裁剪，加Exp12预先锁定的train/val/test裁剪；训练范围合计53个区域"
+  },
+  "model": {
+    "base": "Ruicheng/moge-2-vitl-normal",
+    "base_and_2d_heads_frozen": true,
+    "ssr_zero_initialized": true,
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "training_refinement_steps": 3,
+    "normal_prediction": false
+  },
+  "controlled_sweep": {
+    "arms": [
+      {
+        "id": "lr_2e6",
+        "ssr_learning_rate": 2e-6
+      },
+      {
+        "id": "lr_1e5",
+        "ssr_learning_rate": 1e-5
+      },
+      {
+        "id": "lr_2e5",
+        "ssr_learning_rate": 2e-5
+      }
+    ],
+    "shared_seed": 131,
+    "steps": 800,
+    "global_batch_size": 8,
+    "microbatch_size": 1,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "schedule": "constant",
+    "evaluation_every_steps": 100
+  },
+  "checkpoint_selection": {
+    "split": "train",
+    "scope": "53个锁定训练结构区域",
+    "metric": "K=3 Point Rel",
+    "mode": "min",
+    "locked_before_training": true
+  },
+  "posthoc_evaluation": {
+    "splits": [
+      "train",
+      "val",
+      "test"
+    ],
+    "refinement_steps": [
+      0,
+      1,
+      3,
+      5
+    ],
+    "required_comparisons": [
+      "K=3相对K=0的全图改善",
+      "K=3相对K=0的细结构改善",
+      "K=5是否继续改善",
+      "训练、验证、测试逐帧改善比例"
+    ]
+  },
+  "monitoring": {
+    "interval_seconds": 600,
+    "minimum_free_memory_mib": 18000,
+    "maximum_prelaunch_utilization_percent": 10,
+    "maximum_parallel_arms": 3,
+    "do_not_terminate_other_jobs": true
+  }
+}

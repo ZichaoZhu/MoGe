@@ -1,0 +1,55 @@
+{
+  "status": "complete",
+  "sample_id": "ai_019_004_cam_00_frame.0099",
+  "crop_xyxy": [
+    0,
+    96,
+    192,
+    288
+  ],
+  "checkpoints": [
+    {
+      "stage": "initial",
+      "file": "initial.pt",
+      "step": 0
+    },
+    {
+      "stage": "stage1",
+      "file": "stage1.pt",
+      "step": 2000
+    },
+    {
+      "stage": "final",
+      "file": "final.pt",
+      "step": 2100
+    }
+  ],
+  "render": {
+    "yaw_degrees": [
+      -90.0,
+      90.0
+    ],
+    "motion": "one-way",
+    "frames": 46,
+    "duration_ms": 110,
+    "pitch_degrees": -8.0
+  },
+  "artifacts": {
+    "complete_crop": {
+      "file": "final_crop_orbit.gif",
+      "preview": "final_crop_orbit.png",
+      "frames": 46,
+      "duration_ms": 110,
+      "radius_m": 4.778776187896729
+    },
+    "locked_structure": {
+      "file": "final_structure_orbit.gif",
+      "preview": "final_structure_orbit.png",
+      "frames": 46,
+      "duration_ms": 110,
+      "radius_m": 3.5778396320343018
+    },
+    "stage_depth_comparison": "stage_depth_comparison.png",
+    "stage_point_error_comparison": "stage_point_error_comparison.png"
+  }
+}

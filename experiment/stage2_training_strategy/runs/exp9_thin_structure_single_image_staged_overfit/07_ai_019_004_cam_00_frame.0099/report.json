@@ -1,0 +1,588 @@
+{
+  "status": "complete",
+  "experiment": "exp9 paper-style single-image fine-structure overfit",
+  "sample_id": "ai_019_004_cam_00_frame.0099",
+  "scene": "ai_019_004",
+  "frame": 99,
+  "selection": {
+    "order": 7,
+    "id": "ai_019_004_cam_00_frame.0099",
+    "candidate": "H19",
+    "crop_xyxy": [
+      0,
+      96,
+      192,
+      288
+    ],
+    "display_mask": {
+      "type": "near_quantile",
+      "quantile": 0.5
+    },
+    "description": "玻璃楼梯细拉杆"
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "training_refinement_steps": 3,
+  "evaluation_refinement_steps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "parameter_counts": {
+    "ssr": 50739073,
+    "neck": 6157376,
+    "points_head": 4692323,
+    "backbone": 304368640
+  },
+  "normal_prediction": false,
+  "augmentation": "disabled",
+  "stage1_end_step": 2000,
+  "best_joint_step": 2100,
+  "last_step": 4000,
+  "joint_stop_reason": "detected_plateau",
+  "best_joint_score": 2.158672332763672,
+  "elapsed_seconds": 7000.130171371857,
+  "peak_memory_bytes": 29423867392,
+  "cuda_visible_devices": "3",
+  "initial": {
+    "status": "complete",
+    "sample_id": "ai_019_004_cam_00_frame.0099",
+    "snapshot": "initial",
+    "step": 0,
+    "stage": "initial",
+    "stop_reason": "before_training",
+    "metrics": {
+      "k0": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.08768990635871887,
+          "depth_rel": 0.080174021422863,
+          "depth_delta_1.01": 0.2464040219783783,
+          "depth_delta_1.25": 0.9224955439567566,
+          "boundary_f1": 0.8510226011276245
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.1844811588525772,
+          "depth_rel": 0.17061595618724823,
+          "depth_delta_1.01": 0.1024848073720932,
+          "depth_delta_1.25": 0.8413357138633728,
+          "boundary_f1": 0.9260382056236267
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.21668797731399536,
+          "depth_rel": 0.20031823217868805,
+          "depth_delta_1.01": 0.1139865443110466,
+          "depth_delta_1.25": 0.8271484375,
+          "boundary_f1": 0.8040807843208313
+        },
+        "alignment": {
+          "scale": 2.321809768676758,
+          "z_shift": -0.12363529205322266
+        }
+      },
+      "k1": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.08768990635871887,
+          "depth_rel": 0.080174021422863,
+          "depth_delta_1.01": 0.2464040219783783,
+          "depth_delta_1.25": 0.9224955439567566,
+          "boundary_f1": 0.8510226011276245
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.1844811588525772,
+          "depth_rel": 0.17061595618724823,
+          "depth_delta_1.01": 0.1024848073720932,
+          "depth_delta_1.25": 0.8413357138633728,
+          "boundary_f1": 0.9260382056236267
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.21668797731399536,
+          "depth_rel": 0.20031823217868805,
+          "depth_delta_1.01": 0.1139865443110466,
+          "depth_delta_1.25": 0.8271484375,
+          "boundary_f1": 0.8040807843208313
+        },
+        "alignment": {
+          "scale": 2.321809768676758,
+          "z_shift": -0.12363529205322266
+        }
+      },
+      "k3": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.08768990635871887,
+          "depth_rel": 0.080174021422863,
+          "depth_delta_1.01": 0.2464040219783783,
+          "depth_delta_1.25": 0.9224955439567566,
+          "boundary_f1": 0.8510226011276245
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.1844811588525772,
+          "depth_rel": 0.17061595618724823,
+          "depth_delta_1.01": 0.1024848073720932,
+          "depth_delta_1.25": 0.8413357138633728,
+          "boundary_f1": 0.9260382056236267
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.21668797731399536,
+          "depth_rel": 0.20031823217868805,
+          "depth_delta_1.01": 0.1139865443110466,
+          "depth_delta_1.25": 0.8271484375,
+          "boundary_f1": 0.8040807843208313
+        },
+        "alignment": {
+          "scale": 2.321809768676758,
+          "z_shift": -0.12363529205322266
+        }
+      },
+      "k5": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.08768990635871887,
+          "depth_rel": 0.080174021422863,
+          "depth_delta_1.01": 0.2464040219783783,
+          "depth_delta_1.25": 0.9224955439567566,
+          "boundary_f1": 0.8510226011276245
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.1844811588525772,
+          "depth_rel": 0.17061595618724823,
+          "depth_delta_1.01": 0.1024848073720932,
+          "depth_delta_1.25": 0.8413357138633728,
+          "boundary_f1": 0.9260382056236267
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.21668797731399536,
+          "depth_rel": 0.20031823217868805,
+          "depth_delta_1.01": 0.1139865443110466,
+          "depth_delta_1.25": 0.8271484375,
+          "boundary_f1": 0.8040807843208313
+        },
+        "alignment": {
+          "scale": 2.321809768676758,
+          "z_shift": -0.12363529205322266
+        }
+      }
+    },
+    "zero_identity_max_abs_error": 0.0
+  },
+  "stage1": {
+    "status": "complete",
+    "sample_id": "ai_019_004_cam_00_frame.0099",
+    "snapshot": "stage1",
+    "step": 2000,
+    "stage": "detached",
+    "stop_reason": "detected_plateau",
+    "metrics": {
+      "k0": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k1": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k3": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k5": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      }
+    },
+    "plateau_trackers": {
+      "stage1_best": {
+        "k0": 0.036496352404356,
+        "k3": 0.02899271622300148
+      },
+      "stage1_stale": {
+        "k0": 17,
+        "k3": 17
+      },
+      "joint_best_score": null,
+      "joint_stale": 0,
+      "success_streak": 0
+    }
+  },
+  "final": {
+    "status": "complete",
+    "sample_id": "ai_019_004_cam_00_frame.0099",
+    "snapshot": "final",
+    "step": 2100,
+    "stage": "joint_best",
+    "stop_reason": "minimum_full_plus_structure_k3_point_rel",
+    "metrics": {
+      "k0": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k1": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k3": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k5": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      }
+    },
+    "last_step": 4000,
+    "joint_stop_reason": "detected_plateau",
+    "selection_score": 2.158672332763672
+  },
+  "last": {
+    "status": "complete",
+    "sample_id": "ai_019_004_cam_00_frame.0099",
+    "snapshot": "last",
+    "step": 4000,
+    "stage": "joint",
+    "stop_reason": "detected_plateau",
+    "metrics": {
+      "k0": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k1": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k3": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      },
+      "k5": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 1.0820695161819458,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 1.076865315437317,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 1.076602816581726,
+          "depth_rel": 1.0,
+          "depth_delta_1.01": 0.0,
+          "depth_delta_1.25": 0.0,
+          "boundary_f1": 0.0
+        },
+        "alignment": {
+          "scale": 0.0,
+          "z_shift": 0.0
+        }
+      }
+    }
+  }
+}

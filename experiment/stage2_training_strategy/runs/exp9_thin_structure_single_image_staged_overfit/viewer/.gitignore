@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.open-next/
+dist/
+.vercel/
+out/
+playwright-report/
+test-results/
+*.tsbuildinfo
+.vercel

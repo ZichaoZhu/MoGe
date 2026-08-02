@@ -1,0 +1,75 @@
+{
+  "experiment_id": "exp9_thin_structure_single_image_staged_overfit",
+  "date": "2026-07-28",
+  "objective": "在五张含细结构的Hypersim训练图上，分别验证论文式分离训练与联合训练能否达到极限单图拟合。",
+  "claim_boundary": "只验证小数据学习能力和实现正确性，不宣称泛化或完整论文复现。",
+  "data": {
+    "dataset": "Hypersim",
+    "reuse": "../exp7_ssr_thin_structure_training/data",
+    "selection": "../exp7_ssr_thin_structure_training/gif_selection.json",
+    "samples": [
+      "ai_019_004_cam_00_frame.0000",
+      "ai_054_008_cam_00_frame.0000",
+      "ai_053_018_cam_00_frame.0000",
+      "ai_002_003_cam_00_frame.0000",
+      "ai_019_004_cam_00_frame.0099"
+    ],
+    "augmentation": false,
+    "normal_data_used": false
+  },
+  "model": {
+    "base": "Ruicheng/moge-2-vitl-normal",
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "training_refinement_steps": 3,
+    "evaluation_refinement_steps": [0, 1, 3, 5],
+    "trainable": ["DINO backbone", "neck", "points head", "SSR"],
+    "frozen": ["normal head", "mask head", "metric-scale head"],
+    "dino_dtype": "bfloat16",
+    "geometry_dtype": "float32"
+  },
+  "optimization": {
+    "optimizer": "AdamW",
+    "batch_size": 1,
+    "ssr_learning_rate": 0.00002,
+    "head_learning_rate": 0.00001,
+    "dino_learning_rate": 5e-7,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "dino_freeze_steps": 1000,
+    "dino_warmup_end": 2000,
+    "stage1_min_steps": 2000,
+    "stage1_max_steps": 5000,
+    "joint_min_steps": 2000,
+    "joint_max_steps": 5000,
+    "eval_every": 100,
+    "seed": 91
+  },
+  "loss": {
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "edge_weight": 1.0,
+    "local_scales": [4, 16, 64],
+    "supervised_iterations": [0, 1, 2, 3]
+  },
+  "plateau": {
+    "relative_improvement": 0.005,
+    "patience_evaluations": 5,
+    "loss_window_steps": 500,
+    "loss_comparison_chunk_steps": 100
+  },
+  "success": {
+    "patience_evaluations": 3,
+    "full_depth_rel_below": 0.01,
+    "full_delta_1.01_above": 0.95,
+    "structure_point_rel_below": 0.02,
+    "require_k3_better_than_k0": true
+  },
+  "visualization": {
+    "yaw_degrees": [-90, 90],
+    "motion": "one-way",
+    "frames": 46,
+    "duration_ms": 110
+  }
+}

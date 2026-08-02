@@ -1,0 +1,148 @@
+{
+  "status": "complete",
+  "experiment": "MoGe-3 fine-structure 3D visualization",
+  "paper_basis": {
+    "figure_1_and_3": "off-axis point-map views reveal distortions hidden in 2D depth",
+    "figure_4": "K=0/1/2/3/5 iteration comparison on thin structures",
+    "appendix_b1": "coarse multi-scale residual and morphology proposal"
+  },
+  "mask_scope": "Appendix B.1 coarse proposal only; SAM2 segment-aware expansion is omitted, so these are diagnostic crops rather than paper benchmark masks.",
+  "selection": {
+    "val": "fixed sample chosen before model evaluation; within-sample window maximizes ground-truth fine-detail proposal support",
+    "test": "fixed sample chosen before model evaluation; within-sample window maximizes ground-truth fine-detail proposal support"
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "max_k": 5,
+  "yaw_degrees": 28.0,
+  "pitch_degrees": -8.0,
+  "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp6_two_stage_joint_finetuning/artifacts/training/checkpoint.pt",
+  "checkpoint_step": 250,
+  "val": {
+    "id": "ai_055_003_cam_00_frame.0013",
+    "split": "val",
+    "scene": "ai_055_003",
+    "frame": 13,
+    "crop": [
+      96,
+      96,
+      288,
+      288
+    ],
+    "fine_pixels": 36722,
+    "selection_score": 36722.0,
+    "metrics": {
+      "0": {
+        "fine_pixels": 36722,
+        "point_rel": 0.13076898455619812,
+        "depth_rel": 0.1268264651298523,
+        "depth_delta_1.01": 0.04141931267360165,
+        "boundary_f1": 0.9302191734313965
+      },
+      "1": {
+        "fine_pixels": 36722,
+        "point_rel": 0.13076668977737427,
+        "depth_rel": 0.12682561576366425,
+        "depth_delta_1.01": 0.04139208104133762,
+        "boundary_f1": 0.930269718170166
+      },
+      "2": {
+        "fine_pixels": 36722,
+        "point_rel": 0.1307561844587326,
+        "depth_rel": 0.12681438028812408,
+        "depth_delta_1.01": 0.04136484940907358,
+        "boundary_f1": 0.9303111433982849
+      },
+      "3": {
+        "fine_pixels": 36722,
+        "point_rel": 0.13075241446495056,
+        "depth_rel": 0.1268099993467331,
+        "depth_delta_1.01": 0.041310386144545505,
+        "boundary_f1": 0.9302873015403748
+      },
+      "4": {
+        "fine_pixels": 36722,
+        "point_rel": 0.13076470792293549,
+        "depth_rel": 0.1268233209848404,
+        "depth_delta_1.01": 0.04139208104133762,
+        "boundary_f1": 0.9302865862846375
+      },
+      "5": {
+        "fine_pixels": 36722,
+        "point_rel": 0.1307682991027832,
+        "depth_rel": 0.1268274486064911,
+        "depth_delta_1.01": 0.04141931267360165,
+        "boundary_f1": 0.9302213788032532
+      }
+    }
+  },
+  "test": {
+    "id": "ai_046_001_cam_00_frame.0079",
+    "split": "test",
+    "scene": "ai_046_001",
+    "frame": 79,
+    "crop": [
+      192,
+      0,
+      384,
+      192
+    ],
+    "fine_pixels": 36864,
+    "selection_score": 36864.0,
+    "metrics": {
+      "0": {
+        "fine_pixels": 36864,
+        "point_rel": 0.11313579976558685,
+        "depth_rel": 0.10911139100790024,
+        "depth_delta_1.01": 0.1579318576388889,
+        "boundary_f1": 0.7733118534088135
+      },
+      "1": {
+        "fine_pixels": 36864,
+        "point_rel": 0.11314734816551208,
+        "depth_rel": 0.10912297666072845,
+        "depth_delta_1.01": 0.1579318576388889,
+        "boundary_f1": 0.7731503248214722
+      },
+      "2": {
+        "fine_pixels": 36864,
+        "point_rel": 0.11315090209245682,
+        "depth_rel": 0.1091265082359314,
+        "depth_delta_1.01": 0.1577419704861111,
+        "boundary_f1": 0.7731006145477295
+      },
+      "3": {
+        "fine_pixels": 36864,
+        "point_rel": 0.1131514459848404,
+        "depth_rel": 0.1091269850730896,
+        "depth_delta_1.01": 0.15785047743055555,
+        "boundary_f1": 0.7731011509895325
+      },
+      "4": {
+        "fine_pixels": 36864,
+        "point_rel": 0.11316283792257309,
+        "depth_rel": 0.10913833975791931,
+        "depth_delta_1.01": 0.1574978298611111,
+        "boundary_f1": 0.7731011509895325
+      },
+      "5": {
+        "fine_pixels": 36864,
+        "point_rel": 0.11316564679145813,
+        "depth_rel": 0.10914114117622375,
+        "depth_delta_1.01": 0.157470703125,
+        "boundary_f1": 0.7731168866157532
+      }
+    }
+  },
+  "artifacts": {
+    "candidates": "candidate_regions.csv",
+    "val_panel": "val_fine_structure.png",
+    "test_panel": "test_fine_structure.png",
+    "val_panel_pdf": "val_fine_structure.pdf",
+    "test_panel_pdf": "test_fine_structure.pdf",
+    "val_orbit": "val_fine_structure_orbit.gif",
+    "test_orbit": "test_fine_structure_orbit.gif"
+  }
+}

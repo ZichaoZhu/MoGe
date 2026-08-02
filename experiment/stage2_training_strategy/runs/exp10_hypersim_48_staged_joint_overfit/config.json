@@ -1,0 +1,76 @@
+{
+  "experiment_id": "exp10_hypersim_48_staged_joint_overfit",
+  "objective": "在Exp2与Exp7合并的48张Hypersim训练图上进行论文式两阶段联合训练，验证二维基础几何与SSR能否稳定达到更强的训练集拟合。",
+  "data": {
+    "train": {
+      "exp2_trajectory_frames": 24,
+      "exp7_curated_fine_structure_frames": 24,
+      "total": 48
+    },
+    "validation_frames": 16,
+    "test_frames": 16,
+    "tartanair_used": false,
+    "augmentation": false,
+    "normal_data_used": false
+  },
+  "model": {
+    "base": "Ruicheng/moge-2-vitl-normal",
+    "height": 384,
+    "width": 512,
+    "num_tokens": 2500,
+    "training_refinement_steps": 3,
+    "evaluation_refinement_steps": [0, 1, 3, 5],
+    "trainable": ["DINO backbone", "neck", "points head", "SSR"],
+    "frozen": ["normal head", "mask head", "metric-scale head"]
+  },
+  "distributed": {
+    "initial_run": {
+      "world_size": 2,
+      "backend": "gloo",
+      "global_batch_size": 2,
+      "local_batch_size": 1
+    },
+    "stable_recovery": {
+      "reason": "step 3000恢复在step 3300达到最佳后出现SSR残差与梯度持续漂移，因此从step 3300最佳模型重置优化器并降低SSR学习率",
+      "warm_start_step": 3300,
+      "world_size": 1,
+      "physical_gpu": "由监督器从安全空闲GPU中自动选择",
+      "global_batch_size": 8,
+      "microbatch_size": 1,
+      "gradient_accumulation_steps": 8,
+      "minimum_free_memory_mib": 32768,
+      "maximum_start_utilization_percent": 10,
+      "monitor_interval_seconds": 600
+    }
+  },
+  "optimization": {
+    "steps": 10000,
+    "refiner_detach_steps": 5000,
+    "backbone_freeze_steps": 1000,
+    "backbone_warmup_end": 2000,
+    "ssr_learning_rate": 0.000001,
+    "head_learning_rate": 0.000001,
+    "backbone_learning_rate": 1e-7,
+    "optimizer": "AdamW",
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "eval_every": 100,
+    "selection_split": "train",
+    "seed": 101,
+    "stability_guards": {
+      "max_preclip_gradient_norm": 100.0,
+      "max_skipped_preclip_steps": 5,
+      "max_consecutive_skipped_preclip_steps": 2,
+      "max_absolute_log_depth_residual": 5.0,
+      "max_refined_point_rel": 0.1,
+      "max_refined_to_base_ratio": 3.0
+    }
+  },
+  "loss": {
+    "global_weight": 1.0,
+    "local_weight": 1.0,
+    "edge_weight": 1.0,
+    "local_scales": [4, 16, 64],
+    "supervised_iterations": [0, 1, 2, 3]
+  }
+}

@@ -8,7 +8,11 @@ import torch.nn.functional as F
 import utils3d
 
 from ..utils.geometry_torch import normalized_view_plane_uv, recover_focal_shift
-from .ssr import SelfGuidedSparseRefiner, factorize_points
+from .ssr import (
+    SelfGuidedSparseRefiner,
+    factorize_points,
+    load_batch_norm_running_state,
+)
 from .v2 import MoGeModel as MoGeModelV2
 
 
@@ -45,6 +49,7 @@ class MoGeModel(MoGeModelV2):
             "visual_channels": 256,
             "blocks_per_level": 2,
             "backend": "spconv",
+            "normalization": "batch_norm",
         }
         if ssr is not None:
             ssr_config.update(ssr)
@@ -146,11 +151,21 @@ class MoGeModel(MoGeModelV2):
         num_refinement_steps: Optional[int] = None,
         return_intermediates: bool = False,
         detach_base_from_refiner: bool = False,
+        ssr_batch_norm_states: Optional[
+            List[Dict[str, Dict[str, torch.Tensor]]]
+        ] = None,
     ) -> Dict[str, Any]:
         if num_refinement_steps is None:
             num_refinement_steps = self.default_num_refinement_steps
         if not 0 <= int(num_refinement_steps) <= 7:
             raise ValueError("num_refinement_steps must be in [0, 7]")
+        if (
+            ssr_batch_norm_states is not None
+            and len(ssr_batch_norm_states) < int(num_refinement_steps)
+        ):
+            raise ValueError(
+                "SSR BatchNorm states must cover every refinement iteration"
+            )
 
         output = self._forward_base(image, num_tokens)
         base_points = output["points"]
@@ -169,7 +184,12 @@ class MoGeModel(MoGeModelV2):
                     visual_for_refiner = visual_for_refiner.detach()
                     refined_points = refined_points.detach()
 
-                for _ in range(int(num_refinement_steps)):
+                for iteration in range(int(num_refinement_steps)):
+                    if ssr_batch_norm_states is not None:
+                        load_batch_norm_running_state(
+                            self.ssr,
+                            ssr_batch_norm_states[iteration],
+                        )
                     residual, stats = self.ssr(factorized, visual_for_refiner)
                     factorized = torch.cat(
                         (

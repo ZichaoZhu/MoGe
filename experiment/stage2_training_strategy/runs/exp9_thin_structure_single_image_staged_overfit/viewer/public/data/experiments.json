@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "defaultExperiment": "exp12_hypersim_100_immediate_joint_finetuning",
+  "experiments": [
+    {
+      "id": "exp9_thin_structure_single_image_staged_overfit",
+      "label": "Exp9 · 单图极限过拟合",
+      "shortLabel": "Exp9 单图",
+      "summary": "五张细结构图片分别独立训练；网页开放其中三张，用于观察单图过拟合时 Base 与 SSR 能达到的上限。",
+      "manifestUrl": "/data/manifest.json",
+      "stageLabels": {
+        "initial": "训练前",
+        "final": "训练后"
+      },
+      "stageDetails": {
+        "initial": "MoGe-2 初始化与零初始化 SSR",
+        "final": "每张图片各自完成两阶段极限过拟合"
+      }
+    },
+    {
+      "id": "exp12_hypersim_100_immediate_joint_finetuning",
+      "label": "Exp12 · 100 张联合微调",
+      "shortLabel": "Exp12 百图",
+      "summary": "从 Exp11 step 3000 最佳模型开始，对 100 张训练图立即联合更新 Base、2D Head 与 SSR；比较联合训练前后及 train/val/test 差异。",
+      "manifestUrl": "/data/exp12/manifest.json",
+      "stageLabels": {
+        "initial": "联合前",
+        "final": "联合后"
+      },
+      "stageDetails": {
+        "initial": "Exp11 最佳模型 · step 3000",
+        "final": "Exp12 最佳模型 · step 3300"
+      }
+    }
+  ]
+}

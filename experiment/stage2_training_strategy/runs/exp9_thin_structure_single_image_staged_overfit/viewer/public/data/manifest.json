@@ -1,0 +1,1025 @@
+{
+  "version": 1,
+  "experiment": "exp9_thin_structure_single_image_staged_overfit",
+  "coordinateSpace": {
+    "stored": "raw_moge_camera_xyz",
+    "aligned": "P_aligned = scale * P_raw + (0, 0, zShift)",
+    "threeDisplay": "[x, -y, -z]"
+  },
+  "voxelization": {
+    "depthScale": 200,
+    "spconvOrder": [
+      "batch",
+      "depth",
+      "row",
+      "column"
+    ],
+    "depthCoordinate": "round(depthScale * log(Z_raw))"
+  },
+  "resolution": {
+    "width": 512,
+    "height": 384
+  },
+  "steps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "websiteSampleOrder": [
+    "ai_053_018_cam_00_frame.0000",
+    "ai_054_008_cam_00_frame.0000",
+    "ai_002_003_cam_00_frame.0000"
+  ],
+  "archivedInitialSampleIds": [
+    "ai_019_004_cam_00_frame.0000",
+    "ai_054_008_cam_00_frame.0000",
+    "ai_053_018_cam_00_frame.0000",
+    "ai_002_003_cam_00_frame.0000",
+    "ai_019_004_cam_00_frame.0099"
+  ],
+  "samples": [
+    {
+      "id": "ai_019_004_cam_00_frame.0000",
+      "label": "样本 01",
+      "order": 1,
+      "description": "楼梯扶手与平行栏杆",
+      "websiteEnabled": false,
+      "cropXYXY": [
+        192,
+        160,
+        384,
+        352
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/01_ai_019_004_cam_00_frame.0000/source_rgb.jpg",
+      "stages": {
+        "initial": {
+          "0": {
+            "url": "/data/01_ai_019_004_cam_00_frame.0000/initial_k0.ply",
+            "pointCount": 196608,
+            "sha256": "24e45bcb2a661d77aed98f149096e6dccc92ab0c6b2157da2710b4c7b1670b7c",
+            "checkpointSha256": "d0c6d9d9d2072a86acd1fc38f9659c08ae5e0ff85da8ba0d540abaf287686d06",
+            "alignment": {
+              "scale": 1.9216818809509277,
+              "zShift": -0.01988840103149414
+            },
+            "bounds": {
+              "min": [
+                -1.6392121315002441,
+                -1.1254183053970337,
+                0.37167808413505554
+              ],
+              "max": [
+                1.4415777921676636,
+                0.842153787612915,
+                4.4257001876831055
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.09128591418266296,
+                "depth_rel": 0.08456825464963913,
+                "depth_delta_1.01": 0.1285044401884079,
+                "depth_delta_1.25": 0.9277191162109375,
+                "boundary_f1": 0.9142928719520569
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.10902052372694016,
+                "depth_rel": 0.10676568746566772,
+                "depth_delta_1.01": 0.1327039897441864,
+                "depth_delta_1.25": 0.9032931923866272,
+                "boundary_f1": 0.9230778813362122
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.12166777998209,
+                "depth_rel": 0.11833105981349945,
+                "depth_delta_1.01": 0.0836588516831398,
+                "depth_delta_1.25": 0.902940571308136,
+                "boundary_f1": 0.7505564093589783
+              }
+            }
+          },
+          "1": {
+            "alias": "initial.0"
+          },
+          "3": {
+            "alias": "initial.0"
+          },
+          "5": {
+            "alias": "initial.0"
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_054_008_cam_00_frame.0000",
+      "label": "样本 04",
+      "order": 4,
+      "description": "悬空楼梯踏板与支架",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        192,
+        192,
+        384,
+        384
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18413
+      },
+      "rgbUrl": "/data/04_ai_054_008_cam_00_frame.0000/source_rgb.jpg",
+      "stages": {
+        "initial": {
+          "0": {
+            "url": "/data/04_ai_054_008_cam_00_frame.0000/initial_k0.ply",
+            "pointCount": 196608,
+            "sha256": "4bb35e6fe93323f9d2b7cd77be4ab6b1eb99622f27a6fbaf049fba9212c39316",
+            "checkpointSha256": "9eb36acc71a2efa41cc9c37a5bd37835b136ff85e2c4d38954d91329391a8138",
+            "alignment": {
+              "scale": 4.351247310638428,
+              "zShift": -0.06155252456665039
+            },
+            "bounds": {
+              "min": [
+                -1.1874178647994995,
+                -1.0834184885025024,
+                0.7131457328796387
+              ],
+              "max": [
+                0.6525630950927734,
+                0.4790651202201843,
+                3.750034809112549
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196569,
+                "point_rel": 0.08209394663572311,
+                "depth_rel": 0.07726428657770157,
+                "depth_delta_1.01": 0.26069217920303345,
+                "depth_delta_1.25": 0.8848801255226135,
+                "boundary_f1": 0.47751644253730774
+              },
+              "crop": {
+                "pixels": 36825,
+                "point_rel": 0.07926885783672333,
+                "depth_rel": 0.0761057510972023,
+                "depth_delta_1.01": 0.17985065281391144,
+                "depth_delta_1.25": 0.9282009601593018,
+                "boundary_f1": 0.7443040609359741
+              },
+              "structure": {
+                "pixels": 18413,
+                "point_rel": 0.06855541467666626,
+                "depth_rel": 0.064018115401268,
+                "depth_delta_1.01": 0.2093629390001297,
+                "depth_delta_1.25": 0.9745288491249084,
+                "boundary_f1": 0.4126317501068115
+              }
+            }
+          },
+          "1": {
+            "alias": "initial.0"
+          },
+          "3": {
+            "alias": "initial.0"
+          },
+          "5": {
+            "alias": "initial.0"
+          }
+        },
+        "final": {
+          "0": {
+            "url": "/data/04_ai_054_008_cam_00_frame.0000/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "5e5814ab74be5ac997ef255c548844d983d5aa34dd20337d1a336f405785c462",
+            "checkpointSha256": "8ba06b0d66c90fa5f2f9f9202a5865c267efbdf5d52379b45eef0a9622a00e08",
+            "alignment": {
+              "scale": 549329.5,
+              "zShift": -0.3922872543334961
+            },
+            "bounds": {
+              "min": [
+                -9.662903721618932e-06,
+                -1.668773256824352e-05,
+                6.049906914995518e-06
+              ],
+              "max": [
+                9.719519766804297e-06,
+                3.933920652343659e-06,
+                5.752387733082287e-05
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196569,
+                "point_rel": 0.017095832154154778,
+                "depth_rel": 0.015873095020651817,
+                "depth_delta_1.01": 0.6541061997413635,
+                "depth_delta_1.25": 0.9929541349411011,
+                "boundary_f1": 0.8201402425765991
+              },
+              "crop": {
+                "pixels": 36825,
+                "point_rel": 0.018047140911221504,
+                "depth_rel": 0.017443131655454636,
+                "depth_delta_1.01": 0.4660964012145996,
+                "depth_delta_1.25": 0.99277663230896,
+                "boundary_f1": 0.9309486746788025
+              },
+              "structure": {
+                "pixels": 18413,
+                "point_rel": 0.014283038675785065,
+                "depth_rel": 0.013669607229530811,
+                "depth_delta_1.01": 0.48606961965560913,
+                "depth_delta_1.25": 0.9985879063606262,
+                "boundary_f1": 0.7540792226791382
+              }
+            }
+          },
+          "1": {
+            "url": "/data/04_ai_054_008_cam_00_frame.0000/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "3e816d0732082ea8c885cc46eb3223b41e4036d49db73fc2872da1430e5ff22b",
+            "checkpointSha256": "8ba06b0d66c90fa5f2f9f9202a5865c267efbdf5d52379b45eef0a9622a00e08",
+            "alignment": {
+              "scale": 568038.9375,
+              "zShift": -0.38817787170410156
+            },
+            "bounds": {
+              "min": [
+                -9.313383088738192e-06,
+                -1.6236370356637053e-05,
+                6.039758318365784e-06
+              ],
+              "max": [
+                9.487776878813747e-06,
+                3.6306357742432738e-06,
+                6.71164525556378e-05
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196569,
+                "point_rel": 0.015428159385919571,
+                "depth_rel": 0.014214460738003254,
+                "depth_delta_1.01": 0.653465211391449,
+                "depth_delta_1.25": 0.9941394925117493,
+                "boundary_f1": 0.8630769848823547
+              },
+              "crop": {
+                "pixels": 36825,
+                "point_rel": 0.015177156776189804,
+                "depth_rel": 0.01462771650403738,
+                "depth_delta_1.01": 0.47511202096939087,
+                "depth_delta_1.25": 0.9968499541282654,
+                "boundary_f1": 0.9661587476730347
+              },
+              "structure": {
+                "pixels": 18413,
+                "point_rel": 0.01135244220495224,
+                "depth_rel": 0.010676941834390163,
+                "depth_delta_1.01": 0.6088089942932129,
+                "depth_delta_1.25": 0.9998913407325745,
+                "boundary_f1": 0.8953219652175903
+              }
+            }
+          },
+          "3": {
+            "url": "/data/04_ai_054_008_cam_00_frame.0000/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "b471b07f9cc1d26e2c08c324fd64f262b4cea917482ed584829509e162dbe88a",
+            "checkpointSha256": "8ba06b0d66c90fa5f2f9f9202a5865c267efbdf5d52379b45eef0a9622a00e08",
+            "alignment": {
+              "scale": 612475.3125,
+              "zShift": -0.3927302360534668
+            },
+            "bounds": {
+              "min": [
+                -8.620815606263932e-06,
+                -3.743559500435367e-05,
+                5.6823514569259714e-06
+              ],
+              "max": [
+                1.0295056199538521e-05,
+                3.268979298809427e-06,
+                0.00017213293176610023
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196569,
+                "point_rel": 0.01148639339953661,
+                "depth_rel": 0.010440018959343433,
+                "depth_delta_1.01": 0.7524533271789551,
+                "depth_delta_1.25": 0.9965711832046509,
+                "boundary_f1": 0.9098633527755737
+              },
+              "crop": {
+                "pixels": 36825,
+                "point_rel": 0.011349333450198174,
+                "depth_rel": 0.010862368158996105,
+                "depth_delta_1.01": 0.6202308535575867,
+                "depth_delta_1.25": 0.9972572922706604,
+                "boundary_f1": 0.9812938570976257
+              },
+              "structure": {
+                "pixels": 18413,
+                "point_rel": 0.007379454560577869,
+                "depth_rel": 0.0067898789420723915,
+                "depth_delta_1.01": 0.772551953792572,
+                "depth_delta_1.25": 0.9998913407325745,
+                "boundary_f1": 0.9781726002693176
+              }
+            }
+          },
+          "5": {
+            "url": "/data/04_ai_054_008_cam_00_frame.0000/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "aa9099f9daf3aba97a6f3c80e61a96bfb79510d66df0d639bf11d34449eed283",
+            "checkpointSha256": "8ba06b0d66c90fa5f2f9f9202a5865c267efbdf5d52379b45eef0a9622a00e08",
+            "alignment": {
+              "scale": 657731.0,
+              "zShift": -0.3972358703613281
+            },
+            "bounds": {
+              "min": [
+                -8.002360118553042e-06,
+                -0.00010235519584966823,
+                5.293398317007814e-06
+              ],
+              "max": [
+                2.532175312808249e-05,
+                3.0320745736389654e-06,
+                0.0004270762437954545
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196569,
+                "point_rel": 0.013942253775894642,
+                "depth_rel": 0.012837422080338001,
+                "depth_delta_1.01": 0.809156060218811,
+                "depth_delta_1.25": 0.994419276714325,
+                "boundary_f1": 0.9263217449188232
+              },
+              "crop": {
+                "pixels": 36825,
+                "point_rel": 0.008402111940085888,
+                "depth_rel": 0.007767730392515659,
+                "depth_delta_1.01": 0.7976374626159668,
+                "depth_delta_1.25": 0.9971486926078796,
+                "boundary_f1": 0.9816024899482727
+              },
+              "structure": {
+                "pixels": 18413,
+                "point_rel": 0.005080610513687134,
+                "depth_rel": 0.004340709652751684,
+                "depth_delta_1.01": 0.9457448124885559,
+                "depth_delta_1.25": 0.9997284412384033,
+                "boundary_f1": 0.982771098613739
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_053_018_cam_00_frame.0000",
+      "label": "样本 05",
+      "order": 5,
+      "description": "密集竖直隔断杆",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        320,
+        64,
+        512,
+        256
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18429
+      },
+      "rgbUrl": "/data/05_ai_053_018_cam_00_frame.0000/source_rgb.jpg",
+      "stages": {
+        "initial": {
+          "0": {
+            "url": "/data/05_ai_053_018_cam_00_frame.0000/initial_k0.ply",
+            "pointCount": 196608,
+            "sha256": "6cd705bd9ad1bc62a700266a9d6b0e4ad42a80f645bfe9770976c13af43e91a8",
+            "checkpointSha256": "25177fff0e3d4d952b74ddb2dd3ed0c2943a872dc3ea4fe1868db693a690c62d",
+            "alignment": {
+              "scale": 3.9729814529418945,
+              "zShift": -0.18765926361083984
+            },
+            "bounds": {
+              "min": [
+                -1.03836989402771,
+                -0.9490663409233093,
+                0.4689912796020508
+              ],
+              "max": [
+                1.7256890535354614,
+                0.4095209538936615,
+                4.1206374168396
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196588,
+                "point_rel": 0.1455439031124115,
+                "depth_rel": 0.12164153903722763,
+                "depth_delta_1.01": 0.3094492256641388,
+                "depth_delta_1.25": 0.8377012014389038,
+                "boundary_f1": 0.9484434723854065
+              },
+              "crop": {
+                "pixels": 36858,
+                "point_rel": 0.140702024102211,
+                "depth_rel": 0.12738123536109924,
+                "depth_delta_1.01": 0.23574258387088776,
+                "depth_delta_1.25": 0.8553096055984497,
+                "boundary_f1": 0.9609407186508179
+              },
+              "structure": {
+                "pixels": 18429,
+                "point_rel": 0.1906721591949463,
+                "depth_rel": 0.17074811458587646,
+                "depth_delta_1.01": 0.08850181847810745,
+                "depth_delta_1.25": 0.841879665851593,
+                "boundary_f1": 0.6123239398002625
+              }
+            }
+          },
+          "1": {
+            "alias": "initial.0"
+          },
+          "3": {
+            "alias": "initial.0"
+          },
+          "5": {
+            "alias": "initial.0"
+          }
+        },
+        "final": {
+          "0": {
+            "url": "/data/05_ai_053_018_cam_00_frame.0000/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "2bdaec4d34d8ce4780e94b74f100f3bac37aeda490324945d31e06f2119c1a2c",
+            "checkpointSha256": "c3e5d5ac887597afdf552c49fc30574268c823af06babfa1efad231b0fe139dc",
+            "alignment": {
+              "scale": 5.8281097412109375,
+              "zShift": 0.006501555442810059
+            },
+            "bounds": {
+              "min": [
+                -0.7028204798698425,
+                -0.6460481882095337,
+                0.17593048512935638
+              ],
+              "max": [
+                1.1590099334716797,
+                0.28164318203926086,
+                2.6979739665985107
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196588,
+                "point_rel": 0.006369015667587519,
+                "depth_rel": 0.005781169049441814,
+                "depth_delta_1.01": 0.954620897769928,
+                "depth_delta_1.25": 0.9956610202789307,
+                "boundary_f1": 0.980080783367157
+              },
+              "crop": {
+                "pixels": 36858,
+                "point_rel": 0.011334633454680443,
+                "depth_rel": 0.010397855192422867,
+                "depth_delta_1.01": 0.8862662315368652,
+                "depth_delta_1.25": 0.9893375039100647,
+                "boundary_f1": 0.9911125302314758
+              },
+              "structure": {
+                "pixels": 18429,
+                "point_rel": 0.010979597456753254,
+                "depth_rel": 0.009998303838074207,
+                "depth_delta_1.01": 0.8623908162117004,
+                "depth_delta_1.25": 0.9920777082443237,
+                "boundary_f1": 0.9223548769950867
+              }
+            }
+          },
+          "1": {
+            "url": "/data/05_ai_053_018_cam_00_frame.0000/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "0eae19355446a9efc11be7f1c6dbf5f98d5a6732c85c92b0e509d98202786f15",
+            "checkpointSha256": "c3e5d5ac887597afdf552c49fc30574268c823af06babfa1efad231b0fe139dc",
+            "alignment": {
+              "scale": 6.250330448150635,
+              "zShift": 0.0033746957778930664
+            },
+            "bounds": {
+              "min": [
+                -0.6342435479164124,
+                -0.600519597530365,
+                0.16793771088123322
+              ],
+              "max": [
+                1.0356318950653076,
+                0.2596721649169922,
+                2.4859983921051025
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196588,
+                "point_rel": 0.0043815625831484795,
+                "depth_rel": 0.004052062053233385,
+                "depth_delta_1.01": 0.9741490483283997,
+                "depth_delta_1.25": 0.9980518221855164,
+                "boundary_f1": 0.9839587807655334
+              },
+              "crop": {
+                "pixels": 36858,
+                "point_rel": 0.0069382572546601295,
+                "depth_rel": 0.006295477971434593,
+                "depth_delta_1.01": 0.9460632801055908,
+                "depth_delta_1.25": 0.9952791929244995,
+                "boundary_f1": 0.9953261613845825
+              },
+              "structure": {
+                "pixels": 18429,
+                "point_rel": 0.008063091896474361,
+                "depth_rel": 0.007286666892468929,
+                "depth_delta_1.01": 0.9291877150535583,
+                "depth_delta_1.25": 0.9969613552093506,
+                "boundary_f1": 0.9638400077819824
+              }
+            }
+          },
+          "3": {
+            "url": "/data/05_ai_053_018_cam_00_frame.0000/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "ba944dd830b578d922ab46b9183f170f965a2d68895f27b04d0e634d3ab02160",
+            "checkpointSha256": "c3e5d5ac887597afdf552c49fc30574268c823af06babfa1efad231b0fe139dc",
+            "alignment": {
+              "scale": 7.098321914672852,
+              "zShift": 0.00335538387298584
+            },
+            "bounds": {
+              "min": [
+                -0.5550984144210815,
+                -0.5310460329055786,
+                0.14810211956501007
+              ],
+              "max": [
+                0.9109550714492798,
+                0.22657687962055206,
+                2.1892549991607666
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196588,
+                "point_rel": 0.002789333462715149,
+                "depth_rel": 0.0025535880122333765,
+                "depth_delta_1.01": 0.9935194849967957,
+                "depth_delta_1.25": 0.998733401298523,
+                "boundary_f1": 0.9876981973648071
+              },
+              "crop": {
+                "pixels": 36858,
+                "point_rel": 0.002782692201435566,
+                "depth_rel": 0.0024701408110558987,
+                "depth_delta_1.01": 0.9883336424827576,
+                "depth_delta_1.25": 0.9983721375465393,
+                "boundary_f1": 0.9978479146957397
+              },
+              "structure": {
+                "pixels": 18429,
+                "point_rel": 0.0033663343638181686,
+                "depth_rel": 0.0029741721227765083,
+                "depth_delta_1.01": 0.9868143200874329,
+                "depth_delta_1.25": 0.9984264373779297,
+                "boundary_f1": 0.9935391545295715
+              }
+            }
+          },
+          "5": {
+            "url": "/data/05_ai_053_018_cam_00_frame.0000/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "0baffe6b479fe9761b9f1eb77c340e16f88f80d49d48620af8ac4b4899f25a5f",
+            "checkpointSha256": "c3e5d5ac887597afdf552c49fc30574268c823af06babfa1efad231b0fe139dc",
+            "alignment": {
+              "scale": 8.071520805358887,
+              "zShift": 0.003159761428833008
+            },
+            "bounds": {
+              "min": [
+                -0.48867911100387573,
+                -0.4696652889251709,
+                0.13026154041290283
+              ],
+              "max": [
+                0.8074522018432617,
+                0.19911576807498932,
+                1.9141415357589722
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196588,
+                "point_rel": 0.002696024486795068,
+                "depth_rel": 0.002467042300850153,
+                "depth_delta_1.01": 0.9947708249092102,
+                "depth_delta_1.25": 0.998728334903717,
+                "boundary_f1": 0.9873111844062805
+              },
+              "crop": {
+                "pixels": 36858,
+                "point_rel": 0.002888171235099435,
+                "depth_rel": 0.0025603827089071274,
+                "depth_delta_1.01": 0.9924033284187317,
+                "depth_delta_1.25": 0.9985077977180481,
+                "boundary_f1": 0.9978480935096741
+              },
+              "structure": {
+                "pixels": 18429,
+                "point_rel": 0.0036054360680282116,
+                "depth_rel": 0.0031874789856374264,
+                "depth_delta_1.01": 0.9889847636222839,
+                "depth_delta_1.25": 0.9981551170349121,
+                "boundary_f1": 0.9936418533325195
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_002_003_cam_00_frame.0000",
+      "label": "样本 06",
+      "order": 6,
+      "description": "楼梯栏杆与斜向扶手",
+      "websiteEnabled": true,
+      "cropXYXY": [
+        128,
+        32,
+        320,
+        224
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/06_ai_002_003_cam_00_frame.0000/source_rgb.jpg",
+      "stages": {
+        "initial": {
+          "0": {
+            "url": "/data/06_ai_002_003_cam_00_frame.0000/initial_k0.ply",
+            "pointCount": 196608,
+            "sha256": "ee8f0db9cdd62e7f9b5a222d636723f3a053a8e0d0b8d65530c1fb098dc457a7",
+            "checkpointSha256": "68bb69f389b1c44291f3730748c77809e8c3b3a7b7a53a0f8ba7548da01dbd82",
+            "alignment": {
+              "scale": 3.3880515098571777,
+              "zShift": 0.022257328033447266
+            },
+            "bounds": {
+              "min": [
+                -1.2031971216201782,
+                -1.3768638372421265,
+                0.5446107983589172
+              ],
+              "max": [
+                1.1594823598861694,
+                0.38550490140914917,
+                3.8993027210235596
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.03742309659719467,
+                "depth_rel": 0.03462597355246544,
+                "depth_delta_1.01": 0.4956563413143158,
+                "depth_delta_1.25": 0.9667307734489441,
+                "boundary_f1": 0.8582285046577454
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.0830521509051323,
+                "depth_rel": 0.08067122846841812,
+                "depth_delta_1.01": 0.2174750417470932,
+                "depth_delta_1.25": 0.881944477558136,
+                "boundary_f1": 0.8854671716690063
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.08064333349466324,
+                "depth_rel": 0.07915402948856354,
+                "depth_delta_1.01": 0.0928819477558136,
+                "depth_delta_1.25": 0.9293619990348816,
+                "boundary_f1": 0.6624513268470764
+              }
+            }
+          },
+          "1": {
+            "alias": "initial.0"
+          },
+          "3": {
+            "alias": "initial.0"
+          },
+          "5": {
+            "alias": "initial.0"
+          }
+        },
+        "final": {
+          "0": {
+            "url": "/data/06_ai_002_003_cam_00_frame.0000/final_k0.ply",
+            "pointCount": 196608,
+            "sha256": "0fe88e50682badc0c344462449a961ab9191f55347362af4c1dc6717e9ad5428",
+            "checkpointSha256": "a895690716e0a309c5a0e71b296418e23f33251039c83b8e9fd119dd4739fea0",
+            "alignment": {
+              "scale": 22821.09765625,
+              "zShift": -0.5761351585388184
+            },
+            "bounds": {
+              "min": [
+                -0.0001810723333619535,
+                -0.00022236867516767234,
+                0.00010775590635603294
+              ],
+              "max": [
+                0.0001807867520255968,
+                5.6613764172652736e-05,
+                0.000609935203101486
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.011584393680095673,
+                "depth_rel": 0.010976756922900677,
+                "depth_delta_1.01": 0.8949992060661316,
+                "depth_delta_1.25": 0.9838155508041382,
+                "boundary_f1": 0.9531995058059692
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.03243608772754669,
+                "depth_rel": 0.03169207647442818,
+                "depth_delta_1.01": 0.7167426347732544,
+                "depth_delta_1.25": 0.93994140625,
+                "boundary_f1": 0.9496148228645325
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.013509861193597317,
+                "depth_rel": 0.013143442571163177,
+                "depth_delta_1.01": 0.7298719882965088,
+                "depth_delta_1.25": 0.9934895634651184,
+                "boundary_f1": 0.7774766683578491
+              }
+            }
+          },
+          "1": {
+            "url": "/data/06_ai_002_003_cam_00_frame.0000/final_k1.ply",
+            "pointCount": 196608,
+            "sha256": "420cf55b6478d63b4bf31fa21f7b05e8986f2a2ad9af5da31705a2922193c87a",
+            "checkpointSha256": "a895690716e0a309c5a0e71b296418e23f33251039c83b8e9fd119dd4739fea0",
+            "alignment": {
+              "scale": 24208.673828125,
+              "zShift": -0.5750918388366699
+            },
+            "bounds": {
+              "min": [
+                -0.00017085719446185976,
+                -0.00020089857571292669,
+                0.00010155426571145654
+              ],
+              "max": [
+                0.0001686143659753725,
+                5.328034967533313e-05,
+                0.0005666399956680834
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.007640529423952103,
+                "depth_rel": 0.007093142252415419,
+                "depth_delta_1.01": 0.9350637197494507,
+                "depth_delta_1.25": 0.9918670654296875,
+                "boundary_f1": 0.9863178730010986
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.019776947796344757,
+                "depth_rel": 0.019201813265681267,
+                "depth_delta_1.01": 0.8209364414215088,
+                "depth_delta_1.25": 0.9668239951133728,
+                "boundary_f1": 0.990452766418457
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.008376790210604668,
+                "depth_rel": 0.008032925426959991,
+                "depth_delta_1.01": 0.865234375,
+                "depth_delta_1.25": 0.9959309697151184,
+                "boundary_f1": 0.8598929047584534
+              }
+            }
+          },
+          "3": {
+            "url": "/data/06_ai_002_003_cam_00_frame.0000/final_k3.ply",
+            "pointCount": 196608,
+            "sha256": "fcb46197a0d19ed7e76f2c2e7234322f5cf03ec4a12060b68c7980cf9e4b2042",
+            "checkpointSha256": "a895690716e0a309c5a0e71b296418e23f33251039c83b8e9fd119dd4739fea0",
+            "alignment": {
+              "scale": 27267.28125,
+              "zShift": -0.5732343196868896
+            },
+            "bounds": {
+              "min": [
+                -0.0001524793478893116,
+                -0.00017685189959593117,
+                9.02175743249245e-05
+              ],
+              "max": [
+                0.000150419378769584,
+                5.0543567340355366e-05,
+                0.0005016801878809929
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.004916992504149675,
+                "depth_rel": 0.004391631577163935,
+                "depth_delta_1.01": 0.9655405879020691,
+                "depth_delta_1.25": 0.9980010986328125,
+                "boundary_f1": 0.9884217977523804
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.009333993308246136,
+                "depth_rel": 0.008886590600013733,
+                "depth_delta_1.01": 0.9064399003982544,
+                "depth_delta_1.25": 0.9930555820465088,
+                "boundary_f1": 0.9886823296546936
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.005525652784854174,
+                "depth_rel": 0.005197967868298292,
+                "depth_delta_1.01": 0.9759114384651184,
+                "depth_delta_1.25": 0.9958767294883728,
+                "boundary_f1": 0.9484009742736816
+              }
+            }
+          },
+          "5": {
+            "url": "/data/06_ai_002_003_cam_00_frame.0000/final_k5.ply",
+            "pointCount": 196608,
+            "sha256": "0acf49b1968fa73dd25011e5f9a10901230e3382c04bdc41bbed58c88fc2c9e0",
+            "checkpointSha256": "a895690716e0a309c5a0e71b296418e23f33251039c83b8e9fd119dd4739fea0",
+            "alignment": {
+              "scale": 30708.87109375,
+              "zShift": -0.571845531463623
+            },
+            "bounds": {
+              "min": [
+                -0.00013552546442952007,
+                -0.00015661290672142059,
+                8.007545693544671e-05
+              ],
+              "max": [
+                0.0001331843959633261,
+                4.4322190660750493e-05,
+                0.0004446830425877124
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.00529828667640686,
+                "depth_rel": 0.0047283777967095375,
+                "depth_delta_1.01": 0.9562785029411316,
+                "depth_delta_1.25": 0.9978129267692566,
+                "boundary_f1": 0.9866893887519836
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.008680607192218304,
+                "depth_rel": 0.008223154582083225,
+                "depth_delta_1.01": 0.9228515625,
+                "depth_delta_1.25": 0.9928928017616272,
+                "boundary_f1": 0.9850649237632751
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.005706607364118099,
+                "depth_rel": 0.005390493664890528,
+                "depth_delta_1.01": 0.9787326455116272,
+                "depth_delta_1.25": 0.9956597089767456,
+                "boundary_f1": 0.9550740122795105
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "ai_019_004_cam_00_frame.0099",
+      "label": "样本 07",
+      "order": 7,
+      "description": "玻璃楼梯细拉杆",
+      "websiteEnabled": false,
+      "cropXYXY": [
+        0,
+        96,
+        192,
+        288
+      ],
+      "structureMask": {
+        "type": "near_quantile",
+        "quantile": 0.5,
+        "pixels": 18432
+      },
+      "rgbUrl": "/data/07_ai_019_004_cam_00_frame.0099/source_rgb.jpg",
+      "stages": {
+        "initial": {
+          "0": {
+            "url": "/data/07_ai_019_004_cam_00_frame.0099/initial_k0.ply",
+            "pointCount": 196608,
+            "sha256": "6b17a8b0e5efdb85e32889eb449b64802e2ffc2bc03eddee183799ab135dcb81",
+            "checkpointSha256": "5db57058f4a3b7d0adcf30da1f36c3705ee31c870297e281dc348b25ac166df6",
+            "alignment": {
+              "scale": 2.321809768676758,
+              "zShift": -0.12363529205322266
+            },
+            "bounds": {
+              "min": [
+                -2.237119197845459,
+                -0.7909003496170044,
+                0.6138065457344055
+              ],
+              "max": [
+                1.1750093698501587,
+                0.5926973223686218,
+                4.257360458374023
+              ]
+            },
+            "metrics": {
+              "full": {
+                "pixels": 196608,
+                "point_rel": 0.08768990635871887,
+                "depth_rel": 0.080174021422863,
+                "depth_delta_1.01": 0.2464040219783783,
+                "depth_delta_1.25": 0.9224955439567566,
+                "boundary_f1": 0.8510226011276245
+              },
+              "crop": {
+                "pixels": 36864,
+                "point_rel": 0.1844811588525772,
+                "depth_rel": 0.17061595618724823,
+                "depth_delta_1.01": 0.1024848073720932,
+                "depth_delta_1.25": 0.8413357138633728,
+                "boundary_f1": 0.9260382056236267
+              },
+              "structure": {
+                "pixels": 18432,
+                "point_rel": 0.21668797731399536,
+                "depth_rel": 0.20031823217868805,
+                "depth_delta_1.01": 0.1139865443110466,
+                "depth_delta_1.25": 0.8271484375,
+                "boundary_f1": 0.8040807843208313
+              }
+            }
+          },
+          "1": {
+            "alias": "initial.0"
+          },
+          "3": {
+            "alias": "initial.0"
+          },
+          "5": {
+            "alias": "initial.0"
+          }
+        }
+      }
+    }
+  ]
+}

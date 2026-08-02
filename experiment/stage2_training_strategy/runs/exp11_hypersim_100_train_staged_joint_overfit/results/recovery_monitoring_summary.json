@@ -1,0 +1,52 @@
+{
+  "experiment": "exp11_hypersim_100_train_staged_joint_overfit",
+  "run": "recovery_from_best3000_lr5e7",
+  "terminal_status": "stopped_by_monitor",
+  "wrapper_status": "failed",
+  "wrapper_exit_code": 1,
+  "stop_reason": "训练集 K=3 Point Rel 相对 step 3000 最佳点的回退加速并在 step 4000 达到 5.7394%，触发监控保护阈值。",
+  "stop_requested_at": "2026-08-01T04:19:46+08:00",
+  "pipeline_finished_at": "2026-08-01T04:19:59.348686+08:00",
+  "supervisor_finished_at": "2026-08-01T04:22:25.347745+08:00",
+  "last_step": 4000,
+  "stage": "detached_warmup",
+  "physical_gpus": [1, 0],
+  "learning_rates": {
+    "ssr": 5e-7,
+    "heads": 5e-7,
+    "backbone": 5e-8
+  },
+  "best": {
+    "step": 3000,
+    "train_k3_point_rel": 0.03344780563609675,
+    "val_k3_point_rel": 0.10400824504904449,
+    "original_checkpoint_sha256": "1a665e760516fde4e00082b9743a0fd8c7eed98d298cb76bb012b813227c98ce",
+    "recovery_checkpoint_sha256": "c088e875e0086055f4be36fc587230ab827e52918666940416af8f10bcba141a"
+  },
+  "last_evaluation": {
+    "step": 4000,
+    "train_k0_point_rel": 0.03558534264098853,
+    "train_k3_point_rel": 0.03536750909406692,
+    "val_k0_point_rel": 0.12159745837561786,
+    "val_k3_point_rel": 0.12142850062809885,
+    "train_k3_regression_from_best_percent": 5.7394,
+    "train_k3_improvement_over_same_step_k0_percent": 0.612144,
+    "train_k3_improvement_over_original_step4000_percent": 42.946503
+  },
+  "stability": {
+    "oom": false,
+    "nan": false,
+    "instability_event": false,
+    "optimizer_steps_skipped": 0,
+    "max_preclip_gradient_norm": 19.558025360107422,
+    "gradient_norm_ge_10_count": 4,
+    "gradient_norm_ge_100_count": 0,
+    "max_abs_log_depth_residual": 0.023585155606269836,
+    "max_depth_span": 1116.0
+  },
+  "resume_checkpoint": {
+    "step": 4000,
+    "sha256": "5c0e64cacc17f61040fd1e03f0b8fbb36c72994e67417e3f4915657b0d24151f"
+  },
+  "interpretation": "降低学习率抑制了首次分支的梯度爆炸与快速坍塌，但 detached 阶段的 Base 指标仍持续漂移；后续不应从 step 4000 继续，而应从 step 3000 最佳点设计新的阶段切换或 Base 更新策略。"
+}

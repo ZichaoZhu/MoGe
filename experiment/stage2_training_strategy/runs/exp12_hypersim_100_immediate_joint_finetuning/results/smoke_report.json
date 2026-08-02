@@ -1,0 +1,143 @@
+{
+  "status": "complete",
+  "experiment": "Hypersim two-stage joint MoGe-3 fine-tuning",
+  "paper_alignment": {
+    "base_and_ssr_jointly_optimized": true,
+    "refiner_detached_during_warmup": true,
+    "dino_bfloat16_geometry_float32": true,
+    "normal_prediction": false,
+    "synthetic_only_controlled_screen": true,
+    "real_data_routing_exercised": false
+  },
+  "distributed": {
+    "backend": "gloo",
+    "world_size": 2,
+    "global_batch_size": 16,
+    "local_batch_size": 8
+  },
+  "counts": {
+    "train": 4,
+    "val": 4,
+    "test": 4
+  },
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "optimization_steps": 3004,
+  "refiner_detach_steps": 3000,
+  "backbone_frozen": false,
+  "backbone_freeze_steps": 1000,
+  "backbone_warmup_end": 2000,
+  "learning_rates": {
+    "ssr": 5e-07,
+    "heads": 2e-07,
+    "backbone": 1e-08,
+    "schedule": "cosine",
+    "decay_start_step": 3000,
+    "decay_end_step": 5000,
+    "final_scale": 0.1
+  },
+  "batch_size": 16,
+  "microbatch_size": 1,
+  "best_step": 3004,
+  "selection_split": "train",
+  "best_k3_point_rel": 0.004782993812114,
+  "initial_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.005216824938543141,
+        "depth_rel": 0.0044188410975039005,
+        "depth_delta_1.01": 0.9280993342399597,
+        "depth_delta_1.25": 0.9997050166130066,
+        "boundary_f1": 0.8934694975614548
+      },
+      "val": {
+        "point_rel": 0.028784537222236395,
+        "depth_rel": 0.025559552013874054,
+        "depth_delta_1.01": 0.33903511986136436,
+        "depth_delta_1.25": 0.9928091019392014,
+        "boundary_f1": 0.8480008989572525
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.0051466236473061144,
+        "depth_rel": 0.004378286539576948,
+        "depth_delta_1.01": 0.9291432797908783,
+        "depth_delta_1.25": 0.9996973872184753,
+        "boundary_f1": 0.8951649516820908
+      },
+      "val": {
+        "point_rel": 0.02860726322978735,
+        "depth_rel": 0.025462199468165636,
+        "depth_delta_1.01": 0.34062084183096886,
+        "depth_delta_1.25": 0.9928065687417984,
+        "boundary_f1": 0.8479667007923126
+      }
+    }
+  },
+  "latest_periodic": {
+    "0": {
+      "train": {
+        "point_rel": 0.004814169369637966,
+        "depth_rel": 0.004121473408304155,
+        "depth_delta_1.01": 0.9350433647632599,
+        "depth_delta_1.25": 0.9996999204158783,
+        "boundary_f1": 0.895036980509758
+      },
+      "val": {
+        "point_rel": 0.02867371030151844,
+        "depth_rel": 0.02543738717213273,
+        "depth_delta_1.01": 0.3427494578063488,
+        "depth_delta_1.25": 0.9928027540445328,
+        "boundary_f1": 0.8484058529138565
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.004782993812114,
+        "depth_rel": 0.0040938902529887855,
+        "depth_delta_1.01": 0.9348589777946472,
+        "depth_delta_1.25": 0.9996961206197739,
+        "boundary_f1": 0.8962983042001724
+      },
+      "val": {
+        "point_rel": 0.028716594446450472,
+        "depth_rel": 0.025501057505607605,
+        "depth_delta_1.01": 0.33650587499141693,
+        "depth_delta_1.25": 0.9928065687417984,
+        "boundary_f1": 0.8480513691902161
+      }
+    }
+  },
+  "initial_loss": 0.022963958675973117,
+  "final_loss": 0.0236154095036909,
+  "training_seconds_including_periodic_eval": 92.62231132108718,
+  "total_seconds": 170.73677346110344,
+  "peak_memory_bytes": 14120387584,
+  "peak_memory_bytes_by_process": [
+    14120387584,
+    14119068672
+  ],
+  "stability": {
+    "max_preclip_grad_norm": 100.0,
+    "skipped_preclip_steps": 0,
+    "max_skipped_preclip_steps": 5,
+    "max_consecutive_skipped_preclip_steps": 2
+  },
+  "resumed_from": null,
+  "warm_started_from": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp11_hypersim_100_train_staged_joint_overfit/artifacts/training/checkpoint.pt",
+  "cuda_visible_devices": "0,2",
+  "requested_device": "cuda:0",
+  "artifacts": {
+    "best_checkpoint": "checkpoint.pt",
+    "latest_checkpoint": "latest_checkpoint.pt",
+    "resume_checkpoint": "resume_checkpoint.pt",
+    "training_history": "training_history.csv",
+    "evaluation_history": "evaluation_history.csv",
+    "training_curves": "training_curves.png",
+    "stability_events": "stability_events.jsonl"
+  }
+}

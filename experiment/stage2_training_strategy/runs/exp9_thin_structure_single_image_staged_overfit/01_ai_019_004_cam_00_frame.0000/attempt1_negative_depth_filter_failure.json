@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "sample_id": "ai_019_004_cam_00_frame.0000",
+  "error_type": "ValueError",
+  "error": "Evaluation scope contains no valid points",
+  "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/overfit_hypersim_staged_v3.py\", line 1179, in main\n    run(args)\n  File \"/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/overfit_hypersim_staged_v3.py\", line 888, in run\n    metrics, _ = evaluate_single_image(\n                 ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/utils/_contextlib.py\", line 120, in decorate_context\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/overfit_hypersim_staged_v3.py\", line 405, in evaluate_single_image\n    \"full\": _scope_metrics(\n            ^^^^^^^^^^^^^^^\n  File \"/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/moge/scripts/overfit_hypersim_staged_v3.py\", line 346, in _scope_metrics\n    raise ValueError(\"Evaluation scope contains no valid points\")\nValueError: Evaluation scope contains no valid points\n"
+}

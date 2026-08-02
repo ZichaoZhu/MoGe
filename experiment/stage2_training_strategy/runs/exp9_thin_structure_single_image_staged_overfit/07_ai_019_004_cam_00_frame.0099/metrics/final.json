@@ -1,0 +1,133 @@
+{
+  "status": "complete",
+  "sample_id": "ai_019_004_cam_00_frame.0099",
+  "snapshot": "final",
+  "step": 2100,
+  "stage": "joint_best",
+  "stop_reason": "minimum_full_plus_structure_k3_point_rel",
+  "metrics": {
+    "k0": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 1.0820695161819458,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 1.076865315437317,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 1.076602816581726,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "alignment": {
+        "scale": 0.0,
+        "z_shift": 0.0
+      }
+    },
+    "k1": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 1.0820695161819458,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 1.076865315437317,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 1.076602816581726,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "alignment": {
+        "scale": 0.0,
+        "z_shift": 0.0
+      }
+    },
+    "k3": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 1.0820695161819458,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 1.076865315437317,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 1.076602816581726,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "alignment": {
+        "scale": 0.0,
+        "z_shift": 0.0
+      }
+    },
+    "k5": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 1.0820695161819458,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 1.076865315437317,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 1.076602816581726,
+        "depth_rel": 1.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "alignment": {
+        "scale": 0.0,
+        "z_shift": 0.0
+      }
+    }
+  },
+  "last_step": 4000,
+  "joint_stop_reason": "detected_plateau",
+  "selection_score": 2.158672332763672
+}

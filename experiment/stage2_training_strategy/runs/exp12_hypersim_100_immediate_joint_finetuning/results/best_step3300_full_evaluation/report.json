@@ -1,0 +1,161 @@
+{
+  "status": "complete",
+  "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp12_hypersim_100_immediate_joint_finetuning/artifacts/joint_from_exp11_best3000_cosine/checkpoint.pt",
+  "checkpoint_step": 3300,
+  "checkpoint_type": "full_model",
+  "pretrained": "Ruicheng/moge-2-vitl-normal",
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "evaluation_refinement_steps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "counts": {
+    "train": 100,
+    "val": 16,
+    "test": 16
+  },
+  "metrics_by_k": {
+    "0": {
+      "train": {
+        "point_rel": 0.03333752949023619,
+        "depth_rel": 0.026661787594202905,
+        "depth_delta_1.01": 0.664236222654581,
+        "depth_delta_1.25": 0.9728718715906143,
+        "boundary_f1": 0.8126026913523674
+      },
+      "val": {
+        "point_rel": 0.10541685915086418,
+        "depth_rel": 0.07606624101754278,
+        "depth_delta_1.01": 0.18399984762072563,
+        "depth_delta_1.25": 0.9425206705927849,
+        "boundary_f1": 0.8563972227275372
+      },
+      "test": {
+        "point_rel": 0.05847553291823715,
+        "depth_rel": 0.05343618686310947,
+        "depth_delta_1.01": 0.254885361995548,
+        "depth_delta_1.25": 0.9669809564948082,
+        "boundary_f1": 0.8252778574824333
+      }
+    },
+    "1": {
+      "train": {
+        "point_rel": 0.033231054842472074,
+        "depth_rel": 0.02655521391890943,
+        "depth_delta_1.01": 0.668970641642809,
+        "depth_delta_1.25": 0.9728738200664521,
+        "boundary_f1": 0.8129408138990403
+      },
+      "val": {
+        "point_rel": 0.10540064086671919,
+        "depth_rel": 0.0760812945663929,
+        "depth_delta_1.01": 0.1835160271730274,
+        "depth_delta_1.25": 0.9421566836535931,
+        "boundary_f1": 0.8565667904913425
+      },
+      "test": {
+        "point_rel": 0.058451931341551244,
+        "depth_rel": 0.05340807477477938,
+        "depth_delta_1.01": 0.25585874589160085,
+        "depth_delta_1.25": 0.966969832777977,
+        "boundary_f1": 0.8255351595580578
+      }
+    },
+    "3": {
+      "train": {
+        "point_rel": 0.03319135401863605,
+        "depth_rel": 0.026522445988375692,
+        "depth_delta_1.01": 0.6708656996488571,
+        "depth_delta_1.25": 0.9728832870721817,
+        "boundary_f1": 0.8132978066802025
+      },
+      "val": {
+        "point_rel": 0.10540088894777,
+        "depth_rel": 0.07614160643424839,
+        "depth_delta_1.01": 0.18187857826706022,
+        "depth_delta_1.25": 0.9420648142695427,
+        "boundary_f1": 0.8570324182510376
+      },
+      "test": {
+        "point_rel": 0.05844644783064723,
+        "depth_rel": 0.053389116656035185,
+        "depth_delta_1.01": 0.2561642355285585,
+        "depth_delta_1.25": 0.9669320024549961,
+        "boundary_f1": 0.8259308449923992
+      }
+    },
+    "5": {
+      "train": {
+        "point_rel": 0.03332514614332467,
+        "depth_rel": 0.02666586365783587,
+        "depth_delta_1.01": 0.6660583771765232,
+        "depth_delta_1.25": 0.9728903019428253,
+        "boundary_f1": 0.8135218742489815
+      },
+      "val": {
+        "point_rel": 0.10542631382122636,
+        "depth_rel": 0.0762094744713977,
+        "depth_delta_1.01": 0.17957448202650994,
+        "depth_delta_1.25": 0.941562544554472,
+        "boundary_f1": 0.8571146950125694
+      },
+      "test": {
+        "point_rel": 0.058494814205914736,
+        "depth_rel": 0.053414896596223116,
+        "depth_delta_1.01": 0.25407887483015656,
+        "depth_delta_1.25": 0.9669148325920105,
+        "boundary_f1": 0.8260849267244339
+      }
+    }
+  },
+  "k3_changes_from_k0": {
+    "train": {
+      "point_rel_reduction": 0.004384712179795747,
+      "depth_rel_reduction": 0.005226266443496441,
+      "depth_delta_1.01_change": 0.006629476994276073,
+      "depth_delta_1.25_change": 1.141548156746719e-05,
+      "boundary_f1_change": 0.0006951153278350608
+    },
+    "val": {
+      "point_rel_reduction": 0.00015149572110972898,
+      "depth_rel_reduction": -0.0009907866577529845,
+      "depth_delta_1.01_change": -0.0021212693536654115,
+      "depth_delta_1.25_change": -0.0004558563232421875,
+      "boundary_f1_change": 0.0006351955235004425
+    },
+    "test": {
+      "point_rel_reduction": 0.0004973890127788483,
+      "depth_rel_reduction": 0.0008808676261812254,
+      "depth_delta_1.01_change": 0.0012788735330104828,
+      "depth_delta_1.25_change": -4.895403981208801e-05,
+      "boundary_f1_change": 0.0006529875099658966
+    }
+  },
+  "fraction_improved": {
+    "train": {
+      "point_rel_improved_k3_vs_k0": 0.85,
+      "depth_rel_improved_k3_vs_k0": 0.81,
+      "boundary_f1_improved_k3_vs_k0": 0.66
+    },
+    "val": {
+      "point_rel_improved_k3_vs_k0": 0.5625,
+      "depth_rel_improved_k3_vs_k0": 0.375,
+      "boundary_f1_improved_k3_vs_k0": 0.75
+    },
+    "test": {
+      "point_rel_improved_k3_vs_k0": 0.375,
+      "depth_rel_improved_k3_vs_k0": 0.375,
+      "boundary_f1_improved_k3_vs_k0": 0.625
+    }
+  },
+  "elapsed_seconds": 150.35024904389866,
+  "peak_memory_bytes": 2995736064,
+  "cuda_visible_devices": "1",
+  "normal_prediction": false
+}

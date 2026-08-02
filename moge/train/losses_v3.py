@@ -24,6 +24,18 @@ class GlobalAlignment:
         return GlobalAlignment(self.scale.detach(), self.shift.detach(), self.valid.detach())
 
 
+def edge_angle_loss_v3(
+    pred_points: torch.Tensor,
+    gt_points: torch.Tensor,
+) -> Tuple[torch.Tensor, Dict[str, torch.Tensor]]:
+    """Paper Eq. (13), normalized by the shorter image dimension."""
+    return edge_loss(
+        pred_points,
+        gt_points,
+        normalization_dimension="min",
+    )
+
+
 def solve_global_affine_alignment(
     pred_points: torch.Tensor,
     gt_points: torch.Tensor,
@@ -80,7 +92,12 @@ def affine_invariant_global_loss_v3(
     alignment = solve_global_affine_alignment(
         pred_points, gt_points, align_resolution=align_resolution, trunc=trunc
     )
-    aligned = alignment.apply(pred_points)
+    # Alignment is the solved nuisance optimum for this prediction. Its
+    # derivative is not needed for the minimized objective (envelope theorem),
+    # and differentiating through the selected anchor ratio can explode when
+    # two predicted anchor coordinates are nearly equal. Treat the solved
+    # scale/shift as constants, matching the local-loss alignment route.
+    aligned = alignment.detached().apply(pred_points)
 
     weight = (mask & alignment.valid[..., None, None]).float()
     weight = weight / safe_gt[..., 2].clamp_min(1e-5)
@@ -106,6 +123,8 @@ def grouped_weighted_median(
         return values.new_zeros((groups, values.shape[1]))
     if (weights < 0).any():
         raise ValueError("Weighted median requires non-negative weights")
+    if not torch.isfinite(weights).all():
+        raise ValueError("Weighted median requires finite weights")
     if num_groups is None:
         num_groups = int(group_ids.max().item()) + 1
 
@@ -117,7 +136,13 @@ def grouped_weighted_median(
         order = by_value[by_group]
         sorted_groups = group_ids[order]
         sorted_weights = weights[order]
-        cumulative = sorted_weights.cumsum(dim=0)
+        accumulator_dtype = (
+            torch.float64
+            if sorted_weights.dtype
+            in (torch.float16, torch.bfloat16, torch.float32)
+            else sorted_weights.dtype
+        )
+        cumulative = sorted_weights.to(accumulator_dtype).cumsum(dim=0)
 
         counts = torch.bincount(sorted_groups, minlength=num_groups)
         if (counts == 0).any():
@@ -132,6 +157,14 @@ def grouped_weighted_median(
         totals = cumulative[ends] - prefix
         thresholds = prefix + 0.5 * totals
         median_positions = torch.searchsorted(cumulative, thresholds, right=False)
+        # A global float32 prefix can dwarf the weight of later groups, making
+        # prefix + group_total numerically equal to prefix. Accumulating in
+        # float64 avoids most such cases; clamping also guarantees that a
+        # round-off at a group boundary cannot select another group or N.
+        median_positions = torch.maximum(
+            starts,
+            torch.minimum(median_positions.clamp_max(values.shape[0] - 1), ends),
+        )
         medians.append(values[order[median_positions], component])
     return torch.stack(medians, dim=-1)
 
@@ -252,7 +285,7 @@ def geometric_loss_sequence(
             scales=local_scales,
             generator=generator,
         )
-        edge, _ = edge_loss(points, gt_points)
+        edge, _ = edge_angle_loss_v3(points, gt_points)
         global_mean = global_loss.mean()
         local_mean = local_loss.mean()
         edge_mean = edge.mean()

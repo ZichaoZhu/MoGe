@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/tools/moge3/audit_loss_gradients.py", line 494, in <module>
+    main()
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/tools/moge3/audit_loss_gradients.py", line 490, in main
+    print(json.dumps(run(parse_args()), ensure_ascii=False))
+                     ^^^^^^^^^^^^^^^^^
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/tools/moge3/audit_loss_gradients.py", line 368, in run
+    torch.cuda.reset_peak_memory_stats(device)
+  File "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/envs/moge3/lib/python3.12/site-packages/torch/cuda/memory.py", line 376, in reset_peak_memory_stats
+    return torch._C._cuda_resetPeakMemoryStats(device)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Invalid device argument 

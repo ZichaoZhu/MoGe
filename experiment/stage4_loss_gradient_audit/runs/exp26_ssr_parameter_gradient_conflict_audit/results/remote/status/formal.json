@@ -1,0 +1,8 @@
+{
+  "status": "complete",
+  "exit_code": 0,
+  "physical_gpu": 1,
+  "mode": "formal",
+  "started_at": "2026-08-02T13:51:54+08:00",
+  "finished_at": "2026-08-02T13:52:54.321317+08:00"
+}

@@ -1,0 +1,2139 @@
+{
+  "status": "complete",
+  "checkpoint_step": 800,
+  "checkpoint_sha256": "04d64d0bafa18bc42f48dae495aafc9b1559d399aeb2f24de5ccfd749d0ff341",
+  "shape": [
+    384,
+    512
+  ],
+  "microbatch_size": 2,
+  "pairs_per_split": 4,
+  "parameter_count": 50739073,
+  "selection": {
+    "policy": "first 2N samples per split in the pre-prediction data manifest, paired consecutively without shuffling",
+    "batches": [
+      {
+        "batch_id": "train_00",
+        "split": "train",
+        "sample_ids": [
+          "ai_001_001_cam_00_frame.0000",
+          "ai_001_001_cam_00_frame.0014"
+        ]
+      },
+      {
+        "batch_id": "train_01",
+        "split": "train",
+        "sample_ids": [
+          "ai_001_001_cam_00_frame.0028",
+          "ai_001_001_cam_00_frame.0043"
+        ]
+      },
+      {
+        "batch_id": "train_02",
+        "split": "train",
+        "sample_ids": [
+          "ai_001_001_cam_00_frame.0056",
+          "ai_001_001_cam_00_frame.0071"
+        ]
+      },
+      {
+        "batch_id": "train_03",
+        "split": "train",
+        "sample_ids": [
+          "ai_001_001_cam_00_frame.0085",
+          "ai_001_001_cam_00_frame.0099"
+        ]
+      },
+      {
+        "batch_id": "val_00",
+        "split": "val",
+        "sample_ids": [
+          "ai_043_002_cam_00_frame.0000",
+          "ai_043_002_cam_00_frame.0014"
+        ]
+      },
+      {
+        "batch_id": "val_01",
+        "split": "val",
+        "sample_ids": [
+          "ai_043_002_cam_00_frame.0028",
+          "ai_043_002_cam_00_frame.0042"
+        ]
+      },
+      {
+        "batch_id": "val_02",
+        "split": "val",
+        "sample_ids": [
+          "ai_043_002_cam_00_frame.0057",
+          "ai_043_002_cam_00_frame.0071"
+        ]
+      },
+      {
+        "batch_id": "val_03",
+        "split": "val",
+        "sample_ids": [
+          "ai_043_002_cam_00_frame.0085",
+          "ai_043_002_cam_00_frame.0099"
+        ]
+      },
+      {
+        "batch_id": "test_00",
+        "split": "test",
+        "sample_ids": [
+          "ai_046_001_cam_00_frame.0000",
+          "ai_046_001_cam_00_frame.0014"
+        ]
+      },
+      {
+        "batch_id": "test_01",
+        "split": "test",
+        "sample_ids": [
+          "ai_046_001_cam_00_frame.0028",
+          "ai_046_001_cam_00_frame.0042"
+        ]
+      },
+      {
+        "batch_id": "test_02",
+        "split": "test",
+        "sample_ids": [
+          "ai_046_001_cam_00_frame.0057",
+          "ai_046_001_cam_00_frame.0071"
+        ]
+      },
+      {
+        "batch_id": "test_03",
+        "split": "test",
+        "sample_ids": [
+          "ai_046_001_cam_00_frame.0085",
+          "ai_046_001_cam_00_frame.0099"
+        ]
+      }
+    ]
+  },
+  "elapsed_seconds": 42.26423044013791,
+  "peak_cuda_memory_bytes": {
+    "allocated": 18986521600,
+    "reserved": 19308478464
+  },
+  "objective_means": [
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "count": 4,
+      "loss": 0.188080295920372,
+      "gradient_l2": 3.841974695578723,
+      "gradient_rms": 0.0005393655896114235,
+      "loss_normalized_gradient_rms": 0.004359968752826899,
+      "cosine_to_paper_combined": 0.9999615679216232,
+      "projection_fraction_to_paper_combined": 0.9874491262043874,
+      "cosine_to_checkpoint_combined": 1.0,
+      "projection_fraction_to_checkpoint_combined": 1.0,
+      "max_abs_log_depth_residual": 0.20567921549081802
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "count": 4,
+      "loss": 0.18888970650732517,
+      "gradient_l2": 3.881906357107068,
+      "gradient_rms": 0.0005449714995590305,
+      "loss_normalized_gradient_rms": 0.004374684606939423,
+      "cosine_to_paper_combined": 1.0,
+      "projection_fraction_to_paper_combined": 1.0,
+      "cosine_to_checkpoint_combined": 0.9999615679216232,
+      "projection_fraction_to_checkpoint_combined": 1.0126622349700698,
+      "max_abs_log_depth_residual": 0.20567921549081802
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "count": 4,
+      "loss": 0.0032376457238569856,
+      "gradient_l2": 0.17669178928932355,
+      "gradient_rms": 2.4805335448774464e-05,
+      "loss_normalized_gradient_rms": 0.008282417139637215,
+      "cosine_to_paper_combined": 0.8944275197450612,
+      "projection_fraction_to_paper_combined": 0.05020351876510715,
+      "cosine_to_checkpoint_combined": 0.890866108880082,
+      "projection_fraction_to_checkpoint_combined": 0.050648963604665295,
+      "max_abs_log_depth_residual": 0.20567921549081802
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "count": 4,
+      "loss": 0.08696512132883072,
+      "gradient_l2": 2.312787412933938,
+      "gradient_rms": 0.0003246866638810822,
+      "loss_normalized_gradient_rms": 0.00505058325777026,
+      "cosine_to_paper_combined": 0.8411035757692263,
+      "projection_fraction_to_paper_combined": 0.49436473717368234,
+      "cosine_to_checkpoint_combined": 0.8438440628281684,
+      "projection_fraction_to_checkpoint_combined": 0.5009550231926388,
+      "max_abs_log_depth_residual": 0.20567921549081802
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "count": 4,
+      "loss": 0.09868693351745605,
+      "gradient_l2": 1.5453771669885104,
+      "gradient_rms": 0.00021695178466531623,
+      "loss_normalized_gradient_rms": 0.003718363325583211,
+      "cosine_to_paper_combined": 0.9646381938736083,
+      "projection_fraction_to_paper_combined": 0.45543174321681557,
+      "cosine_to_checkpoint_combined": 0.9633129212812377,
+      "projection_fraction_to_checkpoint_combined": 0.4610582472763937,
+      "max_abs_log_depth_residual": 0.20567921549081802
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "count": 4,
+      "loss": 0.027338719926774502,
+      "gradient_l2": 3.7733444624969588,
+      "gradient_rms": 0.0005297307562081963,
+      "loss_normalized_gradient_rms": 0.019826693419608726,
+      "cosine_to_paper_combined": 0.9999699374252415,
+      "projection_fraction_to_paper_combined": 0.9831700501335391,
+      "cosine_to_checkpoint_combined": 1.0,
+      "projection_fraction_to_checkpoint_combined": 1.0,
+      "max_abs_log_depth_residual": 0.28106895834207535
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "count": 4,
+      "loss": 0.027815985959023237,
+      "gradient_l2": 3.837431926558106,
+      "gradient_rms": 0.0005387278411915565,
+      "loss_normalized_gradient_rms": 0.019803155798586478,
+      "cosine_to_paper_combined": 1.0,
+      "projection_fraction_to_paper_combined": 1.0,
+      "cosine_to_checkpoint_combined": 0.9999699374252415,
+      "projection_fraction_to_checkpoint_combined": 1.0170580406349352,
+      "max_abs_log_depth_residual": 0.28106895834207535
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "count": 4,
+      "loss": 0.0019090650603175163,
+      "gradient_l2": 0.2822508030669313,
+      "gradient_rms": 3.962451157986128e-05,
+      "loss_normalized_gradient_rms": 0.02075390361987013,
+      "cosine_to_paper_combined": 0.9106852646484362,
+      "projection_fraction_to_paper_combined": 0.06731977132933761,
+      "cosine_to_checkpoint_combined": 0.9074612330086256,
+      "projection_fraction_to_checkpoint_combined": 0.06823213366016419,
+      "max_abs_log_depth_residual": 0.28106895834207535
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "count": 4,
+      "loss": 0.012394645251333714,
+      "gradient_l2": 1.914411049083124,
+      "gradient_rms": 0.00026875956404283537,
+      "loss_normalized_gradient_rms": 0.022102574527913834,
+      "cosine_to_paper_combined": 0.9956870622371718,
+      "projection_fraction_to_paper_combined": 0.4991315274925864,
+      "cosine_to_checkpoint_combined": 0.9961853538174741,
+      "projection_fraction_to_checkpoint_combined": 0.5079267661223504,
+      "max_abs_log_depth_residual": 0.28106895834207535
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "count": 4,
+      "loss": 0.013512276113033295,
+      "gradient_l2": 1.6793793236514074,
+      "gradient_rms": 0.00023576402523547407,
+      "loss_normalized_gradient_rms": 0.01801238557174412,
+      "cosine_to_paper_combined": 0.997160418916194,
+      "projection_fraction_to_paper_combined": 0.4335487009790582,
+      "cosine_to_checkpoint_combined": 0.9970634473070442,
+      "projection_fraction_to_checkpoint_combined": 0.44089914061994584,
+      "max_abs_log_depth_residual": 0.28106895834207535
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "count": 4,
+      "loss": 0.13068346865475178,
+      "gradient_l2": 4.409094909664844,
+      "gradient_rms": 0.0006189822328452075,
+      "loss_normalized_gradient_rms": 0.007180941023736395,
+      "cosine_to_paper_combined": 0.9999816923977931,
+      "projection_fraction_to_paper_combined": 0.9878811865786057,
+      "cosine_to_checkpoint_combined": 1.0,
+      "projection_fraction_to_checkpoint_combined": 1.0,
+      "max_abs_log_depth_residual": 0.251275185495615
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "count": 4,
+      "loss": 0.1312838550657034,
+      "gradient_l2": 4.46238217254567,
+      "gradient_rms": 0.0006264631035535884,
+      "loss_normalized_gradient_rms": 0.007211433150210425,
+      "cosine_to_paper_combined": 1.0,
+      "projection_fraction_to_paper_combined": 1.0,
+      "cosine_to_checkpoint_combined": 0.9999816923977931,
+      "projection_fraction_to_checkpoint_combined": 1.0122331567626073,
+      "max_abs_log_depth_residual": 0.251275185495615
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "count": 4,
+      "loss": 0.00240157637745142,
+      "gradient_l2": 0.23728636128177638,
+      "gradient_rms": 3.331206171315402e-05,
+      "loss_normalized_gradient_rms": 0.013986072480477162,
+      "cosine_to_paper_combined": 0.8988695881138442,
+      "projection_fraction_to_paper_combined": 0.0484752372308895,
+      "cosine_to_checkpoint_combined": 0.8962298294922577,
+      "projection_fraction_to_checkpoint_combined": 0.04893261038321873,
+      "max_abs_log_depth_residual": 0.251275185495615
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "count": 4,
+      "loss": 0.0862678624689579,
+      "gradient_l2": 2.3286255334183124,
+      "gradient_rms": 0.0003269101395336476,
+      "loss_normalized_gradient_rms": 0.007422024441610532,
+      "cosine_to_paper_combined": 0.984963573097952,
+      "projection_fraction_to_paper_combined": 0.5113157109264572,
+      "cosine_to_checkpoint_combined": 0.9856094290423828,
+      "projection_fraction_to_checkpoint_combined": 0.517873709731212,
+      "max_abs_log_depth_residual": 0.251275185495615
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "count": 4,
+      "loss": 0.04261441947892308,
+      "gradient_l2": 1.9780076441743213,
+      "gradient_rms": 0.0002776877371117826,
+      "loss_normalized_gradient_rms": 0.007305143907761208,
+      "cosine_to_paper_combined": 0.9870226226174431,
+      "projection_fraction_to_paper_combined": 0.4402090556814469,
+      "cosine_to_checkpoint_combined": 0.9865927819576854,
+      "projection_fraction_to_checkpoint_combined": 0.44542684054430204,
+      "max_abs_log_depth_residual": 0.251275185495615
+    }
+  ],
+  "cosine_means": [
+    {
+      "split": "test",
+      "gradient_pair": "global_edge",
+      "count": 4,
+      "cosine": 0.6550640605426759
+    },
+    {
+      "split": "test",
+      "gradient_pair": "global_local",
+      "count": 4,
+      "cosine": 0.7081672115403277
+    },
+    {
+      "split": "test",
+      "gradient_pair": "local_edge",
+      "count": 4,
+      "cosine": 0.9201562806953052
+    },
+    {
+      "split": "train",
+      "gradient_pair": "global_edge",
+      "count": 4,
+      "cosine": 0.878369490353512
+    },
+    {
+      "split": "train",
+      "gradient_pair": "global_local",
+      "count": 4,
+      "cosine": 0.9876238736948618
+    },
+    {
+      "split": "train",
+      "gradient_pair": "local_edge",
+      "count": 4,
+      "cosine": 0.9119774326051107
+    },
+    {
+      "split": "val",
+      "gradient_pair": "global_edge",
+      "count": 4,
+      "cosine": 0.8382323641420102
+    },
+    {
+      "split": "val",
+      "gradient_pair": "global_local",
+      "count": 4,
+      "cosine": 0.9455770444041423
+    },
+    {
+      "split": "val",
+      "gradient_pair": "local_edge",
+      "count": 4,
+      "cosine": 0.9170015842053804
+    }
+  ],
+  "group_energy_shares": [
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.006662318109667145
+    },
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.003507511468871935
+    },
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.018433915612139636
+    },
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 0.0008239136070075929
+    },
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9705723412023137
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.006405353317499308
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0033923219169474
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.017723632936224202
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 0.0007940554093058544
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9716846364200233
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.00015125032462515197
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0004406390136844151
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.00040074012603305906
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 2.7994239535344837e-05
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.998979376296122
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.016094919019142565
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.007700426670125444
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.05883348600546065
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 0.0038309367595963937
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.913540231545675
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.003782389672277019
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.002202000747732268
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.004892913027197613
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 0.00022115277703243903
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9889015437757606
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.000831471363171264
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0011969848334618595
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.0015656992560570792
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 4.808039689345898e-05
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9963577641504164
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.0008079180148109366
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0011647715582756707
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.0015221235263703685
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 4.680634918548188e-05
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9964583805513575
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 6.181409067315127e-05
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0005115147581635075
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.00025216831607099424
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 5.939925764749346e-06
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9991685629093274
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.0013897916734910633
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0017860295148474587
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.003070239369505335
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 8.769401379183596e-05
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9936662454283642
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.000735101009221096
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0010285935757454545
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.0010805864361218733
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 3.584278183473643e-05
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9971198761970769
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.0016075755089132852
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0021029594906529425
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.00719886980452234
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 0.001504363420281543
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.98758623177563
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.0015754659397453118
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.002058808305408439
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.007046372508171351
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 0.0014732497720447689
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9878461034746302
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.00020554524076422058
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.000531500421144902
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.00043159004315888394
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 3.101726669998339e-05
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.9988003470282321
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.003431309616287896
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.003786169485125013
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.01907763309864533
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 0.0038817746729007375
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.969823113127041
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "bottleneck",
+      "count": 4,
+      "energy_share": 0.0009483330352079346
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "decoder",
+      "count": 4,
+      "energy_share": 0.0015664790769117187
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "encoder",
+      "count": 4,
+      "energy_share": 0.0019224715826229243
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "input_fusion",
+      "count": 4,
+      "energy_share": 0.00027992296122324477
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "output",
+      "count": 4,
+      "energy_share": 0.995282793344034
+    }
+  ],
+  "edge_to_global_gradient_l2_ratio": {
+    "test": 0.109133860502286,
+    "train": 0.14823125572656135,
+    "val": 0.10489875358481893
+  },
+  "edge_to_local_gradient_l2_ratio": {
+    "test": 0.11845556870914517,
+    "train": 0.171556191426485,
+    "val": 0.12069846471278224
+  },
+  "edge_output_layer_gradient_energy_share": {
+    "test": 0.998979376296122,
+    "train": 0.9991685629093274,
+    "val": 0.9988003470282321
+  },
+  "paper_to_checkpoint_combined_gradient_cosine": {
+    "test": 0.9999615679216232,
+    "train": 0.9999699374252415,
+    "val": 0.9999816923977931
+  },
+  "effective_batch_size": 8,
+  "effective_objectives": [
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "count": 1,
+      "loss": 0.188080295920372,
+      "gradient_l2": 3.758361215560465,
+      "gradient_rms": 0.0005276272941975029,
+      "loss_normalized_gradient_rms": 0.002805329987469212,
+      "cosine_to_paper_combined": 0.9999945883528506,
+      "projection_fraction_to_paper_combined": 0.9891180189378191,
+      "cosine_to_checkpoint_combined": 1.0,
+      "projection_fraction_to_checkpoint_combined": 1.0,
+      "max_abs_log_depth_residual": 0.23481522500514984
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "count": 1,
+      "loss": 0.18888970650732517,
+      "gradient_l2": 3.799689020600052,
+      "gradient_rms": 0.0005334292053756724,
+      "loss_normalized_gradient_rms": 0.002824024745652225,
+      "cosine_to_paper_combined": 1.0,
+      "projection_fraction_to_paper_combined": 1.0,
+      "cosine_to_checkpoint_combined": 0.9999945883528506,
+      "projection_fraction_to_checkpoint_combined": 1.010990759028778,
+      "max_abs_log_depth_residual": 0.23481522500514984
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "count": 1,
+      "loss": 0.0032376457238569856,
+      "gradient_l2": 0.17262922711054438,
+      "gradient_rms": 2.423500211279183e-05,
+      "loss_normalized_gradient_rms": 0.007485378012243055,
+      "cosine_to_paper_combined": 0.9580803111954762,
+      "projection_fraction_to_paper_combined": 0.04352794734906644,
+      "cosine_to_checkpoint_combined": 0.9571325785217434,
+      "projection_fraction_to_checkpoint_combined": 0.04396305937503967,
+      "max_abs_log_depth_residual": 0.23481522500514984
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "count": 1,
+      "loss": 0.08696512132883072,
+      "gradient_l2": 2.1163941084484144,
+      "gradient_rms": 0.0002971154800855538,
+      "loss_normalized_gradient_rms": 0.0034164901462289334,
+      "cosine_to_paper_combined": 0.9976268631179945,
+      "projection_fraction_to_paper_combined": 0.555669583506959,
+      "cosine_to_checkpoint_combined": 0.9977206689309507,
+      "projection_fraction_to_checkpoint_combined": 0.5618326777267436,
+      "max_abs_log_depth_residual": 0.23481522500514984
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "count": 1,
+      "loss": 0.09868693351745605,
+      "gradient_l2": 1.528616105349926,
+      "gradient_rms": 0.00021459873952329282,
+      "loss_normalized_gradient_rms": 0.002174540558455329,
+      "cosine_to_paper_combined": 0.9962768088501559,
+      "projection_fraction_to_paper_combined": 0.40080247808134456,
+      "cosine_to_checkpoint_combined": 0.9962405104411971,
+      "projection_fraction_to_checkpoint_combined": 0.4051950309505702,
+      "max_abs_log_depth_residual": 0.23481522500514984
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "count": 1,
+      "loss": 0.027338719926774502,
+      "gradient_l2": 3.750119834544155,
+      "gradient_rms": 0.0005264703065327507,
+      "loss_normalized_gradient_rms": 0.019257313727302414,
+      "cosine_to_paper_combined": 0.99998205983716,
+      "projection_fraction_to_paper_combined": 0.9832925313020633,
+      "cosine_to_checkpoint_combined": 1.0,
+      "projection_fraction_to_checkpoint_combined": 1.0,
+      "max_abs_log_depth_residual": 0.3282376825809479
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "count": 1,
+      "loss": 0.027815985959023237,
+      "gradient_l2": 3.813771016665694,
+      "gradient_rms": 0.0005354061429436349,
+      "loss_normalized_gradient_rms": 0.019248145427322318,
+      "cosine_to_paper_combined": 1.0,
+      "projection_fraction_to_paper_combined": 1.0,
+      "cosine_to_checkpoint_combined": 0.99998205983716,
+      "projection_fraction_to_checkpoint_combined": 1.0169548615120974,
+      "max_abs_log_depth_residual": 0.3282376825809479
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "count": 1,
+      "loss": 0.0019090650603175163,
+      "gradient_l2": 0.2702483145510689,
+      "gradient_rms": 3.793951107670537e-05,
+      "loss_normalized_gradient_rms": 0.019873346312458965,
+      "cosine_to_paper_combined": 0.9431095538904471,
+      "projection_fraction_to_paper_combined": 0.06682985587287174,
+      "cosine_to_checkpoint_combined": 0.9411010690384606,
+      "projection_fraction_to_checkpoint_combined": 0.06781942683193437,
+      "max_abs_log_depth_residual": 0.3282376825809479
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "count": 1,
+      "loss": 0.012394645251333714,
+      "gradient_l2": 1.8930601993167278,
+      "gradient_rms": 0.00026576216958154196,
+      "loss_normalized_gradient_rms": 0.02144169229473872,
+      "cosine_to_paper_combined": 0.9976805435910296,
+      "projection_fraction_to_paper_combined": 0.49522357804168404,
+      "cosine_to_checkpoint_combined": 0.9979665096313636,
+      "projection_fraction_to_checkpoint_combined": 0.5037734160470664,
+      "max_abs_log_depth_residual": 0.3282376825809479
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "count": 1,
+      "loss": 0.013512276113033295,
+      "gradient_l2": 1.6724479734010056,
+      "gradient_rms": 0.0002347909496400222,
+      "loss_normalized_gradient_rms": 0.01737612136370971,
+      "cosine_to_paper_combined": 0.9986725543164904,
+      "projection_fraction_to_paper_combined": 0.437946557949897,
+      "cosine_to_checkpoint_combined": 0.9986325046746951,
+      "projection_fraction_to_checkpoint_combined": 0.44536201036321826,
+      "max_abs_log_depth_residual": 0.3282376825809479
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "count": 1,
+      "loss": 0.13068346865475178,
+      "gradient_l2": 4.343568538237549,
+      "gradient_rms": 0.0006097831431165188,
+      "loss_normalized_gradient_rms": 0.004666107728801446,
+      "cosine_to_paper_combined": 0.9999902211281468,
+      "projection_fraction_to_paper_combined": 0.9877307165990004,
+      "cosine_to_checkpoint_combined": 1.0,
+      "projection_fraction_to_checkpoint_combined": 1.0,
+      "max_abs_log_depth_residual": 0.3112177550792694
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "count": 1,
+      "loss": 0.1312838550657034,
+      "gradient_l2": 4.397479991300925,
+      "gradient_rms": 0.0006173516423837832,
+      "loss_normalized_gradient_rms": 0.004702418603375246,
+      "cosine_to_paper_combined": 1.0,
+      "projection_fraction_to_paper_combined": 1.0,
+      "cosine_to_checkpoint_combined": 0.9999902211281468,
+      "projection_fraction_to_checkpoint_combined": 1.0124018880318904,
+      "max_abs_log_depth_residual": 0.3112177550792694
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "count": 1,
+      "loss": 0.00240157637745142,
+      "gradient_l2": 0.22908572418909684,
+      "gradient_rms": 3.2160793989872944e-05,
+      "loss_normalized_gradient_rms": 0.013391534948391832,
+      "cosine_to_paper_combined": 0.9420749380087173,
+      "projection_fraction_to_paper_combined": 0.049077180530906706,
+      "cosine_to_checkpoint_combined": 0.9405824407349201,
+      "projection_fraction_to_checkpoint_combined": 0.049607599764671474,
+      "max_abs_log_depth_residual": 0.3112177550792694
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "count": 1,
+      "loss": 0.0862678624689579,
+      "gradient_l2": 2.2284513719813517,
+      "gradient_rms": 0.0003128469298749651,
+      "loss_normalized_gradient_rms": 0.0036264597373968552,
+      "cosine_to_paper_combined": 0.9955592455155623,
+      "projection_fraction_to_paper_combined": 0.5045060741485148,
+      "cosine_to_checkpoint_combined": 0.9958309513673633,
+      "projection_fraction_to_checkpoint_combined": 0.5109072943825458,
+      "max_abs_log_depth_residual": 0.3112177550792694
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "count": 1,
+      "loss": 0.04261441947892308,
+      "gradient_l2": 1.9702573048836907,
+      "gradient_rms": 0.00027659968561420504,
+      "loss_normalized_gradient_rms": 0.006490753341155102,
+      "cosine_to_paper_combined": 0.9963717756657287,
+      "projection_fraction_to_paper_combined": 0.44641675988719653,
+      "cosine_to_checkpoint_combined": 0.9962161738384351,
+      "projection_fraction_to_checkpoint_combined": 0.45188700868177994,
+      "max_abs_log_depth_residual": 0.3112177550792694
+    }
+  ],
+  "effective_cosines": [
+    {
+      "split": "test",
+      "gradient_pair": "global_edge",
+      "count": 1,
+      "cosine": 0.9471674135739823
+    },
+    {
+      "split": "test",
+      "gradient_pair": "global_local",
+      "count": 1,
+      "cosine": 0.9883246542075615
+    },
+    {
+      "split": "test",
+      "gradient_pair": "local_edge",
+      "count": 1,
+      "cosine": 0.9572046962869561
+    },
+    {
+      "split": "train",
+      "gradient_pair": "global_edge",
+      "count": 1,
+      "cosine": 0.9240556502174667
+    },
+    {
+      "split": "train",
+      "gradient_pair": "global_local",
+      "count": 1,
+      "cosine": 0.9938368518600276
+    },
+    {
+      "split": "train",
+      "gradient_pair": "local_edge",
+      "count": 1,
+      "cosine": 0.9430861762573151
+    },
+    {
+      "split": "val",
+      "gradient_pair": "global_edge",
+      "count": 1,
+      "cosine": 0.9165463848993831
+    },
+    {
+      "split": "val",
+      "gradient_pair": "global_local",
+      "count": 1,
+      "cosine": 0.9844058742316125
+    },
+    {
+      "split": "val",
+      "gradient_pair": "local_edge",
+      "count": 1,
+      "cosine": 0.9497190830800387
+    }
+  ],
+  "effective_group_energy_shares": [
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0004864053253320522
+    },
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0010799483549301127
+    },
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0012862933602288517
+    },
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 3.5552757448887365e-05
+    },
+    {
+      "split": "test",
+      "objective": "combined_checkpoint",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9971118002020599
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0004769544840478625
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.001060389668583722
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0012614713391214951
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 3.496565387036561e-05
+    },
+    {
+      "split": "test",
+      "objective": "combined_paper",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9971662188543766
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 4.364690386892481e-05
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0002320591976980148
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0001437064931154156
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 1.5418521722606957e-05
+    },
+    {
+      "split": "test",
+      "objective": "edge_paper",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9995651688835951
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0010783443345833822
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0012815016434001329
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0027814727935134985
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 0.00010174254556285055
+    },
+    {
+      "split": "test",
+      "objective": "global",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.99475693868294
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0007330209150395606
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0012633022513179246
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0010911142578731293
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 9.475816542888896e-05
+    },
+    {
+      "split": "test",
+      "objective": "local",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9968178044103403
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.00031431064442578025
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0008677516320662069
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0005133818981566486
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 1.7393268416589835e-05
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.998287162556935
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0003056200244102061
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0008440598739611227
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0004991686689697744
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 1.700716064538653e-05
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9983341442720134
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 2.3899749975330675e-05
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0002786954459459339
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.00010147309237284025
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 3.651354754947618e-06
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9995922803569508
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0005261274346808433
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0011930548178697854
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.001046428280878298
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 3.125922443503814e-05
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.997203130242136
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0002708161271230581
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0007765607489711091
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0003378684521914681
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 1.2911501561036304e-05
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9986018431701532
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0004963261003320835
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0012750423894736015
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.001901598255857881
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 0.0005026460656035453
+    },
+    {
+      "split": "val",
+      "objective": "combined_checkpoint",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9958243871887326
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0004870395294633659
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0012482980689678335
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0018611843596688978
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 0.0004922292781337689
+    },
+    {
+      "split": "val",
+      "objective": "combined_paper",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9959112487637657
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 7.361415057635659e-05
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.00028852028887274453
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.00015000763317919662
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 2.3765049508636574e-05
+    },
+    {
+      "split": "val",
+      "objective": "edge_paper",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.999464092877863
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0010028852994326562
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0017837524961295925
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.005019190344990517
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 0.0012894650029379884
+    },
+    {
+      "split": "val",
+      "objective": "global",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9909047068565093
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0003155947492957115
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0011263129597348328
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0005831029471119945
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 9.08444218315876e-05
+    },
+    {
+      "split": "val",
+      "objective": "local",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9978841449220257
+    }
+  ],
+  "effective_edge_to_global_gradient_l2_ratio": {
+    "test": 0.08156761844187117,
+    "train": 0.142757380166046,
+    "val": 0.10280041425602797
+  },
+  "effective_edge_to_local_gradient_l2_ratio": {
+    "test": 0.11293170764482206,
+    "train": 0.1615884732136125,
+    "val": 0.11627198316750835
+  },
+  "cross_split_cosines": [
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "global",
+      "parameter_scope": "all",
+      "cosine": 0.9875521847676533
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "global",
+      "parameter_scope": "non_output",
+      "cosine": 0.3441380669827448
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "global",
+      "parameter_scope": "output",
+      "cosine": 0.9917182593567191
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "local",
+      "parameter_scope": "all",
+      "cosine": 0.9965844889394039
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "local",
+      "parameter_scope": "non_output",
+      "cosine": 0.5436727015952089
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "local",
+      "parameter_scope": "output",
+      "cosine": 0.997401893532779
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "edge_paper",
+      "parameter_scope": "all",
+      "cosine": 0.964426908968769
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "edge_paper",
+      "parameter_scope": "non_output",
+      "cosine": 0.4076161861073437
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "edge_paper",
+      "parameter_scope": "output",
+      "cosine": 0.9646915293425429
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "combined_paper",
+      "parameter_scope": "all",
+      "cosine": 0.9947701913168349
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "combined_paper",
+      "parameter_scope": "non_output",
+      "cosine": 0.4459960771305068
+    },
+    {
+      "split_pair": "train_val",
+      "left_split": "train",
+      "right_split": "val",
+      "objective": "combined_paper",
+      "parameter_scope": "output",
+      "cosine": 0.9964741042369488
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "global",
+      "parameter_scope": "all",
+      "cosine": 0.9887171567504013
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "global",
+      "parameter_scope": "non_output",
+      "cosine": 0.3416558836855584
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "global",
+      "parameter_scope": "output",
+      "cosine": 0.9913949442137667
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "local",
+      "parameter_scope": "all",
+      "cosine": 0.9917909996053125
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "local",
+      "parameter_scope": "non_output",
+      "cosine": 0.3786764837956131
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "local",
+      "parameter_scope": "output",
+      "cosine": 0.9932674051912291
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "edge_paper",
+      "parameter_scope": "all",
+      "cosine": 0.9665649149532168
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "edge_paper",
+      "parameter_scope": "non_output",
+      "cosine": 0.31132763408796355
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "edge_paper",
+      "parameter_scope": "output",
+      "cosine": 0.9668411346582393
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "combined_paper",
+      "parameter_scope": "all",
+      "cosine": 0.9940180042321215
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "combined_paper",
+      "parameter_scope": "non_output",
+      "cosine": 0.4470716641931036
+    },
+    {
+      "split_pair": "train_test",
+      "left_split": "train",
+      "right_split": "test",
+      "objective": "combined_paper",
+      "parameter_scope": "output",
+      "cosine": 0.9952860299156114
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "global",
+      "parameter_scope": "all",
+      "cosine": 0.9890409984755326
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "global",
+      "parameter_scope": "non_output",
+      "cosine": 0.2311862842181501
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "global",
+      "parameter_scope": "output",
+      "cosine": 0.994576675355571
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "local",
+      "parameter_scope": "all",
+      "cosine": 0.9958687755773661
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "local",
+      "parameter_scope": "non_output",
+      "cosine": 0.4752816604307806
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "local",
+      "parameter_scope": "output",
+      "cosine": 0.9972774630018887
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "edge_paper",
+      "parameter_scope": "all",
+      "cosine": 0.9911814874900337
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "edge_paper",
+      "parameter_scope": "non_output",
+      "cosine": 0.5901883374731499
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "edge_paper",
+      "parameter_scope": "output",
+      "cosine": 0.9913777707829329
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "combined_paper",
+      "parameter_scope": "all",
+      "cosine": 0.994979006231138
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "combined_paper",
+      "parameter_scope": "non_output",
+      "cosine": 0.330194466948782
+    },
+    {
+      "split_pair": "val_test",
+      "left_split": "val",
+      "right_split": "test",
+      "objective": "combined_paper",
+      "parameter_scope": "output",
+      "cosine": 0.9973071955722694
+    }
+  ],
+  "effective_scope_cosines": [
+    {
+      "split": "train",
+      "gradient_pair": "global_local",
+      "parameter_scope": "non_output",
+      "cosine": 0.77888363436693
+    },
+    {
+      "split": "train",
+      "gradient_pair": "global_local",
+      "parameter_scope": "output",
+      "cosine": 0.9943825924724492
+    },
+    {
+      "split": "train",
+      "gradient_pair": "global_edge",
+      "parameter_scope": "non_output",
+      "cosine": 0.25826286965215106
+    },
+    {
+      "split": "train",
+      "gradient_pair": "global_edge",
+      "parameter_scope": "output",
+      "cosine": 0.9252630653110198
+    },
+    {
+      "split": "train",
+      "gradient_pair": "local_edge",
+      "parameter_scope": "non_output",
+      "cosine": 0.3383450780035634
+    },
+    {
+      "split": "train",
+      "gradient_pair": "local_edge",
+      "parameter_scope": "output",
+      "cosine": 0.9436829219895739
+    },
+    {
+      "split": "val",
+      "gradient_pair": "global_local",
+      "parameter_scope": "non_output",
+      "cosine": 0.6374526055636477
+    },
+    {
+      "split": "val",
+      "gradient_pair": "global_local",
+      "parameter_scope": "output",
+      "cosine": 0.9871490566851676
+    },
+    {
+      "split": "val",
+      "gradient_pair": "global_edge",
+      "parameter_scope": "non_output",
+      "cosine": 0.33222224482674084
+    },
+    {
+      "split": "val",
+      "gradient_pair": "global_edge",
+      "parameter_scope": "output",
+      "cosine": 0.9202529544384414
+    },
+    {
+      "split": "val",
+      "gradient_pair": "local_edge",
+      "parameter_scope": "non_output",
+      "cosine": 0.36821661899326524
+    },
+    {
+      "split": "val",
+      "gradient_pair": "local_edge",
+      "parameter_scope": "output",
+      "cosine": 0.9505876514621198
+    },
+    {
+      "split": "test",
+      "gradient_pair": "global_local",
+      "parameter_scope": "non_output",
+      "cosine": 0.3608485452900895
+    },
+    {
+      "split": "test",
+      "gradient_pair": "global_local",
+      "parameter_scope": "output",
+      "cosine": 0.9910260635712431
+    },
+    {
+      "split": "test",
+      "gradient_pair": "global_edge",
+      "parameter_scope": "non_output",
+      "cosine": 0.31148263436131113
+    },
+    {
+      "split": "test",
+      "gradient_pair": "global_edge",
+      "parameter_scope": "output",
+      "cosine": 0.9493951341551385
+    },
+    {
+      "split": "test",
+      "gradient_pair": "local_edge",
+      "parameter_scope": "non_output",
+      "cosine": 0.16037164894435402
+    },
+    {
+      "split": "test",
+      "gradient_pair": "local_edge",
+      "parameter_scope": "output",
+      "cosine": 0.958750868634591
+    }
+  ]
+}

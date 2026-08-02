@@ -1,0 +1,33 @@
+{
+  "experiment": "exp25_loss_gradient_structure_audit",
+  "source_checkpoint": "exp24_microbatch2_long_detached/artifacts/formal/training/latest_checkpoint.pt",
+  "checkpoint_step": 800,
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "refinement_steps": [
+    0,
+    3
+  ],
+  "formal_selection": {
+    "train_locked_rois": 12,
+    "order": "first ROI-bearing train samples in the pre-prediction data manifest",
+    "validation_locked_rois": "all",
+    "test_locked_rois": "all",
+    "selection_uses_predictions": false
+  },
+  "local_scales": [
+    4,
+    16,
+    64
+  ],
+  "boundary_threshold": 0.03,
+  "gradient_target": "per-pixel log depth zeta with fixed u,v",
+  "edge_normalization": {
+    "legacy": "max(H,W)",
+    "paper": "min(H,W)"
+  },
+  "seed": 251
+}

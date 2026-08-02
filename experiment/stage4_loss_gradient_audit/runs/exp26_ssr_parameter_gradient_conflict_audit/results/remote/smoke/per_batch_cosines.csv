@@ -1,0 +1,4 @@
+batch_id,split,pair_index,sample_ids,gradient_pair,left_objective,right_objective,cosine
+train_00,train,0,ai_001_001_cam_00_frame.0000|ai_001_001_cam_00_frame.0014,global_local,global,local,0.9856740822540043
+train_00,train,0,ai_001_001_cam_00_frame.0000|ai_001_001_cam_00_frame.0014,global_edge,global,edge_paper,0.888194016647566
+train_00,train,0,ai_001_001_cam_00_frame.0000|ai_001_001_cam_00_frame.0014,local_edge,local,edge_paper,0.921618479463587

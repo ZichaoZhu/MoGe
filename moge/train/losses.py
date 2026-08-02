@@ -243,7 +243,12 @@ def normal_loss(points: torch.Tensor, gt_points: torch.Tensor) -> torch.Tensor:
     return loss, {}
 
 
-def edge_loss(points: torch.Tensor, gt_points: torch.Tensor) -> torch.Tensor:
+def edge_loss(
+    points: torch.Tensor,
+    gt_points: torch.Tensor,
+    *,
+    normalization_dimension: Literal["min", "max"] = "max",
+) -> torch.Tensor:
     device, dtype = points.device, points.dtype
     height, width = points.shape[-3:-1]
 
@@ -263,7 +268,17 @@ def edge_loss(points: torch.Tensor, gt_points: torch.Tensor) -> torch.Tensor:
 
     loss_dx = mask_dx * _smooth(angle_diff_vec3(dx, gt_dx).clamp(MIN_ANGLE, MAX_ANGLE), beta=BETA_RAD)
     loss_dy = mask_dy * _smooth(angle_diff_vec3(dy, gt_dy).clamp(MIN_ANGLE, MAX_ANGLE), beta=BETA_RAD)
-    loss = (loss_dx.mean(dim=(-2, -1)) + loss_dy.mean(dim=(-2, -1))) / (2 * max(points.shape[-3:-1]))
+    if normalization_dimension == "min":
+        spatial_normalizer = min(points.shape[-3:-1])
+    elif normalization_dimension == "max":
+        spatial_normalizer = max(points.shape[-3:-1])
+    else:
+        raise ValueError(
+            "normalization_dimension must be either 'min' or 'max'"
+        )
+    loss = (
+        loss_dx.mean(dim=(-2, -1)) + loss_dy.mean(dim=(-2, -1))
+    ) / (2 * spatial_normalizer)
 
     return loss, {}
 

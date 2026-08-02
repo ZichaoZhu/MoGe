@@ -1,0 +1,31 @@
+{
+  "experiment": "exp26_ssr_parameter_gradient_conflict_audit",
+  "source_checkpoint": "exp24_microbatch2_long_detached/artifacts/formal/training/latest_checkpoint.pt",
+  "checkpoint_step": 800,
+  "shape": [
+    384,
+    512
+  ],
+  "num_tokens": 2500,
+  "refinement_steps": 3,
+  "microbatch_size": 2,
+  "formal_pairs_per_split": 4,
+  "splits": [
+    "train",
+    "val",
+    "test"
+  ],
+  "selection": "first 8 samples per split in the pre-prediction data manifest, paired consecutively",
+  "local_scales": [
+    4,
+    16,
+    64
+  ],
+  "optimizer_updates": 0,
+  "seed": 261,
+  "monitoring": {
+    "interval_seconds": 600,
+    "minimum_free_memory_mib": 30000,
+    "do_not_terminate_other_jobs": true
+  }
+}

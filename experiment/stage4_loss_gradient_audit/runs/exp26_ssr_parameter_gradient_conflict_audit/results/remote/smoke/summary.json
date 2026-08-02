@@ -1,0 +1,311 @@
+{
+  "status": "complete",
+  "checkpoint_step": 800,
+  "checkpoint_sha256": "04d64d0bafa18bc42f48dae495aafc9b1559d399aeb2f24de5ccfd749d0ff341",
+  "shape": [
+    384,
+    512
+  ],
+  "microbatch_size": 2,
+  "pairs_per_split": 1,
+  "parameter_count": 50739073,
+  "selection": {
+    "policy": "first 2N samples per split in the pre-prediction data manifest, paired consecutively without shuffling",
+    "batches": [
+      {
+        "batch_id": "train_00",
+        "split": "train",
+        "sample_ids": [
+          "ai_001_001_cam_00_frame.0000",
+          "ai_001_001_cam_00_frame.0014"
+        ]
+      }
+    ]
+  },
+  "elapsed_seconds": 11.933619714109227,
+  "peak_cuda_memory_bytes": {
+    "allocated": 12981428224,
+    "reserved": 13082034176
+  },
+  "objective_means": [
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "count": 1,
+      "loss": 0.028129685670137405,
+      "gradient_l2": 3.6727025710671986,
+      "gradient_rms": 0.000515601883060466,
+      "loss_normalized_gradient_rms": 0.01832945768063918,
+      "cosine_to_paper_combined": 0.9999710093510207,
+      "projection_fraction_to_paper_combined": 0.9826220807580575,
+      "cosine_to_checkpoint_combined": 1.0,
+      "projection_fraction_to_checkpoint_combined": 1.0,
+      "max_abs_log_depth_residual": 0.2616155445575714
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "count": 1,
+      "loss": 0.02862207219004631,
+      "gradient_l2": 3.73754688496607,
+      "gradient_rms": 0.0005247052203727241,
+      "loss_normalized_gradient_rms": 0.01833218842048749,
+      "cosine_to_paper_combined": 1.0,
+      "projection_fraction_to_paper_combined": 1.0,
+      "cosine_to_checkpoint_combined": 0.9999710093510207,
+      "projection_fraction_to_checkpoint_combined": 1.0176262462686365,
+      "max_abs_log_depth_residual": 0.2616155445575714
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "count": 1,
+      "loss": 0.0019695470109581947,
+      "gradient_l2": 0.2828621701890488,
+      "gradient_rms": 3.971033994012337e-05,
+      "loss_normalized_gradient_rms": 0.020162169127815887,
+      "cosine_to_paper_combined": 0.9184796338698727,
+      "projection_fraction_to_paper_combined": 0.06951167450391293,
+      "cosine_to_checkpoint_combined": 0.9154417172816127,
+      "projection_fraction_to_checkpoint_combined": 0.0705049825901431,
+      "max_abs_log_depth_residual": 0.2616155445575714
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "count": 1,
+      "loss": 0.013357674703001976,
+      "gradient_l2": 2.035618249966272,
+      "gradient_rms": 0.00028577555153612156,
+      "loss_normalized_gradient_rms": 0.021394109221112935,
+      "cosine_to_paper_combined": 0.9958673971107089,
+      "projection_fraction_to_paper_combined": 0.5423894095507436,
+      "cosine_to_checkpoint_combined": 0.9963485726369451,
+      "projection_fraction_to_checkpoint_combined": 0.5522323952299436,
+      "max_abs_log_depth_residual": 0.2616155445575714
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "count": 1,
+      "loss": 0.013294852338731289,
+      "gradient_l2": 1.4561063926234645,
+      "gradient_rms": 0.00020441927530082693,
+      "loss_normalized_gradient_rms": 0.015375821415127834,
+      "cosine_to_paper_combined": 0.9961757484644627,
+      "projection_fraction_to_paper_combined": 0.38809891090603316,
+      "cosine_to_checkpoint_combined": 0.996018801170862,
+      "projection_fraction_to_checkpoint_combined": 0.39488886330826045,
+      "max_abs_log_depth_residual": 0.2616155445575714
+    }
+  ],
+  "cosine_means": [
+    {
+      "split": "train",
+      "gradient_pair": "global_edge",
+      "count": 1,
+      "cosine": 0.888194016647566
+    },
+    {
+      "split": "train",
+      "gradient_pair": "global_local",
+      "count": 1,
+      "cosine": 0.9856740822540043
+    },
+    {
+      "split": "train",
+      "gradient_pair": "local_edge",
+      "count": 1,
+      "cosine": 0.921618479463587
+    }
+  ],
+  "group_energy_shares": [
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0009959599978953614
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0013800302894241964
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0018612429554856534
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 8.942915345845056e-05
+    },
+    {
+      "split": "train",
+      "objective": "combined_checkpoint",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9956733376037363
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0009666755828970996
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0013411180868149852
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0018061548054546823
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 8.689950650749602e-05
+    },
+    {
+      "split": "train",
+      "objective": "combined_paper",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9957991520183256
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 6.909440063347937e-05
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0005019016206315016
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0002219848601886287
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 8.519702475659838e-06
+    },
+    {
+      "split": "train",
+      "objective": "edge_paper",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9991984994160703
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.001785102874720984
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0020685544591915552
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.003641518675744352
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 0.0001547575532495525
+    },
+    {
+      "split": "train",
+      "objective": "global",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9923500664370934
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "bottleneck",
+      "count": 1,
+      "energy_share": 0.0008358029007106447
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "decoder",
+      "count": 1,
+      "energy_share": 0.0011667234679904413
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "encoder",
+      "count": 1,
+      "energy_share": 0.0012549199120890416
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "input_fusion",
+      "count": 1,
+      "energy_share": 5.5328131359522234e-05
+    },
+    {
+      "split": "train",
+      "objective": "local",
+      "parameter_group": "output",
+      "count": 1,
+      "energy_share": 0.9966872255878504
+    }
+  ],
+  "edge_to_global_gradient_l2_ratio": {
+    "train": 0.13895639331870577
+  },
+  "edge_to_local_gradient_l2_ratio": {
+    "train": 0.19425927365061318
+  },
+  "edge_output_layer_gradient_energy_share": {
+    "train": 0.9991984994160703
+  },
+  "paper_to_checkpoint_combined_gradient_cosine": {
+    "train": 0.9999710093510207
+  }
+}

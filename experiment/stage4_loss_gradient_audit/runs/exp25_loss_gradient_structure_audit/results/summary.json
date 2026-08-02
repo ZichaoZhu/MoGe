@@ -1,0 +1,96 @@
+{
+  "status": "complete",
+  "checkpoint_step": 800,
+  "checkpoint_sha256": "04d64d0bafa18bc42f48dae495aafc9b1559d399aeb2f24de5ccfd749d0ff341",
+  "shape": [
+    384,
+    512
+  ],
+  "selection": {
+    "policy": "first N ROI-bearing train samples in the pre-prediction data manifest, plus every locked validation/test ROI",
+    "train_roi_limit": 12,
+    "sample_ids": [
+      "ai_054_008_cam_00_frame.0000",
+      "ai_052_005_cam_01_frame.0099",
+      "ai_028_001_cam_00_frame.0099",
+      "ai_036_006_cam_00_frame.0000",
+      "ai_011_009_cam_01_frame.0099",
+      "ai_024_018_cam_00_frame.0099",
+      "ai_017_009_cam_03_frame.0099",
+      "ai_031_009_cam_00_frame.0000",
+      "ai_002_002_cam_00_frame.0099",
+      "ai_027_003_cam_00_frame.0000",
+      "ai_055_004_cam_00_frame.0099",
+      "ai_039_006_cam_00_frame.0000",
+      "ai_047_001_cam_00_frame.0042",
+      "ai_046_001_cam_00_frame.0000"
+    ],
+    "counts": {
+      "train": 12,
+      "val": 1,
+      "test": 1
+    }
+  },
+  "edge_formula": {
+    "legacy_normalizer": "max(H,W)",
+    "paper_normalizer": "min(H,W)",
+    "expected_paper_to_legacy_ratio": 1.3333333333333333,
+    "observed_loss_ratio_mean": 1.3333333665814655,
+    "observed_gradient_l1_ratio_mean": 1.3333333902029465
+  },
+  "peak_cuda_memory_bytes": {
+    "allocated": 2259567616,
+    "reserved": 2474639360
+  },
+  "objective_change_k0_to_k3": {
+    "train": {
+      "sample_count": 12,
+      "k0_combined_loss": 0.09434518366470002,
+      "k3_combined_loss": 0.08027933094611701,
+      "k3_relative_reduction": 0.1490892504759186
+    },
+    "val": {
+      "sample_count": 1,
+      "k0_combined_loss": 0.07722860982175916,
+      "k3_combined_loss": 0.07862268504686654,
+      "k3_relative_reduction": -0.018051279549442193
+    },
+    "test": {
+      "sample_count": 1,
+      "k0_combined_loss": 0.0541165501344949,
+      "k3_combined_loss": 0.059334406396374106,
+      "k3_relative_reduction": -0.09641886352532378
+    }
+  },
+  "train_k3_objectives": {
+    "global": {
+      "loss": 0.035040816524997354,
+      "gradient_l1_mass": 0.37986455609401065,
+      "structure_gradient_enrichment": 1.0972973771056427,
+      "gt_boundary_gradient_enrichment": 1.0344831659283888
+    },
+    "local": {
+      "loss": 0.04396150641453763,
+      "gradient_l1_mass": 0.882795532544454,
+      "structure_gradient_enrichment": 1.053782352275952,
+      "gt_boundary_gradient_enrichment": 1.001012158875698
+    },
+    "edge_paper_min": {
+      "loss": 0.0012770080065820366,
+      "gradient_l1_mass": 0.7030845383803049,
+      "structure_gradient_enrichment": 0.8874452418669323,
+      "gt_boundary_gradient_enrichment": 0.6080946503700234
+    },
+    "combined_paper": {
+      "loss": 0.08027933094611701,
+      "gradient_l1_mass": 1.462205598751704,
+      "structure_gradient_enrichment": 1.0028564433164666,
+      "gt_boundary_gradient_enrichment": 0.95410176690249
+    }
+  },
+  "train_k3_gradient_cosines": {
+    "cosine_global_local": 0.4117203652858734,
+    "cosine_global_edge": 0.07613827008754015,
+    "cosine_local_edge": 0.32053029785553616
+  }
+}

@@ -108,7 +108,11 @@ def query_gpus() -> list[GpuState]:
 def eligible_gpus(states: Sequence[GpuState], minimum_free_mib: int) -> list[int]:
     return [
         state.index
-        for state in states
+        for state in sorted(
+            states,
+            key=lambda candidate: candidate.free_mib,
+            reverse=True,
+        )
         if state.free_mib >= minimum_free_mib
     ]
 

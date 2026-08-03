@@ -19,7 +19,7 @@ def test_gpu_selection_requires_28_gib_free():
         GpuState(1, 28_000, 0),
         GpuState(2, 40_000, 90),
     ]
-    assert eligible_gpus(states, 28_672) == [0, 2]
+    assert eligible_gpus(states, 28_672) == [2, 0]
 
 
 def test_single_and_multi_gpu_use_the_same_gloo_launcher(tmp_path):

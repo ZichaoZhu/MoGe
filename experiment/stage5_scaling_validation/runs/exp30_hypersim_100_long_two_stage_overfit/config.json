@@ -68,7 +68,7 @@
     "raw_abort": 1.5,
     "saturation_fraction_abort": 0.05,
     "saturation_consecutive_steps": 3,
-    "maximum_voxel_depth_span": 512,
+    "maximum_voxel_depth_span": "max(512, current batch K=0 base depth span + 122)",
     "maximum_preclip_gradient": 25.0,
     "maximum_skipped_gradients_total": 5,
     "maximum_skipped_gradients_consecutive": 2,

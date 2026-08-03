@@ -160,8 +160,6 @@ def training_launcher(
     *,
     process_count: int,
 ) -> list[str]:
-    if process_count == 1:
-        return [str(python), "-m", "moge.scripts.train_hypersim_joint_v3"]
     return [
         str(python),
         "-m",

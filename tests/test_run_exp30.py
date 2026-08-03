@@ -8,6 +8,7 @@ from tools.moge3.run_exp30 import (
     eligible_gpus,
     find_data_root,
     full_scores,
+    training_launcher,
     window_improvement,
 )
 
@@ -19,6 +20,14 @@ def test_gpu_selection_requires_28_gib_free():
         GpuState(2, 40_000, 90),
     ]
     assert eligible_gpus(states, 28_672) == [0, 2]
+
+
+def test_single_and_multi_gpu_use_the_same_gloo_launcher(tmp_path):
+    single = training_launcher(tmp_path / "python", process_count=1)
+    multi = training_launcher(tmp_path / "python", process_count=4)
+    assert "torch.distributed.run" in single
+    assert "--nproc_per_node=1" in single
+    assert "--nproc_per_node=4" in multi
 
 
 def test_full_composite_score_and_plateau_window(tmp_path):

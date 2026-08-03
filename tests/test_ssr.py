@@ -5,6 +5,7 @@ from moge.model.ssr import (
     SelfGuidedSparseRefiner,
     SpconvSparseUNet,
     VoxelDepthSpanError,
+    effective_voxel_depth_limit,
     factorize_points,
     gather_features_at_coordinates,
     sample_visual_features_for_voxels,
@@ -88,6 +89,19 @@ def test_voxel_depth_span_is_rejected_before_sparse_construction():
             voxel_resolution=200,
             max_depth_span=512,
         )
+
+
+def test_effective_depth_limit_never_rejects_the_base_shell():
+    assert effective_voxel_depth_limit(
+        512,
+        torch.tensor([120, 908]),
+        maximum_expansion=122,
+    ) == 1030
+    assert effective_voxel_depth_limit(
+        512,
+        torch.tensor([120, 300]),
+        maximum_expansion=122,
+    ) == 512
 
 
 def test_depth_discontinuity_is_separated_in_voxel_space():

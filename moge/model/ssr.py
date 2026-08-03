@@ -79,6 +79,39 @@ class VoxelDepthSpanError(RuntimeError):
     """Raised before sparse allocation when a shell exceeds its safe depth span."""
 
 
+def logical_voxel_depth_spans(
+    factorized: torch.Tensor,
+    *,
+    voxel_resolution: float,
+) -> torch.Tensor:
+    logical_depth = torch.round(
+        float(voxel_resolution) * factorized[..., 2]
+    ).to(torch.long)
+    return (
+        logical_depth.amax(dim=(-2, -1))
+        - logical_depth.amin(dim=(-2, -1))
+        + 1
+    )
+
+
+def effective_voxel_depth_limit(
+    configured_limit: Optional[int],
+    base_depth_spans: torch.Tensor,
+    *,
+    maximum_expansion: int = 0,
+) -> Optional[int]:
+    if configured_limit is None:
+        return None
+    if configured_limit <= 0:
+        raise ValueError("Maximum voxel depth span must be positive")
+    if maximum_expansion < 0:
+        raise ValueError("Maximum voxel depth expansion must be non-negative")
+    return max(
+        int(configured_limit),
+        int(base_depth_spans.detach().amax().item()) + maximum_expansion,
+    )
+
+
 def voxelize_factorized(
     factorized: torch.Tensor,
     voxel_resolution: float = 200.0,

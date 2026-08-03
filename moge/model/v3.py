@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from numbers import Number
 from typing import Any, Dict, List, Optional, Union
 
@@ -9,8 +10,10 @@ import utils3d
 
 from ..utils.geometry_torch import normalized_view_plane_uv, recover_focal_shift
 from .ssr import (
+    effective_voxel_depth_limit,
     SelfGuidedSparseRefiner,
     factorize_points,
+    logical_voxel_depth_spans,
     load_batch_norm_running_state,
     smooth_bound_log_depth_residual,
 )
@@ -181,6 +184,30 @@ class MoGeModel(MoGeModelV2):
         if num_refinement_steps:
             with torch.autocast(device_type=image.device.type, enabled=False):
                 factorized = factorize_points(base_points.float())
+                base_depth_spans = logical_voxel_depth_spans(
+                    factorized,
+                    voxel_resolution=self.ssr.voxel_resolution,
+                )
+                depth_span_expansion_margin = (
+                    math.ceil(
+                        2
+                        * self.ssr.voxel_resolution
+                        * float(smooth_log_depth_residual_bound)
+                        * int(num_refinement_steps)
+                    )
+                    + 2
+                    if (
+                        max_voxel_depth_span is not None
+                        and smooth_log_depth_residual_bound is not None
+                        and float(smooth_log_depth_residual_bound) > 0
+                    )
+                    else 0
+                )
+                effective_max_depth_span = effective_voxel_depth_limit(
+                    max_voxel_depth_span,
+                    base_depth_spans,
+                    maximum_expansion=depth_span_expansion_margin,
+                )
                 visual_for_refiner = visual_features.float()
                 refined_points = base_points.float()
                 if detach_base_from_refiner:
@@ -197,7 +224,13 @@ class MoGeModel(MoGeModelV2):
                     raw_residual, stats = self.ssr(
                         factorized,
                         visual_for_refiner,
-                        max_depth_span=max_voxel_depth_span,
+                        max_depth_span=effective_max_depth_span,
+                    )
+                    stats["base_depth_span"] = base_depth_spans
+                    stats["configured_max_depth_span"] = max_voxel_depth_span
+                    stats["effective_max_depth_span"] = effective_max_depth_span
+                    stats["depth_span_expansion_margin"] = (
+                        depth_span_expansion_margin
                     )
                     residual = smooth_bound_log_depth_residual(
                         raw_residual,

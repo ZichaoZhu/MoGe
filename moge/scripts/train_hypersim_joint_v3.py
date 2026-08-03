@@ -1034,6 +1034,22 @@ def preclip_gradient_action(
     return "abort"
 
 
+def skipped_gradient_budget_exhausted(
+    *,
+    skipped_total: int,
+    skipped_consecutive: int,
+    max_skipped_total: int,
+    max_skipped_consecutive: int,
+) -> bool:
+    return (
+        max_skipped_total > 0
+        and (
+            skipped_total >= max_skipped_total
+            or skipped_consecutive >= max_skipped_consecutive
+        )
+    )
+
+
 def checkpoint_payload(
     *,
     model: MoGeModel,
@@ -1798,6 +1814,34 @@ def main() -> None:
                     },
                 )
             optimizer.zero_grad(set_to_none=True)
+            if skipped_gradient_budget_exhausted(
+                skipped_total=skipped_preclip_total,
+                skipped_consecutive=skipped_preclip_consecutive,
+                max_skipped_total=args.max_skipped_preclip_steps,
+                max_skipped_consecutive=(
+                    args.max_consecutive_skipped_preclip_steps
+                ),
+            ):
+                if accelerator.is_main_process:
+                    write_instability_event(
+                        output,
+                        {
+                            "event": "preclip_gradient_skip_budget_exhausted",
+                            "step": step,
+                            "stage": stage,
+                            "threshold": args.max_preclip_grad_norm,
+                            "grad_norm": float(grad_norm),
+                            "skipped_preclip_total": skipped_preclip_total,
+                            "skipped_preclip_consecutive": (
+                                skipped_preclip_consecutive
+                            ),
+                            **step_maxima,
+                            "action": "aborted after the configured skipped update",
+                        },
+                    )
+                raise RuntimeError(
+                    "Pre-clip gradient skip budget was exhausted"
+                )
         else:
             optimizer.step()
             skipped_preclip_consecutive = 0

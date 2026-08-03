@@ -18,6 +18,7 @@ from moge.scripts.train_hypersim_joint_v3 import (
     selection_metric_key,
     set_refiner_only_trainable,
     shard_batch_indices,
+    skipped_gradient_budget_exhausted,
     skipped_preclip_state,
     training_stage,
     validate_distributed_batch,
@@ -330,6 +331,18 @@ def test_preclip_gradient_guard_skips_only_within_both_budgets():
         skipped_total=5,
         skipped_consecutive=2,
     ) == "apply"
+    assert skipped_gradient_budget_exhausted(
+        skipped_total=2,
+        skipped_consecutive=2,
+        max_skipped_total=5,
+        max_skipped_consecutive=2,
+    )
+    assert skipped_gradient_budget_exhausted(
+        skipped_total=5,
+        skipped_consecutive=1,
+        max_skipped_total=5,
+        max_skipped_consecutive=2,
+    )
 
 
 def test_skipped_preclip_state_restores_total_and_consecutive_counts():

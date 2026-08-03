@@ -63,6 +63,7 @@ def write_binary_ply(
     *,
     width: int,
     height: int,
+    allow_nonfinite: bool = False,
 ) -> None:
     points = np.asarray(points, dtype=np.float32)
     colors = np.asarray(colors, dtype=np.uint8)
@@ -70,7 +71,7 @@ def write_binary_ply(
         raise ValueError(f"Unexpected point shape: {points.shape}")
     if colors.shape != (height, width, 3):
         raise ValueError(f"Unexpected color shape: {colors.shape}")
-    if not np.isfinite(points).all():
+    if not allow_nonfinite and not np.isfinite(points).all():
         raise ValueError("Point map contains NaN or infinity")
 
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -268,8 +269,12 @@ def point_asset(
     alignment: Mapping[str, float],
     metrics: Mapping[str, Any],
 ) -> Dict[str, Any]:
-    minimum = points.reshape(-1, 3).min(axis=0)
-    maximum = points.reshape(-1, 3).max(axis=0)
+    flat_points = points.reshape(-1, 3)
+    finite = np.isfinite(flat_points).all(axis=-1)
+    if not finite.any():
+        raise ValueError("Point map has no finite XYZ values")
+    minimum = flat_points[finite].min(axis=0)
+    maximum = flat_points[finite].max(axis=0)
     return {
         "url": "/" + path.relative_to(public_root).as_posix(),
         "pointCount": int(points.shape[0] * points.shape[1]),

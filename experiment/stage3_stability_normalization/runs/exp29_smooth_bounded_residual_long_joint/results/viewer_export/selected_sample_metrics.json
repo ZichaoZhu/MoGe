@@ -2,18 +2,45 @@
   "ai_005_006_cam_00_frame.0099": {
     "split": "train",
     "cropXYXY": [
-      304,
+      320,
       96,
-      496,
+      512,
       288
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+      "policy": "人工选择玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；保留三张改善与两张退化样本",
       "rank": 1,
       "total": 100,
       "relativeImprovement": 0.487645804903337,
-      "outcome": "improved"
+      "outcome": "improved",
+      "structureDescription": "玻璃楼梯的长扶手与栏杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
@@ -27,19 +54,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.06426719576120377,
-          "depth_rel": 0.0587916374206543,
-          "depth_delta_1.01": 0.1345757395029068,
-          "depth_delta_1.25": 0.9519856572151184,
-          "boundary_f1": 0.9289748668670654
+          "point_rel": 0.06830944865942001,
+          "depth_rel": 0.06173188239336014,
+          "depth_delta_1.01": 0.1257866770029068,
+          "depth_delta_1.25": 0.952989399433136,
+          "boundary_f1": 0.9155808687210083
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.08743308484554291,
-          "depth_rel": 0.07844872772693634,
-          "depth_delta_1.01": 0.1080186665058136,
-          "depth_delta_1.25": 0.9403212070465088,
-          "boundary_f1": 0.7133367657661438
+          "point_rel": 0.07893551886081696,
+          "depth_rel": 0.0701354518532753,
+          "depth_delta_1.01": 0.109754778444767,
+          "depth_delta_1.25": 0.9519314169883728,
+          "boundary_f1": 0.6526007652282715
         }
       },
       "1": {
@@ -53,19 +80,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.0442269966006279,
-          "depth_rel": 0.040117066353559494,
-          "depth_delta_1.01": 0.4181857705116272,
-          "depth_delta_1.25": 0.9680446982383728,
-          "boundary_f1": 0.9294441342353821
+          "point_rel": 0.046455852687358856,
+          "depth_rel": 0.04163114354014397,
+          "depth_delta_1.01": 0.3882921040058136,
+          "depth_delta_1.25": 0.9690483808517456,
+          "boundary_f1": 0.9165730476379395
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.058670349419116974,
-          "depth_rel": 0.05201873928308487,
-          "depth_delta_1.01": 0.2667643129825592,
-          "depth_delta_1.25": 0.9742838740348816,
-          "boundary_f1": 0.7365109324455261
+          "point_rel": 0.05334676057100296,
+          "depth_rel": 0.046734705567359924,
+          "depth_delta_1.01": 0.277886301279068,
+          "depth_delta_1.25": 0.9753146767616272,
+          "boundary_f1": 0.6872583627700806
         }
       },
       "3": {
@@ -79,19 +106,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.03262605145573616,
-          "depth_rel": 0.029849596321582794,
-          "depth_delta_1.01": 0.5549858808517456,
-          "depth_delta_1.25": 0.9689399003982544,
-          "boundary_f1": 0.9006572961807251
+          "point_rel": 0.03379308432340622,
+          "depth_rel": 0.030612528324127197,
+          "depth_delta_1.01": 0.5060492753982544,
+          "depth_delta_1.25": 0.9696994423866272,
+          "boundary_f1": 0.8918884992599487
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.03767960146069527,
-          "depth_rel": 0.03416042402386665,
-          "depth_delta_1.01": 0.3986545205116272,
-          "depth_delta_1.25": 0.9760199785232544,
-          "boundary_f1": 0.724576473236084
+          "point_rel": 0.036191605031490326,
+          "depth_rel": 0.032386552542448044,
+          "depth_delta_1.01": 0.4052734375,
+          "depth_delta_1.25": 0.9767795205116272,
+          "boundary_f1": 0.7249534726142883
         }
       },
       "5": {
@@ -105,147 +132,174 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.04177295044064522,
-          "depth_rel": 0.03865250572562218,
-          "depth_delta_1.01": 0.402886301279068,
-          "depth_delta_1.25": 0.968017578125,
-          "boundary_f1": 0.8654440641403198
+          "point_rel": 0.04243074357509613,
+          "depth_rel": 0.038904815912246704,
+          "depth_delta_1.01": 0.3552517294883728,
+          "depth_delta_1.25": 0.9696180820465088,
+          "boundary_f1": 0.8635547757148743
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.0480663999915123,
-          "depth_rel": 0.044328201562166214,
-          "depth_delta_1.01": 0.16552734375,
-          "depth_delta_1.25": 0.9746636152267456,
-          "boundary_f1": 0.6873264312744141
+          "point_rel": 0.044232599437236786,
+          "depth_rel": 0.04039548337459564,
+          "depth_delta_1.01": 0.1724175363779068,
+          "depth_delta_1.25": 0.9754774570465088,
+          "boundary_f1": 0.713905930519104
         }
       }
     }
   },
-  "ai_018_007_cam_00_frame.0000": {
+  "ai_036_006_cam_00_frame.0000": {
     "split": "train",
     "cropXYXY": [
-      224,
-      160,
-      416,
-      352
+      192,
+      0,
+      384,
+      192
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-      "rank": 2,
+      "policy": "人工选择玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；保留三张改善与两张退化样本",
+      "rank": 18,
       "total": 100,
-      "relativeImprovement": 0.475119706007628,
-      "outcome": "improved"
+      "relativeImprovement": 0.3092325340160527,
+      "outcome": "improved",
+      "structureDescription": "天花板裸露管线与金属横杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.02782585285604,
-          "depth_rel": 0.02480168640613556,
-          "depth_delta_1.01": 0.3010508418083191,
-          "depth_delta_1.25": 0.9971720576286316,
-          "boundary_f1": 0.832944929599762
+          "point_rel": 0.04369893670082092,
+          "depth_rel": 0.03995320945978165,
+          "depth_delta_1.01": 0.387603759765625,
+          "depth_delta_1.25": 0.9730275869369507,
+          "boundary_f1": 0.8290855288505554
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.026957716792821884,
-          "depth_rel": 0.025629563257098198,
-          "depth_delta_1.01": 0.3132053017616272,
-          "depth_delta_1.25": 0.9915907382965088,
-          "boundary_f1": 0.8277851939201355
+          "point_rel": 0.051725346595048904,
+          "depth_rel": 0.04922797903418541,
+          "depth_delta_1.01": 0.3188205361366272,
+          "depth_delta_1.25": 0.9679633378982544,
+          "boundary_f1": 0.7947922945022583
         },
         "structure": {
-          "pixels": 18433,
-          "point_rel": 0.020454343408346176,
-          "depth_rel": 0.0186325591057539,
-          "depth_delta_1.01": 0.3580535054206848,
-          "depth_delta_1.25": 0.9982097148895264,
-          "boundary_f1": 0.6982327699661255
+          "pixels": 18432,
+          "point_rel": 0.07195448875427246,
+          "depth_rel": 0.06795040518045425,
+          "depth_delta_1.01": 0.1632487028837204,
+          "depth_delta_1.25": 0.954698383808136,
+          "boundary_f1": 0.6472214460372925
         }
       },
       "1": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.018339641392230988,
-          "depth_rel": 0.016706420108675957,
-          "depth_delta_1.01": 0.4918721616268158,
-          "depth_delta_1.25": 0.9971771240234375,
-          "boundary_f1": 0.8359332084655762
+          "point_rel": 0.034155525267124176,
+          "depth_rel": 0.031012674793601036,
+          "depth_delta_1.01": 0.488616943359375,
+          "depth_delta_1.25": 0.9740651845932007,
+          "boundary_f1": 0.8189701437950134
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.020528443157672882,
-          "depth_rel": 0.019800182431936264,
-          "depth_delta_1.01": 0.439208984375,
-          "depth_delta_1.25": 0.991563618183136,
-          "boundary_f1": 0.8327914476394653
+          "point_rel": 0.03981902077794075,
+          "depth_rel": 0.037877801805734634,
+          "depth_delta_1.01": 0.425537109375,
+          "depth_delta_1.25": 0.9681803584098816,
+          "boundary_f1": 0.7846389412879944
         },
         "structure": {
-          "pixels": 18433,
-          "point_rel": 0.015377482399344444,
-          "depth_rel": 0.014604052528738976,
-          "depth_delta_1.01": 0.4991048574447632,
-          "depth_delta_1.25": 0.997884213924408,
-          "boundary_f1": 0.7217682003974915
+          "pixels": 18432,
+          "point_rel": 0.05174573138356209,
+          "depth_rel": 0.04879956692457199,
+          "depth_delta_1.01": 0.2829318642616272,
+          "depth_delta_1.25": 0.955186665058136,
+          "boundary_f1": 0.6313467621803284
         }
       },
       "3": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.01460524182766676,
-          "depth_rel": 0.013034248724579811,
-          "depth_delta_1.01": 0.5910593867301941,
-          "depth_delta_1.25": 0.9970906972885132,
-          "boundary_f1": 0.8421013951301575
+          "point_rel": 0.030185803771018982,
+          "depth_rel": 0.02743394672870636,
+          "depth_delta_1.01": 0.5846049189567566,
+          "depth_delta_1.25": 0.9737498164176941,
+          "boundary_f1": 0.7945643067359924
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.01674492098391056,
-          "depth_rel": 0.016116643324494362,
-          "depth_delta_1.01": 0.628282368183136,
-          "depth_delta_1.25": 0.9915907382965088,
-          "boundary_f1": 0.8369351029396057
+          "point_rel": 0.03439787030220032,
+          "depth_rel": 0.03279595449566841,
+          "depth_delta_1.01": 0.4992404580116272,
+          "depth_delta_1.25": 0.9696994423866272,
+          "boundary_f1": 0.7591234445571899
         },
         "structure": {
-          "pixels": 18433,
-          "point_rel": 0.01150057278573513,
-          "depth_rel": 0.01102179940789938,
-          "depth_delta_1.01": 0.7197960019111633,
-          "depth_delta_1.25": 0.997504472732544,
-          "boundary_f1": 0.7341904044151306
+          "pixels": 18432,
+          "point_rel": 0.040141452103853226,
+          "depth_rel": 0.03775058686733246,
+          "depth_delta_1.01": 0.4626193642616272,
+          "depth_delta_1.25": 0.9583876132965088,
+          "boundary_f1": 0.6032406687736511
         }
       },
       "5": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.021158479154109955,
-          "depth_rel": 0.01862579956650734,
-          "depth_delta_1.01": 0.468963623046875,
-          "depth_delta_1.25": 0.9971567988395691,
-          "boundary_f1": 0.8349061012268066
+          "point_rel": 0.035133909434080124,
+          "depth_rel": 0.03218381106853485,
+          "depth_delta_1.01": 0.4943339228630066,
+          "depth_delta_1.25": 0.97296142578125,
+          "boundary_f1": 0.7730557918548584
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.018435491248965263,
-          "depth_rel": 0.017472995445132256,
-          "depth_delta_1.01": 0.5300564169883728,
-          "depth_delta_1.25": 0.9916449785232544,
-          "boundary_f1": 0.8223947286605835
+          "point_rel": 0.04131146892905235,
+          "depth_rel": 0.039583463221788406,
+          "depth_delta_1.01": 0.369873046875,
+          "depth_delta_1.25": 0.9704047441482544,
+          "boundary_f1": 0.7459784150123596
         },
         "structure": {
-          "pixels": 18433,
-          "point_rel": 0.013066882267594337,
-          "depth_rel": 0.011987969279289246,
-          "depth_delta_1.01": 0.6696685552597046,
-          "depth_delta_1.25": 0.9975587129592896,
-          "boundary_f1": 0.7060948610305786
+          "pixels": 18432,
+          "point_rel": 0.05020304396748543,
+          "depth_rel": 0.04776531457901001,
+          "depth_delta_1.01": 0.220703125,
+          "depth_delta_1.25": 0.9603949785232544,
+          "boundary_f1": 0.5789522528648376
         }
       }
     }
   },
-  "ai_053_018_cam_00_frame.0000": {
+  "ai_029_005_cam_00_frame.0000": {
     "split": "train",
     "cropXYXY": [
       320,
@@ -255,361 +309,442 @@
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-      "rank": 3,
+      "policy": "人工选择玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；保留三张改善与两张退化样本",
+      "rank": 42,
       "total": 100,
-      "relativeImprovement": 0.40696338268670906,
-      "outcome": "improved"
+      "relativeImprovement": 0.21590342577003438,
+      "outcome": "improved",
+      "structureDescription": "旋转楼梯的细长扶手"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
         "full": {
-          "pixels": 196588,
-          "point_rel": 0.13306264579296112,
-          "depth_rel": 0.111971914768219,
-          "depth_delta_1.01": 0.18725965917110443,
-          "depth_delta_1.25": 0.8466284871101379,
-          "boundary_f1": 0.9498791098594666
+          "pixels": 196608,
+          "point_rel": 0.04215993732213974,
+          "depth_rel": 0.03772205859422684,
+          "depth_delta_1.01": 0.2978871762752533,
+          "depth_delta_1.25": 0.9737091064453125,
+          "boundary_f1": 0.910539448261261
         },
         "crop": {
-          "pixels": 36858,
-          "point_rel": 0.0937548354268074,
-          "depth_rel": 0.0846497043967247,
-          "depth_delta_1.01": 0.20937110483646393,
-          "depth_delta_1.25": 0.8894948363304138,
-          "boundary_f1": 0.9584604501724243
+          "pixels": 36864,
+          "point_rel": 0.07583844661712646,
+          "depth_rel": 0.06868524849414825,
+          "depth_delta_1.01": 0.1846245676279068,
+          "depth_delta_1.25": 0.9299587607383728,
+          "boundary_f1": 0.909774124622345
         },
         "structure": {
-          "pixels": 18429,
-          "point_rel": 0.09978586435317993,
-          "depth_rel": 0.08832526206970215,
-          "depth_delta_1.01": 0.10467198491096497,
-          "depth_delta_1.25": 0.9116609692573547,
-          "boundary_f1": 0.6235666275024414
+          "pixels": 18432,
+          "point_rel": 0.07553163915872574,
+          "depth_rel": 0.06772530823945999,
+          "depth_delta_1.01": 0.1580403596162796,
+          "depth_delta_1.25": 0.956163227558136,
+          "boundary_f1": 0.6609460711479187
         }
       },
       "1": {
         "full": {
-          "pixels": 196588,
-          "point_rel": 0.11200278252363205,
-          "depth_rel": 0.09269636124372482,
-          "depth_delta_1.01": 0.23457179963588715,
-          "depth_delta_1.25": 0.8481952548027039,
-          "boundary_f1": 0.9534865021705627
+          "pixels": 196608,
+          "point_rel": 0.034719161689281464,
+          "depth_rel": 0.03096870705485344,
+          "depth_delta_1.01": 0.4065348505973816,
+          "depth_delta_1.25": 0.9747467041015625,
+          "boundary_f1": 0.9149341583251953
         },
         "crop": {
-          "pixels": 36858,
-          "point_rel": 0.08421400189399719,
-          "depth_rel": 0.0754849910736084,
-          "depth_delta_1.01": 0.28221824765205383,
-          "depth_delta_1.25": 0.8957892656326294,
-          "boundary_f1": 0.9642205238342285
+          "pixels": 36864,
+          "point_rel": 0.06716180592775345,
+          "depth_rel": 0.06058361008763313,
+          "depth_delta_1.01": 0.3111165463924408,
+          "depth_delta_1.25": 0.9337294101715088,
+          "boundary_f1": 0.9053325653076172
         },
         "structure": {
-          "pixels": 18429,
-          "point_rel": 0.08836422860622406,
-          "depth_rel": 0.07743626832962036,
-          "depth_delta_1.01": 0.14694231748580933,
-          "depth_delta_1.25": 0.9186065793037415,
-          "boundary_f1": 0.6529338955879211
+          "pixels": 18432,
+          "point_rel": 0.06805302202701569,
+          "depth_rel": 0.061209533363580704,
+          "depth_delta_1.01": 0.2565104067325592,
+          "depth_delta_1.25": 0.9569770097732544,
+          "boundary_f1": 0.6380714178085327
         }
       },
       "3": {
         "full": {
-          "pixels": 196588,
-          "point_rel": 0.07891102135181427,
-          "depth_rel": 0.05988551676273346,
-          "depth_delta_1.01": 0.20169085264205933,
-          "depth_delta_1.25": 0.9690724015235901,
-          "boundary_f1": 0.9516884088516235
+          "pixels": 196608,
+          "point_rel": 0.03305746242403984,
+          "depth_rel": 0.029036611318588257,
+          "depth_delta_1.01": 0.4584605097770691,
+          "depth_delta_1.25": 0.9742940664291382,
+          "boundary_f1": 0.8951402902603149
         },
         "crop": {
-          "pixels": 36858,
-          "point_rel": 0.0780579000711441,
-          "depth_rel": 0.06840521842241287,
-          "depth_delta_1.01": 0.2956753075122833,
-          "depth_delta_1.25": 0.8993706107139587,
-          "boundary_f1": 0.9631925225257874
+          "pixels": 36864,
+          "point_rel": 0.06223354861140251,
+          "depth_rel": 0.05598738417029381,
+          "depth_delta_1.01": 0.3779296875,
+          "depth_delta_1.25": 0.9349501132965088,
+          "boundary_f1": 0.881281852722168
         },
         "structure": {
-          "pixels": 18429,
-          "point_rel": 0.08173400908708572,
-          "depth_rel": 0.06912116706371307,
-          "depth_delta_1.01": 0.16479462385177612,
-          "depth_delta_1.25": 0.9220250844955444,
-          "boundary_f1": 0.7071358561515808
+          "pixels": 18432,
+          "point_rel": 0.06351087242364883,
+          "depth_rel": 0.05775574967265129,
+          "depth_delta_1.01": 0.322319895029068,
+          "depth_delta_1.25": 0.957139790058136,
+          "boundary_f1": 0.571897566318512
         }
       },
       "5": {
         "full": {
-          "pixels": 196588,
-          "point_rel": 0.05729540064930916,
-          "depth_rel": 0.036442551761865616,
-          "depth_delta_1.01": 0.25076302886009216,
-          "depth_delta_1.25": 0.9703899025917053,
-          "boundary_f1": 0.9466432332992554
+          "pixels": 196608,
+          "point_rel": 0.042924683541059494,
+          "depth_rel": 0.03833526000380516,
+          "depth_delta_1.01": 0.2382710874080658,
+          "depth_delta_1.25": 0.9740194082260132,
+          "boundary_f1": 0.8680310845375061
         },
         "crop": {
-          "pixels": 36858,
-          "point_rel": 0.0753873735666275,
-          "depth_rel": 0.06552640348672867,
-          "depth_delta_1.01": 0.3394649922847748,
-          "depth_delta_1.25": 0.9003472924232483,
-          "boundary_f1": 0.960185170173645
+          "pixels": 36864,
+          "point_rel": 0.07039012014865875,
+          "depth_rel": 0.06387483328580856,
+          "depth_delta_1.01": 0.2184787392616272,
+          "depth_delta_1.25": 0.9356825351715088,
+          "boundary_f1": 0.8509363532066345
         },
         "structure": {
-          "pixels": 18429,
-          "point_rel": 0.07882893830537796,
-          "depth_rel": 0.0657951757311821,
-          "depth_delta_1.01": 0.22893266379833221,
-          "depth_delta_1.25": 0.9189863801002502,
-          "boundary_f1": 0.7475560903549194
+          "pixels": 18432,
+          "point_rel": 0.07229580730199814,
+          "depth_rel": 0.06601694226264954,
+          "depth_delta_1.01": 0.1918402761220932,
+          "depth_delta_1.25": 0.9573025107383728,
+          "boundary_f1": 0.5185144543647766
         }
       }
     }
   },
-  "ai_001_001_cam_00_frame.0056": {
+  "ai_013_001_cam_00_frame.0000": {
     "split": "train",
     "cropXYXY": [
-      304,
+      160,
+      96,
+      352,
+      288
+    ],
+    "selection": {
+      "metric": "full_point_rel_relative_reduction_k0_to_k3",
+      "policy": "人工选择玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；保留三张改善与两张退化样本",
+      "rank": 97,
+      "total": 100,
+      "relativeImprovement": -0.5410483688867871,
+      "outcome": "degraded",
+      "structureDescription": "室内细长立柱与边框"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
+    },
+    "final": {
+      "0": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.048965781927108765,
+          "depth_rel": 0.04398829862475395,
+          "depth_delta_1.01": 0.2668507993221283,
+          "depth_delta_1.25": 0.9926300048828125,
+          "boundary_f1": 0.9339749217033386
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.02302960678935051,
+          "depth_rel": 0.02237224020063877,
+          "depth_delta_1.01": 0.484917551279068,
+          "depth_delta_1.25": 0.983154296875,
+          "boundary_f1": 0.9009557962417603
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.019075656309723854,
+          "depth_rel": 0.018469132483005524,
+          "depth_delta_1.01": 0.5293511152267456,
+          "depth_delta_1.25": 0.9880642294883728,
+          "boundary_f1": 0.0
+        }
+      },
+      "1": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.057033851742744446,
+          "depth_rel": 0.05146899074316025,
+          "depth_delta_1.01": 0.352386474609375,
+          "depth_delta_1.25": 0.991485595703125,
+          "boundary_f1": 0.9382176399230957
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.01938268169760704,
+          "depth_rel": 0.018741924315690994,
+          "depth_delta_1.01": 0.6646864414215088,
+          "depth_delta_1.25": 0.9832899570465088,
+          "boundary_f1": 0.903913140296936
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.016243038699030876,
+          "depth_rel": 0.015747012570500374,
+          "depth_delta_1.01": 0.71484375,
+          "depth_delta_1.25": 0.98828125,
+          "boundary_f1": 0.0
+        }
+      },
+      "3": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.07545863837003708,
+          "depth_rel": 0.0679374411702156,
+          "depth_delta_1.01": 0.2315216064453125,
+          "depth_delta_1.25": 0.9212290644645691,
+          "boundary_f1": 0.9286893010139465
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.0232797060161829,
+          "depth_rel": 0.02251998521387577,
+          "depth_delta_1.01": 0.6213107705116272,
+          "depth_delta_1.25": 0.9824761152267456,
+          "boundary_f1": 0.8924562335014343
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.017943760380148888,
+          "depth_rel": 0.017126822844147682,
+          "depth_delta_1.01": 0.6930881142616272,
+          "depth_delta_1.25": 0.98828125,
+          "boundary_f1": 0.0
+        }
+      },
+      "5": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.09750115871429443,
+          "depth_rel": 0.08706247061491013,
+          "depth_delta_1.01": 0.205963134765625,
+          "depth_delta_1.25": 0.7554473876953125,
+          "boundary_f1": 0.9277670979499817
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.030321979895234108,
+          "depth_rel": 0.02929117903113365,
+          "depth_delta_1.01": 0.487114816904068,
+          "depth_delta_1.25": 0.9772135615348816,
+          "boundary_f1": 0.8925898671150208
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.02114957571029663,
+          "depth_rel": 0.020023299381136894,
+          "depth_delta_1.01": 0.5234917402267456,
+          "depth_delta_1.25": 0.9884440302848816,
+          "boundary_f1": 0.0
+        }
+      }
+    }
+  },
+  "ai_004_008_cam_00_frame.0000": {
+    "split": "train",
+    "cropXYXY": [
+      160,
       192,
-      496,
+      352,
       384
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-      "rank": 100,
+      "policy": "人工选择玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；保留三张改善与两张退化样本",
+      "rank": 88,
       "total": 100,
-      "relativeImprovement": -1.1561916165947055,
-      "outcome": "degraded"
+      "relativeImprovement": -0.02569957641190522,
+      "outcome": "degraded",
+      "structureDescription": "吧椅长腿与横向支撑杆"
     },
-    "final": {
-      "0": {
-        "full": {
-          "pixels": 196608,
-          "point_rel": 0.006623501889407635,
-          "depth_rel": 0.005815564654767513,
-          "depth_delta_1.01": 0.8993632197380066,
-          "depth_delta_1.25": 0.999908447265625,
-          "boundary_f1": 0.9103128910064697
-        },
-        "crop": {
-          "pixels": 36864,
-          "point_rel": 0.01748376525938511,
-          "depth_rel": 0.015369734726846218,
-          "depth_delta_1.01": 0.58740234375,
-          "depth_delta_1.25": 0.99951171875,
-          "boundary_f1": 0.9934065341949463
-        },
-        "structure": {
-          "pixels": 18432,
-          "point_rel": 0.02885652892291546,
-          "depth_rel": 0.02506130374968052,
-          "depth_delta_1.01": 0.2904731035232544,
-          "depth_delta_1.25": 0.9990234375,
-          "boundary_f1": 1.0
-        }
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
       },
-      "1": {
-        "full": {
-          "pixels": 196608,
-          "point_rel": 0.00725399237126112,
-          "depth_rel": 0.006374186836183071,
-          "depth_delta_1.01": 0.8618876338005066,
-          "depth_delta_1.25": 0.9998983144760132,
-          "boundary_f1": 0.9118306636810303
-        },
-        "crop": {
-          "pixels": 36864,
-          "point_rel": 0.0177669208496809,
-          "depth_rel": 0.01614920236170292,
-          "depth_delta_1.01": 0.4717610776424408,
-          "depth_delta_1.25": 0.9994574785232544,
-          "boundary_f1": 0.9934065341949463
-        },
-        "structure": {
-          "pixels": 18432,
-          "point_rel": 0.025972872972488403,
-          "depth_rel": 0.023098193109035492,
-          "depth_delta_1.01": 0.1891276091337204,
-          "depth_delta_1.25": 0.9989149570465088,
-          "boundary_f1": 1.0
-        }
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
       },
-      "3": {
-        "full": {
-          "pixels": 196608,
-          "point_rel": 0.014281539246439934,
-          "depth_rel": 0.01266799122095108,
-          "depth_delta_1.01": 0.443939208984375,
-          "depth_delta_1.25": 0.9998576045036316,
-          "boundary_f1": 0.9085597991943359
-        },
-        "crop": {
-          "pixels": 36864,
-          "point_rel": 0.021694663912057877,
-          "depth_rel": 0.020378010347485542,
-          "depth_delta_1.01": 0.097412109375,
-          "depth_delta_1.25": 0.9992404580116272,
-          "boundary_f1": 0.9810901284217834
-        },
-        "structure": {
-          "pixels": 18432,
-          "point_rel": 0.02735385298728943,
-          "depth_rel": 0.025159666314721107,
-          "depth_delta_1.01": 0.0545789934694767,
-          "depth_delta_1.25": 0.9984809160232544,
-          "boundary_f1": 1.0
-        }
-      },
-      "5": {
-        "full": {
-          "pixels": 196608,
-          "point_rel": 0.02275889739394188,
-          "depth_rel": 0.019912298768758774,
-          "depth_delta_1.01": 0.2938639521598816,
-          "depth_delta_1.25": 0.9998423457145691,
-          "boundary_f1": 0.9077879190444946
-        },
-        "crop": {
-          "pixels": 36864,
-          "point_rel": 0.031638938933610916,
-          "depth_rel": 0.030202431604266167,
-          "depth_delta_1.01": 0.0195583775639534,
-          "depth_delta_1.25": 0.9991590976715088,
-          "boundary_f1": 0.980215847492218
-        },
-        "structure": {
-          "pixels": 18432,
-          "point_rel": 0.03626330569386482,
-          "depth_rel": 0.03397928178310394,
-          "depth_delta_1.01": 0.02685546875,
-          "depth_delta_1.25": 0.9983181357383728,
-          "boundary_f1": 0.9990916848182678
-        }
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
       }
-    }
-  },
-  "ai_001_001_cam_00_frame.0043": {
-    "split": "train",
-    "cropXYXY": [
-      304,
-      144,
-      496,
-      336
-    ],
-    "selection": {
-      "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-      "rank": 99,
-      "total": 100,
-      "relativeImprovement": -1.0904845698092462,
-      "outcome": "degraded"
     },
     "final": {
       "0": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.004787711426615715,
-          "depth_rel": 0.00400027958676219,
-          "depth_delta_1.01": 0.9396209716796875,
-          "depth_delta_1.25": 0.9999644160270691,
-          "boundary_f1": 0.9230251908302307
+          "point_rel": 0.029300108551979065,
+          "depth_rel": 0.026749467477202415,
+          "depth_delta_1.01": 0.6025238037109375,
+          "depth_delta_1.25": 0.9737650752067566,
+          "boundary_f1": 0.7755647301673889
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.0045098536647856236,
-          "depth_rel": 0.0035907994024455547,
-          "depth_delta_1.01": 0.9433864951133728,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8774754405021667
+          "point_rel": 0.015734881162643433,
+          "depth_rel": 0.015003870241343975,
+          "depth_delta_1.01": 0.5949435830116272,
+          "depth_delta_1.25": 0.9986979365348816,
+          "boundary_f1": 0.981904149055481
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.0054564992897212505,
-          "depth_rel": 0.00430699810385704,
-          "depth_delta_1.01": 0.9289279580116272,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.784363865852356
+          "point_rel": 0.02092318795621395,
+          "depth_rel": 0.0199218038469553,
+          "depth_delta_1.01": 0.3844943642616272,
+          "depth_delta_1.25": 0.9985893964767456,
+          "boundary_f1": 0.7343342304229736
         }
       },
       "1": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.006170165725052357,
-          "depth_rel": 0.005337362177670002,
-          "depth_delta_1.01": 0.8774465322494507,
-          "depth_delta_1.25": 0.9999135732650757,
-          "boundary_f1": 0.9295912981033325
+          "point_rel": 0.026496630162000656,
+          "depth_rel": 0.023922961205244064,
+          "depth_delta_1.01": 0.7694244384765625,
+          "depth_delta_1.25": 0.973907470703125,
+          "boundary_f1": 0.7669374942779541
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.004500741604715586,
-          "depth_rel": 0.003873031120747328,
-          "depth_delta_1.01": 0.9407280683517456,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8932345509529114
+          "point_rel": 0.012429731898009777,
+          "depth_rel": 0.011942746117711067,
+          "depth_delta_1.01": 0.6531032919883728,
+          "depth_delta_1.25": 0.9985893964767456,
+          "boundary_f1": 0.9822723865509033
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.005205121356993914,
-          "depth_rel": 0.004398332443088293,
-          "depth_delta_1.01": 0.9357638955116272,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.812308669090271
+          "point_rel": 0.015285821631550789,
+          "depth_rel": 0.014661562629044056,
+          "depth_delta_1.01": 0.4771592915058136,
+          "depth_delta_1.25": 0.9985893964767456,
+          "boundary_f1": 0.7357971668243408
         }
       },
       "3": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.010008636862039566,
-          "depth_rel": 0.00905069150030613,
-          "depth_delta_1.01": 0.7000936269760132,
-          "depth_delta_1.25": 0.9998983144760132,
-          "boundary_f1": 0.9279015064239502
+          "point_rel": 0.03005310893058777,
+          "depth_rel": 0.026839349418878555,
+          "depth_delta_1.01": 0.5726827383041382,
+          "depth_delta_1.25": 0.9721273183822632,
+          "boundary_f1": 0.7426673173904419
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.006130095571279526,
-          "depth_rel": 0.005683870054781437,
-          "depth_delta_1.01": 0.8462456464767456,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8861830830574036
+          "point_rel": 0.012879161164164543,
+          "depth_rel": 0.012317147105932236,
+          "depth_delta_1.01": 0.6513671875,
+          "depth_delta_1.25": 0.9985080361366272,
+          "boundary_f1": 0.977323055267334
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.005889175925403833,
-          "depth_rel": 0.005260339938104153,
-          "depth_delta_1.01": 0.88037109375,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8194461464881897
+          "point_rel": 0.015871137380599976,
+          "depth_rel": 0.015083006583154202,
+          "depth_delta_1.01": 0.5534396767616272,
+          "depth_delta_1.25": 0.9985893964767456,
+          "boundary_f1": 0.7360261678695679
         }
       },
       "5": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.014806879684329033,
-          "depth_rel": 0.01348140463232994,
-          "depth_delta_1.01": 0.519561767578125,
-          "depth_delta_1.25": 0.9998931884765625,
-          "boundary_f1": 0.9294226765632629
+          "point_rel": 0.03741264343261719,
+          "depth_rel": 0.03323516994714737,
+          "depth_delta_1.01": 0.3151499629020691,
+          "depth_delta_1.25": 0.9719645380973816,
+          "boundary_f1": 0.7419801354408264
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.008964353241026402,
-          "depth_rel": 0.008389410562813282,
-          "depth_delta_1.01": 0.6972113847732544,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8971489071846008
+          "point_rel": 0.01720435731112957,
+          "depth_rel": 0.015976818278431892,
+          "depth_delta_1.01": 0.530626118183136,
+          "depth_delta_1.25": 0.9979383945465088,
+          "boundary_f1": 0.9761753082275391
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.008317436091601849,
-          "depth_rel": 0.007553703151643276,
-          "depth_delta_1.01": 0.74169921875,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8307772874832153
+          "point_rel": 0.02215121127665043,
+          "depth_rel": 0.020571239292621613,
+          "depth_delta_1.01": 0.3582356870174408,
+          "depth_delta_1.25": 0.9985893964767456,
+          "boundary_f1": 0.7429301142692566
         }
       }
     }
@@ -624,11 +759,38 @@
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+      "policy": "人工选择椅腿、窗格、隔断竖杆和吊灯杆；保留三张改善与两张退化样本",
       "rank": 1,
       "total": 16,
       "relativeImprovement": 0.05140928169524958,
-      "outcome": "improved"
+      "outcome": "improved",
+      "structureDescription": "餐椅腿与窗格细杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196601,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
@@ -668,16 +830,16 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.0746045783162117,
-          "depth_rel": 0.067876897752285,
+          "point_rel": 0.07460450381040573,
+          "depth_rel": 0.06787686794996262,
           "depth_delta_1.01": 0.1193576380610466,
           "depth_delta_1.25": 0.9775933027267456,
           "boundary_f1": 0.7593082785606384
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.10614818334579468,
-          "depth_rel": 0.09567345678806305,
+          "point_rel": 0.10614805668592453,
+          "depth_rel": 0.09567337483167648,
           "depth_delta_1.01": 0.041015625,
           "depth_delta_1.25": 0.9758571982383728,
           "boundary_f1": 0.6276881098747253
@@ -702,8 +864,8 @@
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.10536689311265945,
-          "depth_rel": 0.09546475112438202,
+          "point_rel": 0.10536690056324005,
+          "depth_rel": 0.09546475857496262,
           "depth_delta_1.01": 0.0509440116584301,
           "depth_delta_1.25": 0.9337565302848816,
           "boundary_f1": 0.6155135631561279
@@ -720,19 +882,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.09253088384866714,
-          "depth_rel": 0.08664137870073318,
-          "depth_delta_1.01": 0.1037055104970932,
-          "depth_delta_1.25": 0.9265679121017456,
-          "boundary_f1": 0.7122575044631958
+          "point_rel": 0.09241913259029388,
+          "depth_rel": 0.0865512564778328,
+          "depth_delta_1.01": 0.1025933176279068,
+          "depth_delta_1.25": 0.9243977665901184,
+          "boundary_f1": 0.7138530015945435
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.13698726892471313,
-          "depth_rel": 0.12808465957641602,
-          "depth_delta_1.01": 0.0457356758415699,
-          "depth_delta_1.25": 0.8737521767616272,
-          "boundary_f1": 0.5977746844291687
+          "point_rel": 0.13677436113357544,
+          "depth_rel": 0.12791381776332855,
+          "depth_delta_1.01": 0.04345703125,
+          "depth_delta_1.25": 0.8694118857383728,
+          "boundary_f1": 0.5996413826942444
         }
       }
     }
@@ -741,17 +903,44 @@
     "split": "val",
     "cropXYXY": [
       320,
-      144,
+      0,
       512,
-      336
+      192
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+      "policy": "人工选择椅腿、窗格、隔断竖杆和吊灯杆；保留三张改善与两张退化样本",
       "rank": 2,
       "total": 16,
       "relativeImprovement": 0.05096055038889752,
-      "outcome": "improved"
+      "outcome": "improved",
+      "structureDescription": "工业空间隔断竖杆与吊灯杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
@@ -765,19 +954,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.09400097280740738,
-          "depth_rel": 0.08546888828277588,
-          "depth_delta_1.01": 0.0980902761220932,
-          "depth_delta_1.25": 0.9364963173866272,
-          "boundary_f1": 0.884774386882782
+          "point_rel": 0.07073896378278732,
+          "depth_rel": 0.06249828636646271,
+          "depth_delta_1.01": 0.1646864116191864,
+          "depth_delta_1.25": 0.9726833701133728,
+          "boundary_f1": 0.8606501817703247
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.11113543063402176,
-          "depth_rel": 0.10046057403087616,
-          "depth_delta_1.01": 0.0486653633415699,
-          "depth_delta_1.25": 0.9393988847732544,
-          "boundary_f1": 0.9058911204338074
+          "point_rel": 0.08862258493900299,
+          "depth_rel": 0.07767530530691147,
+          "depth_delta_1.01": 0.1337348073720932,
+          "depth_delta_1.25": 0.9710286259651184,
+          "boundary_f1": 0.8171461820602417
         }
       },
       "1": {
@@ -791,19 +980,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.09517880529165268,
-          "depth_rel": 0.0864001214504242,
-          "depth_delta_1.01": 0.0982530415058136,
-          "depth_delta_1.25": 0.92041015625,
-          "boundary_f1": 0.8818331956863403
+          "point_rel": 0.07283622771501541,
+          "depth_rel": 0.06437575817108154,
+          "depth_delta_1.01": 0.1420627236366272,
+          "depth_delta_1.25": 0.955430805683136,
+          "boundary_f1": 0.8516582250595093
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.11386112123727798,
-          "depth_rel": 0.10243719071149826,
-          "depth_delta_1.01": 0.0528971366584301,
-          "depth_delta_1.25": 0.9072808027267456,
-          "boundary_f1": 0.9033297896385193
+          "point_rel": 0.09342912584543228,
+          "depth_rel": 0.08142001181840897,
+          "depth_delta_1.01": 0.1219075545668602,
+          "depth_delta_1.25": 0.9373372197151184,
+          "boundary_f1": 0.8082150220870972
         }
       },
       "3": {
@@ -817,19 +1006,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.10113655030727386,
-          "depth_rel": 0.09108822792768478,
-          "depth_delta_1.01": 0.0845269113779068,
-          "depth_delta_1.25": 0.9195149540901184,
-          "boundary_f1": 0.8573879599571228
+          "point_rel": 0.07964704185724258,
+          "depth_rel": 0.07037905603647232,
+          "depth_delta_1.01": 0.1163194477558136,
+          "depth_delta_1.25": 0.9509006142616272,
+          "boundary_f1": 0.8340198993682861
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.12344176322221756,
-          "depth_rel": 0.10950694233179092,
-          "depth_delta_1.01": 0.05322265625,
-          "depth_delta_1.25": 0.9067925214767456,
-          "boundary_f1": 0.8804100155830383
+          "point_rel": 0.10578347742557526,
+          "depth_rel": 0.09179852902889252,
+          "depth_delta_1.01": 0.0906032994389534,
+          "depth_delta_1.25": 0.9312065839767456,
+          "boundary_f1": 0.7956247329711914
         }
       },
       "5": {
@@ -843,19 +1032,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.11069364845752716,
-          "depth_rel": 0.09930484741926193,
-          "depth_delta_1.01": 0.070692278444767,
-          "depth_delta_1.25": 0.914903461933136,
-          "boundary_f1": 0.8395500183105469
+          "point_rel": 0.08779815584421158,
+          "depth_rel": 0.07774954289197922,
+          "depth_delta_1.01": 0.0995551198720932,
+          "depth_delta_1.25": 0.9500054121017456,
+          "boundary_f1": 0.8147109746932983
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.13070161640644073,
-          "depth_rel": 0.11430953443050385,
-          "depth_delta_1.01": 0.0560438372194767,
-          "depth_delta_1.25": 0.90771484375,
-          "boundary_f1": 0.8553736805915833
+          "point_rel": 0.11706166714429855,
+          "depth_rel": 0.1016433909535408,
+          "depth_delta_1.01": 0.0677083358168602,
+          "depth_delta_1.25": 0.9294704794883728,
+          "boundary_f1": 0.7759109735488892
         }
       }
     }
@@ -863,18 +1052,45 @@
   "ai_047_001_cam_00_frame.0028": {
     "split": "val",
     "cropXYXY": [
-      256,
+      320,
       128,
-      448,
+      512,
       320
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+      "policy": "人工选择椅腿、窗格、隔断竖杆和吊灯杆；保留三张改善与两张退化样本",
       "rank": 3,
       "total": 16,
       "relativeImprovement": 0.042386974795938726,
-      "outcome": "improved"
+      "outcome": "improved",
+      "structureDescription": "隔断、椅背与桌椅支撑杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
@@ -888,19 +1104,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.09203874319791794,
-          "depth_rel": 0.08949647098779678,
-          "depth_delta_1.01": 0.0781792551279068,
-          "depth_delta_1.25": 0.948350727558136,
-          "boundary_f1": 0.8968846201896667
+          "point_rel": 0.1423509120941162,
+          "depth_rel": 0.13876482844352722,
+          "depth_delta_1.01": 0.0400390625,
+          "depth_delta_1.25": 0.8872341513633728,
+          "boundary_f1": 0.9237645268440247
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.11594254523515701,
-          "depth_rel": 0.1123482957482338,
-          "depth_delta_1.01": 0.0671115443110466,
-          "depth_delta_1.25": 0.9411892294883728,
-          "boundary_f1": 0.820549488067627
+          "point_rel": 0.18313241004943848,
+          "depth_rel": 0.17944984138011932,
+          "depth_delta_1.01": 0.00927734375,
+          "depth_delta_1.25": 0.8302409052848816,
+          "boundary_f1": 0.7913475632667542
         }
       },
       "1": {
@@ -914,19 +1130,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.08841333538293839,
-          "depth_rel": 0.08583859354257584,
-          "depth_delta_1.01": 0.084852434694767,
-          "depth_delta_1.25": 0.9481337070465088,
-          "boundary_f1": 0.8893401026725769
+          "point_rel": 0.13728059828281403,
+          "depth_rel": 0.13363410532474518,
+          "depth_delta_1.01": 0.0443522147834301,
+          "depth_delta_1.25": 0.8958876132965088,
+          "boundary_f1": 0.9178742170333862
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.11003607511520386,
-          "depth_rel": 0.10637269914150238,
-          "depth_delta_1.01": 0.0735134556889534,
-          "depth_delta_1.25": 0.9390190839767456,
-          "boundary_f1": 0.8122029900550842
+          "point_rel": 0.17761939764022827,
+          "depth_rel": 0.17366617918014526,
+          "depth_delta_1.01": 0.009060329757630825,
+          "depth_delta_1.25": 0.8475477695465088,
+          "boundary_f1": 0.7890174984931946
         }
       },
       "3": {
@@ -940,19 +1156,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.08181504905223846,
-          "depth_rel": 0.07909557223320007,
-          "depth_delta_1.01": 0.1005045548081398,
-          "depth_delta_1.25": 0.9482693076133728,
-          "boundary_f1": 0.8602327108383179
+          "point_rel": 0.12645907700061798,
+          "depth_rel": 0.1224604994058609,
+          "depth_delta_1.01": 0.0500217005610466,
+          "depth_delta_1.25": 0.9067925214767456,
+          "boundary_f1": 0.8900057673454285
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.09871235489845276,
-          "depth_rel": 0.09484740346670151,
-          "depth_delta_1.01": 0.09326171875,
-          "depth_delta_1.25": 0.9392361044883728,
-          "boundary_f1": 0.7725955843925476
+          "point_rel": 0.16240036487579346,
+          "depth_rel": 0.15773619711399078,
+          "depth_delta_1.01": 0.0160047747194767,
+          "depth_delta_1.25": 0.87109375,
+          "boundary_f1": 0.7656691074371338
         }
       },
       "5": {
@@ -966,142 +1182,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.07937202602624893,
-          "depth_rel": 0.07657869905233383,
-          "depth_delta_1.01": 0.0895724818110466,
-          "depth_delta_1.25": 0.9538031816482544,
-          "boundary_f1": 0.8460406064987183
+          "point_rel": 0.11934006214141846,
+          "depth_rel": 0.1149023100733757,
+          "depth_delta_1.01": 0.0561794713139534,
+          "depth_delta_1.25": 0.9271918535232544,
+          "boundary_f1": 0.8770360350608826
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.09466370195150375,
-          "depth_rel": 0.09064732491970062,
-          "depth_delta_1.01": 0.0782877579331398,
-          "depth_delta_1.25": 0.9494357705116272,
-          "boundary_f1": 0.7504074573516846
-        }
-      }
-    }
-  },
-  "ai_043_002_cam_00_frame.0042": {
-    "split": "val",
-    "cropXYXY": [
-      192,
-      160,
-      384,
-      352
-    ],
-    "selection": {
-      "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-      "rank": 16,
-      "total": 16,
-      "relativeImprovement": -0.367201161227823,
-      "outcome": "degraded"
-    },
-    "final": {
-      "0": {
-        "full": {
-          "pixels": 196605,
-          "point_rel": 0.01885826885700226,
-          "depth_rel": 0.017650365829467773,
-          "depth_delta_1.01": 0.37498027086257935,
-          "depth_delta_1.25": 0.9942218661308289,
-          "boundary_f1": 0.8376168012619019
-        },
-        "crop": {
-          "pixels": 36864,
-          "point_rel": 0.03300784155726433,
-          "depth_rel": 0.032074373215436935,
-          "depth_delta_1.01": 0.2585178017616272,
-          "depth_delta_1.25": 0.9764811396598816,
-          "boundary_f1": 0.8806238174438477
-        },
-        "structure": {
-          "pixels": 18432,
-          "point_rel": 0.027285359799861908,
-          "depth_rel": 0.026280978694558144,
-          "depth_delta_1.01": 0.3231336772441864,
-          "depth_delta_1.25": 0.9908854365348816,
-          "boundary_f1": 0.690997838973999
-        }
-      },
-      "1": {
-        "full": {
-          "pixels": 196605,
-          "point_rel": 0.020631322637200356,
-          "depth_rel": 0.01923949085175991,
-          "depth_delta_1.01": 0.30804404616355896,
-          "depth_delta_1.25": 0.994150698184967,
-          "boundary_f1": 0.8405659794807434
-        },
-        "crop": {
-          "pixels": 36864,
-          "point_rel": 0.03234820440411568,
-          "depth_rel": 0.0314500518143177,
-          "depth_delta_1.01": 0.2709418535232544,
-          "depth_delta_1.25": 0.9763725996017456,
-          "boundary_f1": 0.8801945447921753
-        },
-        "structure": {
-          "pixels": 18432,
-          "point_rel": 0.027170218527317047,
-          "depth_rel": 0.026184141635894775,
-          "depth_delta_1.01": 0.3404405415058136,
-          "depth_delta_1.25": 0.9904513955116272,
-          "boundary_f1": 0.6968969702720642
-        }
-      },
-      "3": {
-        "full": {
-          "pixels": 196605,
-          "point_rel": 0.025783047080039978,
-          "depth_rel": 0.023939775303006172,
-          "depth_delta_1.01": 0.29710331559181213,
-          "depth_delta_1.25": 0.9942015409469604,
-          "boundary_f1": 0.8292613625526428
-        },
-        "crop": {
-          "pixels": 36864,
-          "point_rel": 0.034397948533296585,
-          "depth_rel": 0.03347059711813927,
-          "depth_delta_1.01": 0.2865125834941864,
-          "depth_delta_1.25": 0.9767795205116272,
-          "boundary_f1": 0.8698694109916687
-        },
-        "structure": {
-          "pixels": 18432,
-          "point_rel": 0.02950335294008255,
-          "depth_rel": 0.028461748734116554,
-          "depth_delta_1.01": 0.3407660722732544,
-          "depth_delta_1.25": 0.9895833134651184,
-          "boundary_f1": 0.6813872456550598
-        }
-      },
-      "5": {
-        "full": {
-          "pixels": 196605,
-          "point_rel": 0.032600462436676025,
-          "depth_rel": 0.030203823000192642,
-          "depth_delta_1.01": 0.236275777220726,
-          "depth_delta_1.25": 0.9941608309745789,
-          "boundary_f1": 0.8240057229995728
-        },
-        "crop": {
-          "pixels": 36864,
-          "point_rel": 0.03797383978962898,
-          "depth_rel": 0.036978501826524734,
-          "depth_delta_1.01": 0.2586805522441864,
-          "depth_delta_1.25": 0.9767795205116272,
-          "boundary_f1": 0.8599262237548828
-        },
-        "structure": {
-          "pixels": 18432,
-          "point_rel": 0.033546268939971924,
-          "depth_rel": 0.03239193931221962,
-          "depth_delta_1.01": 0.303765207529068,
-          "depth_delta_1.25": 0.9890950322151184,
-          "boundary_f1": 0.6710655093193054
+          "point_rel": 0.15602560341358185,
+          "depth_rel": 0.15030735731124878,
+          "depth_delta_1.01": 0.02978515625,
+          "depth_delta_1.25": 0.8963758945465088,
+          "boundary_f1": 0.745849609375
         }
       }
     }
@@ -1109,18 +1202,45 @@
   "ai_043_002_cam_00_frame.0000": {
     "split": "val",
     "cropXYXY": [
-      272,
-      192,
-      464,
-      384
+      288,
+      64,
+      480,
+      256
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+      "policy": "人工选择椅腿、窗格、隔断竖杆和吊灯杆；保留三张改善与两张退化样本",
       "rank": 15,
       "total": 16,
       "relativeImprovement": -0.25879080017790546,
-      "outcome": "degraded"
+      "outcome": "degraded",
+      "structureDescription": "餐椅腿和密集窗格"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196606,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18434,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
@@ -1134,19 +1254,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.03219989314675331,
-          "depth_rel": 0.029485080391168594,
-          "depth_delta_1.01": 0.3991970419883728,
-          "depth_delta_1.25": 0.982286274433136,
-          "boundary_f1": 0.9274302124977112
+          "point_rel": 0.024122094735503197,
+          "depth_rel": 0.022742340341210365,
+          "depth_delta_1.01": 0.3874240517616272,
+          "depth_delta_1.25": 0.989013671875,
+          "boundary_f1": 0.8405547142028809
         },
         "structure": {
-          "pixels": 18432,
-          "point_rel": 0.02222588285803795,
-          "depth_rel": 0.01980167254805565,
-          "depth_delta_1.01": 0.4346788227558136,
-          "depth_delta_1.25": 0.99755859375,
-          "boundary_f1": 0.7538576126098633
+          "pixels": 18434,
+          "point_rel": 0.037158410996198654,
+          "depth_rel": 0.03527161851525307,
+          "depth_delta_1.01": 0.2612021267414093,
+          "depth_delta_1.25": 0.9793316721916199,
+          "boundary_f1": 0.7914262413978577
         }
       },
       "1": {
@@ -1160,19 +1280,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.030930012464523315,
-          "depth_rel": 0.028745518997311592,
-          "depth_delta_1.01": 0.408013254404068,
-          "depth_delta_1.25": 0.9814453125,
-          "boundary_f1": 0.9170016050338745
+          "point_rel": 0.024821065366268158,
+          "depth_rel": 0.023318840190768242,
+          "depth_delta_1.01": 0.3638509213924408,
+          "depth_delta_1.25": 0.9885796308517456,
+          "boundary_f1": 0.820214569568634
         },
         "structure": {
-          "pixels": 18432,
-          "point_rel": 0.020997323095798492,
-          "depth_rel": 0.019250329583883286,
-          "depth_delta_1.01": 0.46630859375,
-          "depth_delta_1.25": 0.997178852558136,
-          "boundary_f1": 0.7538197636604309
+          "pixels": 18434,
+          "point_rel": 0.03665713965892792,
+          "depth_rel": 0.034777916967868805,
+          "depth_delta_1.01": 0.2922860085964203,
+          "depth_delta_1.25": 0.9783552289009094,
+          "boundary_f1": 0.7702589631080627
         }
       },
       "3": {
@@ -1186,19 +1306,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.03537996485829353,
-          "depth_rel": 0.03308838978409767,
-          "depth_delta_1.01": 0.3239203691482544,
-          "depth_delta_1.25": 0.977403461933136,
-          "boundary_f1": 0.8955000042915344
+          "point_rel": 0.029532743617892265,
+          "depth_rel": 0.027587885037064552,
+          "depth_delta_1.01": 0.2911783754825592,
+          "depth_delta_1.25": 0.9848361611366272,
+          "boundary_f1": 0.7973308563232422
         },
         "structure": {
-          "pixels": 18432,
-          "point_rel": 0.027538776397705078,
-          "depth_rel": 0.025408590212464333,
-          "depth_delta_1.01": 0.3395724892616272,
-          "depth_delta_1.25": 0.996202290058136,
-          "boundary_f1": 0.7418846487998962
+          "pixels": 18434,
+          "point_rel": 0.040793661028146744,
+          "depth_rel": 0.03859016299247742,
+          "depth_delta_1.01": 0.24053379893302917,
+          "depth_delta_1.25": 0.9708148241043091,
+          "boundary_f1": 0.7522475719451904
         }
       },
       "5": {
@@ -1212,142 +1332,169 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.040986787527799606,
-          "depth_rel": 0.03827909380197525,
-          "depth_delta_1.01": 0.2805446982383728,
-          "depth_delta_1.25": 0.9763997197151184,
-          "boundary_f1": 0.8822219967842102
+          "point_rel": 0.03598989173769951,
+          "depth_rel": 0.03359900042414665,
+          "depth_delta_1.01": 0.2161729633808136,
+          "depth_delta_1.25": 0.9841579794883728,
+          "boundary_f1": 0.7739339470863342
         },
         "structure": {
-          "pixels": 18432,
-          "point_rel": 0.033950891345739365,
-          "depth_rel": 0.031191885471343994,
-          "depth_delta_1.01": 0.3268771767616272,
-          "depth_delta_1.25": 0.9954969882965088,
-          "boundary_f1": 0.7283675670623779
+          "pixels": 18434,
+          "point_rel": 0.046961259096860886,
+          "depth_rel": 0.04444942623376846,
+          "depth_delta_1.01": 0.21020939946174622,
+          "depth_delta_1.25": 0.9694586396217346,
+          "boundary_f1": 0.7234109044075012
         }
       }
     }
   },
-  "ai_050_001_cam_00_frame.0085": {
-    "split": "test",
+  "ai_047_001_cam_00_frame.0071": {
+    "split": "val",
     "cropXYXY": [
-      160,
-      192,
-      352,
-      384
+      320,
+      96,
+      512,
+      288
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-      "rank": 1,
+      "policy": "人工选择椅腿、窗格、隔断竖杆和吊灯杆；保留三张改善与两张退化样本",
+      "rank": 12,
       "total": 16,
-      "relativeImprovement": 0.11639108651080217,
-      "outcome": "improved"
+      "relativeImprovement": -0.10135665840661237,
+      "outcome": "degraded",
+      "structureDescription": "工业隔断竖杆与吊灯悬杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.05630333721637726,
-          "depth_rel": 0.049265678972005844,
-          "depth_delta_1.01": 0.1667124480009079,
-          "depth_delta_1.25": 0.9792734980583191,
-          "boundary_f1": 0.8414084315299988
+          "point_rel": 0.10972245782613754,
+          "depth_rel": 0.10336192697286606,
+          "depth_delta_1.01": 0.0717264860868454,
+          "depth_delta_1.25": 0.9116872549057007,
+          "boundary_f1": 0.8677713871002197
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.06476054340600967,
-          "depth_rel": 0.06056961044669151,
-          "depth_delta_1.01": 0.2158203125,
-          "depth_delta_1.25": 0.9425455927848816,
-          "boundary_f1": 0.9049597382545471
+          "point_rel": 0.1773701310157776,
+          "depth_rel": 0.17285701632499695,
+          "depth_delta_1.01": 0.0055338540114462376,
+          "depth_delta_1.25": 0.7998589277267456,
+          "boundary_f1": 0.7957902550697327
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.08528641611337662,
-          "depth_rel": 0.07787933945655823,
-          "depth_delta_1.01": 0.3601345419883728,
-          "depth_delta_1.25": 0.9186198115348816,
-          "boundary_f1": 0.8710617423057556
+          "point_rel": 0.15517957508563995,
+          "depth_rel": 0.1516411304473877,
+          "depth_delta_1.01": 0.0045572915114462376,
+          "depth_delta_1.25": 0.9564887285232544,
+          "boundary_f1": 0.7269856929779053
         }
       },
       "1": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.05249299854040146,
-          "depth_rel": 0.046167366206645966,
-          "depth_delta_1.01": 0.1923980712890625,
-          "depth_delta_1.25": 0.9778798818588257,
-          "boundary_f1": 0.8381087779998779
+          "point_rel": 0.1152711734175682,
+          "depth_rel": 0.10825996100902557,
+          "depth_delta_1.01": 0.0616912841796875,
+          "depth_delta_1.25": 0.9125620722770691,
+          "boundary_f1": 0.8654992580413818
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.06697676330804825,
-          "depth_rel": 0.0625229924917221,
-          "depth_delta_1.01": 0.2312554270029068,
-          "depth_delta_1.25": 0.93505859375,
-          "boundary_f1": 0.9076730012893677
+          "point_rel": 0.1792532056570053,
+          "depth_rel": 0.1746239811182022,
+          "depth_delta_1.01": 0.005099826492369175,
+          "depth_delta_1.25": 0.7995876669883728,
+          "boundary_f1": 0.7924923896789551
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.09200350195169449,
-          "depth_rel": 0.08399581909179688,
-          "depth_delta_1.01": 0.3882921040058136,
-          "depth_delta_1.25": 0.9033203125,
-          "boundary_f1": 0.8723148703575134
+          "point_rel": 0.15372519195079803,
+          "depth_rel": 0.15011848509311676,
+          "depth_delta_1.01": 0.0040147569961845875,
+          "depth_delta_1.25": 0.960069477558136,
+          "boundary_f1": 0.7169652581214905
         }
       },
       "3": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.049750130623579025,
-          "depth_rel": 0.043114274740219116,
-          "depth_delta_1.01": 0.2921956479549408,
-          "depth_delta_1.25": 0.9750875234603882,
-          "boundary_f1": 0.8160150647163391
+          "point_rel": 0.1208435595035553,
+          "depth_rel": 0.11266886442899704,
+          "depth_delta_1.01": 0.0500386580824852,
+          "depth_delta_1.25": 0.9101715087890625,
+          "boundary_f1": 0.8551806807518005
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.07253466546535492,
-          "depth_rel": 0.06752943992614746,
-          "depth_delta_1.01": 0.2630479633808136,
-          "depth_delta_1.25": 0.9187282919883728,
-          "boundary_f1": 0.8994321227073669
+          "point_rel": 0.17814703285694122,
+          "depth_rel": 0.17316770553588867,
+          "depth_delta_1.01": 0.0055067273788154125,
+          "depth_delta_1.25": 0.804443359375,
+          "boundary_f1": 0.7820127606391907
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.106791190803051,
-          "depth_rel": 0.09766006469726562,
-          "depth_delta_1.01": 0.38134765625,
-          "depth_delta_1.25": 0.8699544072151184,
-          "boundary_f1": 0.865691602230072
+          "point_rel": 0.15142332017421722,
+          "depth_rel": 0.14746807515621185,
+          "depth_delta_1.01": 0.0040690102614462376,
+          "depth_delta_1.25": 0.9565972089767456,
+          "boundary_f1": 0.7074361443519592
         }
       },
       "5": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.05147863179445267,
-          "depth_rel": 0.044494859874248505,
-          "depth_delta_1.01": 0.313262939453125,
-          "depth_delta_1.25": 0.9747721552848816,
-          "boundary_f1": 0.7934170961380005
+          "point_rel": 0.12402936071157455,
+          "depth_rel": 0.11478914320468903,
+          "depth_delta_1.01": 0.0489858016371727,
+          "depth_delta_1.25": 0.9076385498046875,
+          "boundary_f1": 0.8392918109893799
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.07419051975011826,
-          "depth_rel": 0.06853276491165161,
-          "depth_delta_1.01": 0.3196614682674408,
-          "depth_delta_1.25": 0.9165310263633728,
-          "boundary_f1": 0.8816410303115845
+          "point_rel": 0.17563065886497498,
+          "depth_rel": 0.16996875405311584,
+          "depth_delta_1.01": 0.0055338540114462376,
+          "depth_delta_1.25": 0.7985568642616272,
+          "boundary_f1": 0.7612677216529846
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.1115678921341896,
-          "depth_rel": 0.10121183842420578,
-          "depth_delta_1.01": 0.35107421875,
-          "depth_delta_1.25": 0.865234375,
-          "boundary_f1": 0.8593856692314148
+          "point_rel": 0.14600007236003876,
+          "depth_rel": 0.14097459614276886,
+          "depth_delta_1.01": 0.0062391492538154125,
+          "depth_delta_1.25": 0.9324001669883728,
+          "boundary_f1": 0.6910379528999329
         }
       }
     }
@@ -1356,17 +1503,44 @@
     "split": "test",
     "cropXYXY": [
       0,
-      176,
       192,
-      368
+      192,
+      384
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+      "policy": "人工选择楼梯栏杆、桌椅腿、金属椅背和吊灯杆；保留三张改善与两张退化样本",
       "rank": 2,
       "total": 16,
       "relativeImprovement": 0.049706670986421085,
-      "outcome": "improved"
+      "outcome": "improved",
+      "structureDescription": "楼梯扶手与栏杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
@@ -1380,19 +1554,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.17035619914531708,
-          "depth_rel": 0.14562413096427917,
-          "depth_delta_1.01": 0.0604926235973835,
-          "depth_delta_1.25": 0.842149555683136,
-          "boundary_f1": 0.8198476433753967
+          "point_rel": 0.16635662317276,
+          "depth_rel": 0.1418936401605606,
+          "depth_delta_1.01": 0.0673828125,
+          "depth_delta_1.25": 0.8416883945465088,
+          "boundary_f1": 0.8086495995521545
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.1621852070093155,
-          "depth_rel": 0.1277853101491928,
-          "depth_delta_1.01": 0.1168077290058136,
-          "depth_delta_1.25": 0.7927517294883728,
-          "boundary_f1": 0.7209454774856567
+          "point_rel": 0.14854927361011505,
+          "depth_rel": 0.11677446961402893,
+          "depth_delta_1.01": 0.129177525639534,
+          "depth_delta_1.25": 0.826171875,
+          "boundary_f1": 0.7022382616996765
         }
       },
       "1": {
@@ -1406,19 +1580,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.16007809340953827,
-          "depth_rel": 0.13650144636631012,
-          "depth_delta_1.01": 0.0393608957529068,
-          "depth_delta_1.25": 0.8491753339767456,
-          "boundary_f1": 0.8251047134399414
+          "point_rel": 0.15710383653640747,
+          "depth_rel": 0.13380205631256104,
+          "depth_delta_1.01": 0.0412326380610466,
+          "depth_delta_1.25": 0.8451063632965088,
+          "boundary_f1": 0.8149563670158386
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.15099622309207916,
-          "depth_rel": 0.11845927685499191,
-          "depth_delta_1.01": 0.0706380233168602,
-          "depth_delta_1.25": 0.79541015625,
-          "boundary_f1": 0.7378091812133789
+          "point_rel": 0.14473676681518555,
+          "depth_rel": 0.1143164113163948,
+          "depth_delta_1.01": 0.0676540806889534,
+          "depth_delta_1.25": 0.81982421875,
+          "boundary_f1": 0.7108736038208008
         }
       },
       "3": {
@@ -1432,19 +1606,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.1606224924325943,
-          "depth_rel": 0.13715849816799164,
-          "depth_delta_1.01": 0.017333984375,
-          "depth_delta_1.25": 0.853868305683136,
-          "boundary_f1": 0.7948336601257324
+          "point_rel": 0.16362686455249786,
+          "depth_rel": 0.1396869421005249,
+          "depth_delta_1.01": 0.02115885354578495,
+          "depth_delta_1.25": 0.8398708701133728,
+          "boundary_f1": 0.7805606722831726
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.1675696074962616,
-          "depth_rel": 0.1337854415178299,
-          "depth_delta_1.01": 0.0282118059694767,
-          "depth_delta_1.25": 0.781358540058136,
-          "boundary_f1": 0.6780613660812378
+          "point_rel": 0.17386694252490997,
+          "depth_rel": 0.14047585427761078,
+          "depth_delta_1.01": 0.0352647565305233,
+          "depth_delta_1.25": 0.7771809697151184,
+          "boundary_f1": 0.6492671370506287
         }
       },
       "5": {
@@ -1458,19 +1632,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.15274731814861298,
-          "depth_rel": 0.12856334447860718,
-          "depth_delta_1.01": 0.01944986917078495,
-          "depth_delta_1.25": 0.8733452558517456,
-          "boundary_f1": 0.7710010409355164
+          "point_rel": 0.1634799987077713,
+          "depth_rel": 0.13787589967250824,
+          "depth_delta_1.01": 0.02251519076526165,
+          "depth_delta_1.25": 0.8472222089767456,
+          "boundary_f1": 0.7456936240196228
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.1669260859489441,
-          "depth_rel": 0.131815567612648,
-          "depth_delta_1.01": 0.02766927145421505,
-          "depth_delta_1.25": 0.8186848759651184,
-          "boundary_f1": 0.6545860767364502
+          "point_rel": 0.17775635421276093,
+          "depth_rel": 0.14227601885795593,
+          "depth_delta_1.01": 0.033203125,
+          "depth_delta_1.25": 0.817491352558136,
+          "boundary_f1": 0.5872194170951843
         }
       }
     }
@@ -1478,18 +1652,45 @@
   "ai_050_001_cam_00_frame.0042": {
     "split": "test",
     "cropXYXY": [
-      16,
+      96,
       192,
-      208,
+      288,
       384
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+      "policy": "人工选择楼梯栏杆、桌椅腿、金属椅背和吊灯杆；保留三张改善与两张退化样本",
       "rank": 3,
       "total": 16,
       "relativeImprovement": 0.0301960581756052,
-      "outcome": "improved"
+      "outcome": "improved",
+      "structureDescription": "桌腿、椅腿与横向支架"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
@@ -1503,19 +1704,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.059688687324523926,
-          "depth_rel": 0.05826589837670326,
-          "depth_delta_1.01": 0.1159396693110466,
-          "depth_delta_1.25": 0.948106586933136,
-          "boundary_f1": 0.8288212418556213
+          "point_rel": 0.06421450525522232,
+          "depth_rel": 0.06321290135383606,
+          "depth_delta_1.01": 0.1841362863779068,
+          "depth_delta_1.25": 0.9452582597732544,
+          "boundary_f1": 0.8356972932815552
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.09955775737762451,
-          "depth_rel": 0.09803042560815811,
-          "depth_delta_1.01": 0.0011393228778615594,
-          "depth_delta_1.25": 0.8962131142616272,
-          "boundary_f1": 0.8007040619850159
+          "point_rel": 0.10864945501089096,
+          "depth_rel": 0.10754342377185822,
+          "depth_delta_1.01": 0.0008138020639307797,
+          "depth_delta_1.25": 0.8905165195465088,
+          "boundary_f1": 0.8315311074256897
         }
       },
       "1": {
@@ -1529,19 +1730,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.06044997274875641,
-          "depth_rel": 0.05882355943322182,
-          "depth_delta_1.01": 0.1169704869389534,
-          "depth_delta_1.25": 0.9440646767616272,
-          "boundary_f1": 0.8187562227249146
+          "point_rel": 0.06444101780653,
+          "depth_rel": 0.06328678876161575,
+          "depth_delta_1.01": 0.2060004323720932,
+          "depth_delta_1.25": 0.9419758915901184,
+          "boundary_f1": 0.8285741806030273
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.10172170400619507,
-          "depth_rel": 0.10001592338085175,
-          "depth_delta_1.01": 0.00146484375,
-          "depth_delta_1.25": 0.8881293535232544,
-          "boundary_f1": 0.7777523398399353
+          "point_rel": 0.1102537289261818,
+          "depth_rel": 0.10902612656354904,
+          "depth_delta_1.01": 0.0008138020639307797,
+          "depth_delta_1.25": 0.8839518427848816,
+          "boundary_f1": 0.8277214765548706
         }
       },
       "3": {
@@ -1555,19 +1756,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.06378570944070816,
-          "depth_rel": 0.06158851832151413,
-          "depth_delta_1.01": 0.1471625417470932,
-          "depth_delta_1.25": 0.9417046308517456,
-          "boundary_f1": 0.8141856789588928
+          "point_rel": 0.06623256206512451,
+          "depth_rel": 0.06471271812915802,
+          "depth_delta_1.01": 0.270562082529068,
+          "depth_delta_1.25": 0.940538227558136,
+          "boundary_f1": 0.8269745111465454
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.10711191594600677,
-          "depth_rel": 0.10506900399923325,
-          "depth_delta_1.01": 0.0060221352614462376,
-          "depth_delta_1.25": 0.883409321308136,
-          "boundary_f1": 0.7605663537979126
+          "point_rel": 0.11437082290649414,
+          "depth_rel": 0.1130795106291771,
+          "depth_delta_1.01": 0.0015190972480922937,
+          "depth_delta_1.25": 0.8810763955116272,
+          "boundary_f1": 0.8224532604217529
         }
       },
       "5": {
@@ -1581,142 +1782,169 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.06667206436395645,
-          "depth_rel": 0.06348971277475357,
-          "depth_delta_1.01": 0.1573350727558136,
-          "depth_delta_1.25": 0.9305827021598816,
-          "boundary_f1": 0.811093807220459
+          "point_rel": 0.06891463696956635,
+          "depth_rel": 0.06685956567525864,
+          "depth_delta_1.01": 0.2642686665058136,
+          "depth_delta_1.25": 0.9399142861366272,
+          "boundary_f1": 0.8280677199363708
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.11170898377895355,
-          "depth_rel": 0.1089683249592781,
-          "depth_delta_1.01": 0.009385851211845875,
-          "depth_delta_1.25": 0.8611653447151184,
-          "boundary_f1": 0.7560882568359375
+          "point_rel": 0.11919254809617996,
+          "depth_rel": 0.11763887852430344,
+          "depth_delta_1.01": 0.0023328992538154125,
+          "depth_delta_1.25": 0.8798285722732544,
+          "boundary_f1": 0.8261120915412903
         }
       }
     }
   },
-  "ai_046_001_cam_00_frame.0028": {
+  "ai_046_001_cam_00_frame.0071": {
     "split": "test",
     "cropXYXY": [
-      224,
-      80,
-      416,
-      272
+      96,
+      32,
+      288,
+      224
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-      "rank": 16,
+      "policy": "人工选择楼梯栏杆、桌椅腿、金属椅背和吊灯杆；保留三张改善与两张退化样本",
+      "rank": 6,
       "total": 16,
-      "relativeImprovement": -0.4342975364649447,
-      "outcome": "degraded"
+      "relativeImprovement": 0.001452759449662161,
+      "outcome": "improved",
+      "structureDescription": "金属椅背、枝条和吊灯杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.026591707020998,
-          "depth_rel": 0.02199903130531311,
-          "depth_delta_1.01": 0.459869384765625,
-          "depth_delta_1.25": 0.9983673095703125,
-          "boundary_f1": 0.8444201350212097
+          "point_rel": 0.04320308566093445,
+          "depth_rel": 0.03897487744688988,
+          "depth_delta_1.01": 0.1362711638212204,
+          "depth_delta_1.25": 0.9740397334098816,
+          "boundary_f1": 0.7450582385063171
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.014879819937050343,
-          "depth_rel": 0.014387852512300014,
-          "depth_delta_1.01": 0.5132378339767456,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8448669910430908
+          "point_rel": 0.0849858820438385,
+          "depth_rel": 0.08195115625858307,
+          "depth_delta_1.01": 0.1495496928691864,
+          "depth_delta_1.25": 0.8959418535232544,
+          "boundary_f1": 0.660719633102417
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.019717711955308914,
-          "depth_rel": 0.01934349536895752,
-          "depth_delta_1.01": 0.3143988847732544,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.38531970977783203
+          "point_rel": 0.06036161258816719,
+          "depth_rel": 0.057779114693403244,
+          "depth_delta_1.01": 0.1708441823720932,
+          "depth_delta_1.25": 0.9712456464767456,
+          "boundary_f1": 0.43440061807632446
         }
       },
       "1": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.02990630827844143,
-          "depth_rel": 0.024675382301211357,
-          "depth_delta_1.01": 0.3296000361442566,
-          "depth_delta_1.25": 0.9983927607536316,
-          "boundary_f1": 0.8385723829269409
+          "point_rel": 0.04193952679634094,
+          "depth_rel": 0.038707613945007324,
+          "depth_delta_1.01": 0.2002054899930954,
+          "depth_delta_1.25": 0.9741363525390625,
+          "boundary_f1": 0.7400742769241333
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.015011151321232319,
-          "depth_rel": 0.014184867031872272,
-          "depth_delta_1.01": 0.4701334536075592,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8503726720809937
+          "point_rel": 0.08488181233406067,
+          "depth_rel": 0.08195693790912628,
+          "depth_delta_1.01": 0.1356065571308136,
+          "depth_delta_1.25": 0.896728515625,
+          "boundary_f1": 0.6560379266738892
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.018421897664666176,
-          "depth_rel": 0.017780207097530365,
-          "depth_delta_1.01": 0.3131510317325592,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.40327727794647217
+          "point_rel": 0.0590999536216259,
+          "depth_rel": 0.05692674219608307,
+          "depth_delta_1.01": 0.1691080778837204,
+          "depth_delta_1.25": 0.9733073115348816,
+          "boundary_f1": 0.436766117811203
         }
       },
       "3": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.038140419870615005,
-          "depth_rel": 0.030503366142511368,
-          "depth_delta_1.01": 0.3137766718864441,
-          "depth_delta_1.25": 0.9984283447265625,
-          "boundary_f1": 0.8280777931213379
+          "point_rel": 0.04314032196998596,
+          "depth_rel": 0.04018474742770195,
+          "depth_delta_1.01": 0.243377685546875,
+          "depth_delta_1.25": 0.9734090566635132,
+          "boundary_f1": 0.7324869632720947
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.01768502965569496,
-          "depth_rel": 0.016322921961545944,
-          "depth_delta_1.01": 0.3925510048866272,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8403618335723877
+          "point_rel": 0.08900095522403717,
+          "depth_rel": 0.08586720377206802,
+          "depth_delta_1.01": 0.1240776926279068,
+          "depth_delta_1.25": 0.8940700888633728,
+          "boundary_f1": 0.653378963470459
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.020046574994921684,
-          "depth_rel": 0.018865695223212242,
-          "depth_delta_1.01": 0.3351236879825592,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.39202550053596497
+          "point_rel": 0.060461390763521194,
+          "depth_rel": 0.05818101391196251,
+          "depth_delta_1.01": 0.1453450471162796,
+          "depth_delta_1.25": 0.9778645634651184,
+          "boundary_f1": 0.43717390298843384
         }
       },
       "5": {
         "full": {
           "pixels": 196608,
-          "point_rel": 0.044242314994335175,
-          "depth_rel": 0.036496199667453766,
-          "depth_delta_1.01": 0.2595316767692566,
-          "depth_delta_1.25": 0.9983876943588257,
-          "boundary_f1": 0.8091875910758972
+          "point_rel": 0.045769449323415756,
+          "depth_rel": 0.04269213601946831,
+          "depth_delta_1.01": 0.2213389128446579,
+          "depth_delta_1.25": 0.973052978515625,
+          "boundary_f1": 0.7279852628707886
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.020054910331964493,
-          "depth_rel": 0.01865784451365471,
-          "depth_delta_1.01": 0.334771066904068,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.8206413984298706
+          "point_rel": 0.09218934923410416,
+          "depth_rel": 0.08890637010335922,
+          "depth_delta_1.01": 0.12939453125,
+          "depth_delta_1.25": 0.8921440839767456,
+          "boundary_f1": 0.6507697701454163
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.022256165742874146,
-          "depth_rel": 0.020997831597924232,
-          "depth_delta_1.01": 0.29736328125,
-          "depth_delta_1.25": 1.0,
-          "boundary_f1": 0.3758836090564728
+          "point_rel": 0.06315214186906815,
+          "depth_rel": 0.0606757327914238,
+          "depth_delta_1.01": 0.1710612028837204,
+          "depth_delta_1.25": 0.9782986044883728,
+          "boundary_f1": 0.4412248730659485
         }
       }
     }
@@ -1725,17 +1953,44 @@
     "split": "test",
     "cropXYXY": [
       320,
-      192,
+      128,
       512,
-      384
+      320
     ],
     "selection": {
       "metric": "full_point_rel_relative_reduction_k0_to_k3",
-      "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+      "policy": "人工选择楼梯栏杆、桌椅腿、金属椅背和吊灯杆；保留三张改善与两张退化样本",
       "rank": 15,
       "total": 16,
       "relativeImprovement": -0.18695207469698458,
-      "outcome": "degraded"
+      "outcome": "degraded",
+      "structureDescription": "椅背竖杆与细长枝条"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
     },
     "final": {
       "0": {
@@ -1749,19 +2004,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.03514992073178291,
-          "depth_rel": 0.03151798993349075,
-          "depth_delta_1.01": 0.2763129472732544,
-          "depth_delta_1.25": 0.976915180683136,
-          "boundary_f1": 0.8853284120559692
+          "point_rel": 0.02996703051030636,
+          "depth_rel": 0.027447236701846123,
+          "depth_delta_1.01": 0.2482367604970932,
+          "depth_delta_1.25": 0.9834797978401184,
+          "boundary_f1": 0.8703738451004028
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.03559885546565056,
-          "depth_rel": 0.03127218037843704,
-          "depth_delta_1.01": 0.300835520029068,
-          "depth_delta_1.25": 0.983506977558136,
-          "boundary_f1": 0.6359829902648926
+          "point_rel": 0.031951289623975754,
+          "depth_rel": 0.02900514379143715,
+          "depth_delta_1.01": 0.2558051347732544,
+          "depth_delta_1.25": 0.9915907382965088,
+          "boundary_f1": 0.6613184213638306
         }
       },
       "1": {
@@ -1775,19 +2030,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.03802737221121788,
-          "depth_rel": 0.03445370867848396,
-          "depth_delta_1.01": 0.211208775639534,
-          "depth_delta_1.25": 0.976426899433136,
-          "boundary_f1": 0.8817832469940186
+          "point_rel": 0.03198693320155144,
+          "depth_rel": 0.029375825077295303,
+          "depth_delta_1.01": 0.179226353764534,
+          "depth_delta_1.25": 0.983154296875,
+          "boundary_f1": 0.8726099729537964
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.037309739738702774,
-          "depth_rel": 0.03340955451130867,
-          "depth_delta_1.01": 0.2461480051279068,
-          "depth_delta_1.25": 0.9837239384651184,
-          "boundary_f1": 0.6301369071006775
+          "point_rel": 0.03251729533076286,
+          "depth_rel": 0.02971477061510086,
+          "depth_delta_1.01": 0.1480577290058136,
+          "depth_delta_1.25": 0.991319477558136,
+          "boundary_f1": 0.6638166308403015
         }
       },
       "3": {
@@ -1801,19 +2056,19 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.04200969263911247,
-          "depth_rel": 0.038186896592378616,
-          "depth_delta_1.01": 0.1835666298866272,
-          "depth_delta_1.25": 0.9749348759651184,
-          "boundary_f1": 0.8692949414253235
+          "point_rel": 0.034897420555353165,
+          "depth_rel": 0.03208932653069496,
+          "depth_delta_1.01": 0.1570366770029068,
+          "depth_delta_1.25": 0.9822319746017456,
+          "boundary_f1": 0.8706158399581909
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.04104061797261238,
-          "depth_rel": 0.03705192729830742,
-          "depth_delta_1.01": 0.22119140625,
-          "depth_delta_1.25": 0.9830729365348816,
-          "boundary_f1": 0.612830638885498
+          "point_rel": 0.036138977855443954,
+          "depth_rel": 0.033163029700517654,
+          "depth_delta_1.01": 0.136013463139534,
+          "depth_delta_1.25": 0.9905598759651184,
+          "boundary_f1": 0.6365852952003479
         }
       },
       "5": {
@@ -1827,19 +2082,169 @@
         },
         "crop": {
           "pixels": 36864,
-          "point_rel": 0.045920487493276596,
-          "depth_rel": 0.04165009781718254,
-          "depth_delta_1.01": 0.1761339008808136,
-          "depth_delta_1.25": 0.9724934697151184,
-          "boundary_f1": 0.8525040745735168
+          "point_rel": 0.039350975304841995,
+          "depth_rel": 0.03617345914244652,
+          "depth_delta_1.01": 0.1145562082529068,
+          "depth_delta_1.25": 0.9803602695465088,
+          "boundary_f1": 0.8602157235145569
         },
         "structure": {
           "pixels": 18432,
-          "point_rel": 0.044121842831373215,
-          "depth_rel": 0.03978828713297844,
-          "depth_delta_1.01": 0.2259114533662796,
-          "depth_delta_1.25": 0.9826931357383728,
-          "boundary_f1": 0.6023890376091003
+          "point_rel": 0.04071702063083649,
+          "depth_rel": 0.037434518337249756,
+          "depth_delta_1.01": 0.14404296875,
+          "depth_delta_1.25": 0.9875759482383728,
+          "boundary_f1": 0.620010256767273
+        }
+      }
+    }
+  },
+  "ai_046_001_cam_00_frame.0000": {
+    "split": "test",
+    "cropXYXY": [
+      224,
+      128,
+      416,
+      320
+    ],
+    "selection": {
+      "metric": "full_point_rel_relative_reduction_k0_to_k3",
+      "policy": "人工选择楼梯栏杆、桌椅腿、金属椅背和吊灯杆；保留三张改善与两张退化样本",
+      "rank": 11,
+      "total": 16,
+      "relativeImprovement": -0.06912271033991367,
+      "outcome": "degraded",
+      "structureDescription": "金属椅背和吊灯悬杆"
+    },
+    "groundTruth": {
+      "full": {
+        "pixels": 196608,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "crop": {
+        "pixels": 36864,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      },
+      "structure": {
+        "pixels": 18432,
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 1.0,
+        "depth_delta_1.25": 1.0,
+        "boundary_f1": 1.0
+      }
+    },
+    "final": {
+      "0": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.057083092629909515,
+          "depth_rel": 0.05286100134253502,
+          "depth_delta_1.01": 0.251251220703125,
+          "depth_delta_1.25": 0.9621633291244507,
+          "boundary_f1": 0.8276152610778809
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.08008097112178802,
+          "depth_rel": 0.07745642215013504,
+          "depth_delta_1.01": 0.1110568568110466,
+          "depth_delta_1.25": 0.9159342646598816,
+          "boundary_f1": 0.9149273037910461
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.08854985982179642,
+          "depth_rel": 0.0854078158736229,
+          "depth_delta_1.01": 0.1612955778837204,
+          "depth_delta_1.25": 0.8915473222732544,
+          "boundary_f1": 0.8603575229644775
+        }
+      },
+      "1": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.057167135179042816,
+          "depth_rel": 0.05306433141231537,
+          "depth_delta_1.01": 0.2662862241268158,
+          "depth_delta_1.25": 0.9614664912223816,
+          "boundary_f1": 0.8223065137863159
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.08279535919427872,
+          "depth_rel": 0.08014077693223953,
+          "depth_delta_1.01": 0.091688372194767,
+          "depth_delta_1.25": 0.9096137285232544,
+          "boundary_f1": 0.913722038269043
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.09228745102882385,
+          "depth_rel": 0.08905790001153946,
+          "depth_delta_1.01": 0.1630316823720932,
+          "depth_delta_1.25": 0.8773329257965088,
+          "boundary_f1": 0.8645553588867188
+        }
+      },
+      "3": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.06102883070707321,
+          "depth_rel": 0.056827351450920105,
+          "depth_delta_1.01": 0.2410227507352829,
+          "depth_delta_1.25": 0.959686279296875,
+          "boundary_f1": 0.8052844405174255
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.09209825098514557,
+          "depth_rel": 0.08931086212396622,
+          "depth_delta_1.01": 0.0634494349360466,
+          "depth_delta_1.25": 0.912706196308136,
+          "boundary_f1": 0.8932860493659973
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.10436234623193741,
+          "depth_rel": 0.10085316002368927,
+          "depth_delta_1.01": 0.1163736954331398,
+          "depth_delta_1.25": 0.8731011152267456,
+          "boundary_f1": 0.834291934967041
+        }
+      },
+      "5": {
+        "full": {
+          "pixels": 196608,
+          "point_rel": 0.06496842205524445,
+          "depth_rel": 0.06062060594558716,
+          "depth_delta_1.01": 0.2427520751953125,
+          "depth_delta_1.25": 0.9511210322380066,
+          "boundary_f1": 0.7885561585426331
+        },
+        "crop": {
+          "pixels": 36864,
+          "point_rel": 0.1010315790772438,
+          "depth_rel": 0.09808201342821121,
+          "depth_delta_1.01": 0.055419921875,
+          "depth_delta_1.25": 0.8904622197151184,
+          "boundary_f1": 0.8800312876701355
+        },
+        "structure": {
+          "pixels": 18432,
+          "point_rel": 0.11782806366682053,
+          "depth_rel": 0.11396878212690353,
+          "depth_delta_1.01": 0.097547747194767,
+          "depth_delta_1.25": 0.8235134482383728,
+          "boundary_f1": 0.819109320640564
         }
       }
     }

@@ -48,6 +48,28 @@ def test_binary_ply_rejects_nonfinite_points(tmp_path):
         )
 
 
+def test_binary_ply_can_preserve_sparse_invalid_gt_pixels(tmp_path):
+    points = np.ones((2, 2, 3), dtype=np.float32)
+    points[0, 1] = np.nan
+    output = tmp_path / "ground_truth.ply"
+    write_binary_ply(
+        output,
+        points,
+        np.zeros((2, 2, 3), dtype=np.uint8),
+        width=2,
+        height=2,
+        allow_nonfinite=True,
+    )
+    restored, _, _ = read_binary_ply(output)
+    np.testing.assert_allclose(
+        restored,
+        points.reshape(-1, 3),
+        rtol=0.0,
+        atol=0.0,
+        equal_nan=True,
+    )
+
+
 def test_alignment_matches_paper_scale_and_optical_axis_shift():
     points = np.array([[[1.0, 2.0, 3.0]]], dtype=np.float32)
     aligned = apply_scale_z_shift(points, scale=2.0, z_shift=-0.5)

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  finiteRasterIndices,
   pointPositions,
   rasterIndices,
   roundHalfToEven,
@@ -113,6 +114,18 @@ describe("Exp9 geometry transforms", () => {
         ),
       ),
     ).toEqual([2, -4, -5.5]);
+  });
+
+  it("skips invalid ground-truth pixels without changing raster order", () => {
+    const raw = new Float32Array([
+      0, 0, 1,
+      Number.NaN, Number.NaN, Number.NaN,
+      1, 0, 2,
+      0, 0, 0,
+    ]);
+    expect(
+      Array.from(finiteRasterIndices(raw, new Uint32Array([0, 1, 2, 3]))),
+    ).toEqual([0, 2]);
   });
 
   it("resolves initial K aliases to the exact K0 asset", () => {

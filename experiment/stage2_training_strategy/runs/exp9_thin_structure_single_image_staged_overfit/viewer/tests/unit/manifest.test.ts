@@ -164,6 +164,18 @@ describe("split-aware v2 manifest", () => {
     expect(() => validateManifest(manifest)).toThrow(/五个/);
   });
 
+  it("validates an optional ground-truth point cloud", () => {
+    const manifest = v2Manifest();
+    manifest.samples[0].groundTruth = {
+      ...asset,
+      url: "/data/exp20/train-1/ground_truth.ply",
+      validPointCount: 3,
+    };
+    expect(() => validateManifest(manifest)).not.toThrow();
+    manifest.samples[0].groundTruth.pointCount = 3;
+    expect(() => validateManifest(manifest)).toThrow(/真实点云点数/);
+  });
+
   it("defaults to training-before versus training-after when both stages exist", () => {
     const manifest = v2Manifest();
     for (const sample of manifest.samples) {

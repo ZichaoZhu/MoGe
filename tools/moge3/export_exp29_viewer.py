@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import gc
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -25,7 +26,6 @@ from tools.moge3.export_viewer_experiment import (
     batch_norm_states_equal,
     canonical_full_metrics,
     construct_checkpoint_model,
-    depth_edge_crop,
     load_reference_metrics,
     predict_and_measure,
     sha256_file,
@@ -110,10 +110,94 @@ def _verify_ply(
     colors: np.ndarray,
 ) -> None:
     decoded_points, decoded_colors, comments = read_binary_ply(path)
-    np.testing.assert_array_equal(decoded_points, points.reshape(-1, 3))
+    np.testing.assert_allclose(
+        decoded_points,
+        points.reshape(-1, 3),
+        rtol=0.0,
+        atol=0.0,
+        equal_nan=True,
+    )
     np.testing.assert_array_equal(decoded_colors, colors.reshape(-1, 3))
     if comments.get("vertex_order") != "row_major_one_vertex_per_pixel":
         raise ValueError("PLY raster order was not preserved")
+
+
+def _array_sha256(array: np.ndarray) -> str:
+    value = np.ascontiguousarray(array)
+    digest = hashlib.sha256()
+    digest.update(str(value.dtype).encode("ascii"))
+    digest.update(np.asarray(value.shape, dtype=np.int64).tobytes())
+    digest.update(value.tobytes())
+    return digest.hexdigest()
+
+
+def _locked_crop(
+    selected: Mapping[str, Any],
+    *,
+    width: int,
+    height: int,
+    expected_size: int,
+) -> list[int]:
+    raw = selected.get("cropXYXY")
+    if not isinstance(raw, list) or len(raw) != 4:
+        raise ValueError(f"{selected.get('id')} lacks a locked cropXYXY")
+    crop = [int(value) for value in raw]
+    x0, y0, x1, y1 = crop
+    if (
+        x0 < 0
+        or y0 < 0
+        or x1 > width
+        or y1 > height
+        or x1 - x0 != expected_size
+        or y1 - y0 != expected_size
+    ):
+        raise ValueError(f"{selected.get('id')} has an invalid crop: {crop}")
+    return crop
+
+
+def _ground_truth_metrics(
+    gt_points: torch.Tensor,
+    *,
+    crop: list[int],
+    boundary_threshold: float,
+) -> tuple[Dict[str, Any], int]:
+    from moge.scripts.overfit_hypersim_staged_v3 import (
+        _scope_metrics,
+        build_structure_mask,
+    )
+
+    gt = gt_points.float()
+    full_valid = torch.isfinite(gt).all(dim=-1) & (gt[..., 2] > 0)
+    x0, y0, x1, y1 = crop
+    crop_valid = full_valid[y0:y1, x0:x1]
+    structure_mask = build_structure_mask(
+        gt,
+        crop,
+        {"type": "near_quantile", "quantile": 0.5},
+    )
+    return (
+        {
+            "full": _scope_metrics(
+                gt,
+                gt,
+                full_valid,
+                boundary_threshold=boundary_threshold,
+            ),
+            "crop": _scope_metrics(
+                gt[y0:y1, x0:x1],
+                gt[y0:y1, x0:x1],
+                crop_valid,
+                boundary_threshold=boundary_threshold,
+            ),
+            "structure": _scope_metrics(
+                gt[y0:y1, x0:x1],
+                gt[y0:y1, x0:x1],
+                structure_mask,
+                boundary_threshold=boundary_threshold,
+            ),
+        },
+        int(structure_mask.sum().item()),
+    )
 
 
 def run(args: argparse.Namespace) -> Dict[str, Any]:
@@ -201,11 +285,11 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
                 args.width,
                 args.safe_root,
             )
-            crop = depth_edge_crop(
-                gt_points,
-                size=args.crop_size,
-                stride=args.crop_stride,
-                relative_threshold=args.edge_relative_threshold,
+            crop = _locked_crop(
+                selected,
+                width=args.width,
+                height=args.height,
+                expected_size=args.crop_size,
             )
             colors = (
                 image.permute(1, 2, 0).numpy().clip(0.0, 1.0) * 255.0
@@ -265,6 +349,53 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
     validation_differences: Dict[str, Dict[str, Dict[str, float]]] = {}
 
     for sample in prepared:
+        gt_metrics, expected_structure_pixels = _ground_truth_metrics(
+            sample["gt_points"],
+            crop=sample["crop"],
+            boundary_threshold=args.boundary_threshold,
+        )
+        gt_points = sample["gt_points"].float().cpu().numpy()
+        gt_valid = (
+            np.isfinite(gt_points).all(axis=-1)
+            & (gt_points[..., 2] > 0)
+        )
+        serialized_gt_points = gt_points.copy()
+        serialized_gt_points[~gt_valid] = 0.0
+        ground_truth_output = (
+            output_root / sample["id"] / "ground_truth.ply"
+        )
+        write_binary_ply(
+            ground_truth_output,
+            serialized_gt_points,
+            sample["colors"],
+            width=args.width,
+            height=args.height,
+        )
+        _verify_ply(
+            ground_truth_output,
+            serialized_gt_points,
+            sample["colors"],
+        )
+        ground_truth_asset = point_asset(
+            ground_truth_output,
+            public_root=public_root,
+            points=gt_points,
+            checkpoint_digest=_array_sha256(gt_points),
+            alignment={"scale": 1.0, "zShift": 0.0},
+            metrics=gt_metrics,
+        )
+        ground_truth_asset["validPointCount"] = int(gt_valid.sum())
+        checksums.append(
+            {
+                "sample": sample["id"],
+                "split": sample["split"],
+                "stage": "ground_truth",
+                "k": None,
+                "url": ground_truth_asset["url"],
+                "bytes": ground_truth_output.stat().st_size,
+                "sha256": ground_truth_asset["sha256"],
+            }
+        )
         raw_by_k, metrics_by_k, structure_pixels = predict_and_measure(
             model,
             sample["image"].to(device),
@@ -277,6 +408,10 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
                 args.smooth_log_depth_residual_bound
             ),
         )
+        if structure_pixels != expected_structure_pixels:
+            raise ValueError(
+                f"{sample['id']} structure mask changed between GT and prediction"
+            )
         reference = references[sample["id"]]
         validation_differences[sample["id"]] = {}
         for step in EXPECTED_STEPS:
@@ -366,6 +501,9 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
             "total": int(sample["selection"]["total"]),
             "relativeImprovement": actual_improvement,
             "outcome": outcome,
+            "structureDescription": str(
+                sample["selection"]["structureDescription"]
+            ),
         }
         sample_record = {
             "id": sample["id"],
@@ -373,9 +511,8 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
             "label": f"图片 {int(sample['selection']['picture'])}",
             "order": int(sample["selection"]["picture"]),
             "description": (
-                f"{'改善样本' if outcome == 'improved' else '退化样本'} · "
-                f"{sample['split']} 第 {selection_record['rank']}/"
-                f"{selection_record['total']} 名"
+                f"{selection_record['structureDescription']} · "
+                f"{'改善样本' if outcome == 'improved' else '退化样本'}"
             ),
             "websiteEnabled": True,
             "cropXYXY": sample["crop"],
@@ -386,6 +523,7 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
             },
             "rgbUrl": sample["rgb_url"],
             "selection": selection_record,
+            "groundTruth": ground_truth_asset,
             "stages": {"final": stage_assets},
         }
         samples.append(sample_record)
@@ -393,6 +531,7 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
             "split": sample["split"],
             "cropXYXY": sample["crop"],
             "selection": selection_record,
+            "groundTruth": ground_truth_asset["metrics"],
             "final": {
                 step: stage_assets[step]["metrics"]
                 for step in stage_assets
@@ -443,15 +582,16 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
             "inferencePolicy": "stored_batch_norm_running_statistics",
             "selectionMetric": str(selection["metric"]),
             "selectionPolicy": (
-                "每个划分展示改善最明显三张与退化最严重两张"
+                "训练前GT细杆显著性优先，并在每个划分保留改善与退化案例"
             ),
             "smoothLogDepthResidualBound": (
                 args.smooth_log_depth_residual_bound
             ),
             "note": (
                 "Exp29从Exp28 step 1000继续联合训练；step 2800由训练集"
-                "细结构K=3 Point Rel选出。这里只比较同一检查点的K=0与SSR"
-                "精修结果，不代表验证或测试泛化成功。"
+                "细结构K=3 Point Rel选出。样本按训练前GT中的长细杆显著性"
+                "重选；窗口A展示Hypersim真实点云，B/C比较同一检查点的"
+                "不同K结果，不代表验证或测试泛化成功。"
             ),
         },
     }

@@ -57,19 +57,21 @@ step 2800 的完整 132 张评测进一步表明：
 增加没有自动消除留出域退化，而且过多迭代并非总是更好：Train 的 K=5 平均结果
 也弱于 K=3。
 
-## 网站好坏案例
+## 网站细杆好坏案例
 
-交互式网站新增 `Exp29 · 长程联合训练好坏案例`。每个 Train/Validation/Test
-划分固定展示：
+交互式网站新增 `Exp29 · 长程联合训练细杆案例`。每个 Train/Validation/Test
+划分固定展示五张长细杆显著的图片：
 
-1. K=0→K=3 Point Rel 改善最大的三张；
-2. K=0→K=3 Point Rel 退化最严重的两张。
+1. 样本和 `192×192` 裁剪只依据训练前 RGB 与 GT 几何锁定；
+2. 优先覆盖楼梯栏杆、管线、扶手、椅腿、窗格和隔断竖杆；
+3. 每个划分保留三张改善与两张退化案例。
 
-左右窗口默认使用同一份 step 2800 权重比较 K=0 与 K=3，也可切换 K=1/5。
-该入口共包含 15 张图片、60 份原始 XYZ 二进制 PLY，资产大小
-176,966,700 字节。样本名单见 `viewer_selection.json`，评测、选择指标、导出
-报告和校验和分别位于 `results/viewer_evaluation/`、
-`results/viewer_export/` 与网站 `public/data/exp29/`。
+窗口 A 显示 Hypersim 真实点云，B/C 默认使用同一份 step 2800 权重比较 K=0
+与 K=3，也可切换 K=1/5。该入口共包含 15 张图片、15 份真实点云和 60 份
+预测点云，75 份二进制 PLY 共 221,208,375 字节。样本名单见
+`viewer_selection.json`，评测、选择指标、导出报告和校验和分别位于
+`results/viewer_evaluation/`、`results/viewer_export/` 与网站
+`public/data/exp29/`。
 
 检查点只保存在服务器：
 

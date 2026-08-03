@@ -4,9 +4,9 @@
   "experiments": [
     {
       "id": "exp29_smooth_bounded_residual_long_joint",
-      "label": "Exp29 · 长程联合训练好坏案例",
-      "shortLabel": "Exp29 好坏案例",
-      "summary": "Exp29 最佳 step 2800；每个划分同时展示 K=3 改善最明显的三张与退化最严重的两张，默认左右比较 K=0 与 K=3。",
+      "label": "Exp29 · 长程联合训练细杆案例",
+      "shortLabel": "Exp29 细杆案例",
+      "summary": "Exp29 最佳 step 2800；每个划分展示五张长细杆显著的图片并同时保留改善与退化结果，窗口 A 为 GT，B/C 默认比较 K=0 与 K=3。",
       "manifestUrl": "/data/exp29/manifest.json",
       "stageLabels": {
         "initial": "续训起点",

@@ -24,6 +24,7 @@ import {
   type DatasetSplit,
   type ExperimentCatalog,
   type ExperimentCatalogEntry,
+  type PointCloudAsset,
   type PointCloudManifest,
   type PointCloudSample,
   type RefinementStep,
@@ -87,18 +88,13 @@ function Segment<T extends string | number>({
   );
 }
 
-function Metrics({
-  sample,
-  stage,
-  step,
+function AssetMetrics({
+  asset,
   scope,
 }: {
-  sample: PointCloudSample;
-  stage: StageName;
-  step: RefinementStep;
+  asset: PointCloudAsset;
   scope: ScopeName;
 }) {
-  const asset = resolveAsset(sample, stage, step);
   const metrics = asset.metrics[scope];
   return (
     <dl className="metrics-grid">
@@ -119,6 +115,118 @@ function Metrics({
         <dd>{percent(metrics.boundary_f1)}</dd>
       </div>
     </dl>
+  );
+}
+
+function GroundTruthPane({
+  sample,
+  manifest,
+  fitNonce,
+  setFitNonce,
+  interactionMode,
+  setInteractionMode,
+  coordinateMode,
+  rasterScope,
+  syncEnabled,
+  cameraSnapshot,
+  onCameraChange,
+}: {
+  sample: PointCloudSample;
+  manifest: PointCloudManifest;
+  fitNonce: number;
+  setFitNonce: (value: number) => void;
+  interactionMode: InteractionMode;
+  setInteractionMode: (value: InteractionMode) => void;
+  coordinateMode: CoordinateMode;
+  rasterScope: RasterScope;
+  syncEnabled: boolean;
+  cameraSnapshot: CameraSnapshot | null;
+  onCameraChange: (snapshot: CameraSnapshot) => void;
+}) {
+  const asset = sample.groundTruth;
+  const metricScope: ScopeName = rasterScope === "full" ? "full" : "crop";
+  return (
+    <section className="viewer-pane ground-truth-pane" data-testid="viewer-ground-truth">
+      <header className="pane-header">
+        <div>
+          <span className="pane-kicker">窗口 A · 真实点云</span>
+          <h2>Hypersim Ground Truth</h2>
+          <small className="stage-detail">
+            由真实深度与相机内参反投影，不经过 Base 或 SSR
+          </small>
+        </div>
+        {asset && (
+          <button
+            className="fit-button"
+            type="button"
+            onClick={() => setFitNonce(fitNonce + 1)}
+          >
+            适配视野
+          </button>
+        )}
+      </header>
+
+      {asset ? (
+        <>
+          <div className="pane-controls">
+            <Segment
+              label="鼠标左键"
+              value={interactionMode}
+              values={["rotate", "pan"] as const}
+              format={(value) => (value === "rotate" ? "旋转" : "平移")}
+              onChange={setInteractionMode}
+              testId="ground-truth-interaction"
+            />
+          </div>
+          <div className="canvas-shell">
+            <CloudScene
+              panelId="ground-truth"
+              asset={asset}
+              manifest={manifest}
+              sample={sample}
+              coordinateMode={coordinateMode}
+              renderMode="points"
+              rasterScope={rasterScope}
+              syncEnabled={syncEnabled}
+              cameraSnapshot={cameraSnapshot}
+              onCameraChange={onCameraChange}
+              fitNonce={fitNonce}
+              interactionMode={interactionMode}
+            />
+            <div className="canvas-hint">
+              左键{interactionMode === "rotate" ? "旋转" : "平移"} ·
+              中键拖动/滚轮缩放
+            </div>
+          </div>
+          <AssetMetrics asset={asset} scope={metricScope} />
+          <footer className="asset-meta">
+            <span>
+              {(asset.validPointCount ?? asset.pointCount).toLocaleString(
+                "zh-CN",
+              )}{" "}
+              有效点
+            </span>
+            {asset.validPointCount !== undefined &&
+              asset.validPointCount !== asset.pointCount && (
+                <span>
+                  跳过 {(asset.pointCount - asset.validPointCount).toLocaleString(
+                    "zh-CN",
+                  )}{" "}
+                  个无效深度
+                </span>
+              )}
+            <span>真实尺度 · 米</span>
+            <span title={asset.checkpointSha256}>
+              GT {asset.checkpointSha256.slice(0, 8)}
+            </span>
+          </footer>
+        </>
+      ) : (
+        <div className="ground-truth-missing" role="status">
+          该旧实验尚未归档真实点云。预测窗口 B、C 仍可正常比较。
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -236,12 +344,7 @@ function ViewerPane({
         </div>
       </div>
 
-      <Metrics
-        sample={sample}
-        stage={pane.stage}
-        step={pane.step}
-        scope={metricScope}
-      />
+      <AssetMetrics asset={asset} scope={metricScope} />
       <footer className="asset-meta">
         <span>{asset.pointCount.toLocaleString("zh-CN")} 点</span>
         {asset.pointRelReductionFromK0 !== undefined && (
@@ -298,6 +401,9 @@ export function PointCloudComparison() {
   const [syncEnabled, setSyncEnabled] = useState(true);
   const [cameraSnapshot, setCameraSnapshot] =
     useState<CameraSnapshot | null>(null);
+  const [groundTruthFitNonce, setGroundTruthFitNonce] = useState(0);
+  const [groundTruthInteraction, setGroundTruthInteraction] =
+    useState<InteractionMode>("rotate");
   const [left, setLeft] = useState<PaneState>({
     stage: "initial",
     step: 0,
@@ -382,6 +488,7 @@ export function PointCloudComparison() {
         setSplit(requestedSplit);
         setSampleId(selectedSample.id);
         setCameraSnapshot(null);
+        setGroundTruthFitNonce((value) => value + 1);
         const selectedStages = sampleStages(selectedSample);
         setLeft((value) => ({
           ...value,
@@ -478,6 +585,7 @@ export function PointCloudComparison() {
   const updateGlobalView = (update: () => void) => {
     update();
     setCameraSnapshot(null);
+    setGroundTruthFitNonce((value) => value + 1);
     setLeft((value) => ({ ...value, fitNonce: value.fitNonce + 1 }));
     setRight((value) => ({ ...value, fitNonce: value.fitNonce + 1 }));
   };
@@ -607,7 +715,13 @@ export function PointCloudComparison() {
               })
             }
           >
-            <img src={dataUrl(item.rgbUrl)} alt="" />
+            <span className="sample-thumbnail">
+              <img src={dataUrl(item.rgbUrl)} alt="" />
+              <span className="sample-hover-preview" aria-hidden="true">
+                <img src={dataUrl(item.rgbUrl)} alt="" />
+                <span>{item.description}</span>
+              </span>
+            </span>
             <span>
               <strong>{item.label}</strong>
               <small className="sample-id">{item.id}</small>
@@ -674,7 +788,7 @@ export function PointCloudComparison() {
           title={
             coordinateMode === "raw"
               ? "原始相对尺度不同，不能同步比较"
-              : "同步两个窗口的相机"
+              : "同步所有可用窗口的相机"
           }
         >
           <input
@@ -690,20 +804,34 @@ export function PointCloudComparison() {
 
       {coordinateMode === "raw" && (
         <div className="raw-warning" role="status">
-          原始点图只有相对尺度，不同检查点不能直接比较大小；两个窗口已分别适配视野并关闭相机同步。
+          原始预测点图只有相对尺度，不同检查点不能直接比较大小；各窗口已分别适配视野并关闭相机同步。
         </div>
       )}
       {renderMode === "voxels" && (
         <div className="voxel-note" role="status">
           SSR 体素壳固定显示锁定裁剪；深度轴按 round(200·log Z)
-          离散，只减去中位 depth bin 以居中画面。
+          离散，只减去中位 depth bin 以居中画面。窗口 A
+          始终保留真实彩色点云。
         </div>
       )}
 
       <div className="comparison-grid">
+        <GroundTruthPane
+          sample={sample}
+          manifest={manifest}
+          fitNonce={groundTruthFitNonce}
+          setFitNonce={setGroundTruthFitNonce}
+          interactionMode={groundTruthInteraction}
+          setInteractionMode={setGroundTruthInteraction}
+          coordinateMode={coordinateMode}
+          rasterScope={rasterScope}
+          syncEnabled={syncEnabled}
+          cameraSnapshot={cameraSnapshot}
+          onCameraChange={setCameraSnapshot}
+        />
         <ViewerPane
           panelId="left"
-          title="窗口 A"
+          title="窗口 B · 预测点云"
           sample={sample}
           manifest={manifest}
           experiment={experiment}
@@ -718,7 +846,7 @@ export function PointCloudComparison() {
         />
         <ViewerPane
           panelId="right"
-          title="窗口 B"
+          title="窗口 C · 预测点云"
           sample={sample}
           manifest={manifest}
           experiment={experiment}

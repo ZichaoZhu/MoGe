@@ -1,11 +1,12 @@
 {
-  "version": 1,
+  "version": 2,
   "experiment": "exp29_smooth_bounded_residual_long_joint",
   "metric": "full_point_rel_relative_reduction_k0_to_k3",
+  "selectionBasis": "训练前GT几何与RGB中的长细杆显著性优先；每个划分同时保留改善和退化样本",
   "policy": {
-    "train": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-    "val": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
-    "test": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张"
+    "train": "人工选择玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；保留三张改善与两张退化样本",
+    "val": "人工选择椅腿、窗格、隔断竖杆和吊灯杆；保留三张改善与两张退化样本",
+    "test": "人工选择楼梯栏杆、桌椅腿、金属椅背和吊灯杆；保留三张改善与两张退化样本"
   },
   "splits": {
     "train": [
@@ -15,39 +16,49 @@
         "picture": 1,
         "rank": 1,
         "total": 100,
-        "outcome": "improved"
+        "outcome": "improved",
+        "cropXYXY": [320, 96, 512, 288],
+        "structureDescription": "玻璃楼梯的长扶手与栏杆"
       },
       {
-        "id": "ai_018_007_cam_00_frame.0000",
-        "relativeImprovement": 0.475119706007628,
+        "id": "ai_036_006_cam_00_frame.0000",
+        "relativeImprovement": 0.3092325340160527,
         "picture": 2,
-        "rank": 2,
+        "rank": 18,
         "total": 100,
-        "outcome": "improved"
+        "outcome": "improved",
+        "cropXYXY": [192, 0, 384, 192],
+        "structureDescription": "天花板裸露管线与金属横杆"
       },
       {
-        "id": "ai_053_018_cam_00_frame.0000",
-        "relativeImprovement": 0.40696338268670906,
+        "id": "ai_029_005_cam_00_frame.0000",
+        "relativeImprovement": 0.21590342577003438,
         "picture": 3,
-        "rank": 3,
+        "rank": 42,
         "total": 100,
-        "outcome": "improved"
+        "outcome": "improved",
+        "cropXYXY": [320, 64, 512, 256],
+        "structureDescription": "旋转楼梯的细长扶手"
       },
       {
-        "id": "ai_001_001_cam_00_frame.0056",
-        "relativeImprovement": -1.1561916165947055,
+        "id": "ai_013_001_cam_00_frame.0000",
+        "relativeImprovement": -0.5410483688867871,
         "picture": 4,
-        "rank": 100,
+        "rank": 97,
         "total": 100,
-        "outcome": "degraded"
+        "outcome": "degraded",
+        "cropXYXY": [160, 96, 352, 288],
+        "structureDescription": "室内细长立柱与边框"
       },
       {
-        "id": "ai_001_001_cam_00_frame.0043",
-        "relativeImprovement": -1.0904845698092462,
+        "id": "ai_004_008_cam_00_frame.0000",
+        "relativeImprovement": -0.02569957641190522,
         "picture": 5,
-        "rank": 99,
+        "rank": 88,
         "total": 100,
-        "outcome": "degraded"
+        "outcome": "degraded",
+        "cropXYXY": [160, 192, 352, 384],
+        "structureDescription": "吧椅长腿与横向支撑杆"
       }
     ],
     "val": [
@@ -57,7 +68,9 @@
         "picture": 1,
         "rank": 1,
         "total": 16,
-        "outcome": "improved"
+        "outcome": "improved",
+        "cropXYXY": [288, 192, 480, 384],
+        "structureDescription": "餐椅腿与窗格细杆"
       },
       {
         "id": "ai_047_001_cam_00_frame.0014",
@@ -65,7 +78,9 @@
         "picture": 2,
         "rank": 2,
         "total": 16,
-        "outcome": "improved"
+        "outcome": "improved",
+        "cropXYXY": [320, 0, 512, 192],
+        "structureDescription": "工业空间隔断竖杆与吊灯杆"
       },
       {
         "id": "ai_047_001_cam_00_frame.0028",
@@ -73,65 +88,81 @@
         "picture": 3,
         "rank": 3,
         "total": 16,
-        "outcome": "improved"
-      },
-      {
-        "id": "ai_043_002_cam_00_frame.0042",
-        "relativeImprovement": -0.367201161227823,
-        "picture": 4,
-        "rank": 16,
-        "total": 16,
-        "outcome": "degraded"
+        "outcome": "improved",
+        "cropXYXY": [320, 128, 512, 320],
+        "structureDescription": "隔断、椅背与桌椅支撑杆"
       },
       {
         "id": "ai_043_002_cam_00_frame.0000",
         "relativeImprovement": -0.25879080017790546,
-        "picture": 5,
+        "picture": 4,
         "rank": 15,
         "total": 16,
-        "outcome": "degraded"
+        "outcome": "degraded",
+        "cropXYXY": [288, 64, 480, 256],
+        "structureDescription": "餐椅腿和密集窗格"
+      },
+      {
+        "id": "ai_047_001_cam_00_frame.0071",
+        "relativeImprovement": -0.10135665840661237,
+        "picture": 5,
+        "rank": 12,
+        "total": 16,
+        "outcome": "degraded",
+        "cropXYXY": [320, 96, 512, 288],
+        "structureDescription": "工业隔断竖杆与吊灯悬杆"
       }
     ],
     "test": [
       {
-        "id": "ai_050_001_cam_00_frame.0085",
-        "relativeImprovement": 0.11639108651080217,
-        "picture": 1,
-        "rank": 1,
-        "total": 16,
-        "outcome": "improved"
-      },
-      {
         "id": "ai_050_001_cam_00_frame.0028",
         "relativeImprovement": 0.049706670986421085,
-        "picture": 2,
+        "picture": 1,
         "rank": 2,
         "total": 16,
-        "outcome": "improved"
+        "outcome": "improved",
+        "cropXYXY": [0, 192, 192, 384],
+        "structureDescription": "楼梯扶手与栏杆"
       },
       {
         "id": "ai_050_001_cam_00_frame.0042",
         "relativeImprovement": 0.0301960581756052,
-        "picture": 3,
+        "picture": 2,
         "rank": 3,
         "total": 16,
-        "outcome": "improved"
+        "outcome": "improved",
+        "cropXYXY": [96, 192, 288, 384],
+        "structureDescription": "桌腿、椅腿与横向支架"
       },
       {
-        "id": "ai_046_001_cam_00_frame.0028",
-        "relativeImprovement": -0.4342975364649447,
-        "picture": 4,
-        "rank": 16,
+        "id": "ai_046_001_cam_00_frame.0071",
+        "relativeImprovement": 0.001452759449662161,
+        "picture": 3,
+        "rank": 6,
         "total": 16,
-        "outcome": "degraded"
+        "outcome": "improved",
+        "cropXYXY": [96, 32, 288, 224],
+        "structureDescription": "金属椅背、枝条和吊灯杆"
       },
       {
         "id": "ai_046_001_cam_00_frame.0042",
         "relativeImprovement": -0.18695207469698458,
-        "picture": 5,
+        "picture": 4,
         "rank": 15,
         "total": 16,
-        "outcome": "degraded"
+        "outcome": "degraded",
+        "cropXYXY": [320, 128, 512, 320],
+        "structureDescription": "椅背竖杆与细长枝条"
+      },
+      {
+        "id": "ai_046_001_cam_00_frame.0000",
+        "relativeImprovement": -0.06912271033991367,
+        "picture": 5,
+        "rank": 11,
+        "total": 16,
+        "outcome": "degraded",
+        "cropXYXY": [224, 128, 416, 320],
+        "structureDescription": "金属椅背和吊灯悬杆"
       }
     ]
   }

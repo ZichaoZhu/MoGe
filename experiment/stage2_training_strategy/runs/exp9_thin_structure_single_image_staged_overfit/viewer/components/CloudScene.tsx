@@ -20,6 +20,7 @@ import * as THREE from "three";
 import { PLYLoader } from "three/addons/loaders/PLYLoader.js";
 
 import {
+  finiteRasterIndices,
   finitePositions,
   pointColors,
   pointPositions,
@@ -157,12 +158,13 @@ function PointMap({
     }
     const rawPositions = sourcePosition.array as Float32Array;
     const rawColors = sourceColor.array;
-    const indices = rasterIndices(
+    const raster = rasterIndices(
       manifest.resolution.width,
       manifest.resolution.height,
       sample.cropXYXY,
       rasterScope,
     );
+    const indices = finiteRasterIndices(rawPositions, raster);
     const positions = pointPositions(
       rawPositions,
       indices,
@@ -368,7 +370,10 @@ function CameraRig({
     }
     fit();
     cameraMemory.current.activeSceneSource = sceneSource;
-    recordCamera();
+    const fittedSnapshot = recordCamera();
+    if (syncEnabled && fittedSnapshot) {
+      onCameraChange(fittedSnapshot);
+    }
     cameraMemory.current.hasFitted = true;
     cameraMemory.current.appliedFitNonce = fitNonce;
     gl.domElement.dataset.sceneSource = sceneSource;

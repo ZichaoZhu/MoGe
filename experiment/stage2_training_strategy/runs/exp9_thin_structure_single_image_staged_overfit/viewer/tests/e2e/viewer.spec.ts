@@ -109,7 +109,7 @@ test("switches experiments and preserves the Exp9 two-pane interactions", async 
     .getByTestId("coordinate-mode")
     .getByRole("button", { name: "原始输出" })
     .click();
-  await expect(page.getByRole("status")).toContainText("相对尺度");
+  await expect(page.locator(".raw-warning")).toContainText("相对尺度");
 
   await page
     .getByTestId("render-mode")
@@ -194,9 +194,49 @@ test("shows Exp29 improvements and degradations in every split", async ({
     "/?experiment=exp29_smooth_bounded_residual_long_joint&split=train&sample=1&leftK=0&rightK=3",
   );
   await expect(
-    page.getByText("Exp29 · 长程联合训练好坏案例").first(),
+    page.getByText("Exp29 · 长程联合训练细杆案例").first(),
   ).toBeVisible();
   await expect(page.locator(".sample-switcher button")).toHaveCount(5);
+  await expect(page.getByTestId("viewer-ground-truth")).toContainText(
+    "Hypersim Ground Truth",
+  );
+  await expect(page.locator("canvas")).toHaveCount(3);
+  const groundTruthCanvas = page
+    .getByTestId("canvas-ground-truth")
+    .locator("canvas");
+  const leftPredictionCanvas = page.getByTestId("canvas-left").locator("canvas");
+  const rightPredictionCanvas = page
+    .getByTestId("canvas-right")
+    .locator("canvas");
+  await expect(groundTruthCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    /position/,
+  );
+  await expect(leftPredictionCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    /position/,
+  );
+  await expect(rightPredictionCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    /position/,
+  );
+  await page
+    .getByTestId("viewer-ground-truth")
+    .getByRole("button", { name: "适配视野" })
+    .click();
+  await page.waitForTimeout(300);
+  const synchronizedCamera = await groundTruthCanvas.getAttribute(
+    "data-camera-snapshot",
+  );
+  expect(synchronizedCamera).toBeTruthy();
+  await expect(leftPredictionCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    synchronizedCamera!,
+  );
+  await expect(rightPredictionCanvas).toHaveAttribute(
+    "data-camera-snapshot",
+    synchronizedCamera!,
+  );
   await expect(page.getByTestId("sample-1")).toContainText("改善样本");
   await expect(page.getByTestId("sample-4")).toContainText("退化样本");
   await expect(page.getByTestId("viewer-left")).toContainText(
@@ -206,6 +246,11 @@ test("shows Exp29 improvements and degradations in every split", async ({
     "最佳检查点 · K=3",
   );
   await expect(page.locator("[data-testid='left-stage']")).toHaveCount(0);
+  await page.getByTestId("sample-1").hover();
+  await expect(
+    page.getByTestId("sample-1").locator(".sample-hover-preview"),
+  ).toBeVisible();
+  await page.mouse.move(0, 0);
   const screenshotDirectory = path.resolve(
     process.cwd(),
     "../../../../stage3_stability_normalization/runs/exp29_smooth_bounded_residual_long_joint/results/viewer_acceptance",
@@ -224,11 +269,12 @@ test("shows Exp29 improvements and degradations in every split", async ({
         [4, "degraded"],
       ] as const) {
         await page.getByTestId(`sample-${sample}`).click();
+        await page.mouse.move(0, 0);
         await page.waitForTimeout(800);
         await page.screenshot({
           path: path.join(
             screenshotDirectory,
-            `exp29_${split}_${outcome}_dual_view.png`,
+            `exp29_${split}_${outcome}_triple_view.png`,
           ),
           fullPage: true,
         });

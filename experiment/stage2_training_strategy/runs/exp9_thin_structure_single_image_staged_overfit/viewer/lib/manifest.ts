@@ -35,6 +35,7 @@ export type ScopeMetrics = {
 export type PointCloudAsset = {
   url: string;
   pointCount: number;
+  validPointCount?: number;
   sha256: string;
   checkpointSha256: string;
   alignment: { scale: number; zShift: number };
@@ -76,7 +77,9 @@ export type PointCloudSample = {
     total: number;
     relativeImprovement: number;
     outcome?: "improved" | "degraded";
+    structureDescription?: string;
   };
+  groundTruth?: PointCloudAsset;
   stages: Partial<Record<StageName, StageAssets>>;
 };
 
@@ -264,6 +267,14 @@ export function validateManifest(manifest: PointCloudManifest): void {
   const expectedCount =
     manifest.resolution.width * manifest.resolution.height;
   for (const sample of manifest.samples) {
+    if (sample.groundTruth) {
+      if (sample.groundTruth.pointCount !== expectedCount) {
+        throw new Error(`${sample.id} 的真实点云点数与图像分辨率不一致`);
+      }
+      if (!sample.groundTruth.url.startsWith("/data/")) {
+        throw new Error(`${sample.id} 的真实点云 URL 不在 /data/ 下`);
+      }
+    }
     const stages = sampleStages(sample);
     if (!stages.length) throw new Error(`${sample.id} 没有点云阶段`);
     for (const stage of stages) {

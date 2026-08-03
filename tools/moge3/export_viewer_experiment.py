@@ -142,8 +142,8 @@ def validate_selection(
     experiment: str,
     splits: Sequence[str],
 ) -> None:
-    if selection.get("version") != 1:
-        raise ValueError("Selection manifest version must be 1")
+    if selection.get("version") not in {1, 2}:
+        raise ValueError("Selection manifest version must be 1 or 2")
     if selection.get("experiment") != experiment:
         raise ValueError("Selection manifest experiment does not match")
     seen: set[str] = set()

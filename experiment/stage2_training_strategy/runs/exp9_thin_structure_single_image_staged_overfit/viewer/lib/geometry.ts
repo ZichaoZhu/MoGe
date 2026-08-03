@@ -63,6 +63,21 @@ export function pointPositions(
   return output;
 }
 
+export function finiteRasterIndices(
+  raw: Float32Array,
+  indices: Uint32Array,
+): Uint32Array {
+  return indices.filter((index) => {
+    const offset = 3 * index;
+    return (
+      Number.isFinite(raw[offset]) &&
+      Number.isFinite(raw[offset + 1]) &&
+      Number.isFinite(raw[offset + 2]) &&
+      raw[offset + 2] > 0
+    );
+  });
+}
+
 export function pointColors(
   raw: ArrayLike<number>,
   indices: Uint32Array,

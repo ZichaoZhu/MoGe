@@ -534,16 +534,20 @@ export function PointCloudComparison() {
       {manifest.provenance && (
         <section className="provenance-warning" role="status">
           <strong>结果口径</strong>
-          <span>
-            训练前为
-            {manifest.provenance.initialization
-              ? ` ${manifest.provenance.initialization}`
-              : "原始初始化"}
-            ；训练后使用 {manifest.provenance.sourceExperiment} 的 step{" "}
-            {manifest.provenance.checkpointStep} 权重，SSR 采用单图即时
-            BatchNorm 统计。这是训练域数值最佳的推理诊断，不是新的训练权重，
-            也不代表验证集或测试集泛化成功。
-          </span>
+          {manifest.provenance.note ? (
+            <span>{manifest.provenance.note}</span>
+          ) : (
+            <span>
+              训练前为
+              {manifest.provenance.initialization
+                ? ` ${manifest.provenance.initialization}`
+                : "原始初始化"}
+              ；训练后使用 {manifest.provenance.sourceExperiment} 的 step{" "}
+              {manifest.provenance.checkpointStep} 权重，SSR 采用单图即时
+              BatchNorm 统计。这是训练域数值最佳的推理诊断，不是新的训练权重，
+              也不代表验证集或测试集泛化成功。
+            </span>
+          )}
         </section>
       )}
 
@@ -615,7 +619,10 @@ export function PointCloudComparison() {
                       : "sample-gain degraded"
                   }
                 >
-                  排名 {item.selection.rank}/{item.selection.total} · K=3{" "}
+                  {item.selection.relativeImprovement >= 0
+                    ? "改善样本"
+                    : "退化样本"}{" "}
+                  · 排名 {item.selection.rank}/{item.selection.total} · K=3{" "}
                   {item.selection.relativeImprovement >= 0
                     ? "改善"
                     : "退化"}{" "}

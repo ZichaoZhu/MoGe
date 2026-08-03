@@ -1,0 +1,51 @@
+{
+  "experiment_id": "exp29_smooth_bounded_residual_long_joint",
+  "objective": "精确续训Exp28至step 5000，以至少八小时的长程联合训练检验训练收益、验证退化和残差稳定性。",
+  "resume": {
+    "source_experiment": "exp28_smooth_bounded_residual_joint",
+    "step": 1000,
+    "resume_checkpoint_sha256": "8f82fb9e17cf997645e9c321a1ae3becdfe693ae3e51c71e1f32bc09b0647728",
+    "preserve_optimizer": true,
+    "preserve_rng": true,
+    "preserve_histories": true,
+    "inherited_best_step": 950
+  },
+  "data": {
+    "source_experiment": "exp11_hypersim_100_train_staged_joint_overfit",
+    "train": 100,
+    "validation": 16,
+    "test": 16
+  },
+  "optimization": {
+    "start_step": 1000,
+    "maximum_step": 5000,
+    "new_joint_steps": 4000,
+    "global_batch_size": 8,
+    "microbatch_size": 1,
+    "refinement_steps": 3,
+    "ssr_learning_rate": 2e-06,
+    "head_learning_rate": 5e-07,
+    "backbone_learning_rate": 0.0,
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "seed": 161
+  },
+  "residual_control": {
+    "type": "smooth_tanh",
+    "per_iteration_limit": 0.1,
+    "maximum_raw_residual_safety_limit": 2.0,
+    "saturation_threshold_fraction": 0.95
+  },
+  "evaluation": {
+    "every_steps": 100,
+    "selection_split": "train",
+    "selection_scope": "structure",
+    "periodic_train_samples": 100,
+    "steps": [0, 3]
+  },
+  "runtime": {
+    "target_wall_clock_hours": 8,
+    "estimated_wall_clock_hours": "8.5-10",
+    "preferred_gpu": 3
+  }
+}

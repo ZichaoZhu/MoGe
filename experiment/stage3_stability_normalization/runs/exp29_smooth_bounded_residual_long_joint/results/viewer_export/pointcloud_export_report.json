@@ -1,0 +1,329 @@
+{
+  "status": "complete",
+  "experiment": "exp29_smooth_bounded_residual_long_joint",
+  "manifest": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/exp29/manifest.json",
+  "selectionManifest": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage3_stability_normalization/runs/exp29_smooth_bounded_residual_long_joint/viewer_selection.json",
+  "splits": {
+    "train": [
+      "ai_005_006_cam_00_frame.0099",
+      "ai_018_007_cam_00_frame.0000",
+      "ai_053_018_cam_00_frame.0000",
+      "ai_001_001_cam_00_frame.0056",
+      "ai_001_001_cam_00_frame.0043"
+    ],
+    "val": [
+      "ai_043_002_cam_00_frame.0057",
+      "ai_047_001_cam_00_frame.0014",
+      "ai_047_001_cam_00_frame.0028",
+      "ai_043_002_cam_00_frame.0042",
+      "ai_043_002_cam_00_frame.0000"
+    ],
+    "test": [
+      "ai_050_001_cam_00_frame.0085",
+      "ai_050_001_cam_00_frame.0028",
+      "ai_050_001_cam_00_frame.0042",
+      "ai_046_001_cam_00_frame.0028",
+      "ai_046_001_cam_00_frame.0042"
+    ]
+  },
+  "checkpointStep": 2800,
+  "checkpointSha256": "6c032e13ad217da8578c4d1966da019d092637fc93362a5b90cc00f29de92ffd",
+  "inferencePolicy": "stored_batch_norm_running_statistics",
+  "smoothLogDepthResidualBound": 0.1,
+  "batchNormRunningState": {
+    "beforeSha256": "721e7ebd2a486a10593f8d2948c2df24f04f84303c4c712531d0c1f42fe3a03b",
+    "afterSha256": "721e7ebd2a486a10593f8d2948c2df24f04f84303c4c712531d0c1f42fe3a03b",
+    "unchanged": true
+  },
+  "evaluationSteps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "pointCloudCount": 60,
+  "pointCloudBytes": 176966700,
+  "pointCloudChecksums": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/exp29/pointcloud_sha256.json",
+  "metricValidation": {
+    "requestedTolerance": 1e-05,
+    "maxAbsoluteDifference": {
+      "point_rel": 8.05780291557312e-05,
+      "depth_rel": 8.090585470199585e-05,
+      "depth_delta_1.01": 0.002034485340118408,
+      "depth_delta_1.25": 0.0010172724723815918,
+      "boundary_f1": 0.0015759468078613281
+    }
+  },
+  "samples": [
+    {
+      "id": "ai_005_006_cam_00_frame.0099",
+      "split": "train",
+      "cropXYXY": [
+        304,
+        96,
+        496,
+        288
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 1,
+        "total": 100,
+        "relativeImprovement": 0.487645804903337,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_018_007_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        224,
+        160,
+        416,
+        352
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 2,
+        "total": 100,
+        "relativeImprovement": 0.475119706007628,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_053_018_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        320,
+        64,
+        512,
+        256
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 3,
+        "total": 100,
+        "relativeImprovement": 0.40696338268670906,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0056",
+      "split": "train",
+      "cropXYXY": [
+        304,
+        192,
+        496,
+        384
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 100,
+        "total": 100,
+        "relativeImprovement": -1.1561916165947055,
+        "outcome": "degraded"
+      }
+    },
+    {
+      "id": "ai_001_001_cam_00_frame.0043",
+      "split": "train",
+      "cropXYXY": [
+        304,
+        144,
+        496,
+        336
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 99,
+        "total": 100,
+        "relativeImprovement": -1.0904845698092462,
+        "outcome": "degraded"
+      }
+    },
+    {
+      "id": "ai_043_002_cam_00_frame.0057",
+      "split": "val",
+      "cropXYXY": [
+        288,
+        192,
+        480,
+        384
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 1,
+        "total": 16,
+        "relativeImprovement": 0.05140928169524958,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0014",
+      "split": "val",
+      "cropXYXY": [
+        320,
+        144,
+        512,
+        336
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 2,
+        "total": 16,
+        "relativeImprovement": 0.05096055038889752,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0028",
+      "split": "val",
+      "cropXYXY": [
+        256,
+        128,
+        448,
+        320
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 3,
+        "total": 16,
+        "relativeImprovement": 0.042386974795938726,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_043_002_cam_00_frame.0042",
+      "split": "val",
+      "cropXYXY": [
+        192,
+        160,
+        384,
+        352
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 16,
+        "total": 16,
+        "relativeImprovement": -0.367201161227823,
+        "outcome": "degraded"
+      }
+    },
+    {
+      "id": "ai_043_002_cam_00_frame.0000",
+      "split": "val",
+      "cropXYXY": [
+        272,
+        192,
+        464,
+        384
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 15,
+        "total": 16,
+        "relativeImprovement": -0.25879080017790546,
+        "outcome": "degraded"
+      }
+    },
+    {
+      "id": "ai_050_001_cam_00_frame.0085",
+      "split": "test",
+      "cropXYXY": [
+        160,
+        192,
+        352,
+        384
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 1,
+        "total": 16,
+        "relativeImprovement": 0.11639108651080217,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_050_001_cam_00_frame.0028",
+      "split": "test",
+      "cropXYXY": [
+        0,
+        176,
+        192,
+        368
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 2,
+        "total": 16,
+        "relativeImprovement": 0.049706670986421085,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_050_001_cam_00_frame.0042",
+      "split": "test",
+      "cropXYXY": [
+        16,
+        192,
+        208,
+        384
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 3,
+        "total": 16,
+        "relativeImprovement": 0.0301960581756052,
+        "outcome": "improved"
+      }
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0028",
+      "split": "test",
+      "cropXYXY": [
+        224,
+        80,
+        416,
+        272
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 16,
+        "total": 16,
+        "relativeImprovement": -0.4342975364649447,
+        "outcome": "degraded"
+      }
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0042",
+      "split": "test",
+      "cropXYXY": [
+        320,
+        192,
+        512,
+        384
+      ],
+      "selection": {
+        "metric": "full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+        "rank": 15,
+        "total": 16,
+        "relativeImprovement": -0.18695207469698458,
+        "outcome": "degraded"
+      }
+    }
+  ]
+}

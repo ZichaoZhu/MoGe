@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "experiment": "exp29_smooth_bounded_residual_long_joint",
+  "metric": "full_point_rel_relative_reduction_k0_to_k3",
+  "policy": {
+    "train": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+    "val": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张",
+    "test": "K=0到K=3 Point Rel改善最大的三张，加退化最严重的两张"
+  },
+  "splits": {
+    "train": [
+      {
+        "id": "ai_005_006_cam_00_frame.0099",
+        "relativeImprovement": 0.487645804903337,
+        "picture": 1,
+        "rank": 1,
+        "total": 100,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_018_007_cam_00_frame.0000",
+        "relativeImprovement": 0.475119706007628,
+        "picture": 2,
+        "rank": 2,
+        "total": 100,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_053_018_cam_00_frame.0000",
+        "relativeImprovement": 0.40696338268670906,
+        "picture": 3,
+        "rank": 3,
+        "total": 100,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_001_001_cam_00_frame.0056",
+        "relativeImprovement": -1.1561916165947055,
+        "picture": 4,
+        "rank": 100,
+        "total": 100,
+        "outcome": "degraded"
+      },
+      {
+        "id": "ai_001_001_cam_00_frame.0043",
+        "relativeImprovement": -1.0904845698092462,
+        "picture": 5,
+        "rank": 99,
+        "total": 100,
+        "outcome": "degraded"
+      }
+    ],
+    "val": [
+      {
+        "id": "ai_043_002_cam_00_frame.0057",
+        "relativeImprovement": 0.05140928169524958,
+        "picture": 1,
+        "rank": 1,
+        "total": 16,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_047_001_cam_00_frame.0014",
+        "relativeImprovement": 0.05096055038889752,
+        "picture": 2,
+        "rank": 2,
+        "total": 16,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_047_001_cam_00_frame.0028",
+        "relativeImprovement": 0.042386974795938726,
+        "picture": 3,
+        "rank": 3,
+        "total": 16,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_043_002_cam_00_frame.0042",
+        "relativeImprovement": -0.367201161227823,
+        "picture": 4,
+        "rank": 16,
+        "total": 16,
+        "outcome": "degraded"
+      },
+      {
+        "id": "ai_043_002_cam_00_frame.0000",
+        "relativeImprovement": -0.25879080017790546,
+        "picture": 5,
+        "rank": 15,
+        "total": 16,
+        "outcome": "degraded"
+      }
+    ],
+    "test": [
+      {
+        "id": "ai_050_001_cam_00_frame.0085",
+        "relativeImprovement": 0.11639108651080217,
+        "picture": 1,
+        "rank": 1,
+        "total": 16,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_050_001_cam_00_frame.0028",
+        "relativeImprovement": 0.049706670986421085,
+        "picture": 2,
+        "rank": 2,
+        "total": 16,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_050_001_cam_00_frame.0042",
+        "relativeImprovement": 0.0301960581756052,
+        "picture": 3,
+        "rank": 3,
+        "total": 16,
+        "outcome": "improved"
+      },
+      {
+        "id": "ai_046_001_cam_00_frame.0028",
+        "relativeImprovement": -0.4342975364649447,
+        "picture": 4,
+        "rank": 16,
+        "total": 16,
+        "outcome": "degraded"
+      },
+      {
+        "id": "ai_046_001_cam_00_frame.0042",
+        "relativeImprovement": -0.18695207469698458,
+        "picture": 5,
+        "rank": 15,
+        "total": 16,
+        "outcome": "degraded"
+      }
+    ]
+  }
+}

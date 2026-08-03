@@ -49,6 +49,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--boundary-threshold", type=float, default=0.03)
     parser.add_argument(
+        "--smooth-log-depth-residual-bound",
+        type=float,
+        default=0.0,
+        help=(
+            "Apply the same smooth tanh log-depth residual bound used by "
+            "training. Zero disables the bound."
+        ),
+    )
+    parser.add_argument(
         "--ssr-batch-statistics",
         action="store_true",
         help=(
@@ -255,6 +264,9 @@ def run(args: argparse.Namespace) -> Dict[str, object]:
             refinement_steps=steps,
             batch_size=args.batch_size,
             boundary_threshold=args.boundary_threshold,
+            smooth_log_depth_residual_bound=(
+                args.smooth_log_depth_residual_bound
+            ),
             ssr_batch_norm_states=iteration_states,
         )
     metrics = aggregate_evaluation(records)
@@ -271,6 +283,9 @@ def run(args: argparse.Namespace) -> Dict[str, object]:
         "shape": [args.height, args.width],
         "num_tokens": args.num_tokens,
         "evaluation_refinement_steps": steps,
+        "smooth_log_depth_residual_bound": (
+            args.smooth_log_depth_residual_bound
+        ),
         "ssr_normalization_policy": (
             f"batch_independent_{ssr_normalization}"
             if ssr_normalization != "batch_norm"

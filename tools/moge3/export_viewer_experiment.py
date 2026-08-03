@@ -397,6 +397,7 @@ def predict_and_measure(
     num_tokens: int,
     steps: Sequence[int],
     boundary_threshold: float,
+    smooth_log_depth_residual_bound: float = 0.0,
 ) -> tuple[Dict[int, np.ndarray], Dict[int, Dict[str, Any]], int]:
     from moge.scripts.overfit_hypersim_staged_v3 import (
         _scope_metrics,
@@ -409,6 +410,7 @@ def predict_and_measure(
         num_tokens=num_tokens,
         num_refinement_steps=max(steps),
         return_intermediates=True,
+        smooth_log_depth_residual_bound=smooth_log_depth_residual_bound,
     )
     sequence = output["points_sequence"]
     gt = gt_points.to(image.device)

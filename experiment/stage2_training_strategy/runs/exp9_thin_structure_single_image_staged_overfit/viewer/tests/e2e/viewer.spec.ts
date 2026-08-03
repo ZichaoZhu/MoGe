@@ -187,6 +187,57 @@ test("shows a clear startup error when the manifest cannot be loaded", async ({
   );
 });
 
+test("shows Exp29 improvements and degradations in every split", async ({
+  page,
+}) => {
+  await page.goto(
+    "/?experiment=exp29_smooth_bounded_residual_long_joint&split=train&sample=1&leftK=0&rightK=3",
+  );
+  await expect(
+    page.getByText("Exp29 · 长程联合训练好坏案例").first(),
+  ).toBeVisible();
+  await expect(page.locator(".sample-switcher button")).toHaveCount(5);
+  await expect(page.getByTestId("sample-1")).toContainText("改善样本");
+  await expect(page.getByTestId("sample-4")).toContainText("退化样本");
+  await expect(page.getByTestId("viewer-left")).toContainText(
+    "最佳检查点 · K=0",
+  );
+  await expect(page.getByTestId("viewer-right")).toContainText(
+    "最佳检查点 · K=3",
+  );
+  await expect(page.locator("[data-testid='left-stage']")).toHaveCount(0);
+  const screenshotDirectory = path.resolve(
+    process.cwd(),
+    "../../../../stage3_stability_normalization/runs/exp29_smooth_bounded_residual_long_joint/results/viewer_acceptance",
+  );
+  if (process.env.UPDATE_ACCEPTANCE_SCREENSHOTS === "1") {
+    await mkdir(screenshotDirectory, { recursive: true });
+  }
+  for (const split of ["val", "test", "train"] as const) {
+    await page.getByTestId(`split-${split}`).click();
+    await expect(page.locator(".sample-switcher button")).toHaveCount(5);
+    await expect(page.getByTestId("sample-1")).toContainText("改善样本");
+    await expect(page.getByTestId("sample-4")).toContainText("退化样本");
+    if (process.env.UPDATE_ACCEPTANCE_SCREENSHOTS === "1") {
+      for (const [sample, outcome] of [
+        [1, "improved"],
+        [4, "degraded"],
+      ] as const) {
+        await page.getByTestId(`sample-${sample}`).click();
+        await page.waitForTimeout(800);
+        await page.screenshot({
+          path: path.join(
+            screenshotDirectory,
+            `exp29_${split}_${outcome}_dual_view.png`,
+          ),
+          fullPage: true,
+        });
+      }
+    }
+  }
+  await expect(page.locator(".canvas-error")).toHaveCount(0);
+});
+
 test("loads Exp12 train, validation, and test samples", async ({ page }) => {
   await page.goto("/");
   await page

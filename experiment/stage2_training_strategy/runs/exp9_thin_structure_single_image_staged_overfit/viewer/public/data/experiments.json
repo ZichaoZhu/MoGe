@@ -1,7 +1,22 @@
 {
   "version": 1,
-  "defaultExperiment": "exp20_stateless_ssr_batch_statistics",
+  "defaultExperiment": "exp29_smooth_bounded_residual_long_joint",
   "experiments": [
+    {
+      "id": "exp29_smooth_bounded_residual_long_joint",
+      "label": "Exp29 · 长程联合训练好坏案例",
+      "shortLabel": "Exp29 好坏案例",
+      "summary": "Exp29 最佳 step 2800；每个划分同时展示 K=3 改善最明显的三张与退化最严重的两张，默认左右比较 K=0 与 K=3。",
+      "manifestUrl": "/data/exp29/manifest.json",
+      "stageLabels": {
+        "initial": "续训起点",
+        "final": "最佳检查点"
+      },
+      "stageDetails": {
+        "initial": "Exp28 step 1000（本入口未重复存储）",
+        "final": "Exp29 step 2800 · 保存的 BatchNorm 统计 · 残差平滑上限 0.1"
+      }
+    },
     {
       "id": "exp20_stateless_ssr_batch_statistics",
       "label": "Exp20 · 训练域最佳推理配置",

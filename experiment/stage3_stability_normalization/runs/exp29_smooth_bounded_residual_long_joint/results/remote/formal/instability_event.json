@@ -1,0 +1,11 @@
+{
+  "event": "raw_log_depth_residual_limit",
+  "step": 3631,
+  "stage": "joint",
+  "threshold": 2.0,
+  "ssr_max_abs_log_depth_residual": 0.10000000149011612,
+  "ssr_max_abs_raw_log_depth_residual": 2.0125513076782227,
+  "ssr_max_bound_saturation_fraction": 0.001678466796875,
+  "ssr_max_depth_span": 234.0,
+  "action": "aborted before backward and optimizer step"
+}

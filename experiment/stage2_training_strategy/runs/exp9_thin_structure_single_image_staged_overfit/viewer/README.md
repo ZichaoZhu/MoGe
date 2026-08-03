@@ -1,19 +1,21 @@
 # MoGe-3 多实验双窗口点云查看器
 
-本目录提供 Exp9、Exp12 与 Exp20 点云的统一交互式浏览器。页面依次选择
+本目录提供 Exp9、Exp12、Exp20 与 Exp29 点云的统一交互式浏览器。页面依次选择
 实验、数据划分和图片；两个窗口都可独立选择训练前/后与 K。默认入口为
-`Exp20 → Train → 图片 1`，左侧显示训练前 K=0，右侧显示训练后 K=3。
+`Exp29 → Train → 图片 1`，左侧显示最佳检查点 K=0，右侧显示同一检查点 K=3。
 
 - Exp9：开放样本 05、04、06，展示三项彼此独立的单图极限过拟合；
 - Exp12：开放一张训练、一张验证和一张测试图片，展示 100 张训练图联合微调前后；
 - Exp20：每个 train/val/test 划分开放五张，展示 Exp15 step 800 权重使用
   单图即时 BatchNorm 统计时的 K=0/1/3/5，并与 Exp15 训练开始前的
   MoGe-2 初始化比较；
+- Exp29：每个 train/val/test 划分开放五张，前三张是 step 2800 下 K=3
+  相对 K=0 改善最大的案例，后两张是退化最严重的案例；
 - Exp12 的训练样本与 Exp9 样本 04 是同一帧，可直接比较单图过拟合与百图训练。
 
 实验目录位于 `public/data/experiments.json`。Exp9 清单保持
-`public/data/manifest.json`，Exp12 与 Exp20 的清单和资产分别位于
-`public/data/exp12/`、`public/data/exp20/`。
+`public/data/manifest.json`，Exp12、Exp20 与 Exp29 的清单和资产分别位于
+`public/data/exp12/`、`public/data/exp20/`、`public/data/exp29/`。
 
 ## 数据语义
 
@@ -29,6 +31,10 @@
   `Ruicheng/moge-2-vitl-normal`、seed 151 与零初始化 SSR；“训练后”恢复
   Exp15 step 800，并在不读取或更新 running buffers 的情况下让 SSR 使用当前
   单图稀疏特征统计；
+- Exp29 只展示最终 step 2800 检查点，不重复存储续训起点。Base、2D Head
+  和 SSR 均来自同一检查点，SSR 使用保存的 BatchNorm running statistics，
+  每轮应用 `0.1*tanh(raw_residual/0.1)`；左右 K=0/K=3 对比表示是否启用
+  SSR 精修，不表示两个不同训练阶段；
 - SSR 体素模式使用 `[depth,row,column]`，其中
   `depth=round(200*log(Z_raw))`。为了显示居中只减去当前裁剪的中位 depth bin，
   不改变体素间相对关系。
@@ -52,6 +58,11 @@ SHA-256 分别归档在 Exp20 的 `viewer_selection.json`、导出报告与
 全图指标使用 Exp20 正式评测归档值。SpConv CUDA 重跑在阈值附近存在轻微
 非确定性，本次点云重算相对正式评测的 Point Rel 最大绝对偏差为
 `2.68e-4`；该偏差与有效容差均保存在导出报告，未被当作新的实验结果。
+
+Exp29 保存 15 张图片的最终 K=0/1/3/5，共 60 份 PLY、176,966,700 字节。
+Train/Validation/Test 均采用“改善前三 + 退化最差两张”的固定规则，避免网站
+只展示成功案例。完整评测中 K=3 优于 K=0 的比例分别为 87%、18.75% 与
+37.5%；这说明训练域修正能力明显，但不能据此宣称留出域泛化成功。
 
 ## 本地运行
 
@@ -97,7 +108,8 @@ Exp9 浏览器验收截图位于上级实验目录的 `artifacts/viewer_acceptan
 Exp12 截图位于
 `../../exp12_hypersim_100_immediate_joint_finetuning/results/viewer_acceptance/`。
 Exp20 的 train/val/test 验收截图位于阶段三对应实验的
-`results/viewer_acceptance/`。
+`results/viewer_acceptance/`。Exp29 同样为三个划分各保存一张改善案例和
+一张退化案例的双窗口截图，共六张。
 需要主动更新截图时使用
 `UPDATE_ACCEPTANCE_SCREENSHOTS=1 npm run test:e2e`；普通测试不会改写归档图片。
 

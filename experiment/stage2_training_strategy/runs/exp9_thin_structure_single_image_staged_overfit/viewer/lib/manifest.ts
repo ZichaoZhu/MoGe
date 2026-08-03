@@ -75,6 +75,7 @@ export type PointCloudSample = {
     rank: number;
     total: number;
     relativeImprovement: number;
+    outcome?: "improved" | "degraded";
   };
   stages: Partial<Record<StageName, StageAssets>>;
 };
@@ -110,6 +111,9 @@ export type PointCloudManifest = {
     checkpointSha256: string;
     inferencePolicy: string;
     selectionMetric: string;
+    selectionPolicy?: string;
+    smoothLogDepthResidualBound?: number;
+    note?: string;
   };
   samples: PointCloudSample[];
 };

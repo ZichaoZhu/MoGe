@@ -1,0 +1,40 @@
+{
+  "experiment": "exp29_smooth_bounded_residual_long_joint",
+  "status": "stopped_by_raw_residual_safety_limit",
+  "started_at": "2026-08-03T00:44:19+08:00",
+  "finished_at": "2026-08-03T06:15:02.442342+08:00",
+  "last_completed_step": 3600,
+  "instability_step": 3631,
+  "best_step": 2800,
+  "best_checkpoint_sha256": "6c032e13ad217da8578c4d1966da019d092637fc93362a5b90cc00f29de92ffd",
+  "last_safe_resume_sha256": "f3b94bc42f3a61d68a50977e2bcfa5737e05f057df08539d844ed7d27c41dd10",
+  "instability": {
+    "raw_log_depth_residual": 2.0125513076782227,
+    "raw_residual_limit": 2.0,
+    "bounded_log_depth_residual": 0.10000000149011612,
+    "bound": 0.1,
+    "saturation_fraction": 0.001678466796875,
+    "depth_span": 234.0
+  },
+  "best_step_metrics": {
+    "train_k0_point_rel": 0.04889112440403551,
+    "train_k3_point_rel": 0.04077645584009588,
+    "train_k3_structure_point_rel": 0.04648166474938955,
+    "val_k0_point_rel": 0.08432499220361933,
+    "val_k3_point_rel": 0.08908854331821203
+  },
+  "full_evaluation": {
+    "train_fraction_k3_improved": 0.87,
+    "val_fraction_k3_improved": 0.1875,
+    "test_fraction_k3_improved": 0.375,
+    "train_mean_k3_relative_reduction": 0.16597426757626052,
+    "val_mean_k3_relative_reduction": -0.056490383101253865,
+    "test_mean_k3_relative_reduction": -0.021652980389675232
+  },
+  "viewer": {
+    "samples": 15,
+    "point_clouds": 60,
+    "bytes": 176966700,
+    "selection": "three_best_improvements_plus_two_worst_degradations_per_split"
+  }
+}

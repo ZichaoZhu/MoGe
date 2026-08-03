@@ -19,6 +19,7 @@
 | [Exp23](runs/exp23_true_microbatch2_batchnorm/README.md) | 真实双图 microbatch 短程对照 | 短程无离群，尚不足以检验强修正阶段 |
 | [Exp24](runs/exp24_microbatch2_long_detached/README.md) | 真实双图 microbatch 长程对照 | 训练改善约 21%，离群和最大残差下降，留出集仍退化 |
 | [Exp28](runs/exp28_smooth_bounded_residual_joint/README.md) | 平滑有界残差联合训练 | 稳定完成 200 次联合更新并改善训练集，验证集全图仍退化 |
+| [Exp29](runs/exp29_smooth_bounded_residual_long_joint/README.md) | 平滑有界残差长程联合训练 | 续训至 step 3600；最佳 step 2800 训练集改善，原始残差最终触发安全停止，留出集仍退化 |
 
 ## 因果链
 

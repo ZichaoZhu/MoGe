@@ -85,7 +85,8 @@
     "benchmark_process_counts": [1, 2, 4],
     "ddp_backend": "gloo",
     "minimum_free_memory_mib_per_gpu": 28672,
-    "benchmark_steps": 20
+    "benchmark_steps": 20,
+    "four_gpu_unavailable_policy": "record skipped_resource_unavailable and select the fastest completed topology"
   },
   "seed": 173
 }

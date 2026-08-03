@@ -383,12 +383,27 @@ def run_benchmarks(
 ) -> dict[str, Any]:
     destination = experiment / "artifacts" / "benchmarks"
     results = []
+    skipped = []
     for process_count in (1, 2, 4):
         output = destination / f"{process_count}_gpu"
         existing_report = output / "report.json"
         if existing_report.is_file():
             results.append(benchmark_result(output))
             continue
+        if process_count == 4:
+            states = query_gpus()
+            candidates = eligible_gpus(states, minimum_free_mib)
+            if len(candidates) < process_count:
+                skipped.append(
+                    {
+                        "process_count": process_count,
+                        "status": "skipped_resource_unavailable",
+                        "required_free_mib_per_gpu": minimum_free_mib,
+                        "eligible_gpu_indices": candidates,
+                        "gpu_states": [state.__dict__ for state in states],
+                    }
+                )
+                continue
         gpu_indices = wait_for_gpus(
             experiment,
             count=process_count,
@@ -433,6 +448,7 @@ def run_benchmarks(
         "completed_at": now(),
         "criterion": "minimum median optimization-step wall time over steps 5-20",
         "results": results,
+        "skipped": skipped,
         "selected_process_count": selected["process_count"],
     }
     atomic_json(destination / "summary.json", payload)

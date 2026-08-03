@@ -125,6 +125,17 @@ def update_status(
 ) -> None:
     path = experiment / "artifacts" / "status.json"
     previous = read_json(path) if path.is_file() else {"started_at": now()}
+    if state != "failed":
+        for key in ("error", "message", "failed_at"):
+            previous.pop(key, None)
+    if state != "waiting_for_gpu":
+        for key in (
+            "requested_gpu_count",
+            "eligible_gpu_indices",
+            "gpu_states",
+            "next_check_seconds",
+        ):
+            previous.pop(key, None)
     atomic_json(
         path,
         {

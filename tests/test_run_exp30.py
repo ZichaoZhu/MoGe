@@ -9,6 +9,7 @@ from tools.moge3.run_exp30 import (
     find_data_root,
     full_scores,
     training_launcher,
+    update_status,
     window_improvement,
 )
 
@@ -72,3 +73,41 @@ def test_data_root_supports_the_server_legacy_layout(tmp_path):
     )
     legacy.mkdir(parents=True)
     assert find_data_root(repository, safe_root=tmp_path) == legacy
+
+
+def test_update_status_clears_stale_failure_and_wait_fields(tmp_path):
+    artifacts = tmp_path / "artifacts"
+    artifacts.mkdir()
+    (artifacts / "status.json").write_text(
+        json.dumps(
+            {
+                "started_at": "earlier",
+                "state": "waiting_for_gpu",
+                "error": "RuntimeError",
+                "message": "old failure",
+                "failed_at": "earlier",
+                "requested_gpu_count": 4,
+                "eligible_gpu_indices": [3],
+                "gpu_states": [],
+                "next_check_seconds": 600,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    update_status(tmp_path, state="running", phase="stage1")
+
+    payload = json.loads((artifacts / "status.json").read_text())
+    assert payload["state"] == "running"
+    assert payload["phase"] == "stage1"
+    assert payload["started_at"] == "earlier"
+    for key in (
+        "error",
+        "message",
+        "failed_at",
+        "requested_gpu_count",
+        "eligible_gpu_indices",
+        "gpu_states",
+        "next_check_seconds",
+    ):
+        assert key not in payload

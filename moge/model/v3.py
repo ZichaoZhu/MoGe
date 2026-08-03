@@ -153,6 +153,7 @@ class MoGeModel(MoGeModelV2):
         return_intermediates: bool = False,
         detach_base_from_refiner: bool = False,
         smooth_log_depth_residual_bound: Optional[float] = None,
+        max_voxel_depth_span: Optional[int] = None,
         ssr_batch_norm_states: Optional[
             List[Dict[str, Dict[str, torch.Tensor]]]
         ] = None,
@@ -196,6 +197,7 @@ class MoGeModel(MoGeModelV2):
                     raw_residual, stats = self.ssr(
                         factorized,
                         visual_for_refiner,
+                        max_depth_span=max_voxel_depth_span,
                     )
                     residual = smooth_bound_log_depth_residual(
                         raw_residual,

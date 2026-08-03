@@ -4,6 +4,7 @@ import torch
 from moge.model.ssr import (
     SelfGuidedSparseRefiner,
     SpconvSparseUNet,
+    VoxelDepthSpanError,
     factorize_points,
     gather_features_at_coordinates,
     sample_visual_features_for_voxels,
@@ -76,6 +77,17 @@ def test_voxelization_has_one_input_voxel_per_pixel_and_round_trip_mapping():
         [expected_hash[tuple(coordinate.tolist())] for coordinate in shell.coordinates]
     )
     torch.testing.assert_close(reordered, expected)
+
+
+def test_voxel_depth_span_is_rejected_before_sparse_construction():
+    factorized = torch.zeros(1, 2, 2, 3)
+    factorized[0, 1, 1, 2] = 3.0
+    with pytest.raises(VoxelDepthSpanError, match="before sparse tensor"):
+        voxelize_factorized(
+            factorized,
+            voxel_resolution=200,
+            max_depth_span=512,
+        )
 
 
 def test_depth_discontinuity_is_separated_in_voxel_space():

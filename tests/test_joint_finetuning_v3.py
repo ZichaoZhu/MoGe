@@ -11,6 +11,7 @@ from moge.scripts.train_hypersim_joint_v3 import (
     effective_training_stage,
     flatten_periodic_evaluation,
     learning_rate_scale,
+    periodic_selection_score,
     preclip_gradient_action,
     refinement_has_collapsed,
     save_training_plot,
@@ -35,6 +36,7 @@ def _args(**overrides):
         "backbone_warmup_end": 200,
         "refiner_detach_steps": 500,
         "eval_every": 250,
+        "full_eval_every": 0,
         "periodic_train_samples": 64,
         "ssr_learning_rate": 2e-5,
         "head_learning_rate": 1e-5,
@@ -51,8 +53,15 @@ def _args(**overrides):
         "max_abs_log_depth_residual": 0.0,
         "smooth_log_depth_residual_bound": 0.0,
         "max_abs_raw_log_depth_residual": 0.0,
+        "raw_residual_warning_threshold": 0.0,
+        "raw_residual_tail_threshold": 0.0,
+        "raw_residual_tail_weight": 0.0,
+        "max_bound_saturation_fraction": 0.0,
+        "max_consecutive_saturated_steps": 0,
+        "max_voxel_depth_span": 0,
         "max_refined_point_rel": 0.0,
         "max_refined_to_base_ratio": 0.0,
+        "max_base_to_best_ratio": 0.0,
         "max_skipped_preclip_steps": 0,
         "max_consecutive_skipped_preclip_steps": 0,
     }
@@ -243,6 +252,31 @@ def test_structure_selection_metric_and_flattening():
         "train/k0_point_rel": 0.2,
         "train/k0_structure_point_rel": 0.3,
     }
+    assert periodic_selection_score(
+        periodic,
+        refinement_step=0,
+        split="train",
+        scope="composite",
+    ) == pytest.approx(0.5)
+
+
+def test_composite_selection_requires_full_train_evaluation():
+    validate_joint_schedule(
+        _args(
+            selection_scope="composite",
+            selection_split="train",
+            fine_structure_rois="locked.json",
+            full_eval_every=2500,
+        )
+    )
+    with pytest.raises(ValueError, match="Composite selection"):
+        validate_joint_schedule(
+            _args(
+                selection_scope="composite",
+                selection_split="train",
+                fine_structure_rois="locked.json",
+            )
+        )
 
 
 def test_refinement_collapse_requires_all_enabled_thresholds():

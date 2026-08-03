@@ -3,7 +3,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 from dataclasses import dataclass
 import math
-from typing import Dict, List, Sequence, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 import torch
 import torch.nn as nn
@@ -75,10 +75,15 @@ class VoxelizedShell:
         }
 
 
+class VoxelDepthSpanError(RuntimeError):
+    """Raised before sparse allocation when a shell exceeds its safe depth span."""
+
+
 def voxelize_factorized(
     factorized: torch.Tensor,
     voxel_resolution: float = 200.0,
     num_downsamples: int = 4,
+    max_depth_span: Optional[int] = None,
 ) -> VoxelizedShell:
     """
     Voxelize q=(u,v,zeta) using c=(row,col,round(D*zeta)).
@@ -96,6 +101,16 @@ def voxelize_factorized(
     device = factorized.device
     logical_depth = torch.round(voxel_resolution * factorized[..., 2]).to(torch.long)
     depth_offsets = logical_depth.amin(dim=(-2, -1))
+    depth_spans = logical_depth.amax(dim=(-2, -1)) - depth_offsets + 1
+    maximum_depth_span = int(depth_spans.amax().item())
+    if max_depth_span is not None:
+        if max_depth_span <= 0:
+            raise ValueError("Maximum voxel depth span must be positive")
+        if maximum_depth_span > int(max_depth_span):
+            raise VoxelDepthSpanError(
+                "Voxel depth span exceeded the configured limit before sparse "
+                f"tensor construction: {maximum_depth_span} > {int(max_depth_span)}"
+            )
     storage_depth = logical_depth - depth_offsets[:, None, None]
 
     rows, cols = torch.meshgrid(
@@ -622,6 +637,7 @@ class SelfGuidedSparseRefiner(nn.Module):
         self,
         factorized: torch.Tensor,
         visual_features: torch.Tensor,
+        max_depth_span: Optional[int] = None,
     ) -> Tuple[torch.Tensor, Dict[str, object]]:
         factorized = factorized.float()
         visual_features = visual_features.float()
@@ -629,6 +645,7 @@ class SelfGuidedSparseRefiner(nn.Module):
             factorized,
             voxel_resolution=self.voxel_resolution,
             num_downsamples=self.num_downsamples,
+            max_depth_span=max_depth_span,
         )
         residual, active_counts = self.unet(shell, visual_features)
         stats: Dict[str, object] = dict(shell.statistics())

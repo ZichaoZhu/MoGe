@@ -1,0 +1,91 @@
+{
+  "experiment_id": "exp30_hypersim_100_long_two_stage_overfit",
+  "objective": "在固定100张Hypersim训练集上，以长程两阶段训练验证当前MoGe-3实现的极限拟合能力。",
+  "claim_boundary": "仅验证小数据训练集学习能力和实现可行性，不宣称复现论文的大规模泛化性能。",
+  "initialization": {
+    "pretrained": "Ruicheng/moge-2-vitl-normal",
+    "ssr": "zero_initialized",
+    "inherit_exp29_weights": false
+  },
+  "data": {
+    "source_experiment": "exp11_hypersim_100_train_staged_joint_overfit",
+    "train": 100,
+    "validation": 16,
+    "test": 16,
+    "height": 384,
+    "width": 512,
+    "augmentation": false,
+    "normal_prediction": false
+  },
+  "optimization": {
+    "global_batch_size": 8,
+    "microbatch_size": 2,
+    "refinement_steps": 3,
+    "evaluation_steps": [0, 1, 3, 5],
+    "weight_decay": 0.01,
+    "gradient_clip_norm": 1.0,
+    "loss_weights": {
+      "global": 1.0,
+      "local": 1.0,
+      "edge": 1.0
+    },
+    "local_scales": [4, 16, 64]
+  },
+  "stage1": {
+    "name": "detached_coadaptation",
+    "rungs": [20000, 40000, 62500],
+    "plateau_window_steps": 5000,
+    "minimum_relative_improvement": 0.01,
+    "learning_rates": {
+      "ssr": 1e-05,
+      "heads": 1e-06,
+      "backbone": 5e-08
+    },
+    "backbone_freeze_steps": 1000,
+    "backbone_warmup_end": 2000,
+    "cosine_decay_start": 5000,
+    "cosine_decay_end": 62500,
+    "final_scale": 0.1
+  },
+  "stage2": {
+    "name": "complete_joint",
+    "additional_rungs": [10000, 17500, 25000],
+    "plateau_window_steps": 2500,
+    "minimum_relative_improvement": 0.005,
+    "learning_rates": {
+      "ssr": 1e-06,
+      "heads": 2.5e-07,
+      "backbone": 1e-08
+    },
+    "final_scale": 0.1
+  },
+  "residual_control": {
+    "applied_type": "0.1*tanh(raw/0.1)",
+    "applied_bound": 0.1,
+    "tail_threshold": 0.3,
+    "tail_weight": 0.01,
+    "raw_warning": 1.0,
+    "raw_abort": 1.5,
+    "saturation_fraction_abort": 0.05,
+    "saturation_consecutive_steps": 3,
+    "maximum_voxel_depth_span": 512,
+    "maximum_preclip_gradient": 25.0,
+    "maximum_skipped_gradients_total": 5,
+    "maximum_skipped_gradients_consecutive": 2,
+    "maximum_recoveries_per_stage": 2
+  },
+  "evaluation": {
+    "periodic_every": 500,
+    "periodic_train_samples": 32,
+    "full_train_every": 2500,
+    "selection_score": "train K=3 full point_rel + train K=3 structure point_rel",
+    "test_participates_in_selection": false
+  },
+  "resources": {
+    "benchmark_process_counts": [1, 2, 4],
+    "ddp_backend": "gloo",
+    "minimum_free_memory_mib_per_gpu": 28672,
+    "benchmark_steps": 20
+  },
+  "seed": 173
+}

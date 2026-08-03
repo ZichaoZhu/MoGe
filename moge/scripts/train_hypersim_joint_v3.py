@@ -35,6 +35,14 @@ from moge.scripts.train_hypersim_smallset_v3 import (
     boundary_f1,
     load_raw_sample,
 )
+from moge.train.stability_v3 import (
+    base_geometry_has_collapsed,
+    maximum_saturation_fraction,
+    raw_residual_percentiles,
+    raw_residual_tail_loss,
+    selection_score,
+    updated_threshold_streak,
+)
 from moge.train.trainer_v3 import TrainingScheduleV3, build_v3_optimizer
 from moge.utils.remote_guard import DEFAULT_SAFE_ROOT, assert_safe_path
 
@@ -67,6 +75,14 @@ def parse_args() -> argparse.Namespace:
         "--warm-start",
         type=Path,
         help="Load model weights and step only, with a fresh optimizer and histories.",
+    )
+    checkpoint_group.add_argument(
+        "--transition-from",
+        type=Path,
+        help=(
+            "Load model, optimizer and RNG state but start fresh histories in "
+            "the new output directory. Used for stage changes and recovery."
+        ),
     )
     parser.add_argument("--safe-root", type=Path, default=DEFAULT_SAFE_ROOT)
     parser.add_argument("--pretrained", default="Ruicheng/moge-2-vitl-normal")
@@ -187,6 +203,41 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--raw-residual-warning-threshold",
+        type=float,
+        default=0.0,
+        help="Record a warning when the maximum raw residual exceeds this value.",
+    )
+    parser.add_argument(
+        "--raw-residual-tail-threshold",
+        type=float,
+        default=0.0,
+        help="Raw residual magnitude below which the tail penalty is exactly zero.",
+    )
+    parser.add_argument(
+        "--raw-residual-tail-weight",
+        type=float,
+        default=0.0,
+        help="Weight of the raw residual tail penalty.",
+    )
+    parser.add_argument(
+        "--max-bound-saturation-fraction",
+        type=float,
+        default=0.0,
+        help="Abort after a persistent fraction of applied residuals reaches 95%% of the bound.",
+    )
+    parser.add_argument(
+        "--max-consecutive-saturated-steps",
+        type=int,
+        default=0,
+    )
+    parser.add_argument(
+        "--max-voxel-depth-span",
+        type=int,
+        default=0,
+        help="Reject a shell before SpConv construction when its depth span exceeds this value.",
+    )
+    parser.add_argument(
         "--max-refined-point-rel",
         type=float,
         default=0.0,
@@ -198,11 +249,23 @@ def parse_args() -> argparse.Namespace:
         default=0.0,
         help="Periodic K-refined/K=0 point Rel collapse ratio; 0 disables.",
     )
+    parser.add_argument(
+        "--max-base-to-best-ratio",
+        type=float,
+        default=0.0,
+        help="Abort when periodic K=0 point Rel exceeds this multiple of its historical best.",
+    )
     parser.add_argument("--global-weight", type=float, default=1.0)
     parser.add_argument("--local-weight", type=float, default=1.0)
     parser.add_argument("--edge-weight", type=float, default=1.0)
     parser.add_argument("--local-scales", type=int, nargs="+", default=[4, 16, 64])
     parser.add_argument("--eval-every", type=int, default=250)
+    parser.add_argument(
+        "--full-eval-every",
+        type=int,
+        default=0,
+        help="Evaluate all training samples and save a milestone every N steps; 0 disables.",
+    )
     parser.add_argument("--periodic-train-samples", type=int, default=64)
     parser.add_argument(
         "--selection-split",
@@ -212,9 +275,14 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--selection-scope",
-        choices=("full", "crop", "structure"),
+        choices=("full", "crop", "structure", "composite"),
         default="full",
-        help="Evaluation scope used to select checkpoint.pt.",
+        help="Evaluation scope used to select checkpoint.pt; composite is full+structure point Rel.",
+    )
+    parser.add_argument(
+        "--best-checkpoint-include-optimizer",
+        action="store_true",
+        help="Store optimizer and RNG state in checkpoint.pt for exact stage transition.",
     )
     parser.add_argument("--eval-batch-size", type=int, default=2)
     parser.add_argument("--log-every", type=int, default=25)
@@ -241,7 +309,11 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
             "Expected freeze < warmup <= detach; a short run may end before "
             "the detach boundary"
         )
-    if args.eval_every <= 0 or args.periodic_train_samples <= 0:
+    if (
+        args.eval_every <= 0
+        or args.full_eval_every < 0
+        or args.periodic_train_samples <= 0
+    ):
         raise ValueError("Evaluation intervals and sample counts must be positive")
     if args.ssr_learning_rate <= 0:
         raise ValueError("SSR learning rate must be positive")
@@ -272,8 +344,14 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
         args.max_abs_log_depth_residual,
         args.smooth_log_depth_residual_bound,
         args.max_abs_raw_log_depth_residual,
+        args.raw_residual_warning_threshold,
+        args.raw_residual_tail_threshold,
+        args.raw_residual_tail_weight,
+        args.max_bound_saturation_fraction,
+        args.max_voxel_depth_span,
         args.max_refined_point_rel,
         args.max_refined_to_base_ratio,
+        args.max_base_to_best_ratio,
     ) < 0:
         raise ValueError("Instability thresholds cannot be negative")
     if not math.isfinite(args.smooth_log_depth_residual_bound):
@@ -281,6 +359,7 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
     if min(
         args.max_skipped_preclip_steps,
         args.max_consecutive_skipped_preclip_steps,
+        args.max_consecutive_saturated_steps,
     ) < 0:
         raise ValueError("Skipped-step limits cannot be negative")
     if args.max_skipped_preclip_steps == 0:
@@ -295,6 +374,26 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
     ):
         raise ValueError(
             "Consecutive skipped-step limit must be between 1 and the total limit"
+        )
+    if args.max_bound_saturation_fraction > 1:
+        raise ValueError("Residual saturation fraction must lie in [0, 1]")
+    if (args.max_bound_saturation_fraction > 0) != (
+        args.max_consecutive_saturated_steps > 0
+    ):
+        raise ValueError(
+            "Saturation fraction and consecutive-step limit must be enabled together"
+        )
+    if (
+        args.selection_scope == "composite"
+        and (
+            args.selection_split != "train"
+            or args.fine_structure_rois is None
+            or args.full_eval_every <= 0
+        )
+    ):
+        raise ValueError(
+            "Composite selection requires train selection, fine-structure ROIs, "
+            "and a positive full-eval interval"
         )
     if args.freeze_backbone or args.train_refiner_only:
         if args.backbone_learning_rate != 0:
@@ -625,6 +724,7 @@ def evaluate_model(
     batch_size: int,
     boundary_threshold: float,
     smooth_log_depth_residual_bound: float = 0.0,
+    max_voxel_depth_span: int = 0,
     ssr_batch_norm_states: List[
         Dict[str, Dict[str, torch.Tensor]]
     ]
@@ -651,6 +751,9 @@ def evaluate_model(
             num_refinement_steps=requested[-1],
             return_intermediates=True,
             smooth_log_depth_residual_bound=smooth_log_depth_residual_bound,
+            max_voxel_depth_span=(
+                max_voxel_depth_span if max_voxel_depth_span > 0 else None
+            ),
             ssr_batch_norm_states=ssr_batch_norm_states,
         )
         sequence = output["points_sequence"]
@@ -759,6 +862,21 @@ def selection_metric_key(scope: str) -> str:
     return f"{scope}_point_rel"
 
 
+def periodic_selection_score(
+    periodic: Dict[str, Dict[str, Dict[str, float]]],
+    *,
+    refinement_step: int,
+    split: str,
+    scope: str,
+) -> float:
+    return selection_score(
+        periodic,
+        refinement_step=refinement_step,
+        split=split,
+        scope=scope,
+    )
+
+
 def flatten_periodic_evaluation(
     step: int,
     periodic: Dict[str, Dict[str, Dict[str, float]]],
@@ -825,6 +943,15 @@ def validate_resume_histories(
 def atomic_torch_save(payload: Dict[str, object], path: Path) -> None:
     temporary = path.with_name(f"{path.name}.incomplete")
     torch.save(payload, temporary)
+    os.replace(temporary, path)
+
+
+def atomic_json_save(payload: Dict[str, object], path: Path) -> None:
+    temporary = path.with_name(f"{path.name}.incomplete")
+    temporary.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
     os.replace(temporary, path)
 
 
@@ -919,6 +1046,8 @@ def checkpoint_payload(
     loss_generator: torch.Generator,
     initial_periodic: Dict[str, Dict[str, Dict[str, float]]],
     include_optimizer: bool,
+    best_base_score: float | None = None,
+    initial_full_evaluation: Dict[str, Dict[str, Dict[str, float]]] | None = None,
 ) -> Dict[str, object]:
     payload: Dict[str, object] = {
         "model": model.state_dict(),
@@ -937,6 +1066,8 @@ def checkpoint_payload(
         "cpu_generator_state": cpu_generator.get_state(),
         "loss_generator_state": loss_generator.get_state(),
         "initial_periodic": initial_periodic,
+        "initial_full_evaluation": initial_full_evaluation,
+        "best_base_point_rel": best_base_score,
         "training_mode": (
             "fixed-base SSR-only fine-tuning"
             if args.train_refiner_only
@@ -1111,8 +1242,10 @@ def main() -> None:
     best_step = 0
     resume_path = None
     warm_start_path = None
+    transition_path = None
     resume_checkpoint = None
     warm_start_checkpoint = None
+    transition_checkpoint = None
     if args.resume is not None:
         resume_path = assert_safe_path(
             args.resume,
@@ -1130,11 +1263,23 @@ def main() -> None:
         start_step = int(resume_checkpoint["step"])
         best_step = int(resume_checkpoint["best_step"])
         best_score = float(resume_checkpoint["selection"]["score"])
+        stored_best_base = resume_checkpoint.get("best_base_point_rel")
+        best_base_score = (
+            float(stored_best_base)
+            if stored_best_base is not None
+            else math.inf
+        )
         initial_periodic = resume_checkpoint["initial_periodic"]
+        initial_full_evaluation = resume_checkpoint.get(
+            "initial_full_evaluation"
+        )
         if args.steps <= start_step:
             raise ValueError("--steps must exceed the resumed checkpoint step")
         training_history = load_numeric_csv(output / "training_history.csv")
         evaluation_history = load_numeric_csv(output / "evaluation_history.csv")
+        full_evaluation_history = load_numeric_csv(
+            output / "full_evaluation_history.csv"
+        )
         validate_resume_histories(
             start_step=start_step,
             training_history=training_history,
@@ -1155,6 +1300,27 @@ def main() -> None:
         start_step = int(warm_start_checkpoint["step"])
         if args.steps <= start_step:
             raise ValueError("--steps must exceed the warm-start checkpoint step")
+    elif args.transition_from is not None:
+        transition_path = assert_safe_path(
+            args.transition_from,
+            safe_root=args.safe_root,
+            must_exist=True,
+        )
+        transition_checkpoint = torch.load(
+            transition_path,
+            map_location="cpu",
+            weights_only=False,
+        )
+        if "optimizer" not in transition_checkpoint:
+            raise ValueError(
+                "Stage transition requires a checkpoint containing optimizer state"
+            )
+        model.load_state_dict(transition_checkpoint["model"], strict=True)
+        optimizer.load_state_dict(transition_checkpoint["optimizer"])
+        cpu_generator.set_state(transition_checkpoint["cpu_generator_state"])
+        start_step = int(transition_checkpoint["step"])
+        if args.steps <= start_step:
+            raise ValueError("--steps must exceed the transition checkpoint step")
 
     if args.train_refiner_only:
         set_refiner_only_trainable(model)
@@ -1164,8 +1330,9 @@ def main() -> None:
         set_backbone_trainable(model, False)
     model, optimizer = accelerator.prepare(model, optimizer)
     raw_model = accelerator.unwrap_model(model)
-    if resume_checkpoint is not None:
-        loss_generator.set_state(resume_checkpoint["loss_generator_state"])
+    state_checkpoint = resume_checkpoint or transition_checkpoint
+    if state_checkpoint is not None:
+        loss_generator.set_state(state_checkpoint["loss_generator_state"])
 
     if resume_checkpoint is None:
         initial_periodic = None
@@ -1181,34 +1348,95 @@ def main() -> None:
                 smooth_log_depth_residual_bound=(
                     args.smooth_log_depth_residual_bound
                 ),
+                max_voxel_depth_span=args.max_voxel_depth_span,
             )
             initial_periodic = aggregate_evaluation(initial_records)
         initial_periodic = broadcast_main_object(initial_periodic, accelerator)
         assert initial_periodic is not None
-        metric_key = selection_metric_key(args.selection_scope)
-        best_score = initial_periodic[str(args.refinement_steps)][
-            args.selection_split
-        ][metric_key]
+        initial_full_evaluation = None
+        if accelerator.is_main_process and args.full_eval_every > 0:
+            initial_full_records = evaluate_model(
+                raw_model,
+                train_samples,
+                device=device,
+                num_tokens=args.num_tokens,
+                refinement_steps=(0, args.refinement_steps),
+                batch_size=args.eval_batch_size,
+                boundary_threshold=args.boundary_threshold,
+                smooth_log_depth_residual_bound=(
+                    args.smooth_log_depth_residual_bound
+                ),
+                max_voxel_depth_span=args.max_voxel_depth_span,
+            )
+            initial_full_evaluation = aggregate_evaluation(
+                initial_full_records
+            )
+        initial_full_evaluation = broadcast_main_object(
+            initial_full_evaluation,
+            accelerator,
+        )
+        selection_evaluation = (
+            initial_full_evaluation
+            if args.selection_scope == "composite"
+            else initial_periodic
+        )
+        if selection_evaluation is None:
+            raise RuntimeError("Missing initial selection evaluation")
+        best_score = periodic_selection_score(
+            selection_evaluation,
+            refinement_step=args.refinement_steps,
+            split=args.selection_split,
+            scope=args.selection_scope,
+        )
+        best_base_score = float(
+            initial_periodic["0"][args.selection_split]["point_rel"]
+        )
         best_step = start_step
         training_history = []
         evaluation_history = [
             flatten_periodic_evaluation(start_step, initial_periodic)
         ]
+        full_evaluation_history = (
+            [
+                flatten_periodic_evaluation(
+                    start_step,
+                    initial_full_evaluation,
+                )
+            ]
+            if initial_full_evaluation is not None
+            else []
+        )
         if accelerator.is_main_process:
+            initial_payload = checkpoint_payload(
+                model=raw_model,
+                optimizer=optimizer,
+                step=start_step,
+                best_step=best_step,
+                best_score=best_score,
+                args=args,
+                cpu_generator=cpu_generator,
+                loss_generator=loss_generator,
+                initial_periodic=initial_periodic,
+                include_optimizer=args.best_checkpoint_include_optimizer,
+                best_base_score=best_base_score,
+                initial_full_evaluation=initial_full_evaluation,
+            )
+            atomic_torch_save(initial_payload, output / "checkpoint.pt")
             atomic_torch_save(
-                checkpoint_payload(
-                    model=raw_model,
-                    optimizer=optimizer,
-                    step=start_step,
-                    best_step=best_step,
-                    best_score=best_score,
-                    args=args,
-                    cpu_generator=cpu_generator,
-                    loss_generator=loss_generator,
-                    initial_periodic=initial_periodic,
-                    include_optimizer=False,
-                ),
-                output / "checkpoint.pt",
+                initial_payload,
+                output / "initial_checkpoint.pt",
+            )
+            atomic_json_save(
+                {
+                    "step": best_step,
+                    "score": best_score,
+                    "selection_scope": args.selection_scope,
+                    "selection_split": args.selection_split,
+                    "contains_optimizer": (
+                        args.best_checkpoint_include_optimizer
+                    ),
+                },
+                output / "checkpoint_metadata.json",
             )
             atomic_torch_save(
                 checkpoint_payload(
@@ -1222,10 +1450,16 @@ def main() -> None:
                     loss_generator=loss_generator,
                     initial_periodic=initial_periodic,
                     include_optimizer=True,
+                    best_base_score=best_base_score,
+                    initial_full_evaluation=initial_full_evaluation,
                 ),
                 output / "resume_checkpoint.pt",
             )
             save_csv(output / "evaluation_history.csv", evaluation_history)
+            save_csv(
+                output / "full_evaluation_history.csv",
+                full_evaluation_history,
+            )
         accelerator.wait_for_everyone()
 
     stability_events = load_stability_events(output / "stability_events.jsonl")
@@ -1233,8 +1467,26 @@ def main() -> None:
         stability_events,
         start_step=start_step,
     )
+    saturation_streak = 0
+    for historical_record in reversed(training_history):
+        if (
+            float(
+                historical_record.get(
+                    "ssr_max_bound_saturation_fraction",
+                    0.0,
+                )
+            )
+            <= args.max_bound_saturation_fraction
+        ):
+            break
+        saturation_streak += 1
+    raw_warning_active = bool(
+        training_history
+        and int(training_history[-1].get("ssr_raw_residual_warning", 0))
+    )
     train_start = time.perf_counter()
     for step in range(start_step + 1, args.steps + 1):
+        step_start = time.perf_counter()
         if args.train_refiner_only:
             set_refiner_only_trainable(raw_model)
         elif args.freeze_backbone:
@@ -1272,6 +1524,9 @@ def main() -> None:
             "ssr_max_abs_raw_log_depth_residual": 0.0,
             "ssr_max_bound_saturation_fraction": 0.0,
             "ssr_max_depth_span": 0.0,
+            "ssr_raw_p95": 0.0,
+            "ssr_raw_p99": 0.0,
+            "ssr_raw_p999": 0.0,
         }
         for microbatch_start in range(
             0,
@@ -1296,22 +1551,18 @@ def main() -> None:
                 smooth_log_depth_residual_bound=(
                     args.smooth_log_depth_residual_bound
                 ),
+                max_voxel_depth_span=(
+                    args.max_voxel_depth_span
+                    if args.max_voxel_depth_span > 0
+                    else None
+                ),
             )
             raw_residuals = output_dict["raw_log_depth_residuals"]
-            if args.smooth_log_depth_residual_bound > 0:
-                saturation_fraction = max(
-                    float(
-                        (
-                            residual.detach().abs()
-                            >= 0.95 * args.smooth_log_depth_residual_bound
-                        )
-                        .float()
-                        .mean()
-                    )
-                    for residual in output_dict["log_depth_residuals"]
-                )
-            else:
-                saturation_fraction = 0.0
+            saturation_fraction = maximum_saturation_fraction(
+                output_dict["log_depth_residuals"],
+                bound=args.smooth_log_depth_residual_bound,
+            )
+            percentile_values = raw_residual_percentiles(raw_residuals)
             microbatch_maxima = distributed_max_dict(
                 {
                     "ssr_max_abs_log_depth_residual": max(
@@ -1327,6 +1578,7 @@ def main() -> None:
                         float(stats["depth_span"].detach().amax())
                         for stats in output_dict["voxel_stats"]
                     ),
+                    **percentile_values,
                 },
                 accelerator,
             )
@@ -1398,15 +1650,84 @@ def main() -> None:
                 local_scales=tuple(args.local_scales),
                 generator=loss_generator,
             )
-            loss = refined_loss if args.train_refiner_only else base_loss + refined_loss
+            tail_loss = raw_residual_tail_loss(
+                raw_residuals,
+                threshold=args.raw_residual_tail_threshold,
+            )
+            geometry_total = (
+                refined_loss
+                if args.train_refiner_only
+                else base_loss + refined_loss
+            )
+            loss = (
+                geometry_total
+                + args.raw_residual_tail_weight * tail_loss
+            )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Non-finite loss at step {step}")
             local_loss_value += weight * float(loss.detach())
             for prefix, terms in (("base", base_terms), ("refined", refined_terms)):
                 for key, value in terms.items():
                     local_terms[f"{prefix}/{key}"] += weight * value
+            local_terms["stability/raw_tail_loss"] += (
+                weight * float(tail_loss.detach())
+            )
             accelerator.backward(weight * loss)
-            del images, gt, output_dict, sequence, base_loss, refined_loss, loss
+            del (
+                images,
+                gt,
+                output_dict,
+                sequence,
+                base_loss,
+                refined_loss,
+                geometry_total,
+                tail_loss,
+                loss,
+            )
+
+        warning_now = bool(
+            args.raw_residual_warning_threshold > 0
+            and step_maxima["ssr_max_abs_raw_log_depth_residual"]
+            > args.raw_residual_warning_threshold
+        )
+        if warning_now and not raw_warning_active and accelerator.is_main_process:
+            append_stability_event(
+                output,
+                {
+                    "event": "raw_log_depth_residual_warning",
+                    "step": step,
+                    "stage": stage,
+                    "threshold": args.raw_residual_warning_threshold,
+                    **step_maxima,
+                    "action": "warning_only",
+                },
+            )
+        raw_warning_active = warning_now
+        saturation_streak = updated_threshold_streak(
+            saturation_streak,
+            value=step_maxima["ssr_max_bound_saturation_fraction"],
+            threshold=args.max_bound_saturation_fraction,
+        )
+        if (
+            args.max_consecutive_saturated_steps > 0
+            and saturation_streak >= args.max_consecutive_saturated_steps
+        ):
+            if accelerator.is_main_process:
+                write_instability_event(
+                    output,
+                    {
+                        "event": "residual_saturation_streak",
+                        "step": step,
+                        "stage": stage,
+                        "threshold": args.max_bound_saturation_fraction,
+                        "consecutive_steps": saturation_streak,
+                        **step_maxima,
+                        "action": "aborted before optimizer step",
+                    },
+                )
+            raise RuntimeError(
+                "SSR residual saturation persisted beyond the configured limit"
+            )
 
         if learning_rates["backbone"] == 0.0:
             clear_backbone_gradients(raw_model)
@@ -1500,6 +1821,9 @@ def main() -> None:
             "lr_backbone": learning_rates["backbone"],
             **distributed_values,
             **step_maxima,
+            "ssr_raw_residual_warning": int(warning_now),
+            "ssr_saturation_streak": saturation_streak,
+            "optimization_step_seconds": time.perf_counter() - step_start,
         }
         training_history.append(record)
 
@@ -1518,6 +1842,7 @@ def main() -> None:
                     smooth_log_depth_residual_bound=(
                         args.smooth_log_depth_residual_bound
                     ),
+                    max_voxel_depth_span=args.max_voxel_depth_span,
                 )
                 periodic = aggregate_evaluation(periodic_records)
             periodic = broadcast_main_object(periodic, accelerator)
@@ -1525,14 +1850,44 @@ def main() -> None:
             evaluation_history.append(
                 flatten_periodic_evaluation(step, periodic)
             )
-            metric_key = selection_metric_key(args.selection_scope)
-            score = periodic[str(args.refinement_steps)][args.selection_split][
-                metric_key
-            ]
-            base_score = periodic["0"][args.selection_split][metric_key]
+            base_score = float(
+                periodic["0"][args.selection_split]["point_rel"]
+            )
+            refined_score = float(
+                periodic[str(args.refinement_steps)][args.selection_split][
+                    "point_rel"
+                ]
+            )
+            if base_geometry_has_collapsed(
+                current_point_rel=base_score,
+                best_point_rel=best_base_score,
+                ratio_threshold=args.max_base_to_best_ratio,
+            ):
+                if accelerator.is_main_process:
+                    save_csv(output / "training_history.csv", training_history)
+                    save_csv(output / "evaluation_history.csv", evaluation_history)
+                    write_instability_event(
+                        output,
+                        {
+                            "event": "periodic_base_collapse",
+                            "step": step,
+                            "stage": stage,
+                            "selection_split": args.selection_split,
+                            "base_point_rel": base_score,
+                            "historical_best_base_point_rel": best_base_score,
+                            "ratio_threshold": args.max_base_to_best_ratio,
+                            "action": (
+                                "aborted before overwriting the last safe "
+                                "resume checkpoint"
+                            ),
+                        },
+                    )
+                raise RuntimeError(
+                    "Periodic base point Rel indicates geometry collapse"
+                )
             if refinement_has_collapsed(
                 base_point_rel=base_score,
-                refined_point_rel=score,
+                refined_point_rel=refined_score,
                 absolute_threshold=args.max_refined_point_rel,
                 ratio_threshold=args.max_refined_to_base_ratio,
             ):
@@ -1547,8 +1902,10 @@ def main() -> None:
                             "stage": stage,
                             "selection_split": args.selection_split,
                             "base_point_rel": base_score,
-                            "refined_point_rel": score,
-                            "refined_to_base_ratio": score / max(base_score, 1e-12),
+                            "refined_point_rel": refined_score,
+                            "refined_to_base_ratio": (
+                                refined_score / max(base_score, 1e-12)
+                            ),
                             "absolute_threshold": args.max_refined_point_rel,
                             "ratio_threshold": args.max_refined_to_base_ratio,
                             "action": (
@@ -1560,7 +1917,54 @@ def main() -> None:
                 raise RuntimeError(
                     "Periodic refined point Rel indicates SSR collapse"
                 )
-            if score < best_score:
+            best_base_score = min(best_base_score, base_score)
+
+            full_periodic = None
+            full_eval_due = (
+                args.full_eval_every > 0
+                and (
+                    step % args.full_eval_every == 0
+                    or step == args.steps
+                )
+            )
+            if accelerator.is_main_process and full_eval_due:
+                full_records = evaluate_model(
+                    raw_model,
+                    train_samples,
+                    device=device,
+                    num_tokens=args.num_tokens,
+                    refinement_steps=(0, args.refinement_steps),
+                    batch_size=args.eval_batch_size,
+                    boundary_threshold=args.boundary_threshold,
+                    smooth_log_depth_residual_bound=(
+                        args.smooth_log_depth_residual_bound
+                    ),
+                    max_voxel_depth_span=args.max_voxel_depth_span,
+                )
+                full_periodic = aggregate_evaluation(full_records)
+            full_periodic = broadcast_main_object(
+                full_periodic,
+                accelerator,
+            )
+            if full_periodic is not None:
+                full_evaluation_history.append(
+                    flatten_periodic_evaluation(step, full_periodic)
+                )
+
+            selection_evaluation = (
+                full_periodic
+                if args.selection_scope == "composite"
+                else periodic
+            )
+            score = None
+            if selection_evaluation is not None:
+                score = periodic_selection_score(
+                    selection_evaluation,
+                    refinement_step=args.refinement_steps,
+                    split=args.selection_split,
+                    scope=args.selection_scope,
+                )
+            if score is not None and score < best_score:
                 best_score = score
                 best_step = step
                 if accelerator.is_main_process:
@@ -1575,13 +1979,35 @@ def main() -> None:
                             cpu_generator=cpu_generator,
                             loss_generator=loss_generator,
                             initial_periodic=initial_periodic,
-                            include_optimizer=False,
+                            include_optimizer=(
+                                args.best_checkpoint_include_optimizer
+                            ),
+                            best_base_score=best_base_score,
+                            initial_full_evaluation=(
+                                initial_full_evaluation
+                            ),
                         ),
                         output / "checkpoint.pt",
+                    )
+                    atomic_json_save(
+                        {
+                            "step": best_step,
+                            "score": best_score,
+                            "selection_scope": args.selection_scope,
+                            "selection_split": args.selection_split,
+                            "contains_optimizer": (
+                                args.best_checkpoint_include_optimizer
+                            ),
+                        },
+                        output / "checkpoint_metadata.json",
                     )
             if accelerator.is_main_process:
                 save_csv(output / "training_history.csv", training_history)
                 save_csv(output / "evaluation_history.csv", evaluation_history)
+                save_csv(
+                    output / "full_evaluation_history.csv",
+                    full_evaluation_history,
+                )
                 atomic_torch_save(
                     checkpoint_payload(
                         model=raw_model,
@@ -1594,9 +2020,33 @@ def main() -> None:
                         loss_generator=loss_generator,
                         initial_periodic=initial_periodic,
                         include_optimizer=True,
+                        best_base_score=best_base_score,
+                        initial_full_evaluation=initial_full_evaluation,
                     ),
                     output / "resume_checkpoint.pt",
                 )
+                if full_periodic is not None:
+                    milestones = output / "milestones"
+                    milestones.mkdir(parents=True, exist_ok=True)
+                    atomic_torch_save(
+                        checkpoint_payload(
+                            model=raw_model,
+                            optimizer=optimizer,
+                            step=step,
+                            best_step=best_step,
+                            best_score=best_score,
+                            args=args,
+                            cpu_generator=cpu_generator,
+                            loss_generator=loss_generator,
+                            initial_periodic=initial_periodic,
+                            include_optimizer=True,
+                            best_base_score=best_base_score,
+                            initial_full_evaluation=(
+                                initial_full_evaluation
+                            ),
+                        ),
+                        milestones / f"step_{step:06d}.pt",
+                    )
             accelerator.wait_for_everyone()
 
         if (
@@ -1613,7 +2063,7 @@ def main() -> None:
                         "learning_rates": learning_rates,
                         "best_step": best_step,
                         "selection_split": args.selection_split,
-                        "best_k3_point_rel": best_score,
+                        "best_selection_score": best_score,
                         "optimizer_step_skipped": optimizer_step_skipped,
                         "skipped_preclip_total": skipped_preclip_total,
                         "elapsed_seconds": time.perf_counter() - train_start,
@@ -1646,6 +2096,8 @@ def main() -> None:
                 loss_generator=loss_generator,
                 initial_periodic=initial_periodic,
                 include_optimizer=True,
+                best_base_score=best_base_score,
+                initial_full_evaluation=initial_full_evaluation,
             ),
             output / "latest_checkpoint.pt",
         )
@@ -1711,7 +2163,8 @@ def main() -> None:
             "microbatch_size": args.microbatch_size,
             "best_step": best_step,
             "selection_split": args.selection_split,
-            "best_k3_point_rel": best_score,
+            "selection_scope": args.selection_scope,
+            "best_selection_score": best_score,
             "initial_periodic": initial_periodic,
             "latest_periodic": {
                 str(refinement_step): {
@@ -1739,6 +2192,21 @@ def main() -> None:
                 "max_abs_raw_log_depth_residual": (
                     args.max_abs_raw_log_depth_residual
                 ),
+                "raw_residual_warning_threshold": (
+                    args.raw_residual_warning_threshold
+                ),
+                "raw_residual_tail_threshold": (
+                    args.raw_residual_tail_threshold
+                ),
+                "raw_residual_tail_weight": args.raw_residual_tail_weight,
+                "max_bound_saturation_fraction": (
+                    args.max_bound_saturation_fraction
+                ),
+                "max_consecutive_saturated_steps": (
+                    args.max_consecutive_saturated_steps
+                ),
+                "max_voxel_depth_span": args.max_voxel_depth_span,
+                "max_base_to_best_ratio": args.max_base_to_best_ratio,
                 "skipped_preclip_steps": skipped_preclip_total,
                 "max_skipped_preclip_steps": (
                     args.max_skipped_preclip_steps
@@ -1751,6 +2219,9 @@ def main() -> None:
             "warm_started_from": (
                 str(warm_start_path) if warm_start_path else None
             ),
+            "transitioned_from": (
+                str(transition_path) if transition_path else None
+            ),
             "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
             "requested_device": args.device,
             "artifacts": {
@@ -1759,6 +2230,8 @@ def main() -> None:
                 "resume_checkpoint": "resume_checkpoint.pt",
                 "training_history": "training_history.csv",
                 "evaluation_history": "evaluation_history.csv",
+                "full_evaluation_history": "full_evaluation_history.csv",
+                "milestones": "milestones/",
                 "training_curves": "training_curves.png",
                 "stability_events": "stability_events.jsonl",
             },

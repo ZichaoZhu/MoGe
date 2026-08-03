@@ -58,6 +58,12 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--max-voxel-depth-span",
+        type=int,
+        default=0,
+        help="Reject an SSR shell before sparse allocation when its depth span exceeds this value.",
+    )
+    parser.add_argument(
         "--ssr-batch-statistics",
         action="store_true",
         help=(
@@ -267,6 +273,7 @@ def run(args: argparse.Namespace) -> Dict[str, object]:
             smooth_log_depth_residual_bound=(
                 args.smooth_log_depth_residual_bound
             ),
+            max_voxel_depth_span=args.max_voxel_depth_span,
             ssr_batch_norm_states=iteration_states,
         )
     metrics = aggregate_evaluation(records)
@@ -286,6 +293,7 @@ def run(args: argparse.Namespace) -> Dict[str, object]:
         "smooth_log_depth_residual_bound": (
             args.smooth_log_depth_residual_bound
         ),
+        "max_voxel_depth_span": args.max_voxel_depth_span,
         "ssr_normalization_policy": (
             f"batch_independent_{ssr_normalization}"
             if ssr_normalization != "batch_norm"

@@ -134,5 +134,35 @@
     "url": "/data/07_ai_019_004_cam_00_frame.0099/initial_k0.ply",
     "bytes": 2949445,
     "sha256": "6b17a8b0e5efdb85e32889eb449b64802e2ffc2bc03eddee183799ab135dcb81"
+  },
+  {
+    "sample": "ai_054_008_cam_00_frame.0000",
+    "split": null,
+    "stage": "ground_truth",
+    "k": null,
+    "url": "/data/04_ai_054_008_cam_00_frame.0000/ground_truth.ply",
+    "bytes": 2949445,
+    "sha256": "0392100a4bc02c12602d207c50a16e6417727b8c78a30ba3177dfb5272c9ea8c",
+    "validPointCount": 196569
+  },
+  {
+    "sample": "ai_053_018_cam_00_frame.0000",
+    "split": null,
+    "stage": "ground_truth",
+    "k": null,
+    "url": "/data/05_ai_053_018_cam_00_frame.0000/ground_truth.ply",
+    "bytes": 2949445,
+    "sha256": "625a68f5c5874889db02720a4d26e55f3dfa57bb035c5977fdf4ad34cfbb41ce",
+    "validPointCount": 196588
+  },
+  {
+    "sample": "ai_002_003_cam_00_frame.0000",
+    "split": null,
+    "stage": "ground_truth",
+    "k": null,
+    "url": "/data/06_ai_002_003_cam_00_frame.0000/ground_truth.ply",
+    "bytes": 2949445,
+    "sha256": "3cfdfed8bf88d79e9bc44c38c33298f90fb73010895f1941f9fc396bac2b4797",
+    "validPointCount": 196608
   }
 ]

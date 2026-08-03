@@ -214,5 +214,35 @@
     "url": "/data/exp12/ai_046_001_cam_00_frame.0000/final_k5.ply",
     "bytes": 2949445,
     "sha256": "1d276a85b432679e479d12f00696f49cf50e48ec2cc447a6d7fd15b9c40bcaa8"
+  },
+  {
+    "sample": "ai_054_008_cam_00_frame.0000",
+    "split": "train",
+    "stage": "ground_truth",
+    "k": null,
+    "url": "/data/exp12/ai_054_008_cam_00_frame.0000/ground_truth.ply",
+    "bytes": 2949445,
+    "sha256": "0392100a4bc02c12602d207c50a16e6417727b8c78a30ba3177dfb5272c9ea8c",
+    "validPointCount": 196569
+  },
+  {
+    "sample": "ai_047_001_cam_00_frame.0042",
+    "split": "val",
+    "stage": "ground_truth",
+    "k": null,
+    "url": "/data/exp12/ai_047_001_cam_00_frame.0042/ground_truth.ply",
+    "bytes": 2949445,
+    "sha256": "0842f8bb0c731859b393c14b2681fa6b29c4305f26a1da9ce879b12d3ed91c54",
+    "validPointCount": 196608
+  },
+  {
+    "sample": "ai_046_001_cam_00_frame.0000",
+    "split": "test",
+    "stage": "ground_truth",
+    "k": null,
+    "url": "/data/exp12/ai_046_001_cam_00_frame.0000/ground_truth.ply",
+    "bytes": 2949445,
+    "sha256": "53090107082d3a18f344c92ac7fbca6cf1a3e14975fa13b5107df6192d77058c",
+    "validPointCount": 196608
   }
 ]

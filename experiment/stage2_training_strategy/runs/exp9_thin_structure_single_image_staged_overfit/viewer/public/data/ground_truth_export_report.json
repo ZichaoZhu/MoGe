@@ -1,0 +1,246 @@
+{
+  "status": "complete",
+  "format": "moge3_viewer_ground_truth_export_v1",
+  "resolution": {
+    "width": 512,
+    "height": 384
+  },
+  "manifests": [
+    {
+      "manifest": "manifest.json",
+      "experiment": "exp9_thin_structure_single_image_staged_overfit",
+      "groundTruthCount": 3,
+      "bytes": 8848335,
+      "samples": [
+        {
+          "sample": "ai_054_008_cam_00_frame.0000",
+          "split": null,
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/04_ai_054_008_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "0392100a4bc02c12602d207c50a16e6417727b8c78a30ba3177dfb5272c9ea8c",
+          "validPointCount": 196569
+        },
+        {
+          "sample": "ai_053_018_cam_00_frame.0000",
+          "split": null,
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/05_ai_053_018_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "625a68f5c5874889db02720a4d26e55f3dfa57bb035c5977fdf4ad34cfbb41ce",
+          "validPointCount": 196588
+        },
+        {
+          "sample": "ai_002_003_cam_00_frame.0000",
+          "split": null,
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/06_ai_002_003_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "3cfdfed8bf88d79e9bc44c38c33298f90fb73010895f1941f9fc396bac2b4797",
+          "validPointCount": 196608
+        }
+      ]
+    },
+    {
+      "manifest": "exp12/manifest.json",
+      "experiment": "exp12_hypersim_100_immediate_joint_finetuning",
+      "groundTruthCount": 3,
+      "bytes": 8848335,
+      "samples": [
+        {
+          "sample": "ai_054_008_cam_00_frame.0000",
+          "split": "train",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp12/ai_054_008_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "0392100a4bc02c12602d207c50a16e6417727b8c78a30ba3177dfb5272c9ea8c",
+          "validPointCount": 196569
+        },
+        {
+          "sample": "ai_047_001_cam_00_frame.0042",
+          "split": "val",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp12/ai_047_001_cam_00_frame.0042/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "0842f8bb0c731859b393c14b2681fa6b29c4305f26a1da9ce879b12d3ed91c54",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_046_001_cam_00_frame.0000",
+          "split": "test",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp12/ai_046_001_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "53090107082d3a18f344c92ac7fbca6cf1a3e14975fa13b5107df6192d77058c",
+          "validPointCount": 196608
+        }
+      ]
+    },
+    {
+      "manifest": "exp20/manifest.json",
+      "experiment": "exp20_stateless_ssr_batch_statistics",
+      "groundTruthCount": 15,
+      "bytes": 44241675,
+      "samples": [
+        {
+          "sample": "ai_013_001_cam_00_frame.0000",
+          "split": "train",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_013_001_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "7cb14a9a756611f12081a2f689e2430e5afb57109e96e46052d5952ff731d991",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_005_006_cam_00_frame.0099",
+          "split": "train",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_005_006_cam_00_frame.0099/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "6db9b8585cbab518f43641eeaf37f880a7309701389e87c3fae0220aa68306d1",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_019_001_cam_00_frame.0000",
+          "split": "train",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_019_001_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "bcf53f0057d89372f08d7cc18e01215c660092b4085e63459dac204a408fe92a",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_036_002_cam_00_frame.0085",
+          "split": "train",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_036_002_cam_00_frame.0085/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "dc6120b4a4074746b34188d6e4bc51fca507b93b3a8205e5bd870ad28f8018e6",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_018_007_cam_00_frame.0000",
+          "split": "train",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_018_007_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "5dcc2545b94b9a5f639e0dac6b3d0dee27918ecd9f5da76b0a3632a638e967fa",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_047_001_cam_00_frame.0099",
+          "split": "val",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_047_001_cam_00_frame.0099/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "0a77f4d3dc7a01762d2cf1f05897753fa7275266fa03c15f8c384e83c671e522",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_047_001_cam_00_frame.0042",
+          "split": "val",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_047_001_cam_00_frame.0042/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "0842f8bb0c731859b393c14b2681fa6b29c4305f26a1da9ce879b12d3ed91c54",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_047_001_cam_00_frame.0085",
+          "split": "val",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_047_001_cam_00_frame.0085/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "e8bd20ba20275796e3311b287819f8596ff45c546c644b286adfa78b14dfb71a",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_043_002_cam_00_frame.0099",
+          "split": "val",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_043_002_cam_00_frame.0099/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "f9c563242ff044717aeeef382d1dd5f050c94a489cc1e24547123af808ccc496",
+          "validPointCount": 196607
+        },
+        {
+          "sample": "ai_043_002_cam_00_frame.0042",
+          "split": "val",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_043_002_cam_00_frame.0042/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "7575850d69bf9fbbc5528f8fa51b2dcda506d2a79fb51bc48a08373b39d93a74",
+          "validPointCount": 196605
+        },
+        {
+          "sample": "ai_046_001_cam_00_frame.0071",
+          "split": "test",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_046_001_cam_00_frame.0071/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "970201138541b491ae451981791719e8976dc63c31a870b9cda9b28e694f794c",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_050_001_cam_00_frame.0014",
+          "split": "test",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_050_001_cam_00_frame.0014/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "650642ae314ca37302d2d11452ece8ffaed6e66171bc7851566b18cb5414475b",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_046_001_cam_00_frame.0000",
+          "split": "test",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_046_001_cam_00_frame.0000/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "53090107082d3a18f344c92ac7fbca6cf1a3e14975fa13b5107df6192d77058c",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_050_001_cam_00_frame.0057",
+          "split": "test",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_050_001_cam_00_frame.0057/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "9b51fdb8f40ec7314141d5428bf6fd425759e75bcc0883c5cd3877d9598c4587",
+          "validPointCount": 196608
+        },
+        {
+          "sample": "ai_046_001_cam_00_frame.0099",
+          "split": "test",
+          "stage": "ground_truth",
+          "k": null,
+          "url": "/data/exp20/ai_046_001_cam_00_frame.0099/ground_truth.ply",
+          "bytes": 2949445,
+          "sha256": "f1ff98d17561f064a869f8e6ae9f43617a031e6e86ffa0ff8ea8c4b9300e16c7",
+          "validPointCount": 196608
+        }
+      ]
+    }
+  ],
+  "groundTruthCount": 21,
+  "bytes": 61938345
+}

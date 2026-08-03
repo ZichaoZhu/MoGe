@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
-test("switches experiments and preserves the Exp9 two-pane interactions", async ({
+test("switches experiments and preserves the Exp9 three-pane interactions", async ({
   page,
 }) => {
   await page.goto("/");
@@ -25,7 +25,10 @@ test("switches experiments and preserves the Exp9 two-pane interactions", async 
   await expect(page.getByTestId("sample-6")).toBeVisible();
   await expect(page.getByTestId("viewer-left")).toContainText("训练前 · K=0");
   await expect(page.getByTestId("viewer-right")).toContainText("训练后 · K=3");
-  await expect(page.locator("canvas")).toHaveCount(2);
+  await expect(page.getByTestId("viewer-ground-truth")).toContainText(
+    "Hypersim Ground Truth",
+  );
+  await expect(page.locator("canvas")).toHaveCount(3);
 
   await page
     .getByTestId("left-interaction")
@@ -47,7 +50,17 @@ test("switches experiments and preserves the Exp9 two-pane interactions", async 
   await expect(page.getByTestId("viewer-left")).toContainText(
     "零初始化 SSR",
   );
-  const leftCanvas = page.locator("canvas").first();
+  const groundTruthCanvas = page
+    .getByTestId("viewer-ground-truth")
+    .locator("canvas");
+  await expect(groundTruthCanvas).toHaveAttribute(
+    "data-scene-source",
+    /04_ai_054_008_cam_00_frame\.0000\/ground_truth\.ply/,
+  );
+  const groundTruthSource = await groundTruthCanvas.getAttribute(
+    "data-scene-source",
+  );
+  const leftCanvas = page.getByTestId("viewer-left").locator("canvas");
   const preservationBox = await leftCanvas.boundingBox();
   if (preservationBox) {
     await page.mouse.move(
@@ -83,6 +96,10 @@ test("switches experiments and preserves the Exp9 two-pane interactions", async 
   await expect(leftCanvas).toHaveAttribute(
     "data-camera-snapshot",
     cameraBeforeStageChange!,
+  );
+  await expect(groundTruthCanvas).toHaveAttribute(
+    "data-scene-source",
+    groundTruthSource!,
   );
 
   const cameraBeforeStepChange = await leftCanvas.getAttribute(
@@ -164,7 +181,7 @@ test("switches experiments and preserves the Exp9 two-pane interactions", async 
   await mkdir(screenshotDirectory, { recursive: true });
   for (const order of [5, 4, 6]) {
     await page.getByTestId(`sample-${order}`).click();
-    await expect(page.locator("canvas")).toHaveCount(2);
+    await expect(page.locator("canvas")).toHaveCount(3);
     await page.waitForTimeout(800);
     if (process.env.UPDATE_ACCEPTANCE_SCREENSHOTS === "1") {
       await page.screenshot({
@@ -304,6 +321,10 @@ test("loads Exp12 train, validation, and test samples", async ({ page }) => {
   await expect(page.getByTestId("viewer-right")).toContainText(
     "联合后 · K=3",
   );
+  await expect(page.getByTestId("viewer-ground-truth")).toContainText(
+    "Hypersim Ground Truth",
+  );
+  await expect(page.locator("canvas")).toHaveCount(3);
   await page
     .getByTestId("left-k")
     .getByRole("button", { name: "K=5" })
@@ -328,7 +349,7 @@ test("loads Exp12 train, validation, and test samples", async ({ page }) => {
     ] as const) {
       await page.getByTestId(`split-${split}`).click();
       await page.getByTestId(`sample-${order}`).click();
-      await expect(page.locator("canvas")).toHaveCount(2);
+      await expect(page.locator("canvas")).toHaveCount(3);
       await expect(page.locator(".canvas-error")).toHaveCount(0);
       await page.waitForTimeout(800);
       await page.screenshot({
@@ -359,8 +380,22 @@ test("browses Exp20 by split, picture and K without resetting the camera", async
   await expect(page.getByTestId("viewer-right")).toContainText(
     "训练后 · K=3",
   );
+  await expect(page.getByTestId("viewer-ground-truth")).toContainText(
+    "Hypersim Ground Truth",
+  );
+  await expect(page.locator("canvas")).toHaveCount(3);
 
-  const leftCanvas = page.locator("canvas").first();
+  const groundTruthCanvas = page
+    .getByTestId("viewer-ground-truth")
+    .locator("canvas");
+  await expect(groundTruthCanvas).toHaveAttribute(
+    "data-scene-source",
+    /ground_truth\.ply/,
+  );
+  const groundTruthSource = await groundTruthCanvas.getAttribute(
+    "data-scene-source",
+  );
+  const leftCanvas = page.getByTestId("viewer-left").locator("canvas");
   await expect(leftCanvas).toHaveAttribute("data-camera-snapshot", /position/);
   const cameraBefore = await leftCanvas.getAttribute("data-camera-snapshot");
   await page
@@ -395,6 +430,10 @@ test("browses Exp20 by split, picture and K without resetting the camera", async
   await expect(leftCanvas).toHaveAttribute(
     "data-camera-snapshot",
     cameraBeforeStageChange!,
+  );
+  await expect(groundTruthCanvas).toHaveAttribute(
+    "data-scene-source",
+    groundTruthSource!,
   );
   await expect(page).toHaveURL(/leftStage=final/);
 

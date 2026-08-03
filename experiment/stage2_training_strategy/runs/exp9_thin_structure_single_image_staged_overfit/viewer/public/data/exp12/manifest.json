@@ -445,6 +445,55 @@
             }
           }
         }
+      },
+      "groundTruth": {
+        "url": "/data/exp12/ai_054_008_cam_00_frame.0000/ground_truth.ply",
+        "pointCount": 196608,
+        "sha256": "0392100a4bc02c12602d207c50a16e6417727b8c78a30ba3177dfb5272c9ea8c",
+        "checkpointSha256": "8d91401fa20ab3a4187479f61fd980f1933c996e74d5650e749adf96260542b7",
+        "alignment": {
+          "scale": 1.0,
+          "zShift": 0.0
+        },
+        "bounds": {
+          "min": [
+            -5.237701892852783,
+            -46.24026107788086,
+            3.092764139175415
+          ],
+          "max": [
+            40.157493591308594,
+            5.438750267028809,
+            192.92431640625
+          ]
+        },
+        "metrics": {
+          "full": {
+            "pixels": 196569,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          },
+          "crop": {
+            "pixels": 36825,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          },
+          "structure": {
+            "pixels": 18413,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          }
+        },
+        "validPointCount": 196569
       }
     },
     {
@@ -855,6 +904,55 @@
             }
           }
         }
+      },
+      "groundTruth": {
+        "url": "/data/exp12/ai_047_001_cam_00_frame.0042/ground_truth.ply",
+        "pointCount": 196608,
+        "sha256": "0842f8bb0c731859b393c14b2681fa6b29c4305f26a1da9ce879b12d3ed91c54",
+        "checkpointSha256": "05d6e5d3f373aa3717606cee82744ddafe5e8da06ba01aca049c6e7fc240cf19",
+        "alignment": {
+          "scale": 1.0,
+          "zShift": 0.0
+        },
+        "bounds": {
+          "min": [
+            -9.05444049835205,
+            -1.896882176399231,
+            0.838554859161377
+          ],
+          "max": [
+            7.883594036102295,
+            3.627617120742798,
+            44.97280502319336
+          ]
+        },
+        "metrics": {
+          "full": {
+            "pixels": 196608,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          },
+          "crop": {
+            "pixels": 36864,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          },
+          "structure": {
+            "pixels": 18432,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          }
+        },
+        "validPointCount": 196608
       }
     },
     {
@@ -1265,6 +1363,55 @@
             }
           }
         }
+      },
+      "groundTruth": {
+        "url": "/data/exp12/ai_046_001_cam_00_frame.0000/ground_truth.ply",
+        "pointCount": 196608,
+        "sha256": "53090107082d3a18f344c92ac7fbca6cf1a3e14975fa13b5107df6192d77058c",
+        "checkpointSha256": "0ff4559a5bfe95235a33deca4d6cf9d3ab43100a6e3499e7db9daa74d27af923",
+        "alignment": {
+          "scale": 1.0,
+          "zShift": 0.0
+        },
+        "bounds": {
+          "min": [
+            -5.333437442779541,
+            -2.906370162963867,
+            3.2824957370758057
+          ],
+          "max": [
+            3.966552734375,
+            1.4240573644638062,
+            14.53455924987793
+          ]
+        },
+        "metrics": {
+          "full": {
+            "pixels": 196608,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          },
+          "crop": {
+            "pixels": 36864,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          },
+          "structure": {
+            "pixels": 18432,
+            "point_rel": 0.0,
+            "depth_rel": 0.0,
+            "depth_delta_1.01": 1.0,
+            "depth_delta_1.25": 1.0,
+            "boundary_f1": 1.0
+          }
+        },
+        "validPointCount": 196608
       }
     }
   ]

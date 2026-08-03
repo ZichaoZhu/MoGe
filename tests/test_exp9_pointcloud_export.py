@@ -8,6 +8,7 @@ from tools.moge3.export_exp9_pointclouds import (
     voxel_depth_bins,
     write_binary_ply,
 )
+from tools.moge3.export_viewer_ground_truths import serialized_ground_truth
 
 
 def test_binary_ply_round_trip_preserves_raster_order_and_rgb(tmp_path):
@@ -68,6 +69,16 @@ def test_binary_ply_can_preserve_sparse_invalid_gt_pixels(tmp_path):
         atol=0.0,
         equal_nan=True,
     )
+
+
+def test_ground_truth_serialization_uses_unrendered_zero_sentinels():
+    points = np.ones((2, 2, 3), dtype=np.float32)
+    points[0, 1] = np.nan
+    points[1, 0, 2] = 0.0
+    serialized, valid = serialized_ground_truth(points)
+    np.testing.assert_array_equal(valid, [[True, False], [False, True]])
+    np.testing.assert_array_equal(serialized[~valid], np.zeros((2, 3)))
+    np.testing.assert_array_equal(serialized[valid], np.ones((2, 3)))
 
 
 def test_alignment_matches_paper_scale_and_optical_axis_shift():

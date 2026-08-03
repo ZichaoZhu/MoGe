@@ -39,4 +39,20 @@ describe("viewer URL state", () => {
       rightK: 3,
     });
   });
+
+  it("round-trips the Exp30 stage1 checkpoint", () => {
+    const query = serializeViewerUrl({
+      experiment: "exp30",
+      split: "val",
+      sample: 2,
+      leftStage: "stage1",
+      rightStage: "final",
+      leftK: 3,
+      rightK: 5,
+    });
+    expect(parseViewerUrl(query)).toMatchObject({
+      leftStage: "stage1",
+      rightStage: "final",
+    });
+  });
 });

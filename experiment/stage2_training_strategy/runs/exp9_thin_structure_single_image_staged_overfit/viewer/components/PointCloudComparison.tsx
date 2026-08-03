@@ -263,7 +263,9 @@ function ViewerPane({
   const metricScope: ScopeName = rasterScope === "full" ? "full" : "crop";
   const isInitialAlias = stageUsesAlias(sample, pane.stage, pane.step);
   const stages = sampleStages(sample);
-  const stageLabel = experiment.stageLabels[pane.stage];
+  const stageLabel = experiment.stageLabels[pane.stage] ?? pane.stage;
+  const stageDetail =
+    experiment.stageDetails[pane.stage] ?? "该阶段未提供补充说明";
   return (
     <section className="viewer-pane" data-testid={`viewer-${panelId}`}>
       <header className="pane-header">
@@ -273,7 +275,7 @@ function ViewerPane({
             {stageLabel} · K={pane.step}
           </h2>
           <small className="stage-detail">
-            {experiment.stageDetails[pane.stage]}
+            {stageDetail}
           </small>
         </div>
         <button
@@ -291,7 +293,7 @@ function ViewerPane({
             label="阶段"
             value={pane.stage}
             values={stages}
-            format={(value) => experiment.stageLabels[value]}
+            format={(value) => experiment.stageLabels[value] ?? value}
             onChange={(stage) => setPane({ ...pane, stage })}
             testId={`${panelId}-stage`}
           />

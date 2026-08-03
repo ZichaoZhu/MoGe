@@ -1,5 +1,6 @@
 import {
   REFINEMENT_STEPS,
+  STAGE_NAMES,
   type DatasetSplit,
   type RefinementStep,
   type StageName,
@@ -22,7 +23,7 @@ function refinementStep(value: string | null): RefinementStep | undefined {
 }
 
 function stageName(value: string | null): StageName | undefined {
-  return value === "initial" || value === "final" ? value : undefined;
+  return STAGE_NAMES.find((stage) => stage === value);
 }
 
 export function parseViewerUrl(search: string): ViewerUrlState {

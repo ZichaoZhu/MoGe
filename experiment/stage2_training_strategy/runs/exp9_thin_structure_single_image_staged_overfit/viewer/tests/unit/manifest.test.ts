@@ -4,6 +4,7 @@ import {
   defaultManifestSplit,
   defaultStage,
   manifestSplits,
+  sampleStages,
   validateExperimentCatalog,
   validateManifest,
   websiteSamples,
@@ -192,5 +193,28 @@ describe("split-aware v2 manifest", () => {
     expect(() => validateManifest(manifest)).not.toThrow();
     expect(defaultStage(manifest, sample, "left")).toBe("initial");
     expect(defaultStage(manifest, sample, "right")).toBe("final");
+  });
+
+  it("supports Exp30's initial, stage1 and final checkpoints", () => {
+    const manifest = v2Manifest();
+    for (const sample of manifest.samples) {
+      sample.stages.initial = {
+        "0": asset,
+        "1": { alias: "initial.0" },
+        "3": { alias: "initial.0" },
+        "5": { alias: "initial.0" },
+      };
+      sample.stages.stage1 = {
+        "0": asset,
+        "1": asset,
+        "3": asset,
+        "5": asset,
+      };
+    }
+    manifest.availableStages = ["initial", "stage1", "final"];
+    manifest.defaultStages = { left: "initial", right: "final" };
+    const sample = websiteSamples(manifest, "train")[0];
+    expect(() => validateManifest(manifest)).not.toThrow();
+    expect(sampleStages(sample)).toEqual(["initial", "stage1", "final"]);
   });
 });

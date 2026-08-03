@@ -1,7 +1,8 @@
 export const REFINEMENT_STEPS = [0, 1, 3, 5] as const;
+export const STAGE_NAMES = ["initial", "stage1", "final"] as const;
 
 export type RefinementStep = (typeof REFINEMENT_STEPS)[number];
-export type StageName = "initial" | "final";
+export type StageName = (typeof STAGE_NAMES)[number];
 export type DatasetSplit = "train" | "val" | "test";
 export type CoordinateMode = "aligned" | "raw";
 export type RenderMode = "points" | "voxels";
@@ -13,8 +14,8 @@ export type ExperimentCatalogEntry = {
   shortLabel: string;
   summary: string;
   manifestUrl: string;
-  stageLabels: Record<StageName, string>;
-  stageDetails: Record<StageName, string>;
+  stageLabels: Partial<Record<StageName, string>>;
+  stageDetails: Partial<Record<StageName, string>>;
 };
 
 export type ExperimentCatalog = {
@@ -138,7 +139,7 @@ export function stageUsesAlias(
 }
 
 export function sampleStages(sample: PointCloudSample): StageName[] {
-  return (["initial", "final"] as const).filter(
+  return STAGE_NAMES.filter(
     (stage) => sample.stages[stage] !== undefined,
   );
 }

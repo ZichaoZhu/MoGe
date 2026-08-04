@@ -4,6 +4,7 @@ import argparse
 import csv
 import datetime as dt
 import json
+import math
 import os
 import statistics
 import subprocess
@@ -37,13 +38,32 @@ class GpuState:
     utilization: int
 
 
+@dataclass(frozen=True)
+class StageContinuation:
+    attempts: tuple[Path, ...]
+    next_attempt_index: int
+    recovery_count: int
+    learning_rate_scale: float
+    checkpoint: Path
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run and monitor Exp30.")
     subparsers = parser.add_subparsers(dest="command", required=True)
-    for command in ("run", "status"):
-        child = subparsers.add_parser(command)
-        child.add_argument("--experiment-dir", type=Path, required=True)
-        child.add_argument("--safe-root", type=Path, default=DEFAULT_SAFE_ROOT)
+    run_parser = subparsers.add_parser("run")
+    run_parser.add_argument("--experiment-dir", type=Path, required=True)
+    run_parser.add_argument("--safe-root", type=Path, default=DEFAULT_SAFE_ROOT)
+    run_parser.add_argument(
+        "--continue-failed-stage1",
+        action="store_true",
+        help=(
+            "Continue a failed stage-one run in a new attempt from the latest "
+            "cross-attempt verified milestone. Existing attempts are immutable."
+        ),
+    )
+    status_parser = subparsers.add_parser("status")
+    status_parser.add_argument("--experiment-dir", type=Path, required=True)
+    status_parser.add_argument("--safe-root", type=Path, default=DEFAULT_SAFE_ROOT)
     return parser.parse_args()
 
 
@@ -500,17 +520,108 @@ def window_improvement(
     )
 
 
-def latest_safe_checkpoint(output: Path) -> Path:
-    milestones = sorted((output / "milestones").glob("step_*.pt"))
+def attempt_index(path: Path) -> int:
+    prefix = "attempt_"
+    if not path.name.startswith(prefix):
+        raise ValueError(f"Invalid attempt directory: {path}")
+    return int(path.name[len(prefix) :])
+
+
+def existing_stage_attempts(root: Path) -> list[Path]:
+    return sorted(
+        (
+            path
+            for path in root.glob("attempt_*")
+            if path.is_dir()
+        ),
+        key=attempt_index,
+    )
+
+
+def checkpoint_step_from_name(path: Path) -> int:
+    prefix = "step_"
+    if not path.stem.startswith(prefix):
+        raise ValueError(f"Invalid milestone name: {path}")
+    return int(path.stem[len(prefix) :])
+
+
+def verified_checkpoint_step(path: Path) -> int:
+    if path.name == "initial_checkpoint.pt":
+        return 0
+    return checkpoint_step_from_name(path)
+
+
+def latest_verified_checkpoint(attempts: Sequence[Path]) -> Path:
+    """Return only a checkpoint proven safe by the milestone policy.
+
+    Ordinary ``resume_checkpoint.pt`` files may be written immediately before
+    a later residual failure. They are exact crash-recovery states, not
+    stability-approved rollback points, and must never seed a stability
+    recovery.
+    """
+
+    milestones = [
+        milestone
+        for attempt in attempts
+        for milestone in (attempt / "milestones").glob("step_*.pt")
+    ]
     if milestones:
-        return milestones[-1]
-    resume = output / "resume_checkpoint.pt"
-    if resume.is_file():
-        return resume
-    checkpoint = output / "checkpoint.pt"
-    if checkpoint.is_file():
-        return checkpoint
-    raise FileNotFoundError(f"No safe checkpoint exists in {output}")
+        return max(
+            milestones,
+            key=lambda path: (
+                checkpoint_step_from_name(path),
+                path.stat().st_mtime_ns,
+            ),
+        )
+    initial_candidates = [
+        attempt / "initial_checkpoint.pt"
+        for attempt in attempts
+        if (attempt / "initial_checkpoint.pt").is_file()
+    ]
+    if initial_candidates:
+        return min(initial_candidates, key=lambda path: attempt_index(path.parent))
+    raise FileNotFoundError(
+        "No verified milestone or initial checkpoint exists across attempts"
+    )
+
+
+def failed_stage1_continuation(experiment: Path) -> StageContinuation:
+    status_path = experiment / "artifacts" / "status.json"
+    if not status_path.is_file():
+        raise FileNotFoundError("Exp30 status.json does not exist")
+    status = read_json(status_path)
+    if status.get("state") != "failed" or status.get("phase") != "stage1":
+        raise ValueError(
+            "--continue-failed-stage1 requires a failed stage-one status"
+        )
+    root = experiment / "artifacts" / "training" / "stage1"
+    attempts = existing_stage_attempts(root)
+    if not attempts:
+        raise FileNotFoundError("Failed stage one has no attempt directories")
+    recovery_count = int(status.get("recovery_count", 0))
+    if recovery_count <= 0:
+        raise ValueError("Failed stage one has no recorded recovery count")
+    learning_rate_scale = float(
+        status.get("learning_rate_scale", 0.5**recovery_count)
+    )
+    expected_scale = 0.5**recovery_count
+    if not math.isclose(
+        learning_rate_scale,
+        expected_scale,
+        rel_tol=0.0,
+        abs_tol=1e-12,
+    ):
+        raise ValueError(
+            "Failed stage-one learning-rate scale is inconsistent with its "
+            "recovery count"
+        )
+    return StageContinuation(
+        attempts=tuple(attempts),
+        next_attempt_index=max(attempt_index(path) for path in attempts) + 1,
+        recovery_count=recovery_count,
+        learning_rate_scale=learning_rate_scale,
+        checkpoint=latest_verified_checkpoint(attempts),
+    )
 
 
 def best_checkpoint(attempts: Sequence[Path]) -> tuple[Path, dict[str, Any]]:
@@ -555,18 +666,36 @@ def run_stage(
     plateau_window: int,
     minimum_improvement: float,
     transition_from: Path | None,
+    continuation: StageContinuation | None = None,
 ) -> list[Path]:
     root = experiment / "artifacts" / "training" / stage
-    attempts: list[Path] = []
-    attempt_index = 0
-    recovery_count = 0
-    lr_scale = 1.0
-    checkpoint_option = (
-        ("--transition-from", transition_from)
-        if transition_from is not None
-        else None
-    )
-    current_output = root / f"attempt_{attempt_index:02d}"
+    existing_attempts = existing_stage_attempts(root)
+    if continuation is None:
+        if existing_attempts:
+            raise RuntimeError(
+                f"{stage} already contains attempts; explicit continuation is "
+                "required to preserve prior evidence"
+            )
+        attempts: list[Path] = []
+        current_attempt_index = 0
+        recovery_count = 0
+        lr_scale = 1.0
+        checkpoint_option = (
+            ("--transition-from", transition_from)
+            if transition_from is not None
+            else None
+        )
+    else:
+        if tuple(existing_attempts) != continuation.attempts:
+            raise RuntimeError(
+                f"{stage} attempt directories changed after continuation audit"
+            )
+        attempts = list(continuation.attempts)
+        current_attempt_index = continuation.next_attempt_index
+        recovery_count = continuation.recovery_count
+        lr_scale = continuation.learning_rate_scale
+        checkpoint_option = ("--transition-from", continuation.checkpoint)
+    current_output = root / f"attempt_{current_attempt_index:02d}"
     attempts.append(current_output)
     repeated_model_oom = 0
 
@@ -610,7 +739,7 @@ def run_stage(
                 status_values={
                     "phase": stage,
                     "target_step": target,
-                    "attempt": attempt_index,
+                    "attempt": current_attempt_index,
                     "recovery_count": recovery_count,
                     "learning_rate_scale": lr_scale,
                 },
@@ -655,16 +784,15 @@ def run_stage(
                 raise RuntimeError(
                     f"{stage} exceeded two automatic recoveries"
                 )
-            source = latest_safe_checkpoint(current_output)
-            attempt_index += 1
+            source = latest_verified_checkpoint(attempts)
+            current_attempt_index += 1
             lr_scale *= 0.5
-            current_output = root / f"attempt_{attempt_index:02d}"
+            current_output = root / f"attempt_{current_attempt_index:02d}"
             attempts.append(current_output)
             checkpoint_option = ("--transition-from", source)
 
         scores = full_scores(
-            attempt / "full_evaluation_history.csv"
-            for attempt in attempts
+            [current_output / "full_evaluation_history.csv"]
         )
         improvement = window_improvement(
             scores,
@@ -685,7 +813,7 @@ def run_stage(
         )
         if improvement < minimum_improvement:
             break
-    return attempts
+    return [current_output]
 
 
 def evaluate_checkpoint(
@@ -784,6 +912,11 @@ def run(args: argparse.Namespace) -> None:
         safe_root=safe_root,
         must_exist=True,
     )
+    stage1_continuation = (
+        failed_stage1_continuation(experiment)
+        if args.continue_failed_stage1
+        else None
+    )
 
     benchmark = run_benchmarks(
         python=python,
@@ -796,13 +929,66 @@ def run(args: argparse.Namespace) -> None:
         ),
     )
     process_count = int(benchmark["selected_process_count"])
-    gpu_indices = wait_for_gpus(
-        experiment,
-        count=process_count,
-        minimum_free_mib=int(
-            config["resources"]["minimum_free_memory_mib_per_gpu"]
-        ),
+    minimum_free_mib = int(
+        config["resources"]["minimum_free_memory_mib_per_gpu"]
     )
+    available_now = eligible_gpus(query_gpus(), minimum_free_mib)
+    if (
+        stage1_continuation is not None
+        and len(available_now) < process_count
+        and available_now
+    ):
+        feasible = [
+            item
+            for item in benchmark["results"]
+            if int(item["process_count"]) <= len(available_now)
+        ]
+        if feasible:
+            process_count = int(
+                min(
+                    feasible,
+                    key=lambda item: float(item["median_step_seconds"]),
+                )["process_count"]
+            )
+    gpu_indices = (
+        available_now[:process_count]
+        if len(available_now) >= process_count
+        else wait_for_gpus(
+            experiment,
+            count=process_count,
+            minimum_free_mib=minimum_free_mib,
+        )
+    )
+
+    if stage1_continuation is not None:
+        atomic_json(
+            experiment
+            / "artifacts"
+            / "training"
+            / "stage1"
+            / f"continuation_attempt_{stage1_continuation.next_attempt_index:02d}.json",
+            {
+                "requested_at": now(),
+                "reason": (
+                    "resume checkpoint was rejected because it was not a "
+                    "stability-verified milestone"
+                ),
+                "existing_attempts": [
+                    str(path) for path in stage1_continuation.attempts
+                ],
+                "new_attempt": stage1_continuation.next_attempt_index,
+                "recovery_count": stage1_continuation.recovery_count,
+                "learning_rate_scale": (
+                    stage1_continuation.learning_rate_scale
+                ),
+                "process_count": process_count,
+                "physical_gpu_indices": gpu_indices,
+                "verified_checkpoint": str(stage1_continuation.checkpoint),
+                "verified_checkpoint_step": verified_checkpoint_step(
+                    stage1_continuation.checkpoint
+                ),
+            },
+        )
 
     stage1_attempts = run_stage(
         stage="stage1",
@@ -823,6 +1009,7 @@ def run(args: argparse.Namespace) -> None:
         plateau_window=5000,
         minimum_improvement=0.01,
         transition_from=None,
+        continuation=stage1_continuation,
     )
     stage1_best, stage1_metadata = best_checkpoint(stage1_attempts)
     stage1_step = int(stage1_metadata["step"])
@@ -850,7 +1037,18 @@ def run(args: argparse.Namespace) -> None:
         transition_from=stage1_best,
     )
     final_best, final_metadata = best_checkpoint(stage2_attempts)
-    initial_checkpoint = stage1_attempts[0] / "initial_checkpoint.pt"
+    initial_checkpoint = (
+        experiment
+        / "artifacts"
+        / "training"
+        / "stage1"
+        / "attempt_00"
+        / "initial_checkpoint.pt"
+    )
+    if not initial_checkpoint.is_file():
+        raise FileNotFoundError(
+            "The original MoGe-2/zero-SSR initial checkpoint is missing"
+        )
 
     evaluation_gpu = wait_for_gpus(
         experiment,

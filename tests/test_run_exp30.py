@@ -6,8 +6,10 @@ from tools.moge3.run_exp30 import (
     GpuState,
     best_checkpoint,
     eligible_gpus,
+    failed_stage1_continuation,
     find_data_root,
     full_scores,
+    latest_verified_checkpoint,
     training_launcher,
     update_status,
     window_improvement,
@@ -111,3 +113,65 @@ def test_update_status_clears_stale_failure_and_wait_fields(tmp_path):
         "next_check_seconds",
     ):
         assert key not in payload
+
+
+def test_stability_recovery_uses_cross_attempt_verified_milestone(tmp_path):
+    attempts = []
+    for index in range(3):
+        attempt = tmp_path / f"attempt_{index:02d}"
+        attempt.mkdir()
+        (attempt / "resume_checkpoint.pt").write_bytes(b"unsafe-resume")
+        attempts.append(attempt)
+    milestones = attempts[0] / "milestones"
+    milestones.mkdir()
+    safe_2500 = milestones / "step_002500.pt"
+    safe_2500.write_bytes(b"safe")
+    later_milestones = attempts[2] / "milestones"
+    later_milestones.mkdir()
+    safe_5000 = later_milestones / "step_005000.pt"
+    safe_5000.write_bytes(b"safer")
+
+    assert latest_verified_checkpoint(attempts) == safe_5000
+
+
+def test_stability_recovery_never_falls_back_to_resume_checkpoint(tmp_path):
+    attempt = tmp_path / "attempt_00"
+    attempt.mkdir()
+    (attempt / "resume_checkpoint.pt").write_bytes(b"unsafe-resume")
+    initial = attempt / "initial_checkpoint.pt"
+    initial.write_bytes(b"known-safe-initialization")
+
+    assert latest_verified_checkpoint([attempt]) == initial
+
+
+def test_failed_stage1_continuation_creates_new_attempt_from_milestone(
+    tmp_path,
+):
+    experiment = tmp_path / "exp30"
+    stage = experiment / "artifacts" / "training" / "stage1"
+    for index in range(3):
+        attempt = stage / f"attempt_{index:02d}"
+        attempt.mkdir(parents=True)
+        (attempt / "resume_checkpoint.pt").write_bytes(b"unsafe-resume")
+    milestones = stage / "attempt_00" / "milestones"
+    milestones.mkdir()
+    safe = milestones / "step_002500.pt"
+    safe.write_bytes(b"safe")
+    (experiment / "artifacts" / "status.json").write_text(
+        json.dumps(
+            {
+                "state": "failed",
+                "phase": "stage1",
+                "recovery_count": 2,
+                "learning_rate_scale": 0.25,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    continuation = failed_stage1_continuation(experiment)
+
+    assert continuation.next_attempt_index == 3
+    assert continuation.recovery_count == 2
+    assert continuation.learning_rate_scale == 0.25
+    assert continuation.checkpoint == safe

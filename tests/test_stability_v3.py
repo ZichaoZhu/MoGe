@@ -4,6 +4,8 @@ import torch
 from moge.train.stability_v3 import (
     base_geometry_has_collapsed,
     maximum_saturation_fraction,
+    raw_residual_abort_reason,
+    raw_residual_peak_loss,
     raw_residual_percentiles,
     raw_residual_tail_loss,
     recovery_decision,
@@ -27,6 +29,48 @@ def test_raw_residual_tail_loss_pushes_outliers_toward_margin():
     assert raw.grad is not None
     assert raw.grad[0] < 0
     assert raw.grad[1] > 0
+
+
+def test_raw_residual_peak_loss_is_not_diluted_by_image_size():
+    raw = torch.zeros(2, 32, 32, requires_grad=True)
+    with torch.no_grad():
+        raw[1, 4, 7] = 1.6
+    loss = raw_residual_peak_loss([raw], threshold=0.3)
+    assert loss.item() == pytest.approx((1.6 - 0.3) ** 2 / 2)
+    loss.backward()
+    assert raw.grad is not None
+    assert raw.grad[1, 4, 7] > 0
+    assert torch.count_nonzero(raw.grad) == 1
+
+
+def test_raw_residual_abort_ignores_isolated_bounded_outlier():
+    assert (
+        raw_residual_abort_reason(
+            maximum=1.634,
+            emergency_limit=4.0,
+            p999=0.211,
+            p999_limit=0.75,
+        )
+        is None
+    )
+    assert (
+        raw_residual_abort_reason(
+            maximum=4.1,
+            emergency_limit=4.0,
+            p999=0.211,
+            p999_limit=0.75,
+        )
+        == "raw_log_depth_residual_emergency_limit"
+    )
+    assert (
+        raw_residual_abort_reason(
+            maximum=1.2,
+            emergency_limit=4.0,
+            p999=0.8,
+            p999_limit=0.75,
+        )
+        == "raw_log_depth_residual_p999_limit"
+    )
 
 
 def test_residual_percentiles_and_saturation_are_reported():

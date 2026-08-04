@@ -11,6 +11,7 @@ from tools.moge3.run_exp30 import (
     full_scores,
     latest_launch_failure_kind,
     latest_verified_checkpoint,
+    isolated_raw_outlier_under_current_policy,
     log_contains_oom,
     training_launcher,
     update_status,
@@ -223,3 +224,68 @@ def test_failed_stability_continuation_halves_learning_rate_again(tmp_path):
     assert continuation.recovery_count == 3
     assert continuation.learning_rate_scale == 0.125
     assert continuation.checkpoint == safe
+
+
+def test_isolated_legacy_raw_outlier_does_not_consume_another_recovery(
+    tmp_path,
+):
+    experiment = tmp_path / "exp30"
+    stage = experiment / "artifacts" / "training" / "stage1"
+    for index in range(4):
+        (stage / f"attempt_{index:02d}").mkdir(parents=True)
+    latest = stage / "attempt_03"
+    milestones = stage / "attempt_00" / "milestones"
+    milestones.mkdir()
+    safe = milestones / "step_007500.pt"
+    safe.write_bytes(b"safe")
+    (latest / "run_to_020000.log").write_text(
+        '{"event": "launch"}\n'
+        "RuntimeError: Raw SSR log-depth residual exceeded the configured "
+        "safety limit\n",
+        encoding="utf-8",
+    )
+    (latest / "instability_event.json").write_text(
+        json.dumps(
+            {
+                "event": "raw_log_depth_residual_limit",
+                "ssr_max_abs_raw_log_depth_residual": 1.634,
+                "ssr_raw_p999": 0.211,
+                "ssr_max_bound_saturation_fraction": 0.0033,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (experiment / "artifacts" / "status.json").write_text(
+        json.dumps(
+            {
+                "state": "failed",
+                "phase": "stage1",
+                "recovery_count": 5,
+                "learning_rate_scale": 0.03125,
+            }
+        ),
+        encoding="utf-8",
+    )
+    residual_control = {
+        "raw_emergency_abort": 4.0,
+        "raw_p999_abort": 0.75,
+        "saturation_fraction_abort": 0.05,
+    }
+
+    assert isolated_raw_outlier_under_current_policy(
+        latest,
+        residual_control,
+    )
+    continuation = failed_stage1_continuation(
+        experiment,
+        residual_control=residual_control,
+    )
+
+    assert continuation.next_attempt_index == 4
+    assert continuation.recovery_count == 5
+    assert continuation.learning_rate_scale == 0.03125
+    assert continuation.checkpoint == safe
+    assert (
+        continuation.failure_classification
+        == "isolated_raw_outlier_false_positive"
+    )

@@ -23,6 +23,54 @@ def raw_residual_tail_loss(
     return torch.stack(penalties).mean()
 
 
+def raw_residual_peak_loss(
+    residuals: Sequence[torch.Tensor],
+    *,
+    threshold: float,
+) -> torch.Tensor:
+    """Penalize the largest raw residual in each sample and refinement cycle.
+
+    The dense tail loss above is intentionally averaged over every pixel.  That
+    makes it insensitive to a single extreme pixel in a roughly 200k-pixel
+    image.  This companion term keeps those isolated logits finite without
+    treating them as a geometry failure: the applied residual remains bounded
+    separately by ``limit * tanh(raw / limit)``.
+    """
+    if threshold < 0:
+        raise ValueError("Raw residual peak threshold must be non-negative")
+    if not residuals:
+        raise ValueError("Raw residual peak loss requires at least one tensor")
+    penalties = []
+    for residual in residuals:
+        if residual.ndim == 0:
+            peaks = residual.abs().reshape(1)
+        else:
+            peaks = residual.abs().reshape(residual.shape[0], -1).amax(dim=-1)
+        penalties.append(torch.relu(peaks - float(threshold)).square().mean())
+    return torch.stack(penalties).mean()
+
+
+def raw_residual_abort_reason(
+    *,
+    maximum: float,
+    emergency_limit: float,
+    p999: float,
+    p999_limit: float,
+) -> str | None:
+    """Return an abort reason for systemic or numerically extreme raw logits.
+
+    A lone raw-logit outlier is not itself a geometry explosion once the
+    applied update is smoothly bounded.  The emergency maximum remains as a
+    numerical backstop, while P99.9 detects a dense tail that can move a
+    meaningful fraction of the point map.
+    """
+    if emergency_limit > 0 and maximum > emergency_limit:
+        return "raw_log_depth_residual_emergency_limit"
+    if p999_limit > 0 and p999 > p999_limit:
+        return "raw_log_depth_residual_p999_limit"
+    return None
+
+
 @torch.no_grad()
 def raw_residual_percentiles(
     residuals: Sequence[torch.Tensor],

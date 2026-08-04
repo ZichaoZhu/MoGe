@@ -38,6 +38,8 @@ from moge.scripts.train_hypersim_smallset_v3 import (
 from moge.train.stability_v3 import (
     base_geometry_has_collapsed,
     maximum_saturation_fraction,
+    raw_residual_abort_reason,
+    raw_residual_peak_loss,
     raw_residual_percentiles,
     raw_residual_tail_loss,
     selection_score,
@@ -198,8 +200,18 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=0.0,
         help=(
-            "Abort before backward when the pre-bound SSR residual exceeds "
-            "this value; 0 disables."
+            "Emergency abort before backward when the pre-bound SSR residual "
+            "exceeds this value; 0 disables. Isolated values below this limit "
+            "are constrained by the peak loss rather than treated as collapse."
+        ),
+    )
+    parser.add_argument(
+        "--max-raw-log-depth-residual-p999",
+        type=float,
+        default=0.0,
+        help=(
+            "Abort before backward when the P99.9 absolute raw residual "
+            "exceeds this value; 0 disables."
         ),
     )
     parser.add_argument(
@@ -219,6 +231,14 @@ def parse_args() -> argparse.Namespace:
         type=float,
         default=0.0,
         help="Weight of the raw residual tail penalty.",
+    )
+    parser.add_argument(
+        "--raw-residual-peak-weight",
+        type=float,
+        default=0.0,
+        help=(
+            "Weight of the per-sample, per-cycle raw residual peak penalty."
+        ),
     )
     parser.add_argument(
         "--max-bound-saturation-fraction",
@@ -344,9 +364,11 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
         args.max_abs_log_depth_residual,
         args.smooth_log_depth_residual_bound,
         args.max_abs_raw_log_depth_residual,
+        args.max_raw_log_depth_residual_p999,
         args.raw_residual_warning_threshold,
         args.raw_residual_tail_threshold,
         args.raw_residual_tail_weight,
+        args.raw_residual_peak_weight,
         args.max_bound_saturation_fraction,
         args.max_voxel_depth_span,
         args.max_refined_point_rel,
@@ -1620,23 +1642,29 @@ def main() -> None:
                 raise RuntimeError(
                     "SSR log-depth residual exceeded the configured safety limit"
                 )
-            if (
-                args.max_abs_raw_log_depth_residual > 0
-                and microbatch_maxima[
+            raw_abort_reason = raw_residual_abort_reason(
+                maximum=microbatch_maxima[
                     "ssr_max_abs_raw_log_depth_residual"
-                ]
-                > args.max_abs_raw_log_depth_residual
-            ):
+                ],
+                emergency_limit=args.max_abs_raw_log_depth_residual,
+                p999=microbatch_maxima["ssr_raw_p999"],
+                p999_limit=args.max_raw_log_depth_residual_p999,
+            )
+            if raw_abort_reason is not None:
+                threshold = (
+                    args.max_abs_raw_log_depth_residual
+                    if raw_abort_reason
+                    == "raw_log_depth_residual_emergency_limit"
+                    else args.max_raw_log_depth_residual_p999
+                )
                 if accelerator.is_main_process:
                     write_instability_event(
                         output,
                         {
-                            "event": "raw_log_depth_residual_limit",
+                            "event": raw_abort_reason,
                             "step": step,
                             "stage": stage,
-                            "threshold": (
-                                args.max_abs_raw_log_depth_residual
-                            ),
+                            "threshold": threshold,
                             **microbatch_maxima,
                             "action": (
                                 "aborted before backward and optimizer step"
@@ -1644,8 +1672,8 @@ def main() -> None:
                         },
                     )
                 raise RuntimeError(
-                    "Raw SSR log-depth residual exceeded the configured "
-                    "safety limit"
+                    "Raw SSR log-depth residual distribution exceeded the "
+                    "configured safety limit"
                 )
             sequence = output_dict["points_sequence"]
             base_loss, base_terms = geometry_loss(
@@ -1670,6 +1698,10 @@ def main() -> None:
                 raw_residuals,
                 threshold=args.raw_residual_tail_threshold,
             )
+            peak_loss = raw_residual_peak_loss(
+                raw_residuals,
+                threshold=args.raw_residual_tail_threshold,
+            )
             geometry_total = (
                 refined_loss
                 if args.train_refiner_only
@@ -1678,6 +1710,7 @@ def main() -> None:
             loss = (
                 geometry_total
                 + args.raw_residual_tail_weight * tail_loss
+                + args.raw_residual_peak_weight * peak_loss
             )
             if not torch.isfinite(loss):
                 raise RuntimeError(f"Non-finite loss at step {step}")
@@ -1687,6 +1720,9 @@ def main() -> None:
                     local_terms[f"{prefix}/{key}"] += weight * value
             local_terms["stability/raw_tail_loss"] += (
                 weight * float(tail_loss.detach())
+            )
+            local_terms["stability/raw_peak_loss"] += (
+                weight * float(peak_loss.detach())
             )
             accelerator.backward(weight * loss)
             del (
@@ -1698,6 +1734,7 @@ def main() -> None:
                 refined_loss,
                 geometry_total,
                 tail_loss,
+                peak_loss,
                 loss,
             )
 
@@ -2236,6 +2273,9 @@ def main() -> None:
                 "max_abs_raw_log_depth_residual": (
                     args.max_abs_raw_log_depth_residual
                 ),
+                "max_raw_log_depth_residual_p999": (
+                    args.max_raw_log_depth_residual_p999
+                ),
                 "raw_residual_warning_threshold": (
                     args.raw_residual_warning_threshold
                 ),
@@ -2243,6 +2283,7 @@ def main() -> None:
                     args.raw_residual_tail_threshold
                 ),
                 "raw_residual_tail_weight": args.raw_residual_tail_weight,
+                "raw_residual_peak_weight": args.raw_residual_peak_weight,
                 "max_bound_saturation_fraction": (
                     args.max_bound_saturation_fraction
                 ),

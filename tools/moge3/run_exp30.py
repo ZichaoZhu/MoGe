@@ -12,7 +12,7 @@ import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, Sequence
+from typing import Any, Iterable, Mapping, Sequence
 
 from moge.train.stability_v3 import relative_window_improvement
 from moge.utils.remote_guard import DEFAULT_SAFE_ROOT, assert_safe_path
@@ -45,6 +45,7 @@ class StageContinuation:
     recovery_count: int
     learning_rate_scale: float
     checkpoint: Path
+    failure_classification: str = "standard_stability_failure"
 
 
 def parse_args() -> argparse.Namespace:
@@ -290,12 +291,16 @@ def common_training_args(
         "--max-abs-log-depth-residual",
         "0.100001",
         "--max-abs-raw-log-depth-residual",
-        "1.5",
+        "4.0",
+        "--max-raw-log-depth-residual-p999",
+        "0.75",
         "--raw-residual-warning-threshold",
         "1.0",
         "--raw-residual-tail-threshold",
         "0.3",
         "--raw-residual-tail-weight",
+        "0.01",
+        "--raw-residual-peak-weight",
         "0.01",
         "--max-bound-saturation-fraction",
         "0.05",
@@ -589,7 +594,35 @@ def latest_verified_checkpoint(attempts: Sequence[Path]) -> Path:
     )
 
 
-def failed_stage1_continuation(experiment: Path) -> StageContinuation:
+def isolated_raw_outlier_under_current_policy(
+    attempt: Path,
+    residual_control: Mapping[str, Any] | None,
+) -> bool:
+    if residual_control is None:
+        return False
+    event_path = attempt / "instability_event.json"
+    if not event_path.is_file():
+        return False
+    event = read_json(event_path)
+    if event.get("event") != "raw_log_depth_residual_limit":
+        return False
+    return (
+        float(event.get("ssr_max_abs_raw_log_depth_residual", math.inf))
+        < float(residual_control["raw_emergency_abort"])
+        and float(event.get("ssr_raw_p999", math.inf))
+        < float(residual_control["raw_p999_abort"])
+        and float(
+            event.get("ssr_max_bound_saturation_fraction", math.inf)
+        )
+        < float(residual_control["saturation_fraction_abort"])
+    )
+
+
+def failed_stage1_continuation(
+    experiment: Path,
+    *,
+    residual_control: Mapping[str, Any] | None = None,
+) -> StageContinuation:
     status_path = experiment / "artifacts" / "status.json"
     if not status_path.is_file():
         raise FileNotFoundError("Exp30 status.json does not exist")
@@ -629,7 +662,14 @@ def failed_stage1_continuation(experiment: Path) -> StageContinuation:
         if run_logs
         else "unknown"
     )
-    if failure_kind == "stability":
+    isolated_raw_outlier = (
+        failure_kind == "stability"
+        and isolated_raw_outlier_under_current_policy(
+            latest_attempt,
+            residual_control,
+        )
+    )
+    if failure_kind == "stability" and not isolated_raw_outlier:
         recovery_count += 1
         learning_rate_scale *= 0.5
     return StageContinuation(
@@ -638,6 +678,11 @@ def failed_stage1_continuation(experiment: Path) -> StageContinuation:
         recovery_count=recovery_count,
         learning_rate_scale=learning_rate_scale,
         checkpoint=latest_verified_checkpoint(attempts),
+        failure_classification=(
+            "isolated_raw_outlier_false_positive"
+            if isolated_raw_outlier
+            else "standard_stability_failure"
+        ),
     )
 
 
@@ -687,6 +732,7 @@ def latest_launch_failure_kind(path: Path) -> str:
         return "oom"
     stability_messages = (
         "raw ssr log-depth residual exceeded the configured safety limit",
+        "raw ssr log-depth residual distribution exceeded the configured safety limit",
         "ssr log-depth residual exceeded the configured safety limit",
         "ssr residual saturation persisted beyond the configured limit",
         "pre-clip gradient norm exceeded the configured safety limit",
@@ -977,7 +1023,10 @@ def run(args: argparse.Namespace) -> None:
         must_exist=True,
     )
     stage1_continuation = (
-        failed_stage1_continuation(experiment)
+        failed_stage1_continuation(
+            experiment,
+            residual_control=config["residual_control"],
+        )
         if args.continue_failed_stage1
         else None
     )
@@ -1034,8 +1083,11 @@ def run(args: argparse.Namespace) -> None:
             {
                 "requested_at": now(),
                 "reason": (
-                    "resume checkpoint was rejected because it was not a "
-                    "stability-verified milestone"
+                    "continue from the latest cross-attempt stability-verified "
+                    "milestone after classifying the previous failure"
+                ),
+                "failure_classification": (
+                    stage1_continuation.failure_classification
                 ),
                 "existing_attempts": [
                     str(path) for path in stage1_continuation.attempts

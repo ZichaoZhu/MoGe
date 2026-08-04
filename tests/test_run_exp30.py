@@ -9,7 +9,9 @@ from tools.moge3.run_exp30 import (
     failed_stage1_continuation,
     find_data_root,
     full_scores,
+    latest_launch_failure_kind,
     latest_verified_checkpoint,
+    log_contains_oom,
     training_launcher,
     update_status,
     window_improvement,
@@ -174,4 +176,50 @@ def test_failed_stage1_continuation_creates_new_attempt_from_milestone(
     assert continuation.next_attempt_index == 3
     assert continuation.recovery_count == 2
     assert continuation.learning_rate_scale == 0.25
+    assert continuation.checkpoint == safe
+
+
+def test_oom_detection_ignores_an_older_launch_failure(tmp_path):
+    log = tmp_path / "run.log"
+    old_launch = b'{"event": "launch"}\nCUDA out of memory\n'
+    current_launch = b'{"event": "launch"}\nRuntimeError: residual failure\n'
+    log.write_bytes(old_launch + current_launch)
+
+    assert log_contains_oom(log)
+    assert not log_contains_oom(log, start_offset=len(old_launch))
+    assert latest_launch_failure_kind(log) == "unknown"
+
+
+def test_failed_stability_continuation_halves_learning_rate_again(tmp_path):
+    experiment = tmp_path / "exp30"
+    stage = experiment / "artifacts" / "training" / "stage1"
+    for index in range(4):
+        (stage / f"attempt_{index:02d}").mkdir(parents=True)
+    milestones = stage / "attempt_00" / "milestones"
+    milestones.mkdir()
+    safe = milestones / "step_002500.pt"
+    safe.write_bytes(b"safe")
+    (stage / "attempt_03" / "run_to_020000.log").write_text(
+        '{"event": "launch"}\n'
+        "RuntimeError: Raw SSR log-depth residual exceeded the configured "
+        "safety limit\n",
+        encoding="utf-8",
+    )
+    (experiment / "artifacts" / "status.json").write_text(
+        json.dumps(
+            {
+                "state": "failed",
+                "phase": "stage1",
+                "recovery_count": 2,
+                "learning_rate_scale": 0.25,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    continuation = failed_stage1_continuation(experiment)
+
+    assert continuation.next_attempt_index == 4
+    assert continuation.recovery_count == 3
+    assert continuation.learning_rate_scale == 0.125
     assert continuation.checkpoint == safe

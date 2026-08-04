@@ -357,6 +357,10 @@ def run_process(
     log_path.parent.mkdir(parents=True, exist_ok=True)
     environment = dict(os.environ)
     environment["CUDA_VISIBLE_DEVICES"] = ",".join(map(str, gpu_indices))
+    environment.setdefault(
+        "PYTORCH_CUDA_ALLOC_CONF",
+        "expandable_segments:True",
+    )
     update_status(
         experiment,
         state="running",
@@ -615,6 +619,19 @@ def failed_stage1_continuation(experiment: Path) -> StageContinuation:
             "Failed stage-one learning-rate scale is inconsistent with its "
             "recovery count"
         )
+    latest_attempt = attempts[-1]
+    run_logs = sorted(
+        latest_attempt.glob("run_to_*.log"),
+        key=lambda path: path.stat().st_mtime_ns,
+    )
+    failure_kind = (
+        latest_launch_failure_kind(run_logs[-1])
+        if run_logs
+        else "unknown"
+    )
+    if failure_kind == "stability":
+        recovery_count += 1
+        learning_rate_scale *= 0.5
     return StageContinuation(
         attempts=tuple(attempts),
         next_attempt_index=max(attempt_index(path) for path in attempts) + 1,
@@ -639,11 +656,49 @@ def best_checkpoint(attempts: Sequence[Path]) -> tuple[Path, dict[str, Any]]:
     return checkpoint, read_json(checkpoint.parent / "checkpoint_metadata.json")
 
 
-def log_contains_oom(path: Path) -> bool:
+def log_segment(path: Path, *, start_offset: int = 0) -> str:
     if not path.is_file():
-        return False
-    tail = path.read_text(encoding="utf-8", errors="replace")[-200_000:].lower()
-    return "out of memory" in tail or "cuda error: out of memory" in tail
+        return ""
+    with path.open("rb") as handle:
+        handle.seek(start_offset)
+        return handle.read().decode("utf-8", errors="replace").lower()
+
+
+def log_contains_oom(path: Path, *, start_offset: int = 0) -> bool:
+    segment = log_segment(path, start_offset=start_offset)
+    return (
+        "out of memory" in segment
+        or "cuda error: out of memory" in segment
+    )
+
+
+def latest_launch_failure_kind(path: Path) -> str:
+    """Classify only the most recent launch in an append-only run log."""
+
+    if not path.is_file():
+        return "unknown"
+    payload = path.read_bytes()
+    marker = b'{"event": "launch"'
+    start = payload.rfind(marker)
+    if start < 0:
+        start = 0
+    segment = payload[start:].decode("utf-8", errors="replace").lower()
+    if "out of memory" in segment or "cuda error: out of memory" in segment:
+        return "oom"
+    stability_messages = (
+        "raw ssr log-depth residual exceeded the configured safety limit",
+        "ssr log-depth residual exceeded the configured safety limit",
+        "ssr residual saturation persisted beyond the configured limit",
+        "pre-clip gradient norm exceeded the configured safety limit",
+        "non-finite loss at step",
+        "non-finite gradient at step",
+        "periodic base point rel indicates geometry collapse",
+        "periodic refined point rel indicates ssr collapse",
+        "voxel depth span",
+    )
+    if any(message in segment for message in stability_messages):
+        return "stability"
+    return "unknown"
 
 
 def run_stage(
@@ -665,6 +720,7 @@ def run_stage(
     decay_end: int,
     plateau_window: int,
     minimum_improvement: float,
+    maximum_recoveries: int,
     transition_from: Path | None,
     continuation: StageContinuation | None = None,
 ) -> list[Path]:
@@ -731,6 +787,11 @@ def run_stage(
                 checkpoint_option=checkpoint_option,
             )
             log_path = current_output / f"run_to_{target:06d}.log"
+            launch_log_offset = (
+                log_path.stat().st_size
+                if log_path.is_file()
+                else 0
+            )
             return_code = run_process(
                 training_launcher(python, process_count=process_count) + args,
                 log_path=log_path,
@@ -748,7 +809,10 @@ def run_stage(
                 repeated_model_oom = 0
                 break
 
-            if log_contains_oom(log_path):
+            if log_contains_oom(
+                log_path,
+                start_offset=launch_log_offset,
+            ):
                 states = query_gpus()
                 selected_states = {
                     state.index: state for state in states
@@ -780,9 +844,9 @@ def run_stage(
                 )
 
             recovery_count += 1
-            if recovery_count > 2:
+            if recovery_count > maximum_recoveries:
                 raise RuntimeError(
-                    f"{stage} exceeded two automatic recoveries"
+                    f"{stage} exceeded {maximum_recoveries} automatic recoveries"
                 )
             source = latest_verified_checkpoint(attempts)
             current_attempt_index += 1
@@ -1008,6 +1072,9 @@ def run(args: argparse.Namespace) -> None:
         decay_end=62500,
         plateau_window=5000,
         minimum_improvement=0.01,
+        maximum_recoveries=int(
+            config["residual_control"]["maximum_recoveries_per_stage"]
+        ),
         transition_from=None,
         continuation=stage1_continuation,
     )
@@ -1034,6 +1101,9 @@ def run(args: argparse.Namespace) -> None:
         decay_end=stage1_step + 25000,
         plateau_window=2500,
         minimum_improvement=0.005,
+        maximum_recoveries=int(
+            config["residual_control"]["maximum_recoveries_per_stage"]
+        ),
         transition_from=stage1_best,
     )
     final_best, final_metadata = best_checkpoint(stage2_attempts)

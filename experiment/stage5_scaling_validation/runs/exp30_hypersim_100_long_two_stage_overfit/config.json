@@ -72,7 +72,7 @@
     "maximum_preclip_gradient": 25.0,
     "maximum_skipped_gradients_total": 5,
     "maximum_skipped_gradients_consecutive": 2,
-    "maximum_recoveries_per_stage": 2
+    "maximum_recoveries_per_stage": 5
   },
   "evaluation": {
     "periodic_every": 500,

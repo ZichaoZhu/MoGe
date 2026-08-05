@@ -13,6 +13,7 @@ from tools.moge3.run_exp30 import (
     latest_verified_checkpoint,
     isolated_preclip_outliers_under_window_policy,
     isolated_raw_outlier_under_current_policy,
+    legacy_preclip_spike_safe_under_group_clipping,
     log_contains_oom,
     training_launcher,
     update_status,
@@ -364,4 +365,75 @@ def test_sparse_preclip_outliers_do_not_consume_another_recovery(tmp_path):
     assert (
         continuation.failure_classification
         == "sparse_preclip_outliers_false_positive"
+    )
+
+
+def test_safe_legacy_global_gradient_spike_uses_group_clip_policy(tmp_path):
+    experiment = tmp_path / "exp30"
+    stage = experiment / "artifacts" / "training" / "stage1"
+    latest = stage / "attempt_08"
+    latest.mkdir(parents=True)
+    milestones = latest / "milestones"
+    milestones.mkdir()
+    safe = milestones / "step_010000.pt"
+    safe.write_bytes(b"safe")
+    (latest / "run_to_020000.log").write_text(
+        "RuntimeError: Pre-clip gradient skip budget was exhausted\n",
+        encoding="utf-8",
+    )
+    (latest / "stability_events.jsonl").write_text(
+        json.dumps(
+            {"event": "preclip_gradient_limit_skipped", "step": 10385}
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    (latest / "instability_event.json").write_text(
+        json.dumps(
+            {
+                "event": "preclip_gradient_skip_budget_exhausted",
+                "step": 10386,
+                "grad_norm": 38.687,
+                "skipped_preclip_consecutive": 2,
+                "ssr_raw_p999": 0.2475,
+                "ssr_max_bound_saturation_fraction": 0.0164,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (experiment / "artifacts" / "status.json").write_text(
+        json.dumps(
+            {
+                "state": "failed",
+                "phase": "stage1",
+                "recovery_count": 5,
+                "learning_rate_scale": 0.03125,
+            }
+        ),
+        encoding="utf-8",
+    )
+    residual_control = {
+        "gradient_clip_mode": "per_group",
+        "preclip_gradient_hard_abort": 250.0,
+        "raw_p999_abort": 0.75,
+        "saturation_fraction_abort": 0.05,
+        "maximum_skipped_gradients_in_window": 5,
+        "maximum_skipped_gradients_consecutive": 2,
+        "skipped_gradient_window_steps": 1000,
+    }
+
+    assert legacy_preclip_spike_safe_under_group_clipping(
+        latest,
+        residual_control,
+    )
+    continuation = failed_stage1_continuation(
+        experiment,
+        residual_control=residual_control,
+    )
+    assert continuation.recovery_count == 5
+    assert continuation.learning_rate_scale == 0.03125
+    assert continuation.checkpoint == safe
+    assert (
+        continuation.failure_classification
+        == "legacy_global_gradient_spike_false_positive"
     )

@@ -280,8 +280,12 @@ def common_training_args(
         "0.01",
         "--gradient-clip-norm",
         "1.0",
-        "--max-preclip-grad-norm",
+        "--gradient-clip-mode",
+        "per_group",
+        "--preclip-warning-grad-norm",
         "25",
+        "--max-preclip-grad-norm",
+        "250",
         "--max-skipped-preclip-steps",
         "5",
         "--max-consecutive-skipped-preclip-steps",
@@ -676,6 +680,45 @@ def isolated_preclip_outliers_under_window_policy(
     )
 
 
+def legacy_preclip_spike_safe_under_group_clipping(
+    attempt: Path,
+    residual_control: Mapping[str, Any] | None,
+) -> bool:
+    """Reclassify a finite legacy global-gradient stop under group clipping."""
+
+    if residual_control is None:
+        return False
+    if residual_control.get("gradient_clip_mode") != "per_group":
+        return False
+    event_path = attempt / "instability_event.json"
+    if not event_path.is_file():
+        return False
+    event = read_json(event_path)
+    if event.get("event") not in {
+        "preclip_gradient_limit",
+        "preclip_gradient_skip_budget_exhausted",
+    }:
+        return False
+    gradient_norm = float(event.get("grad_norm", math.inf))
+    hard_threshold = float(
+        residual_control.get("preclip_gradient_hard_abort", 0)
+    )
+    residual_distribution_is_safe = (
+        float(event.get("ssr_raw_p999", math.inf))
+        < float(residual_control["raw_p999_abort"])
+        and float(
+            event.get("ssr_max_bound_saturation_fraction", math.inf)
+        )
+        < float(residual_control["saturation_fraction_abort"])
+    )
+    return (
+        math.isfinite(gradient_norm)
+        and hard_threshold > 0
+        and gradient_norm < hard_threshold
+        and residual_distribution_is_safe
+    )
+
+
 def failed_stage1_continuation(
     experiment: Path,
     *,
@@ -734,7 +777,18 @@ def failed_stage1_continuation(
             residual_control,
         )
     )
-    false_positive = isolated_raw_outlier or isolated_preclip_outliers
+    safe_legacy_preclip_spike = (
+        failure_kind == "stability"
+        and legacy_preclip_spike_safe_under_group_clipping(
+            latest_attempt,
+            residual_control,
+        )
+    )
+    false_positive = (
+        isolated_raw_outlier
+        or isolated_preclip_outliers
+        or safe_legacy_preclip_spike
+    )
     if failure_kind == "stability" and not false_positive:
         recovery_count += 1
         learning_rate_scale *= 0.5
@@ -750,7 +804,11 @@ def failed_stage1_continuation(
             else (
                 "sparse_preclip_outliers_false_positive"
                 if isolated_preclip_outliers
-                else "standard_stability_failure"
+                else (
+                    "legacy_global_gradient_spike_false_positive"
+                    if safe_legacy_preclip_spike
+                    else "standard_stability_failure"
+                )
             )
         ),
     )

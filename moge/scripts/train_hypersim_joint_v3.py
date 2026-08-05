@@ -157,10 +157,31 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--weight-decay", type=float, default=1e-2)
     parser.add_argument("--gradient-clip-norm", type=float, default=1.0)
     parser.add_argument(
+        "--gradient-clip-mode",
+        choices=("global", "per_group"),
+        default="global",
+        help=(
+            "Clip either the complete optimizer gradient jointly or each "
+            "named optimizer group independently."
+        ),
+    )
+    parser.add_argument(
+        "--preclip-warning-grad-norm",
+        type=float,
+        default=0.0,
+        help=(
+            "Record finite pre-clip gradient spikes above this value while "
+            "still applying the clipped update; 0 disables."
+        ),
+    )
+    parser.add_argument(
         "--max-preclip-grad-norm",
         type=float,
         default=0.0,
-        help="Abort before optimizer.step when the pre-clip norm exceeds this value; 0 disables.",
+        help=(
+            "Emergency skip/abort threshold for the finite pre-clip norm; "
+            "0 disables. Use --preclip-warning-grad-norm for ordinary spikes."
+        ),
     )
     parser.add_argument(
         "--max-skipped-preclip-steps",
@@ -369,6 +390,7 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
                 "Cosine decay requires 0 <= start < end"
             )
     if min(
+        args.preclip_warning_grad_norm,
         args.max_preclip_grad_norm,
         args.max_abs_log_depth_residual,
         args.smooth_log_depth_residual_bound,
@@ -385,6 +407,14 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
         args.max_base_to_best_ratio,
     ) < 0:
         raise ValueError("Instability thresholds cannot be negative")
+    if (
+        args.preclip_warning_grad_norm > 0
+        and args.max_preclip_grad_norm > 0
+        and args.preclip_warning_grad_norm >= args.max_preclip_grad_norm
+    ):
+        raise ValueError(
+            "Pre-clip warning threshold must be below the emergency threshold"
+        )
     if not math.isfinite(args.smooth_log_depth_residual_bound):
         raise ValueError("Smooth residual bound must be finite")
     if min(
@@ -637,6 +667,67 @@ def clear_backbone_gradients(model: MoGeModel) -> None:
     """Keep a zero-LR DDP backbone out of global gradient clipping."""
     for parameter in model.encoder.backbone.parameters():
         parameter.grad = None
+
+
+@torch.no_grad()
+def optimizer_group_gradient_norms(
+    optimizer: torch.optim.Optimizer,
+) -> Dict[str, float]:
+    """Measure pre-clip L2 gradient norms for each named optimizer group."""
+
+    result: Dict[str, float] = {}
+    for index, group in enumerate(optimizer.param_groups):
+        squared_norm = None
+        for parameter in group["params"]:
+            if parameter.grad is None:
+                continue
+            contribution = parameter.grad.detach().float().square().sum()
+            squared_norm = (
+                contribution
+                if squared_norm is None
+                else squared_norm + contribution
+            )
+        name = str(group.get("name", index))
+        result[f"grad_norm/{name}"] = (
+            float(squared_norm.sqrt()) if squared_norm is not None else 0.0
+        )
+    return result
+
+
+@torch.no_grad()
+def clip_optimizer_gradients(
+    optimizer: torch.optim.Optimizer,
+    *,
+    max_norm: float,
+    mode: str,
+) -> tuple[float, Dict[str, float]]:
+    """Measure global pre-clip norm and clip globally or per parameter group."""
+
+    group_norms = optimizer_group_gradient_norms(optimizer)
+    global_norm = math.sqrt(sum(value * value for value in group_norms.values()))
+    if max_norm <= 0:
+        return global_norm, group_norms
+    if mode == "global":
+        parameters = [
+            parameter
+            for group in optimizer.param_groups
+            for parameter in group["params"]
+            if parameter.grad is not None
+        ]
+        torch.nn.utils.clip_grad_norm_(parameters, max_norm)
+    elif mode == "per_group":
+        for group in optimizer.param_groups:
+            torch.nn.utils.clip_grad_norm_(
+                [
+                    parameter
+                    for parameter in group["params"]
+                    if parameter.grad is not None
+                ],
+                max_norm,
+            )
+    else:
+        raise ValueError(f"Unsupported gradient clip mode: {mode}")
+    return global_norm, group_norms
 
 
 def limited_manifest(
@@ -1836,18 +1927,16 @@ def main() -> None:
 
         if learning_rates["backbone"] == 0.0:
             clear_backbone_gradients(raw_model)
-        grad_norm = accelerator.clip_grad_norm_(
-            (
-                parameter
-                for parameter in model.parameters()
-                if parameter.grad is not None
-            ),
-            args.gradient_clip_norm,
+        accelerator.unscale_gradients(optimizer)
+        grad_norm, group_gradient_norms = clip_optimizer_gradients(
+            optimizer,
+            max_norm=args.gradient_clip_norm,
+            mode=args.gradient_clip_mode,
         )
-        if not torch.isfinite(grad_norm):
+        if not math.isfinite(grad_norm):
             raise RuntimeError(f"Non-finite gradient at step {step}")
         gradient_action = preclip_gradient_action(
-            grad_norm=float(grad_norm),
+            grad_norm=grad_norm,
             threshold=args.max_preclip_grad_norm,
             skipped_total=skipped_preclip_window_count(
                 skipped_preclip_step_history,
@@ -1859,6 +1948,35 @@ def main() -> None:
             max_skipped_consecutive=args.max_consecutive_skipped_preclip_steps,
         )
         optimizer_step_skipped = gradient_action == "skip"
+        gradient_loss_terms = (
+            distributed_mean_dict(dict(local_terms), accelerator)
+            if gradient_action != "apply"
+            else {}
+        )
+        global_sample_ids = [
+            train_samples[index].sample_id for index in global_indices
+        ]
+        if (
+            args.preclip_warning_grad_norm > 0
+            and grad_norm > args.preclip_warning_grad_norm
+            and gradient_action == "apply"
+            and accelerator.is_main_process
+        ):
+            append_stability_event(
+                output,
+                {
+                    "event": "preclip_gradient_warning_applied",
+                    "step": step,
+                    "stage": stage,
+                    "threshold": args.preclip_warning_grad_norm,
+                    "grad_norm": grad_norm,
+                    "gradient_clip_mode": args.gradient_clip_mode,
+                    **step_maxima,
+                    **group_gradient_norms,
+                    "sample_ids": global_sample_ids,
+                    "action": "clipped optimizer step applied",
+                },
+            )
         if gradient_action == "abort":
             if accelerator.is_main_process:
                 write_instability_event(
@@ -1868,7 +1986,8 @@ def main() -> None:
                         "step": step,
                         "stage": stage,
                         "threshold": args.max_preclip_grad_norm,
-                        "grad_norm": float(grad_norm),
+                        "grad_norm": grad_norm,
+                        "gradient_clip_mode": args.gradient_clip_mode,
                         "skipped_preclip_total": skipped_preclip_total,
                         "skipped_preclip_window": (
                             skipped_preclip_window_count(
@@ -1890,7 +2009,9 @@ def main() -> None:
                             args.max_consecutive_skipped_preclip_steps
                         ),
                         **step_maxima,
-                        "sample_ids": [sample.sample_id for sample in batch],
+                        **group_gradient_norms,
+                        "loss_terms": gradient_loss_terms,
+                        "sample_ids": global_sample_ids,
                         "action": "aborted before optimizer step",
                     },
                 )
@@ -1914,7 +2035,8 @@ def main() -> None:
                         "step": step,
                         "stage": stage,
                         "threshold": args.max_preclip_grad_norm,
-                        "grad_norm": float(grad_norm),
+                        "grad_norm": grad_norm,
+                        "gradient_clip_mode": args.gradient_clip_mode,
                         "skipped_preclip_total": skipped_preclip_total,
                         "skipped_preclip_window": skipped_preclip_window,
                         "skipped_preclip_window_steps": (
@@ -1924,7 +2046,9 @@ def main() -> None:
                             skipped_preclip_consecutive
                         ),
                         **step_maxima,
-                        "sample_ids": [sample.sample_id for sample in batch],
+                        **group_gradient_norms,
+                        "loss_terms": gradient_loss_terms,
+                        "sample_ids": global_sample_ids,
                         "action": "optimizer step skipped after gradient clipping",
                     },
                 )
@@ -1945,7 +2069,8 @@ def main() -> None:
                             "step": step,
                             "stage": stage,
                             "threshold": args.max_preclip_grad_norm,
-                            "grad_norm": float(grad_norm),
+                            "grad_norm": grad_norm,
+                            "gradient_clip_mode": args.gradient_clip_mode,
                             "skipped_preclip_total": skipped_preclip_total,
                             "skipped_preclip_window": (
                                 skipped_preclip_window
@@ -1957,9 +2082,9 @@ def main() -> None:
                                 skipped_preclip_consecutive
                             ),
                             **step_maxima,
-                            "sample_ids": [
-                                sample.sample_id for sample in batch
-                            ],
+                            **group_gradient_norms,
+                            "loss_terms": gradient_loss_terms,
+                            "sample_ids": global_sample_ids,
                             "action": "aborted after the configured skipped update",
                         },
                     )
@@ -1972,7 +2097,7 @@ def main() -> None:
         distributed_values = distributed_mean_dict(
             {
                 "loss": local_loss_value,
-                "grad_norm": float(grad_norm),
+                "grad_norm": grad_norm,
                 **local_terms,
             },
             accelerator,
@@ -1989,6 +2114,7 @@ def main() -> None:
             "lr_backbone": learning_rates["backbone"],
             **distributed_values,
             **step_maxima,
+            **group_gradient_norms,
             "ssr_raw_residual_warning": int(warning_now),
             "ssr_saturation_streak": saturation_streak,
             "skipped_preclip_window": skipped_preclip_window_count(
@@ -2365,6 +2491,11 @@ def main() -> None:
             "peak_memory_bytes": max(peak_memory_by_process),
             "peak_memory_bytes_by_process": peak_memory_by_process,
             "stability": {
+                "gradient_clip_mode": args.gradient_clip_mode,
+                "gradient_clip_norm": args.gradient_clip_norm,
+                "preclip_warning_grad_norm": (
+                    args.preclip_warning_grad_norm
+                ),
                 "max_preclip_grad_norm": args.max_preclip_grad_norm,
                 "max_abs_applied_log_depth_residual": (
                     args.max_abs_log_depth_residual

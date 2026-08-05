@@ -8,9 +8,11 @@ from moge.scripts.train_hypersim_joint_v3 import (
     backbone_learning_rate,
     base_parameters_are_frozen,
     clear_backbone_gradients,
+    clip_optimizer_gradients,
     effective_training_stage,
     flatten_periodic_evaluation,
     learning_rate_scale,
+    optimizer_group_gradient_norms,
     periodic_selection_score,
     preclip_gradient_action,
     refinement_has_collapsed,
@@ -51,6 +53,8 @@ def _args(**overrides):
         "train_refiner_only": False,
         "fine_structure_rois": None,
         "selection_scope": "full",
+        "gradient_clip_mode": "global",
+        "preclip_warning_grad_norm": 0.0,
         "max_preclip_grad_norm": 0.0,
         "max_abs_log_depth_residual": 0.0,
         "smooth_log_depth_residual_bound": 0.0,
@@ -397,6 +401,64 @@ def test_skipped_preclip_window_detects_clustered_outliers():
         max_skipped_total=5,
         max_skipped_consecutive=2,
     )
+
+
+def test_optimizer_group_gradient_norms_separates_named_groups():
+    first = torch.nn.Parameter(torch.tensor([3.0, 4.0]))
+    second = torch.nn.Parameter(torch.tensor([12.0]))
+    optimizer = torch.optim.SGD(
+        [
+            {"name": "ssr", "params": [first]},
+            {"name": "heads", "params": [second]},
+        ],
+        lr=0.1,
+    )
+    first.grad = first.detach().clone()
+    second.grad = second.detach().clone()
+
+    assert optimizer_group_gradient_norms(optimizer) == pytest.approx(
+        {
+            "grad_norm/ssr": 5.0,
+            "grad_norm/heads": 12.0,
+        }
+    )
+
+
+def test_per_group_gradient_clipping_does_not_shrink_other_groups():
+    ssr = torch.nn.Parameter(torch.tensor([3.0, 4.0]))
+    backbone = torch.nn.Parameter(torch.tensor([300.0, 400.0]))
+    optimizer = torch.optim.SGD(
+        [
+            {"name": "ssr", "params": [ssr]},
+            {"name": "backbone", "params": [backbone]},
+        ],
+        lr=0.1,
+    )
+    ssr.grad = ssr.detach().clone()
+    backbone.grad = backbone.detach().clone()
+
+    global_norm, group_norms = clip_optimizer_gradients(
+        optimizer,
+        max_norm=1.0,
+        mode="per_group",
+    )
+
+    assert global_norm == pytest.approx((5.0**2 + 500.0**2) ** 0.5)
+    assert group_norms == pytest.approx(
+        {"grad_norm/ssr": 5.0, "grad_norm/backbone": 500.0}
+    )
+    assert float(ssr.grad.norm()) == pytest.approx(1.0)
+    assert float(backbone.grad.norm()) == pytest.approx(1.0)
+
+
+def test_preclip_warning_must_be_below_emergency_threshold():
+    with pytest.raises(ValueError, match="warning threshold"):
+        validate_joint_schedule(
+            _args(
+                preclip_warning_grad_norm=25.0,
+                max_preclip_grad_norm=25.0,
+            )
+        )
 
 
 def test_aggregate_evaluation_supports_train_and_validation_only():

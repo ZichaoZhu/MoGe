@@ -11,6 +11,7 @@ from tools.moge3.run_exp30 import (
     full_scores,
     latest_launch_failure_kind,
     latest_verified_checkpoint,
+    isolated_preclip_outliers_under_window_policy,
     isolated_raw_outlier_under_current_policy,
     log_contains_oom,
     training_launcher,
@@ -288,4 +289,79 @@ def test_isolated_legacy_raw_outlier_does_not_consume_another_recovery(
     assert (
         continuation.failure_classification
         == "isolated_raw_outlier_false_positive"
+    )
+
+
+def test_sparse_preclip_outliers_do_not_consume_another_recovery(tmp_path):
+    experiment = tmp_path / "exp30"
+    stage = experiment / "artifacts" / "training" / "stage1"
+    latest = stage / "attempt_07"
+    latest.mkdir(parents=True)
+    milestones = latest / "milestones"
+    milestones.mkdir()
+    safe = milestones / "step_010000.pt"
+    safe.write_bytes(b"safe")
+    (latest / "run_to_020000.log").write_text(
+        '{"event": "launch"}\n'
+        "RuntimeError: Pre-clip gradient skip budget was exhausted\n",
+        encoding="utf-8",
+    )
+    events = [
+        {"event": "preclip_gradient_limit_skipped", "step": step}
+        for step in (7954, 8921, 9231, 9525, 10343)
+    ]
+    (latest / "stability_events.jsonl").write_text(
+        "".join(json.dumps(event) + "\n" for event in events),
+        encoding="utf-8",
+    )
+    (latest / "instability_event.json").write_text(
+        json.dumps(
+            {
+                "event": "preclip_gradient_skip_budget_exhausted",
+                "step": 10343,
+                "skipped_preclip_consecutive": 1,
+                "ssr_raw_p999": 0.2603,
+                "ssr_max_bound_saturation_fraction": 0.0184,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (experiment / "artifacts" / "status.json").write_text(
+        json.dumps(
+            {
+                "state": "failed",
+                "phase": "stage1",
+                "recovery_count": 5,
+                "learning_rate_scale": 0.03125,
+            }
+        ),
+        encoding="utf-8",
+    )
+    residual_control = {
+        "raw_p999_abort": 0.75,
+        "saturation_fraction_abort": 0.05,
+        "maximum_skipped_gradients_in_window": 5,
+        "maximum_skipped_gradients_consecutive": 2,
+        "skipped_gradient_window_steps": 1000,
+    }
+
+    assert latest_launch_failure_kind(
+        latest / "run_to_020000.log"
+    ) == "stability"
+    assert isolated_preclip_outliers_under_window_policy(
+        latest,
+        residual_control,
+    )
+    continuation = failed_stage1_continuation(
+        experiment,
+        residual_control=residual_control,
+    )
+
+    assert continuation.next_attempt_index == 8
+    assert continuation.recovery_count == 5
+    assert continuation.learning_rate_scale == 0.03125
+    assert continuation.checkpoint == safe
+    assert (
+        continuation.failure_classification
+        == "sparse_preclip_outliers_false_positive"
     )

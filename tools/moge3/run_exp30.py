@@ -286,6 +286,8 @@ def common_training_args(
         "5",
         "--max-consecutive-skipped-preclip-steps",
         "2",
+        "--skipped-preclip-window-steps",
+        "1000",
         "--smooth-log-depth-residual-bound",
         "0.1",
         "--max-abs-log-depth-residual",
@@ -618,6 +620,62 @@ def isolated_raw_outlier_under_current_policy(
     )
 
 
+def isolated_preclip_outliers_under_window_policy(
+    attempt: Path,
+    residual_control: Mapping[str, Any] | None,
+) -> bool:
+    """Recognize a legacy lifetime-budget stop that the rolling policy permits."""
+
+    if residual_control is None:
+        return False
+    event_path = attempt / "instability_event.json"
+    stability_path = attempt / "stability_events.jsonl"
+    if not event_path.is_file() or not stability_path.is_file():
+        return False
+    event = read_json(event_path)
+    if event.get("event") != "preclip_gradient_skip_budget_exhausted":
+        return False
+    window_steps = int(
+        residual_control.get("skipped_gradient_window_steps", 0)
+    )
+    maximum_window = int(
+        residual_control.get("maximum_skipped_gradients_in_window", 0)
+    )
+    maximum_consecutive = int(
+        residual_control.get(
+            "maximum_skipped_gradients_consecutive",
+            0,
+        )
+    )
+    if window_steps <= 0 or maximum_window <= 0:
+        return False
+    event_step = int(event["step"])
+    first_step = event_step - window_steps + 1
+    skipped_steps = []
+    for record in stability_path.read_text(encoding="utf-8").splitlines():
+        if not record.strip():
+            continue
+        payload = json.loads(record)
+        if payload.get("event") == "preclip_gradient_limit_skipped":
+            step = int(payload["step"])
+            if first_step <= step <= event_step:
+                skipped_steps.append(step)
+    residual_distribution_is_safe = (
+        float(event.get("ssr_raw_p999", math.inf))
+        < float(residual_control["raw_p999_abort"])
+        and float(
+            event.get("ssr_max_bound_saturation_fraction", math.inf)
+        )
+        < float(residual_control["saturation_fraction_abort"])
+    )
+    return (
+        len(skipped_steps) < maximum_window
+        and int(event.get("skipped_preclip_consecutive", math.inf))
+        < maximum_consecutive
+        and residual_distribution_is_safe
+    )
+
+
 def failed_stage1_continuation(
     experiment: Path,
     *,
@@ -669,7 +727,15 @@ def failed_stage1_continuation(
             residual_control,
         )
     )
-    if failure_kind == "stability" and not isolated_raw_outlier:
+    isolated_preclip_outliers = (
+        failure_kind == "stability"
+        and isolated_preclip_outliers_under_window_policy(
+            latest_attempt,
+            residual_control,
+        )
+    )
+    false_positive = isolated_raw_outlier or isolated_preclip_outliers
+    if failure_kind == "stability" and not false_positive:
         recovery_count += 1
         learning_rate_scale *= 0.5
     return StageContinuation(
@@ -681,7 +747,11 @@ def failed_stage1_continuation(
         failure_classification=(
             "isolated_raw_outlier_false_positive"
             if isolated_raw_outlier
-            else "standard_stability_failure"
+            else (
+                "sparse_preclip_outliers_false_positive"
+                if isolated_preclip_outliers
+                else "standard_stability_failure"
+            )
         ),
     )
 
@@ -736,6 +806,7 @@ def latest_launch_failure_kind(path: Path) -> str:
         "ssr log-depth residual exceeded the configured safety limit",
         "ssr residual saturation persisted beyond the configured limit",
         "pre-clip gradient norm exceeded the configured safety limit",
+        "pre-clip gradient skip budget was exhausted",
         "non-finite loss at step",
         "non-finite gradient at step",
         "periodic base point rel indicates geometry collapse",

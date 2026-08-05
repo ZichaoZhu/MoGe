@@ -181,6 +181,15 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--skipped-preclip-window-steps",
+        type=int,
+        default=0,
+        help=(
+            "Count --max-skipped-preclip-steps only inside this trailing "
+            "optimization-step window; 0 preserves the legacy lifetime count."
+        ),
+    )
+    parser.add_argument(
         "--max-abs-log-depth-residual",
         type=float,
         default=0.0,
@@ -381,13 +390,18 @@ def validate_joint_schedule(args: argparse.Namespace) -> None:
     if min(
         args.max_skipped_preclip_steps,
         args.max_consecutive_skipped_preclip_steps,
+        args.skipped_preclip_window_steps,
         args.max_consecutive_saturated_steps,
     ) < 0:
         raise ValueError("Skipped-step limits cannot be negative")
     if args.max_skipped_preclip_steps == 0:
-        if args.max_consecutive_skipped_preclip_steps != 0:
+        if (
+            args.max_consecutive_skipped_preclip_steps != 0
+            or args.skipped_preclip_window_steps != 0
+        ):
             raise ValueError(
-                "Consecutive skipped-step limit requires a positive total limit"
+                "Consecutive skipped-step limit and skipped-step window "
+                "require a positive total limit"
             )
     elif not (
         1
@@ -1020,11 +1034,9 @@ def skipped_preclip_state(
     *,
     start_step: int,
 ) -> tuple[int, int]:
-    skipped_steps = sorted(
-        int(event["step"])
-        for event in events
-        if event.get("event") == "preclip_gradient_limit_skipped"
-        and int(event["step"]) <= start_step
+    skipped_steps = skipped_preclip_steps(
+        events,
+        end_step=start_step,
     )
     total = len(skipped_steps)
     consecutive = 0
@@ -1035,6 +1047,42 @@ def skipped_preclip_state(
         consecutive += 1
         expected_step -= 1
     return total, consecutive
+
+
+def skipped_preclip_steps(
+    events: Sequence[Dict[str, object]],
+    *,
+    end_step: int,
+) -> List[int]:
+    return sorted(
+        int(event["step"])
+        for event in events
+        if event.get("event") == "preclip_gradient_limit_skipped"
+        and int(event["step"]) <= end_step
+    )
+
+
+def skipped_preclip_window_count(
+    skipped_steps: Sequence[int],
+    *,
+    current_step: int,
+    window_steps: int,
+) -> int:
+    """Count skipped updates in a trailing window.
+
+    A zero-length window intentionally preserves the historical lifetime
+    budget.  Positive windows make the guard sensitive to clustered
+    instability instead of eventually aborting every sufficiently long run
+    because of unrelated, isolated gradient outliers.
+    """
+
+    if window_steps < 0:
+        raise ValueError("Skipped-gradient window must be non-negative")
+    eligible = [step for step in skipped_steps if step <= current_step]
+    if window_steps == 0:
+        return len(eligible)
+    first_step = current_step - window_steps + 1
+    return sum(step >= first_step for step in eligible)
 
 
 def preclip_gradient_action(
@@ -1505,6 +1553,10 @@ def main() -> None:
         stability_events,
         start_step=start_step,
     )
+    skipped_preclip_step_history = skipped_preclip_steps(
+        stability_events,
+        end_step=start_step,
+    )
     saturation_streak = 0
     for historical_record in reversed(training_history):
         if (
@@ -1797,7 +1849,11 @@ def main() -> None:
         gradient_action = preclip_gradient_action(
             grad_norm=float(grad_norm),
             threshold=args.max_preclip_grad_norm,
-            skipped_total=skipped_preclip_total,
+            skipped_total=skipped_preclip_window_count(
+                skipped_preclip_step_history,
+                current_step=step,
+                window_steps=args.skipped_preclip_window_steps,
+            ),
             skipped_consecutive=skipped_preclip_consecutive,
             max_skipped_total=args.max_skipped_preclip_steps,
             max_skipped_consecutive=args.max_consecutive_skipped_preclip_steps,
@@ -1814,6 +1870,16 @@ def main() -> None:
                         "threshold": args.max_preclip_grad_norm,
                         "grad_norm": float(grad_norm),
                         "skipped_preclip_total": skipped_preclip_total,
+                        "skipped_preclip_window": (
+                            skipped_preclip_window_count(
+                                skipped_preclip_step_history,
+                                current_step=step,
+                                window_steps=args.skipped_preclip_window_steps,
+                            )
+                        ),
+                        "skipped_preclip_window_steps": (
+                            args.skipped_preclip_window_steps
+                        ),
                         "skipped_preclip_consecutive": (
                             skipped_preclip_consecutive
                         ),
@@ -1824,6 +1890,7 @@ def main() -> None:
                             args.max_consecutive_skipped_preclip_steps
                         ),
                         **step_maxima,
+                        "sample_ids": [sample.sample_id for sample in batch],
                         "action": "aborted before optimizer step",
                     },
                 )
@@ -1833,6 +1900,12 @@ def main() -> None:
         if optimizer_step_skipped:
             skipped_preclip_total += 1
             skipped_preclip_consecutive += 1
+            skipped_preclip_step_history.append(step)
+            skipped_preclip_window = skipped_preclip_window_count(
+                skipped_preclip_step_history,
+                current_step=step,
+                window_steps=args.skipped_preclip_window_steps,
+            )
             if accelerator.is_main_process:
                 append_stability_event(
                     output,
@@ -1843,16 +1916,21 @@ def main() -> None:
                         "threshold": args.max_preclip_grad_norm,
                         "grad_norm": float(grad_norm),
                         "skipped_preclip_total": skipped_preclip_total,
+                        "skipped_preclip_window": skipped_preclip_window,
+                        "skipped_preclip_window_steps": (
+                            args.skipped_preclip_window_steps
+                        ),
                         "skipped_preclip_consecutive": (
                             skipped_preclip_consecutive
                         ),
                         **step_maxima,
+                        "sample_ids": [sample.sample_id for sample in batch],
                         "action": "optimizer step skipped after gradient clipping",
                     },
                 )
             optimizer.zero_grad(set_to_none=True)
             if skipped_gradient_budget_exhausted(
-                skipped_total=skipped_preclip_total,
+                skipped_total=skipped_preclip_window,
                 skipped_consecutive=skipped_preclip_consecutive,
                 max_skipped_total=args.max_skipped_preclip_steps,
                 max_skipped_consecutive=(
@@ -1869,10 +1947,19 @@ def main() -> None:
                             "threshold": args.max_preclip_grad_norm,
                             "grad_norm": float(grad_norm),
                             "skipped_preclip_total": skipped_preclip_total,
+                            "skipped_preclip_window": (
+                                skipped_preclip_window
+                            ),
+                            "skipped_preclip_window_steps": (
+                                args.skipped_preclip_window_steps
+                            ),
                             "skipped_preclip_consecutive": (
                                 skipped_preclip_consecutive
                             ),
                             **step_maxima,
+                            "sample_ids": [
+                                sample.sample_id for sample in batch
+                            ],
                             "action": "aborted after the configured skipped update",
                         },
                     )
@@ -1904,6 +1991,11 @@ def main() -> None:
             **step_maxima,
             "ssr_raw_residual_warning": int(warning_now),
             "ssr_saturation_streak": saturation_streak,
+            "skipped_preclip_window": skipped_preclip_window_count(
+                skipped_preclip_step_history,
+                current_step=step,
+                window_steps=args.skipped_preclip_window_steps,
+            ),
             "optimization_step_seconds": time.perf_counter() - step_start,
         }
         training_history.append(record)
@@ -2147,6 +2239,13 @@ def main() -> None:
                         "best_selection_score": best_score,
                         "optimizer_step_skipped": optimizer_step_skipped,
                         "skipped_preclip_total": skipped_preclip_total,
+                        "skipped_preclip_window": (
+                            skipped_preclip_window_count(
+                                skipped_preclip_step_history,
+                                current_step=step,
+                                window_steps=args.skipped_preclip_window_steps,
+                            )
+                        ),
                         "elapsed_seconds": time.perf_counter() - train_start,
                     },
                     ensure_ascii=False,
@@ -2295,6 +2394,9 @@ def main() -> None:
                 "skipped_preclip_steps": skipped_preclip_total,
                 "max_skipped_preclip_steps": (
                     args.max_skipped_preclip_steps
+                ),
+                "skipped_preclip_window_steps": (
+                    args.skipped_preclip_window_steps
                 ),
                 "max_consecutive_skipped_preclip_steps": (
                     args.max_consecutive_skipped_preclip_steps

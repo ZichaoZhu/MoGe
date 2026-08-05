@@ -20,6 +20,7 @@ from moge.scripts.train_hypersim_joint_v3 import (
     shard_batch_indices,
     skipped_gradient_budget_exhausted,
     skipped_preclip_state,
+    skipped_preclip_window_count,
     training_stage,
     validate_distributed_batch,
     validate_joint_schedule,
@@ -67,6 +68,7 @@ def _args(**overrides):
         "max_base_to_best_ratio": 0.0,
         "max_skipped_preclip_steps": 0,
         "max_consecutive_skipped_preclip_steps": 0,
+        "skipped_preclip_window_steps": 0,
     }
     values.update(overrides)
     return argparse.Namespace(**values)
@@ -118,6 +120,10 @@ def test_scaled_two_stage_schedule_is_valid():
     with pytest.raises(ValueError, match="Consecutive"):
         validate_joint_schedule(
             _args(max_consecutive_skipped_preclip_steps=1)
+        )
+    with pytest.raises(ValueError, match="window"):
+        validate_joint_schedule(
+            _args(skipped_preclip_window_steps=1000)
         )
     with pytest.raises(ValueError, match="between 1"):
         validate_joint_schedule(
@@ -356,6 +362,41 @@ def test_skipped_preclip_state_restores_total_and_consecutive_counts():
     ]
     assert skipped_preclip_state(events, start_step=4200) == (3, 2)
     assert skipped_preclip_state(events, start_step=4300) == (3, 0)
+
+
+def test_skipped_preclip_window_ignores_isolated_old_outliers():
+    skipped_steps = [7954, 8921, 9231, 9525, 10343]
+    assert skipped_preclip_window_count(
+        skipped_steps,
+        current_step=10343,
+        window_steps=0,
+    ) == 5
+    assert skipped_preclip_window_count(
+        skipped_steps,
+        current_step=10343,
+        window_steps=1000,
+    ) == 2
+    assert skipped_preclip_window_count(
+        skipped_steps,
+        current_step=9525,
+        window_steps=1000,
+    ) == 3
+
+
+def test_skipped_preclip_window_detects_clustered_outliers():
+    skipped_steps = [100, 110, 120, 130, 140]
+    recent = skipped_preclip_window_count(
+        skipped_steps,
+        current_step=140,
+        window_steps=100,
+    )
+    assert recent == 5
+    assert skipped_gradient_budget_exhausted(
+        skipped_total=recent,
+        skipped_consecutive=1,
+        max_skipped_total=5,
+        max_skipped_consecutive=2,
+    )
 
 
 def test_aggregate_evaluation_supports_train_and_validation_only():

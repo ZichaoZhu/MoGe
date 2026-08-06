@@ -829,6 +829,31 @@ def best_checkpoint(attempts: Sequence[Path]) -> tuple[Path, dict[str, Any]]:
     return checkpoint, read_json(checkpoint.parent / "checkpoint_metadata.json")
 
 
+def stability_recovery_checkpoint(
+    attempts: Sequence[Path],
+    *,
+    prefer_quality: bool,
+) -> Path:
+    """Choose a safe rollback without carrying a degraded joint trajectory.
+
+    Stage one primarily needs crash recovery and therefore keeps the latest
+    stability-verified milestone. During joint fine-tuning, however, a safe
+    milestone can already be worse than the detached-stage optimum. Prefer the
+    quality-selected checkpoint when it contains the complete optimizer state;
+    fall back to the milestone policy when no such checkpoint exists.
+    """
+
+    if prefer_quality:
+        try:
+            checkpoint, metadata = best_checkpoint(attempts)
+        except RuntimeError:
+            pass
+        else:
+            if metadata.get("contains_optimizer") is True:
+                return checkpoint
+    return latest_verified_checkpoint(attempts)
+
+
 def log_segment(path: Path, *, start_offset: int = 0) -> str:
     if not path.is_file():
         return ""
@@ -1023,7 +1048,10 @@ def run_stage(
                 raise RuntimeError(
                     f"{stage} exceeded {maximum_recoveries} automatic recoveries"
                 )
-            source = latest_verified_checkpoint(attempts)
+            source = stability_recovery_checkpoint(
+                attempts,
+                prefer_quality=stage == "stage2",
+            )
             current_attempt_index += 1
             lr_scale *= 0.5
             current_output = root / f"attempt_{current_attempt_index:02d}"
@@ -1052,7 +1080,10 @@ def run_stage(
         )
         if improvement < minimum_improvement:
             break
-    return [current_output]
+    # Keep every immutable attempt in the checkpoint candidate set. Returning
+    # only the final recovery branch can silently discard a better checkpoint
+    # from an earlier branch.
+    return attempts
 
 
 def evaluate_checkpoint(
@@ -1287,7 +1318,10 @@ def run(args: argparse.Namespace) -> None:
         ),
         transition_from=stage1_best,
     )
-    final_best, final_metadata = best_checkpoint(stage2_attempts)
+    joint_stage_best, joint_stage_metadata = best_checkpoint(stage2_attempts)
+    final_best, final_metadata = best_checkpoint(
+        [*stage1_attempts, *stage2_attempts]
+    )
     initial_checkpoint = (
         experiment
         / "artifacts"
@@ -1326,6 +1360,8 @@ def run(args: argparse.Namespace) -> None:
         state="training_complete",
         stage1_best_checkpoint=str(stage1_best),
         stage1_best=stage1_metadata,
+        joint_stage_best_checkpoint=str(joint_stage_best),
+        joint_stage_best=joint_stage_metadata,
         final_best_checkpoint=str(final_best),
         final_best=final_metadata,
         completed_at=now(),

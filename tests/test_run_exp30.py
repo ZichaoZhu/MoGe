@@ -15,6 +15,7 @@ from tools.moge3.run_exp30 import (
     isolated_raw_outlier_under_current_policy,
     legacy_preclip_spike_safe_under_group_clipping,
     log_contains_oom,
+    stability_recovery_checkpoint,
     training_launcher,
     update_status,
     window_improvement,
@@ -70,6 +71,63 @@ def test_best_checkpoint_is_selected_across_recovery_attempts(tmp_path):
     checkpoint, metadata = best_checkpoint(attempts)
     assert checkpoint.parent.name == "attempt_01"
     assert metadata["score"] == 0.06
+
+
+def test_joint_stability_recovery_prefers_quality_checkpoint(tmp_path):
+    attempts = []
+    for index, (score, step) in enumerate(((0.06, 20_000), (0.08, 25_000))):
+        attempt = tmp_path / f"attempt_{index:02d}"
+        attempt.mkdir()
+        checkpoint = attempt / "checkpoint.pt"
+        checkpoint.write_bytes(b"quality-checkpoint")
+        (attempt / "checkpoint_metadata.json").write_text(
+            json.dumps(
+                {
+                    "step": step,
+                    "score": score,
+                    "contains_optimizer": True,
+                }
+            ),
+            encoding="utf-8",
+        )
+        milestones = attempt / "milestones"
+        milestones.mkdir()
+        (milestones / f"step_{step:06d}.pt").write_bytes(b"safe-milestone")
+        attempts.append(attempt)
+
+    assert stability_recovery_checkpoint(
+        attempts,
+        prefer_quality=True,
+    ) == attempts[0] / "checkpoint.pt"
+    assert stability_recovery_checkpoint(
+        attempts,
+        prefer_quality=False,
+    ) == attempts[1] / "milestones/step_025000.pt"
+
+
+def test_quality_recovery_requires_optimizer_state(tmp_path):
+    attempt = tmp_path / "attempt_00"
+    attempt.mkdir()
+    (attempt / "checkpoint.pt").write_bytes(b"weights-only")
+    (attempt / "checkpoint_metadata.json").write_text(
+        json.dumps(
+            {
+                "step": 1000,
+                "score": 0.01,
+                "contains_optimizer": False,
+            }
+        ),
+        encoding="utf-8",
+    )
+    milestones = attempt / "milestones"
+    milestones.mkdir()
+    safe = milestones / "step_002000.pt"
+    safe.write_bytes(b"safe-with-optimizer")
+
+    assert stability_recovery_checkpoint(
+        [attempt],
+        prefer_quality=True,
+    ) == safe
 
 
 def test_data_root_supports_the_server_legacy_layout(tmp_path):

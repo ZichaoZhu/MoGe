@@ -1,0 +1,387 @@
+{
+  "status": "complete",
+  "experiment": "exp30_hypersim_100_long_two_stage_overfit",
+  "manifest": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/exp30/manifest.json",
+  "selectionManifest": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/viewer_selection.json",
+  "splits": {
+    "train": [
+      "ai_005_006_cam_00_frame.0099",
+      "ai_013_001_cam_00_frame.0000",
+      "ai_029_005_cam_00_frame.0000",
+      "ai_036_006_cam_00_frame.0000",
+      "ai_004_008_cam_00_frame.0000"
+    ],
+    "val": [
+      "ai_043_002_cam_00_frame.0057",
+      "ai_047_001_cam_00_frame.0028",
+      "ai_047_001_cam_00_frame.0071",
+      "ai_043_002_cam_00_frame.0000",
+      "ai_047_001_cam_00_frame.0014"
+    ],
+    "test": [
+      "ai_046_001_cam_00_frame.0000",
+      "ai_050_001_cam_00_frame.0028",
+      "ai_050_001_cam_00_frame.0042",
+      "ai_046_001_cam_00_frame.0071",
+      "ai_046_001_cam_00_frame.0042"
+    ]
+  },
+  "stages": {
+    "initial": {
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_00/initial_checkpoint.pt",
+      "checkpointStep": 0,
+      "checkpointSha256": "3bccf26f6563102bcfe9272b3005e75f58a994e57ebcd6e36c8e60c6f5b4b8e4",
+      "batchNormRunningState": {
+        "beforeSha256": "56ee11d7acd80c40f6182f93651f862603fa9a041bb8df43b8b1ac42c2422650",
+        "afterSha256": "56ee11d7acd80c40f6182f93651f862603fa9a041bb8df43b8b1ac42c2422650",
+        "unchanged": true
+      }
+    },
+    "stage1": {
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_09/checkpoint.pt",
+      "checkpointStep": 20000,
+      "checkpointSha256": "6b50f53d02c17ecc2963b2bed922789bb00a20f73b2150f5b90cb92f700d86c1",
+      "batchNormRunningState": {
+        "beforeSha256": "212fa9dc42f91298a09bd638e2b1b7eb3d1fda3a213d289fbaf01c6ec40ba476",
+        "afterSha256": "212fa9dc42f91298a09bd638e2b1b7eb3d1fda3a213d289fbaf01c6ec40ba476",
+        "unchanged": true
+      }
+    },
+    "final": {
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage2/attempt_03/milestones/step_030000.pt",
+      "checkpointStep": 30000,
+      "checkpointSha256": "0f37dbbb42b738459f0baef0215d2e588d47938cc5ffb1678c7948109ba87062",
+      "batchNormRunningState": {
+        "beforeSha256": "d67daed33c05ef887e08526da3cb49d7487ed593d66f268004cfeed01df837a2",
+        "afterSha256": "d67daed33c05ef887e08526da3cb49d7487ed593d66f268004cfeed01df837a2",
+        "unchanged": true
+      }
+    }
+  },
+  "inferencePolicy": "stored_batch_norm_running_statistics",
+  "smoothLogDepthResidualBound": 0.1,
+  "initialZeroIdentityMaxError": 0.0,
+  "evaluationSteps": [
+    0,
+    1,
+    3,
+    5
+  ],
+  "pointCloudCount": 150,
+  "logicalPointCloudCount": 195,
+  "pointCloudBytes": 442416750,
+  "pointCloudChecksums": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/exp30/pointcloud_sha256.json",
+  "metricValidation": {
+    "requestedTolerance": 1e-05,
+    "maxAbsoluteDifferenceByStage": {
+      "initial": {
+        "point_rel": 0.0,
+        "depth_rel": 0.0,
+        "depth_delta_1.01": 0.0,
+        "depth_delta_1.25": 0.0,
+        "boundary_f1": 0.0
+      },
+      "stage1": {
+        "point_rel": 0.00010008364915847778,
+        "depth_rel": 0.00010360032320022583,
+        "depth_delta_1.01": 0.003448486328125,
+        "depth_delta_1.25": 0.005528748035430908,
+        "boundary_f1": 0.0017034411430358887
+      },
+      "final": {
+        "point_rel": 0.00011876970529556274,
+        "depth_rel": 0.0001138150691986084,
+        "depth_delta_1.01": 0.002782166004180908,
+        "depth_delta_1.25": 0.0003153681755065918,
+        "boundary_f1": 0.005172073841094971
+      }
+    }
+  },
+  "samples": [
+    {
+      "id": "ai_005_006_cam_00_frame.0099",
+      "split": "train",
+      "cropXYXY": [
+        320,
+        96,
+        512,
+        288
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "rank": 7,
+        "total": 100,
+        "relativeImprovement": 0.4253704158508103,
+        "outcome": "improved",
+        "structureDescription": "玻璃楼梯的长扶手与栏杆"
+      }
+    },
+    {
+      "id": "ai_013_001_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        160,
+        96,
+        352,
+        288
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "rank": 21,
+        "total": 100,
+        "relativeImprovement": 0.3901117754734825,
+        "outcome": "improved",
+        "structureDescription": "室内细长立柱与边框"
+      }
+    },
+    {
+      "id": "ai_029_005_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        320,
+        64,
+        512,
+        256
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "rank": 41,
+        "total": 100,
+        "relativeImprovement": 0.32155476013626,
+        "outcome": "improved",
+        "structureDescription": "旋转楼梯的细长扶手"
+      }
+    },
+    {
+      "id": "ai_036_006_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        192,
+        0,
+        384,
+        192
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "rank": 65,
+        "total": 100,
+        "relativeImprovement": 0.2631150896388691,
+        "outcome": "improved",
+        "structureDescription": "天花板裸露管线与金属横杆"
+      }
+    },
+    {
+      "id": "ai_004_008_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        160,
+        192,
+        352,
+        384
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "rank": 89,
+        "total": 100,
+        "relativeImprovement": 0.1334262001417017,
+        "outcome": "improved",
+        "structureDescription": "吧椅长腿与横向支撑杆"
+      }
+    },
+    {
+      "id": "ai_043_002_cam_00_frame.0057",
+      "split": "val",
+      "cropXYXY": [
+        288,
+        192,
+        480,
+        384
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "椅腿、窗格、隔断竖杆和吊灯杆；覆盖阶段一最好、中间与最差结果",
+        "rank": 2,
+        "total": 16,
+        "relativeImprovement": 0.029262353384008812,
+        "outcome": "improved",
+        "structureDescription": "餐椅腿与窗格细杆"
+      }
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0028",
+      "split": "val",
+      "cropXYXY": [
+        320,
+        128,
+        512,
+        320
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "椅腿、窗格、隔断竖杆和吊灯杆；覆盖阶段一最好、中间与最差结果",
+        "rank": 7,
+        "total": 16,
+        "relativeImprovement": -0.000989584282851666,
+        "outcome": "degraded",
+        "structureDescription": "隔断、椅背与桌椅支撑杆"
+      }
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0071",
+      "split": "val",
+      "cropXYXY": [
+        320,
+        96,
+        512,
+        288
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "椅腿、窗格、隔断竖杆和吊灯杆；覆盖阶段一最好、中间与最差结果",
+        "rank": 11,
+        "total": 16,
+        "relativeImprovement": -0.009458067447137676,
+        "outcome": "degraded",
+        "structureDescription": "工业隔断竖杆与吊灯悬杆"
+      }
+    },
+    {
+      "id": "ai_043_002_cam_00_frame.0000",
+      "split": "val",
+      "cropXYXY": [
+        288,
+        64,
+        480,
+        256
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "椅腿、窗格、隔断竖杆和吊灯杆；覆盖阶段一最好、中间与最差结果",
+        "rank": 13,
+        "total": 16,
+        "relativeImprovement": -0.018005760058389414,
+        "outcome": "degraded",
+        "structureDescription": "餐椅腿和密集窗格"
+      }
+    },
+    {
+      "id": "ai_047_001_cam_00_frame.0014",
+      "split": "val",
+      "cropXYXY": [
+        320,
+        0,
+        512,
+        192
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "椅腿、窗格、隔断竖杆和吊灯杆；覆盖阶段一最好、中间与最差结果",
+        "rank": 16,
+        "total": 16,
+        "relativeImprovement": -0.028466230611143378,
+        "outcome": "degraded",
+        "structureDescription": "工业空间隔断竖杆与吊灯杆"
+      }
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0000",
+      "split": "test",
+      "cropXYXY": [
+        224,
+        128,
+        416,
+        320
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "楼梯栏杆、桌椅腿、金属椅背和吊灯杆；覆盖阶段一改善与退化结果",
+        "rank": 2,
+        "total": 16,
+        "relativeImprovement": 0.011301615652868746,
+        "outcome": "improved",
+        "structureDescription": "金属椅背和吊灯悬杆"
+      }
+    },
+    {
+      "id": "ai_050_001_cam_00_frame.0028",
+      "split": "test",
+      "cropXYXY": [
+        0,
+        192,
+        192,
+        384
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "楼梯栏杆、桌椅腿、金属椅背和吊灯杆；覆盖阶段一改善与退化结果",
+        "rank": 4,
+        "total": 16,
+        "relativeImprovement": 0.004123207630245455,
+        "outcome": "improved",
+        "structureDescription": "楼梯扶手与栏杆"
+      }
+    },
+    {
+      "id": "ai_050_001_cam_00_frame.0042",
+      "split": "test",
+      "cropXYXY": [
+        96,
+        192,
+        288,
+        384
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "楼梯栏杆、桌椅腿、金属椅背和吊灯杆；覆盖阶段一改善与退化结果",
+        "rank": 5,
+        "total": 16,
+        "relativeImprovement": 0.0033540191309747334,
+        "outcome": "improved",
+        "structureDescription": "桌腿、椅腿与横向支架"
+      }
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0071",
+      "split": "test",
+      "cropXYXY": [
+        96,
+        32,
+        288,
+        224
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "楼梯栏杆、桌椅腿、金属椅背和吊灯杆；覆盖阶段一改善与退化结果",
+        "rank": 12,
+        "total": 16,
+        "relativeImprovement": -0.0099621841664652,
+        "outcome": "degraded",
+        "structureDescription": "金属椅背、枝条和吊灯杆"
+      }
+    },
+    {
+      "id": "ai_046_001_cam_00_frame.0042",
+      "split": "test",
+      "cropXYXY": [
+        320,
+        128,
+        512,
+        320
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "楼梯栏杆、桌椅腿、金属椅背和吊灯杆；覆盖阶段一改善与退化结果",
+        "rank": 13,
+        "total": 16,
+        "relativeImprovement": -0.013556856962143515,
+        "outcome": "degraded",
+        "structureDescription": "椅背竖杆与细长枝条"
+      }
+    }
+  ]
+}

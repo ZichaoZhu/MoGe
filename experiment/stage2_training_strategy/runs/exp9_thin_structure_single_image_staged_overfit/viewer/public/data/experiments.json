@@ -1,7 +1,24 @@
 {
   "version": 1,
-  "defaultExperiment": "exp29_smooth_bounded_residual_long_joint",
+  "defaultExperiment": "exp30_hypersim_100_long_two_stage_overfit",
   "experiments": [
+    {
+      "id": "exp30_hypersim_100_long_two_stage_overfit",
+      "label": "Exp30 · 百图长程两阶段训练",
+      "shortLabel": "Exp30 百图长程",
+      "summary": "100张Hypersim长程训练；阶段一step 20000是全局最佳，联合终点step 30000发生Base退化。每个划分展示五张长细杆图片，默认比较阶段一与联合终点。",
+      "manifestUrl": "/data/exp30/manifest.json",
+      "stageLabels": {
+        "initial": "训练前",
+        "stage1": "阶段一最佳",
+        "final": "联合训练终点"
+      },
+      "stageDetails": {
+        "initial": "官方MoGe-2初始化 · 零初始化SSR · step 0",
+        "stage1": "Detached共适应最佳 · step 20000",
+        "final": "完整联合训练实际终点 · step 30000 · 未超过阶段一"
+      }
+    },
     {
       "id": "exp29_smooth_bounded_residual_long_joint",
       "label": "Exp29 · 长程联合训练细杆案例",

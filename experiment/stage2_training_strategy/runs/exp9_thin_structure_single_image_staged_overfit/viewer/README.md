@@ -1,9 +1,9 @@
 # MoGe-3 多实验三窗口点云查看器
 
-本目录提供 Exp9、Exp12、Exp20 与 Exp29 点云的统一交互式浏览器。页面依次选择
+本目录提供 Exp9、Exp12、Exp20、Exp29 与 Exp30 点云的统一交互式浏览器。页面依次选择
 实验、数据划分和图片。窗口 A 显示真实点云，窗口 B/C 可独立选择训练前/后与
-K。默认入口为 `Exp29 → Train → 图片 1`，B 显示最佳检查点 K=0，C 显示
-同一检查点 K=3。
+K。默认入口为 `Exp30 → Train → 图片 1`，B 显示阶段一最佳 K=0，C 显示
+联合训练终点 K=3。
 
 - Exp9：开放样本 05、04、06，展示三项彼此独立的单图极限过拟合；
 - Exp12：开放一张训练、一张验证和一张测试图片，展示 100 张训练图联合微调前后；
@@ -12,11 +12,14 @@ K。默认入口为 `Exp29 → Train → 图片 1`，B 显示最佳检查点 K=0
   MoGe-2 初始化比较；
 - Exp29：每个 train/val/test 划分开放五张，按训练前 GT 中的长细杆显著性
   人工锁定，同时保留三张改善和两张退化案例；
+- Exp30：每个 train/val/test 划分开放五张此前人工确认的长细杆图片，提供
+  训练前、阶段一最佳和联合训练终点三个阶段，默认直接展示联合训练造成的变化；
 - Exp12 的训练样本与 Exp9 样本 04 是同一帧，可直接比较单图过拟合与百图训练。
 
 实验目录位于 `public/data/experiments.json`。Exp9 清单保持
-`public/data/manifest.json`，Exp12、Exp20 与 Exp29 的清单和资产分别位于
-`public/data/exp12/`、`public/data/exp20/`、`public/data/exp29/`。
+`public/data/manifest.json`，Exp12、Exp20、Exp29 与 Exp30 的清单和资产分别位于
+`public/data/exp12/`、`public/data/exp20/`、`public/data/exp29/` 和
+`public/data/exp30/`。
 
 ## 数据语义
 
@@ -38,6 +41,9 @@ K。默认入口为 `Exp29 → Train → 图片 1`，B 显示最佳检查点 K=0
   和 SSR 均来自同一检查点，SSR 使用保存的 BatchNorm running statistics，
   每轮应用 `0.1*tanh(raw_residual/0.1)`；左右 K=0/K=3 对比表示是否启用
   SSR 精修，不表示两个不同训练阶段；窗口 A 是真实点云，B/C 是预测点云；
+- Exp30 的 `initial / stage1 / final` 分别对应 step 0、step 20000 和实际联合
+  训练终点 step 30000。阶段一是全局最佳；`final` 特意保留较差的联合终点，
+  用于观察 Base 与 SSR 如何变化，而不是把它标成“最终最佳”；
 - SSR 体素模式使用 `[depth,row,column]`，其中
   `depth=round(200*log(Z_raw))`。为了显示居中只减去当前裁剪的中位 depth bin，
   不改变体素间相对关系。
@@ -69,10 +75,16 @@ Exp29 保存 15 张图片的真实点云和最终 K=0/1/3/5，共 75 份 PLY、
 结果。完整评测中 K=3 优于 K=0 的比例分别为 87%、18.75% 与 37.5%；这说明
 训练域修正能力明显，但不能据此宣称留出域泛化成功。
 
+Exp30 沿用 15 张人工确认的长细杆样本和锁定裁剪，保存真实点云、训练前恒等点云、
+阶段一 K=0/1/3/5 与联合终点 K=0/1/3/5。Train 在阶段一的 100 张图片上均有
+K=3 改善，因此训练划分展示三张较强改善和两张较弱改善；Validation/Test 则如实
+同时保留改善与退化案例。该入口主要用于对照“阶段一有效、联合阶段退化”，不作为
+留出域泛化成功的证据。
+
 Exp9、Exp12、Exp20 的 21 份增补 GT 统一由
 `tools/moge3/export_viewer_ground_truths.py` 生成，导出清单位于
-`public/data/ground_truth_export_report.json`。因此网站四个实验的全部开放样本
-现在都具有真实点云窗口，不再使用缺失占位。
+`public/data/ground_truth_export_report.json`。因此网站全部开放样本
+现在都具有真实点云窗口，不再使用缺失占位；Exp30 的 GT 由其专用导出流程生成。
 
 ## 本地运行
 
@@ -120,7 +132,7 @@ Exp12 截图位于
 `../../exp12_hypersim_100_immediate_joint_finetuning/results/viewer_acceptance/`。
 Exp20 的 train/val/test 验收截图位于阶段三对应实验的
 `results/viewer_acceptance/`。Exp29 同样为三个划分各保存一张改善案例和
-一张退化案例的三窗口截图，共六张。
+一张退化案例的三窗口截图，共六张；Exp30 为三个划分各保存一张三窗口截图。
 需要主动更新截图时使用
 `UPDATE_ACCEPTANCE_SCREENSHOTS=1 npm run test:e2e`；普通测试不会改写归档图片。
 

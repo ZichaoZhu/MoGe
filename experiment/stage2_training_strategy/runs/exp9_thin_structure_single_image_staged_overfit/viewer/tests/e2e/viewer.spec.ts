@@ -204,6 +204,69 @@ test("shows a clear startup error when the manifest cannot be loaded", async ({
   );
 });
 
+test("compares Exp30 initial, stage1 and joint-terminal checkpoints", async ({
+  page,
+}) => {
+  await page.goto(
+    "/?experiment=exp30_hypersim_100_long_two_stage_overfit&split=train&sample=1&leftStage=stage1&rightStage=final&leftK=0&rightK=3",
+  );
+  await expect(
+    page.getByText("Exp30 · 百图长程两阶段训练").first(),
+  ).toBeVisible();
+  await expect(page.locator(".sample-switcher button")).toHaveCount(5);
+  await expect(page.getByTestId("viewer-left")).toContainText(
+    "阶段一最佳 · K=0",
+  );
+  await expect(page.getByTestId("viewer-right")).toContainText(
+    "联合训练终点 · K=3",
+  );
+  await expect(page.getByTestId("viewer-ground-truth")).toContainText(
+    "Hypersim Ground Truth",
+  );
+  await expect(page.locator("canvas")).toHaveCount(3);
+
+  await page
+    .getByTestId("left-stage")
+    .getByRole("button", { name: "训练前" })
+    .click();
+  await page
+    .getByTestId("left-k")
+    .getByRole("button", { name: "K=5" })
+    .click();
+  await expect(page.getByTestId("viewer-left")).toContainText(
+    "零初始化SSR",
+  );
+
+  await page.getByTestId("split-val").click();
+  await expect(page.locator(".sample-switcher button")).toHaveCount(5);
+  await expect(page.getByTestId("sample-1")).toContainText("改善样本");
+  await expect(page.getByTestId("sample-5")).toContainText("退化样本");
+  await page.getByTestId("split-test").click();
+  await expect(page.getByTestId("sample-4")).toContainText("退化样本");
+  await expect(page.locator(".canvas-error")).toHaveCount(0);
+
+  if (process.env.UPDATE_ACCEPTANCE_SCREENSHOTS === "1") {
+    const screenshotDirectory = path.resolve(
+      process.cwd(),
+      "../../../../stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/results/viewer_acceptance",
+    );
+    await mkdir(screenshotDirectory, { recursive: true });
+    for (const split of ["train", "val", "test"] as const) {
+      await page.getByTestId(`split-${split}`).click();
+      await page.getByTestId("sample-1").click();
+      await page.mouse.move(1100, 700);
+      await page.waitForTimeout(800);
+      await page.screenshot({
+        path: path.join(
+          screenshotDirectory,
+          `exp30_${split}_triple_view.png`,
+        ),
+        fullPage: true,
+      });
+    }
+  }
+});
+
 test("shows Exp29 improvements and degradations in every split", async ({
   page,
 }) => {

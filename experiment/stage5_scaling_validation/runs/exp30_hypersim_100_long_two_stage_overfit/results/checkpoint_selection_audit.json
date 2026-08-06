@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "reconciled_at": "2026-08-06T19:54:34.574863+08:00",
+  "reason": "修复跨恢复分支只检查最后一次 attempt 导致的最佳检查点遗漏",
+  "previous_selection": {
+    "final_best_checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage2/attempt_03/checkpoint.pt",
+    "final_best": {
+      "step": 27500,
+      "score": 0.06930549933575095,
+      "selection_scope": "composite",
+      "selection_split": "train",
+      "contains_optimizer": true
+    }
+  },
+  "candidates": [
+    {
+      "stage": "stage1",
+      "attempt": "attempt_00",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_00/checkpoint.pt",
+      "metadata": {
+        "step": 2500,
+        "score": 0.06995696745347231,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_01",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_01/checkpoint.pt",
+      "metadata": {
+        "step": 2500,
+        "score": 0.0699564699968323,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_02",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_02/checkpoint.pt",
+      "metadata": {
+        "step": 4000,
+        "score": 0.06496449016267433,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_03",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_03/checkpoint.pt",
+      "metadata": {
+        "step": 2500,
+        "score": 0.06995719185564667,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_04",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_04/checkpoint.pt",
+      "metadata": {
+        "step": 5000,
+        "score": 0.06686836797045544,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_05",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_05/checkpoint.pt",
+      "metadata": {
+        "step": 5000,
+        "score": 0.0668682922795415,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_06",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_06/checkpoint.pt",
+      "metadata": {
+        "step": 7500,
+        "score": 0.06541068271966652,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_07",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_07/checkpoint.pt",
+      "metadata": {
+        "step": 10000,
+        "score": 0.06501554430229589,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_08",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_08/checkpoint.pt",
+      "metadata": {
+        "step": 10000,
+        "score": 0.06501264830352739,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage1",
+      "attempt": "attempt_09",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_09/checkpoint.pt",
+      "metadata": {
+        "step": 20000,
+        "score": 0.06403789270669222,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage2",
+      "attempt": "attempt_00",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage2/attempt_00/checkpoint.pt",
+      "metadata": {
+        "step": 20000,
+        "score": 0.06403789270669222,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage2",
+      "attempt": "attempt_01",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage2/attempt_01/checkpoint.pt",
+      "metadata": {
+        "step": 20000,
+        "score": 0.0640380473760888,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage2",
+      "attempt": "attempt_02",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage2/attempt_02/checkpoint.pt",
+      "metadata": {
+        "step": 25000,
+        "score": 0.06644695945549757,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    },
+    {
+      "stage": "stage2",
+      "attempt": "attempt_03",
+      "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage2/attempt_03/checkpoint.pt",
+      "metadata": {
+        "step": 27500,
+        "score": 0.06930549933575095,
+        "selection_scope": "composite",
+        "selection_split": "train",
+        "contains_optimizer": true
+      }
+    }
+  ],
+  "stage1_best": {
+    "stage": "stage1",
+    "attempt": "attempt_09",
+    "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_09/checkpoint.pt",
+    "metadata": {
+      "step": 20000,
+      "score": 0.06403789270669222,
+      "selection_scope": "composite",
+      "selection_split": "train",
+      "contains_optimizer": true
+    }
+  },
+  "joint_stage_best": {
+    "stage": "stage2",
+    "attempt": "attempt_00",
+    "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage2/attempt_00/checkpoint.pt",
+    "metadata": {
+      "step": 20000,
+      "score": 0.06403789270669222,
+      "selection_scope": "composite",
+      "selection_split": "train",
+      "contains_optimizer": true
+    }
+  },
+  "global_best": {
+    "stage": "stage1",
+    "attempt": "attempt_09",
+    "checkpoint": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/stage5_scaling_validation/runs/exp30_hypersim_100_long_two_stage_overfit/artifacts/training/stage1/attempt_09/checkpoint.pt",
+    "metadata": {
+      "step": 20000,
+      "score": 0.06403789270669222,
+      "selection_scope": "composite",
+      "selection_split": "train",
+      "contains_optimizer": true
+    }
+  },
+  "existing_evaluation_note": "artifacts/evaluation/final 仍对应修复前选中的 step 27500；全局最佳的正式指标见 artifacts/evaluation/stage1_best。"
+}

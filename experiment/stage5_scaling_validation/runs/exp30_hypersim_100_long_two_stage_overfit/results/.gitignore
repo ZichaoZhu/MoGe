@@ -1,2 +1,9 @@
 *
 !.gitignore
+!checkpoint_selection_audit.json
+!evaluation/
+!evaluation/**
+!viewer_export/
+!viewer_export/**
+!viewer_acceptance/
+!viewer_acceptance/*.png

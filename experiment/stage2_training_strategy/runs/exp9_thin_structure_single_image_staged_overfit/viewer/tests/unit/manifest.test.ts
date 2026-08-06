@@ -97,9 +97,9 @@ const asset: PointCloudAsset = {
   },
 };
 
-function v2Manifest(): PointCloudManifest {
+function v2Manifest(trainCount = 5): PointCloudManifest {
   const samples = (["train", "val", "test"] as const).flatMap((split) =>
-    Array.from({ length: 5 }, (_, offset) => {
+    Array.from({ length: split === "train" ? trainCount : 5 }, (_, offset) => {
       const id = `${split}-${offset + 1}`;
       return {
         id,
@@ -147,22 +147,22 @@ function v2Manifest(): PointCloudManifest {
 }
 
 describe("split-aware v2 manifest", () => {
-  it("validates five samples per split and resolves the final-only stage", () => {
-    const manifest = v2Manifest();
+  it("validates variable sample counts and resolves the final-only stage", () => {
+    const manifest = v2Manifest(8);
     expect(() => validateManifest(manifest)).not.toThrow();
     expect(manifestSplits(manifest)).toEqual(["train", "val", "test"]);
     expect(defaultManifestSplit(manifest)).toBe("train");
+    expect(websiteSamples(manifest, "train")).toHaveLength(8);
     expect(websiteSamples(manifest, "val")).toHaveLength(5);
     expect(defaultStage(manifest, websiteSamples(manifest, "train")[0], "left")).toBe(
       "final",
     );
   });
 
-  it("rejects an incomplete split", () => {
+  it("rejects an empty split", () => {
     const manifest = v2Manifest();
-    manifest.websiteSampleOrderBySplit!.test =
-      manifest.websiteSampleOrderBySplit!.test!.slice(0, 4);
-    expect(() => validateManifest(manifest)).toThrow(/五个/);
+    manifest.websiteSampleOrderBySplit!.test = [];
+    expect(() => validateManifest(manifest)).toThrow(/至少一个/);
   });
 
   it("validates an optional ground-truth point cloud", () => {

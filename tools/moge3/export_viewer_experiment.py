@@ -141,6 +141,7 @@ def validate_selection(
     *,
     experiment: str,
     splits: Sequence[str],
+    expected_counts: Mapping[str, int] | None = None,
 ) -> None:
     if selection.get("version") not in {1, 2}:
         raise ValueError("Selection manifest version must be 1 or 2")
@@ -149,11 +150,21 @@ def validate_selection(
     seen: set[str] = set()
     for split in splits:
         entries = selection.get("splits", {}).get(split)
-        if not isinstance(entries, list) or len(entries) != 5:
-            raise ValueError(f"{split} must contain exactly five samples")
+        expected_count = (
+            int(expected_counts.get(split, 5))
+            if expected_counts is not None
+            else 5
+        )
+        if not isinstance(entries, list) or len(entries) != expected_count:
+            raise ValueError(
+                f"{split} must contain exactly {expected_count} samples"
+            )
         pictures = [int(entry["picture"]) for entry in entries]
-        if pictures != [1, 2, 3, 4, 5]:
-            raise ValueError(f"{split} picture numbers must be 1..5 in order")
+        expected_pictures = list(range(1, expected_count + 1))
+        if pictures != expected_pictures:
+            raise ValueError(
+                f"{split} picture numbers must be 1..{expected_count} in order"
+            )
         for entry in entries:
             sample_id = str(entry["id"])
             if sample_id in seen:

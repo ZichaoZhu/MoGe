@@ -9,7 +9,10 @@
       "ai_013_001_cam_00_frame.0000",
       "ai_029_005_cam_00_frame.0000",
       "ai_036_006_cam_00_frame.0000",
-      "ai_004_008_cam_00_frame.0000"
+      "ai_004_008_cam_00_frame.0000",
+      "ai_053_018_cam_00_frame.0000",
+      "ai_054_008_cam_00_frame.0000",
+      "ai_002_003_cam_00_frame.0000"
     ],
     "val": [
       "ai_043_002_cam_00_frame.0057",
@@ -67,12 +70,12 @@
     3,
     5
   ],
-  "pointCloudCount": 150,
-  "logicalPointCloudCount": 195,
-  "pointCloudBytes": 442416750,
+  "pointCloudCount": 180,
+  "logicalPointCloudCount": 234,
+  "pointCloudBytes": 530900100,
   "pointCloudChecksums": "/mnt/data/home/zhuzichao/2026_TPAMI_InfiniGeometry/third_party/MoGe-3/experiment/exp9_thin_structure_single_image_staged_overfit/viewer/public/data/exp30/pointcloud_sha256.json",
   "metricValidation": {
-    "requestedTolerance": 1e-05,
+    "requestedTolerance": 0.00001,
     "maxAbsoluteDifferenceByStage": {
       "initial": {
         "point_rel": 0.0,
@@ -82,18 +85,18 @@
         "boundary_f1": 0.0
       },
       "stage1": {
-        "point_rel": 0.00010008364915847778,
-        "depth_rel": 0.00010360032320022583,
-        "depth_delta_1.01": 0.003448486328125,
-        "depth_delta_1.25": 0.005528748035430908,
-        "boundary_f1": 0.0017034411430358887
+        "point_rel": 0.00005132704973220825,
+        "depth_rel": 0.00007232651114463806,
+        "depth_delta_1.01": 0.0033416748046875,
+        "depth_delta_1.25": 0.0009562373161315918,
+        "boundary_f1": 0.0017535090446472168
       },
       "final": {
-        "point_rel": 0.00011876970529556274,
-        "depth_rel": 0.0001138150691986084,
-        "depth_delta_1.01": 0.002782166004180908,
-        "depth_delta_1.25": 0.0003153681755065918,
-        "boundary_f1": 0.005172073841094971
+        "point_rel": 0.0002588927745819092,
+        "depth_rel": 0.00017592310905456543,
+        "depth_delta_1.01": 0.0046488940715789795,
+        "depth_delta_1.25": 0.0010019540786743164,
+        "boundary_f1": 0.004921674728393555
       }
     }
   },
@@ -109,7 +112,7 @@
       ],
       "selection": {
         "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
-        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
         "rank": 7,
         "total": 100,
         "relativeImprovement": 0.4253704158508103,
@@ -128,7 +131,7 @@
       ],
       "selection": {
         "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
-        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
         "rank": 21,
         "total": 100,
         "relativeImprovement": 0.3901117754734825,
@@ -147,7 +150,7 @@
       ],
       "selection": {
         "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
-        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
         "rank": 41,
         "total": 100,
         "relativeImprovement": 0.32155476013626,
@@ -166,7 +169,7 @@
       ],
       "selection": {
         "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
-        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
         "rank": 65,
         "total": 100,
         "relativeImprovement": 0.2631150896388691,
@@ -185,12 +188,69 @@
       ],
       "selection": {
         "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
-        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
         "rank": 89,
         "total": 100,
         "relativeImprovement": 0.1334262001417017,
         "outcome": "improved",
         "structureDescription": "吧椅长腿与横向支撑杆"
+      }
+    },
+    {
+      "id": "ai_053_018_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        320,
+        64,
+        512,
+        256
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
+        "rank": 10,
+        "total": 100,
+        "relativeImprovement": 0.41790683843488213,
+        "outcome": "improved",
+        "structureDescription": "Exp9样本05：密集竖直隔断杆"
+      }
+    },
+    {
+      "id": "ai_054_008_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        192,
+        192,
+        384,
+        384
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
+        "rank": 5,
+        "total": 100,
+        "relativeImprovement": 0.4634963959709903,
+        "outcome": "improved",
+        "structureDescription": "Exp9样本04：悬空楼梯踏板与支架"
+      }
+    },
+    {
+      "id": "ai_002_003_cam_00_frame.0000",
+      "split": "train",
+      "cropXYXY": [
+        128,
+        32,
+        320,
+        224
+      ],
+      "selection": {
+        "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
+        "policy": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
+        "rank": 49,
+        "total": 100,
+        "relativeImprovement": 0.310819742778297,
+        "outcome": "improved",
+        "structureDescription": "Exp9样本06：楼梯栏杆与斜向扶手"
       }
     },
     {
@@ -383,5 +443,6 @@
         "structureDescription": "椅背竖杆与细长枝条"
       }
     }
-  ]
+  ],
+  "assetMergePolicy": "保留首次归档的15张点云字节与哈希，仅追加Exp9的三张样本；避免SpConv非确定执行造成无关二进制改写"
 }

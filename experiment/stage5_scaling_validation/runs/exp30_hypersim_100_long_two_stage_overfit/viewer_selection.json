@@ -2,9 +2,9 @@
   "version": 2,
   "experiment": "exp30_hypersim_100_long_two_stage_overfit",
   "metric": "stage1_full_point_rel_relative_reduction_k0_to_k3",
-  "selectionBasis": "沿用此前人工确认的长细杆样本与锁定裁剪，并按Exp30阶段一K=0到K=3的结果记录排名；不根据联合终点预测重新选图",
+  "selectionBasis": "沿用此前人工确认的长细杆样本与锁定裁剪，并追加Exp9网站开放的三张单图过拟合样本；按Exp30阶段一K=0到K=3的结果记录排名，不根据联合终点预测重新选图",
   "policy": {
-    "train": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；阶段一在100张训练图上全部改善，因此展示三张较强改善和两张较弱改善，而非虚构退化样本",
+    "train": "玻璃栏杆、管线、旋梯扶手、立柱和吧椅腿；原五张覆盖不同改善幅度，图片6至8复用Exp9网站的样本05、04、06，用于直接比较单图极限过拟合与百图共享训练",
     "val": "椅腿、窗格、隔断竖杆和吊灯杆；覆盖阶段一最好、中间与最差结果",
     "test": "楼梯栏杆、桌椅腿、金属椅背和吊灯杆；覆盖阶段一改善与退化结果"
   },
@@ -59,6 +59,36 @@
         "outcome": "improved",
         "cropXYXY": [160, 192, 352, 384],
         "structureDescription": "吧椅长腿与横向支撑杆"
+      },
+      {
+        "id": "ai_053_018_cam_00_frame.0000",
+        "relativeImprovement": 0.417906838434882,
+        "picture": 6,
+        "rank": 10,
+        "total": 100,
+        "outcome": "improved",
+        "cropXYXY": [320, 64, 512, 256],
+        "structureDescription": "Exp9样本05：密集竖直隔断杆"
+      },
+      {
+        "id": "ai_054_008_cam_00_frame.0000",
+        "relativeImprovement": 0.46349639597099,
+        "picture": 7,
+        "rank": 5,
+        "total": 100,
+        "outcome": "improved",
+        "cropXYXY": [192, 192, 384, 384],
+        "structureDescription": "Exp9样本04：悬空楼梯踏板与支架"
+      },
+      {
+        "id": "ai_002_003_cam_00_frame.0000",
+        "relativeImprovement": 0.310819742778297,
+        "picture": 8,
+        "rank": 49,
+        "total": 100,
+        "outcome": "improved",
+        "cropXYXY": [128, 32, 320, 224],
+        "structureDescription": "Exp9样本06：楼梯栏杆与斜向扶手"
       }
     ],
     "val": [

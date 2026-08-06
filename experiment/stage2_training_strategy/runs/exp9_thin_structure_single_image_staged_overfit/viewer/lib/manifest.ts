@@ -260,8 +260,8 @@ export function validateManifest(manifest: PointCloudManifest): void {
     }
     for (const split of splits) {
       const ids = manifest.websiteSampleOrderBySplit?.[split];
-      if (!ids || ids.length !== 5 || new Set(ids).size !== 5) {
-        throw new Error(`${split} 必须包含五个不同的网站样本`);
+      if (!ids?.length || new Set(ids).size !== ids.length) {
+        throw new Error(`${split} 必须包含至少一个且互不重复的网站样本`);
       }
     }
   }

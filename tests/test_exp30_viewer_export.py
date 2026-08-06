@@ -3,6 +3,7 @@ from pathlib import Path
 
 from tools.moge3.export_exp30_viewer import (
     DEFAULT_RELATIVE_PATHS,
+    EXPECTED_SPLIT_COUNTS,
     EXPERIMENT,
     SPLITS,
     _stage_paths,
@@ -17,19 +18,30 @@ SELECTION = (
 )
 
 
-def test_exp30_viewer_selection_has_five_unique_samples_per_split():
+def test_exp30_viewer_selection_has_expected_unique_samples_per_split():
     selection = json.loads(SELECTION.read_text(encoding="utf-8"))
     validate_selection(
         selection,
         experiment=EXPERIMENT,
         splits=SPLITS,
+        expected_counts=EXPECTED_SPLIT_COUNTS,
     )
     ids = [
         row["id"]
         for split in SPLITS
         for row in selection["splits"][split]
     ]
-    assert len(ids) == len(set(ids)) == 15
+    assert len(ids) == len(set(ids)) == 18
+    assert {
+        split: len(selection["splits"][split]) for split in SPLITS
+    } == EXPECTED_SPLIT_COUNTS
+    assert {
+        row["id"] for row in selection["splits"]["train"][5:]
+    } == {
+        "ai_053_018_cam_00_frame.0000",
+        "ai_054_008_cam_00_frame.0000",
+        "ai_002_003_cam_00_frame.0000",
+    }
 
 
 def test_exp30_selection_records_train_success_and_holdout_failures():

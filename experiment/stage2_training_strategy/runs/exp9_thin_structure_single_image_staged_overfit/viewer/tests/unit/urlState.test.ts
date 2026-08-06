@@ -27,7 +27,7 @@ describe("viewer URL state", () => {
   it("drops invalid split, picture and K values", () => {
     expect(
       parseViewerUrl(
-        "?split=other&sample=8&leftStage=middle&rightStage=final&leftK=2&rightK=3",
+        "?split=other&sample=0&leftStage=middle&rightStage=final&leftK=2&rightK=3",
       ),
     ).toEqual({
       experiment: undefined,
@@ -43,14 +43,15 @@ describe("viewer URL state", () => {
   it("round-trips the Exp30 stage1 checkpoint", () => {
     const query = serializeViewerUrl({
       experiment: "exp30",
-      split: "val",
-      sample: 2,
+      split: "train",
+      sample: 8,
       leftStage: "stage1",
       rightStage: "final",
       leftK: 3,
       rightK: 5,
     });
     expect(parseViewerUrl(query)).toMatchObject({
+      sample: 8,
       leftStage: "stage1",
       rightStage: "final",
     });

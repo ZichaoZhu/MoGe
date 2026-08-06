@@ -37,9 +37,7 @@ export function parseViewerUrl(search: string): ViewerUrlState {
         ? split
         : undefined,
     sample:
-      Number.isInteger(sample) && sample >= 1 && sample <= 5
-        ? sample
-        : undefined,
+      Number.isInteger(sample) && sample >= 1 ? sample : undefined,
     leftStage: stageName(params.get("leftStage")),
     rightStage: stageName(params.get("rightStage")),
     leftK: refinementStep(params.get("leftK")),

@@ -42,6 +42,7 @@ from tools.moge3.export_viewer_experiment import (
 EXPERIMENT = "exp30_hypersim_100_long_two_stage_overfit"
 SPLITS = ("train", "val", "test")
 STAGES = ("initial", "stage1", "final")
+EXPECTED_SPLIT_COUNTS = {"train": 8, "val": 5, "test": 5}
 DEFAULT_RELATIVE_PATHS = {
     "data": "experiment/exp11_hypersim_100_train_staged_joint_overfit/data",
     "initial_checkpoint": (
@@ -210,7 +211,12 @@ def run(args: argparse.Namespace) -> Dict[str, Any]:
     selection = json.loads(
         paths["selection_manifest"].read_text(encoding="utf-8")
     )
-    validate_selection(selection, experiment=EXPERIMENT, splits=SPLITS)
+    validate_selection(
+        selection,
+        experiment=EXPERIMENT,
+        splits=SPLITS,
+        expected_counts=EXPECTED_SPLIT_COUNTS,
+    )
     data_manifest = json.loads(
         (paths["data"] / "manifest.json").read_text(encoding="utf-8")
     )

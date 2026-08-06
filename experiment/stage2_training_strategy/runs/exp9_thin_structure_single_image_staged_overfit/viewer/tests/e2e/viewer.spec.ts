@@ -213,7 +213,22 @@ test("compares Exp30 initial, stage1 and joint-terminal checkpoints", async ({
   await expect(
     page.getByText("Exp30 · 百图长程两阶段训练").first(),
   ).toBeVisible();
-  await expect(page.locator(".sample-switcher button")).toHaveCount(5);
+  await expect(page.locator(".sample-switcher button")).toHaveCount(8);
+  await expect(page.getByTestId("sample-6")).toContainText(
+    "ai_053_018_cam_00_frame.0000",
+  );
+  await expect(page.getByTestId("sample-7")).toContainText(
+    "ai_054_008_cam_00_frame.0000",
+  );
+  await expect(page.getByTestId("sample-8")).toContainText(
+    "ai_002_003_cam_00_frame.0000",
+  );
+  for (const order of [6, 7, 8]) {
+    await page.getByTestId(`sample-${order}`).click();
+    await expect(page.locator(".canvas-error")).toHaveCount(0);
+    await expect(page).toHaveURL(new RegExp(`split=train.*sample=${order}`));
+  }
+  await page.getByTestId("sample-1").click();
   await expect(page.getByTestId("viewer-left")).toContainText(
     "阶段一最佳 · K=0",
   );

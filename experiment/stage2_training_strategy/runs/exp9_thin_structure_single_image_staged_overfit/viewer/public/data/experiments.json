@@ -6,7 +6,7 @@
       "id": "exp30_hypersim_100_long_two_stage_overfit",
       "label": "Exp30 · 百图长程两阶段训练",
       "shortLabel": "Exp30 百图长程",
-      "summary": "100张Hypersim长程训练；阶段一step 20000是全局最佳，联合终点step 30000发生Base退化。每个划分展示五张长细杆图片，默认比较阶段一与联合终点。",
+      "summary": "100张Hypersim长程训练；阶段一step 20000是全局最佳，联合终点step 30000发生Base退化。Train展示八张图片，其中图片6至8与Exp9网站样本相同；Validation/Test各展示五张。",
       "manifestUrl": "/data/exp30/manifest.json",
       "stageLabels": {
         "initial": "训练前",
